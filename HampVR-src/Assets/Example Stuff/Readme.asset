@@ -3,8 +3,9 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -15,9 +16,9 @@ MonoBehaviour:
   title: 3D With Extras (Preview)
   sections:
   - heading: 'Standard 3D Renderer With Graphics Extras '
-    text: "This template is a good starting point for people who want to develop 3D
-      projects using Unity\u2019s built-in renderer and extra graphics features. This
-      project includes the new Post-Processing stack, several presets to jump-start
+    text: "This template is a good starting point for people who want to develop
+      3D projects using Unity\u2019s built-in renderer and extra graphics features.
+      This project includes the new Post-Processing stack, several presets to jump-start
       development, and example content."
     linkText: 
     url: 
