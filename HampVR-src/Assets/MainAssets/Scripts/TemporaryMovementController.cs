@@ -24,7 +24,7 @@ public class TemporaryMovementController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //Acceleration
         if (Input.GetKey(KeyCode.LeftShift))
@@ -86,6 +86,11 @@ public class TemporaryMovementController : MonoBehaviour
             player.transform.Rotate(new Vector3(0, -rotateSpeed, 0));
         }
 
+        
+    }
+
+    private void Update()
+    {
         //Shooting
         if (Input.GetKeyDown(KeyCode.F))
         {

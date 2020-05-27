@@ -104,9 +104,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 923718704817486067}
   serializedVersion: 2
-  m_Mass: 5
-  m_Drag: 0
-  m_AngularDrag: 0
+  m_Mass: 4
+  m_Drag: 5
+  m_AngularDrag: 0.5
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -125,10 +125,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserSpawner: {fileID: 2119463654848673925}
-  acceleration: 5
-  decceleration: -2
-  strafeSpeed: 2
-  rotateSpeed: 2
+  acceleration: 100
+  decceleration: -100
+  strafeSpeed: 400
+  rotateSpeed: 0.2
   laserSpeed: 20
   laserTimerDefault: 1
 --- !u!1 &2119463654848673925

@@ -8,7 +8,7 @@ public class LaserScript : MonoBehaviour
     public float speed = 30;
     private Rigidbody RB;
     private float timer = 15;
-    private float collisionTimer = 0.5f;
+    private float collisionTimer = 0.0f;
     private bool collisionflag = false;
 
     void Start()
@@ -41,7 +41,7 @@ public class LaserScript : MonoBehaviour
         //GetComponentInChildren<ParticleSystem>().Play();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         playParticle();
         collisionflag = true;

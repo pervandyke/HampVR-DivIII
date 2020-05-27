@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BoxDestroyer : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.layer == 9)
+        if (other.gameObject.layer == 9)
         {
             Destroy(gameObject);
         }
