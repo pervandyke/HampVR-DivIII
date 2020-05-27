@@ -17,7 +17,7 @@ public class LaserScript : MonoBehaviour
     }
     void FixedUpdate()
     {
-        RB.velocity = transform.up * speed;
+        RB.velocity = transform.forward * speed;
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
@@ -38,7 +38,7 @@ public class LaserScript : MonoBehaviour
         print("Bang!");
         gameObject.GetComponent<MeshRenderer>().enabled = false;
         RB.velocity = Vector3.zero;
-        GetComponentInChildren<ParticleSystem>().Play();
+        //GetComponentInChildren<ParticleSystem>().Play();
     }
 
     private void OnCollisionEnter(Collision collision)

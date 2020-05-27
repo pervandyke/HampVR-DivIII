@@ -6,6 +6,9 @@ public class BoxDestroyer : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        Destroy(gameObject);
+        if (collision.gameObject.layer == 9)
+        {
+            Destroy(gameObject);
+        }
     }
 }
