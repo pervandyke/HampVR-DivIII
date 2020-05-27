@@ -46,12 +46,12 @@ public class TemporaryMovementController : MonoBehaviour
             RB.AddRelativeForce(Vector3.forward * strafeSpeed);
         }
 
-        //Yaw
-        if (Input.GetKey(KeyCode.Q))
+        //Strafe
+        if (Input.GetKey(KeyCode.Z))
         {
             RB.AddRelativeForce(Vector3.right * -strafeSpeed);
         }
-        else if (Input.GetKey(KeyCode.E))
+        else if (Input.GetKey(KeyCode.X))
         {
             RB.AddRelativeForce(Vector3.right * strafeSpeed);
         }
@@ -77,11 +77,11 @@ public class TemporaryMovementController : MonoBehaviour
         }
 
         //Roll
-        if (Input.GetKey(KeyCode.Z))
+        if (Input.GetKey(KeyCode.Q))
         {
             player.transform.Rotate(new Vector3(0, rotateSpeed, 0));
         }
-        else if (Input.GetKey(KeyCode.X))
+        else if (Input.GetKey(KeyCode.E))
         {
             player.transform.Rotate(new Vector3(0, -rotateSpeed, 0));
         }
@@ -98,6 +98,7 @@ public class TemporaryMovementController : MonoBehaviour
         Vector3 SpawnPosition = laserSpawner.transform.position;
         Quaternion SpawnRotation = laserSpawner.transform.rotation;
         GameObject LaserInstance;
-        LaserInstance = Instantiate(Resources.Load<GameObject>("Prefabs/Laser"), SpawnPosition, SpawnRotation,laserSpawner.transform) as GameObject;
+        LaserInstance = Instantiate(Resources.Load<GameObject>("Prefabs/Laser"), SpawnPosition, SpawnRotation/*,laserSpawner.transform*/) as GameObject;
+        LaserInstance.GetComponent<LaserScript>().speed = RB.velocity.magnitude + laserSpeed;
     }
 }
