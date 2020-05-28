@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 923718704817486067}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.73, y: -2.783, z: -14.366404}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4687882591510821815}
@@ -126,13 +126,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserSpawner: {fileID: 2119463654848673925}
+  target: {fileID: 0}
   speed: 15
+  acceleration: 0
   decceleration: -5
   strafeSpeed: 5
   rotateSpeed: 1
   laserSpeed: 20
-  laserTimerDefault: 1
-  laserDamage: 10
+  laserTimerDefault: 0.1
+  laserDamage: 1
   health: 30
 --- !u!1 &2119463654848673925
 GameObject:
@@ -158,7 +160,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2119463654848673925}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.489}
+  m_LocalPosition: {x: 0, y: 0, z: 0.919}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1976809975890086307}
@@ -175,7 +177,6 @@ GameObject:
   - component: {fileID: 507332951062652275}
   - component: {fileID: 1209256443087616006}
   - component: {fileID: 2922212003438738186}
-  - component: {fileID: 8530513746261436684}
   m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
@@ -244,16 +245,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &8530513746261436684
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4374352915319979184}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}

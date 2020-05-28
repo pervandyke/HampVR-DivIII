@@ -38,7 +38,6 @@ public class LaserScript : MonoBehaviour
     private void playParticle()
     {
         print("Bang!");
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
         RB.velocity = Vector3.zero;
         //GetComponentInChildren<ParticleSystem>().Play();
     }
