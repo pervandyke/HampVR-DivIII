@@ -131,6 +131,7 @@ MonoBehaviour:
   rotateSpeed: 0.2
   laserSpeed: 20
   laserTimerDefault: 1
+  laserDamage: 10
 --- !u!1 &2119463654848673925
 GameObject:
   m_ObjectHideFlags: 0

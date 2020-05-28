@@ -6,6 +6,7 @@ public class LaserScript : MonoBehaviour
 {
 
     public float speed = 30;
+    public int damage;
     private Rigidbody RB;
     private float timer = 15;
     private float collisionTimer = 0.0f;
@@ -44,6 +45,10 @@ public class LaserScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         playParticle();
+        if (other.gameObject.layer == 10)
+        {
+            GameObject.Find("TempPlayerController").GetComponent<TemporaryMovementController>().health -= damage;
+        } 
         collisionflag = true;
     }
 }

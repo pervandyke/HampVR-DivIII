@@ -16,6 +16,8 @@ public class TemporaryMovementController : MonoBehaviour
 
     public float laserSpeed;
 
+    public int health;
+
 
     // Start is called before the first frame update
     void Start()
@@ -96,6 +98,11 @@ public class TemporaryMovementController : MonoBehaviour
         {
             Shoot();
         }
+
+        if (health <= 0)
+        {
+            Destroy(player);
+        }
     }
 
     public void Shoot()
@@ -103,7 +110,7 @@ public class TemporaryMovementController : MonoBehaviour
         Vector3 SpawnPosition = laserSpawner.transform.position;
         Quaternion SpawnRotation = laserSpawner.transform.rotation;
         GameObject LaserInstance;
-        LaserInstance = Instantiate(Resources.Load<GameObject>("Prefabs/Laser"), SpawnPosition, SpawnRotation/*,laserSpawner.transform*/) as GameObject;
+        LaserInstance = Instantiate(Resources.Load<GameObject>("Prefabs/Laser"), SpawnPosition, SpawnRotation) as GameObject;
         LaserInstance.GetComponent<LaserScript>().speed = RB.velocity.magnitude + laserSpeed;
     }
 }

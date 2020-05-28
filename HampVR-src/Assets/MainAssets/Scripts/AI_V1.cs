@@ -15,6 +15,7 @@ public class AI_V1 : MonoBehaviour
 
     public float laserSpeed;
     public float laserTimerDefault;
+    public int laserDamage;
     private float laserTimer;
 
     // Start is called before the first frame update
@@ -65,5 +66,6 @@ public class AI_V1 : MonoBehaviour
         GameObject LaserInstance;
         LaserInstance = Instantiate(Resources.Load<GameObject>("Prefabs/Laser"), SpawnPosition, SpawnRotation/*,laserSpawner.transform*/) as GameObject;
         LaserInstance.GetComponent<LaserScript>().speed = RB.velocity.magnitude + laserSpeed;
+        LaserInstance.GetComponent<LaserScript>().damage = laserDamage;
     }
 }
