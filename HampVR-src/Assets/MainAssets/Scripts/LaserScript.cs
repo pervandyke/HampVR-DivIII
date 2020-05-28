@@ -9,8 +9,8 @@ public class LaserScript : MonoBehaviour
     public int damage;
     private Rigidbody RB;
     private float timer = 15;
-    private float collisionTimer = 0.0f;
-    private bool collisionflag = false;
+    /*private float collisionTimer = 0.0f;
+    private bool collisionflag = false;*/
 
     void Start()
     {
@@ -24,6 +24,7 @@ public class LaserScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        /*
         if (collisionflag)
         {
             collisionTimer -= Time.deltaTime;
@@ -31,7 +32,7 @@ public class LaserScript : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-        }
+        }*/
     }
 
     private void playParticle()
@@ -47,8 +48,17 @@ public class LaserScript : MonoBehaviour
         playParticle();
         if (other.gameObject.layer == 10)
         {
-            GameObject.Find("TempPlayerController").GetComponent<TemporaryMovementController>().health -= damage;
-        } 
-        collisionflag = true;
+            if (other.gameObject.tag == "Player")
+            {
+                other.gameObject.GetComponentInChildren<TemporaryMovementController>().health -= damage;
+            }
+            if (other.gameObject.tag == "Enemy")
+            {
+                print("Hit enemy");
+                other.gameObject.GetComponent<AI_V1>().DoDamage(damage);
+            }
+        }
+        Destroy(gameObject);
+        //collisionflag = true;
     }
 }

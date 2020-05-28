@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 101514604721111850}
   - component: {fileID: 294985368409787118}
   - component: {fileID: 3985806034817027023}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,6 +132,7 @@ MonoBehaviour:
   laserSpeed: 20
   laserTimerDefault: 1
   laserDamage: 10
+  health: 30
 --- !u!1 &2119463654848673925
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,7 +142,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4687882591510821815}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WeaponSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}

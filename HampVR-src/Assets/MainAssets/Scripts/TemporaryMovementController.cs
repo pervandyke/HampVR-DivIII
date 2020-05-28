@@ -9,6 +9,7 @@ public class TemporaryMovementController : MonoBehaviour
     public GameObject laserSpawner;
     public GameObject laserSpawner2;
     private Rigidbody RB;
+    private Quaternion originalRotation;
 
     public float acceleration;
     public float decceleration;
@@ -16,6 +17,7 @@ public class TemporaryMovementController : MonoBehaviour
     public float rotateSpeed;
 
     public float laserSpeed;
+    public int laserDamage;
 
     public int health;
 
@@ -24,6 +26,7 @@ public class TemporaryMovementController : MonoBehaviour
     void Start()
     {
         RB = player.GetComponent<Rigidbody>();
+        originalRotation = transform.rotation;
     }
 
     // Update is called once per frame
@@ -88,7 +91,18 @@ public class TemporaryMovementController : MonoBehaviour
         {
             player.transform.Rotate(new Vector3(0, -rotateSpeed, 0));
         }
-
+        /*else
+        {
+            if (player.transform.localRotation.eulerAngles.x > 91)
+            {
+                player.transform.Rotate(new Vector3(0, rotateSpeed, 0));
+            }
+            else if (player.transform.localRotation.eulerAngles.x < 89)
+            {
+                player.transform.Rotate(new Vector3(0, -rotateSpeed, 0));
+            }
+        }
+        */
         
     }
 
@@ -113,9 +127,11 @@ public class TemporaryMovementController : MonoBehaviour
         GameObject LaserInstance;
         LaserInstance = Instantiate(Resources.Load<GameObject>("Prefabs/Laser"), SpawnPosition, SpawnRotation) as GameObject;
         LaserInstance.GetComponent<LaserScript>().speed = RB.velocity.magnitude + laserSpeed;
+        LaserInstance.GetComponent<LaserScript>().damage = laserDamage;
         SpawnPosition = laserSpawner2.transform.position;
         SpawnRotation = laserSpawner2.transform.rotation;
         LaserInstance = Instantiate(Resources.Load<GameObject>("Prefabs/Laser"), SpawnPosition, SpawnRotation) as GameObject;
         LaserInstance.GetComponent<LaserScript>().speed = RB.velocity.magnitude + laserSpeed;
+        LaserInstance.GetComponent<LaserScript>().damage = laserDamage;
     }
 }

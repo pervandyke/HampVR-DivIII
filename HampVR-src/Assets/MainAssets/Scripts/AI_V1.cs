@@ -16,7 +16,10 @@ public class AI_V1 : MonoBehaviour
     public float laserSpeed;
     public float laserTimerDefault;
     public int laserDamage;
+    public int health;
+    
     private float laserTimer;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +52,20 @@ public class AI_V1 : MonoBehaviour
             }
             
         }
+    }
+
+    private void Update()
+    {
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void DoDamage(int damage)
+    {
+        health -= damage;
+        print("applied damage");
     }
 
     private float DistanceToTarget(GameObject target)
