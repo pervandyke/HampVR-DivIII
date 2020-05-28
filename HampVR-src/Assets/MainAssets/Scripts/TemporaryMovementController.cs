@@ -36,21 +36,21 @@ public class TemporaryMovementController : MonoBehaviour
         //Acceleration
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            RB.AddRelativeForce(Vector3.up * acceleration);
+            RB.AddRelativeForce(Vector3.forward * acceleration);
         }
         else if (Input.GetKey(KeyCode.LeftControl))
         {
-            RB.AddRelativeForce(Vector3.up * decceleration);
+            RB.AddRelativeForce(Vector3.forward * decceleration);
         }
 
         //Strafe
         if (Input.GetKey(KeyCode.Space))
         {
-            RB.AddRelativeForce(Vector3.forward * -strafeSpeed);
+            RB.AddRelativeForce(Vector3.up * strafeSpeed);
         }
         else if (Input.GetKey(KeyCode.C))
         {
-            RB.AddRelativeForce(Vector3.forward * strafeSpeed);
+            RB.AddRelativeForce(Vector3.up * -strafeSpeed);
         }
 
         //Strafe
@@ -84,11 +84,11 @@ public class TemporaryMovementController : MonoBehaviour
         }
 
         //Roll
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.E))
         {
             player.transform.Rotate(new Vector3(0, rotateSpeed, 0));
         }
-        else if (Input.GetKey(KeyCode.E))
+        else if (Input.GetKey(KeyCode.Q))
         {
             player.transform.Rotate(new Vector3(0, -rotateSpeed, 0));
         }
