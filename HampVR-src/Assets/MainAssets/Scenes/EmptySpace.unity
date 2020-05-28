@@ -227,6 +227,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ef72ef804a53a43823540f9293df1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &59845269 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3107040684366094561, guid: 082155beeab1f45459ad48801f0ac213,
+    type: 3}
+  m_PrefabInstance: {fileID: 7029200458577911607}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &143833602
 GameObject:
   m_ObjectHideFlags: 0
@@ -3670,10 +3676,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1183677842}
   laserSpawner: {fileID: 950078329}
+  laserSpawner2: {fileID: 59845269}
   acceleration: 50
   decceleration: -50
   strafeSpeed: 40
-  rotateSpeed: 0.6
+  rotateSpeed: 1
   laserSpeed: 60
   health: 100
 --- !u!4 &1893347872
@@ -3909,6 +3916,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7029200458253878203, guid: 082155beeab1f45459ad48801f0ac213,
+        type: 3}
+      propertyPath: temporalAntialiasing.jitterSpread
+      value: 0.798
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029200458253878203, guid: 082155beeab1f45459ad48801f0ac213,
+        type: 3}
+      propertyPath: temporalAntialiasing.sharpness
+      value: 0.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029200458253878203, guid: 082155beeab1f45459ad48801f0ac213,
+        type: 3}
+      propertyPath: m_ShowToolkit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029200458253878203, guid: 082155beeab1f45459ad48801f0ac213,
+        type: 3}
+      propertyPath: m_ShowCustomSorter
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7029200458253878207, guid: 082155beeab1f45459ad48801f0ac213,
         type: 3}
       propertyPath: m_Layer

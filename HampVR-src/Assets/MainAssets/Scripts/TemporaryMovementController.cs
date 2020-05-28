@@ -7,6 +7,7 @@ public class TemporaryMovementController : MonoBehaviour
 
     public GameObject player;
     public GameObject laserSpawner;
+    public GameObject laserSpawner2;
     private Rigidbody RB;
 
     public float acceleration;
@@ -110,6 +111,10 @@ public class TemporaryMovementController : MonoBehaviour
         Vector3 SpawnPosition = laserSpawner.transform.position;
         Quaternion SpawnRotation = laserSpawner.transform.rotation;
         GameObject LaserInstance;
+        LaserInstance = Instantiate(Resources.Load<GameObject>("Prefabs/Laser"), SpawnPosition, SpawnRotation) as GameObject;
+        LaserInstance.GetComponent<LaserScript>().speed = RB.velocity.magnitude + laserSpeed;
+        SpawnPosition = laserSpawner2.transform.position;
+        SpawnRotation = laserSpawner2.transform.rotation;
         LaserInstance = Instantiate(Resources.Load<GameObject>("Prefabs/Laser"), SpawnPosition, SpawnRotation) as GameObject;
         LaserInstance.GetComponent<LaserScript>().speed = RB.velocity.magnitude + laserSpeed;
     }
