@@ -50,6 +50,7 @@ MonoBehaviour:
   decceleration: -50
   strafeSpeed: 40
   rotateSpeed: 1
+  maxSpeed: 17
   laserSpeed: 60
   laserDamage: 10
   health: 100

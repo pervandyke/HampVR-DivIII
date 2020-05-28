@@ -15,6 +15,7 @@ public class TemporaryMovementController : MonoBehaviour
     public float decceleration;
     public float strafeSpeed;
     public float rotateSpeed;
+    public float maxSpeed;
 
     public float laserSpeed;
     public int laserDamage;
@@ -103,7 +104,10 @@ public class TemporaryMovementController : MonoBehaviour
             }
         }
         */
-        
+        if (RB.velocity.magnitude > maxSpeed)
+        {
+            RB.velocity = Vector3.ClampMagnitude(RB.velocity, maxSpeed);
+        }
     }
 
     private void Update()

@@ -7,8 +7,10 @@ public class AI_V1 : MonoBehaviour
     public GameObject laserSpawner;
     private Rigidbody RB;
     private GameObject player;
+    private Vector3 direction;
+    private Quaternion lookRotation;
 
-    public float acceleration;
+    public float speed;
     public float decceleration;
     public float strafeSpeed;
     public float rotateSpeed;
@@ -19,6 +21,7 @@ public class AI_V1 : MonoBehaviour
     public int health;
     
     private float laserTimer;
+
     
 
     // Start is called before the first frame update
@@ -32,15 +35,51 @@ public class AI_V1 : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.LookAt(player.transform);
-        if (DistanceToTarget(player) > 15)
+        WhereToRotate(player);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotateSpeed);
+        DecisionTree();
+        
+    }
+
+    private void Update()
+    {
+        if (health <= 0)
         {
-            RB.AddRelativeForce(Vector3.forward * acceleration);
+            Destroy(gameObject);
         }
-        else
+    }
+
+    private void WhereToRotate(GameObject target)
+    {
+        direction = (target.transform.position - transform.position).normalized;
+        lookRotation = Quaternion.LookRotation(direction);
+    }
+    private void DecisionTree()
+    {
+        if (DistanceToTarget(player) > 5 && RB.velocity.magnitude != speed)
         {
-            RB.AddRelativeForce(Vector3.forward * decceleration);
+            RB.velocity = transform.forward * speed;
         }
+
+
+
+
+
+
+
+
+
+        /*else
+        {
+            if (RB.velocity.magnitude > 0)
+            {
+                RB.velocity = RB.velocity + (transform.forward * decceleration);
+            }
+            else if (RB.velocity.magnitude <= 0)
+            {
+                RB.velocity = Vector3.zero;
+            }
+        }*/
 
         if (DistanceToTarget(player) < 40)
         {
@@ -50,15 +89,7 @@ public class AI_V1 : MonoBehaviour
                 Shoot();
                 laserTimer = laserTimerDefault;
             }
-            
-        }
-    }
 
-    private void Update()
-    {
-        if (health <= 0)
-        {
-            Destroy(gameObject);
         }
     }
 
