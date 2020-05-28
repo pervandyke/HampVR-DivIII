@@ -7,8 +7,8 @@ public class LaserScript : MonoBehaviour
 
     public float speed = 30;
     public int damage;
-    public float timer;
     private Rigidbody RB;
+    private float timer = 15;
     private float collisionTimer = 0.0f;
     private bool collisionflag = false;
 
