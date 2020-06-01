@@ -43,7 +43,7 @@ public class TemporaryMovementController : MonoBehaviour
             RB.AddRelativeForce(Vector3.forward * decceleration);
         }
 
-        //Strafe
+        //Strafe Up/Down
         if (Input.GetKey(KeyCode.Space))
         {
             RB.AddRelativeForce(Vector3.up * strafeSpeed);
@@ -53,7 +53,7 @@ public class TemporaryMovementController : MonoBehaviour
             RB.AddRelativeForce(Vector3.up * -strafeSpeed);
         }
 
-        //Strafe
+        //Strafe Left/Right
         if (Input.GetKey(KeyCode.Z))
         {
             RB.AddRelativeForce(Vector3.right * -strafeSpeed);
@@ -73,22 +73,22 @@ public class TemporaryMovementController : MonoBehaviour
             player.transform.Rotate(new Vector3(-rotateSpeed, 0, 0));
         }
 
-        //Rotation
-        if (Input.GetKey(KeyCode.A))
+        //Roll
+        if (Input.GetKey(KeyCode.Q))
         {
             player.transform.Rotate(new Vector3(0,0,rotateSpeed));
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.E))
         {
             player.transform.Rotate(new Vector3(0,0,-rotateSpeed));
         }
 
-        //Roll
-        if (Input.GetKey(KeyCode.E))
+        //Yaw
+        if (Input.GetKey(KeyCode.D))
         {
             player.transform.Rotate(new Vector3(0, rotateSpeed, 0));
         }
-        else if (Input.GetKey(KeyCode.Q))
+        else if (Input.GetKey(KeyCode.A))
         {
             player.transform.Rotate(new Vector3(0, -rotateSpeed, 0));
         }
@@ -104,6 +104,10 @@ public class TemporaryMovementController : MonoBehaviour
             }
         }
         */
+        if (Input.GetKey(KeyCode.B))
+        {
+            RB.velocity = Vector3.zero;
+        }
         if (RB.velocity.magnitude > maxSpeed)
         {
             RB.velocity = Vector3.ClampMagnitude(RB.velocity, maxSpeed);
