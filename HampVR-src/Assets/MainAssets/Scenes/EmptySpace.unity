@@ -860,6 +860,31 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7029200458551409612, guid: 082155beeab1f45459ad48801f0ac213,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029200458551409612, guid: 082155beeab1f45459ad48801f0ac213,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029200458551409612, guid: 082155beeab1f45459ad48801f0ac213,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029200458551409612, guid: 082155beeab1f45459ad48801f0ac213,
+        type: 3}
+      propertyPath: m_SpotAngle
+      value: 94.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029200458551409612, guid: 082155beeab1f45459ad48801f0ac213,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7029200458551409614, guid: 082155beeab1f45459ad48801f0ac213,
         type: 3}
       propertyPath: m_Layer
@@ -868,7 +893,7 @@ PrefabInstance:
     - target: {fileID: 7029200458551409614, guid: 082155beeab1f45459ad48801f0ac213,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7029200459609006753, guid: 082155beeab1f45459ad48801f0ac213,
         type: 3}
