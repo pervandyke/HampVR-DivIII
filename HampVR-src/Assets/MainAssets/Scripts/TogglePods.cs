@@ -7,10 +7,13 @@ public class TogglePods : MonoBehaviour
 
     public Animator podAnimator;
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
+            print("Pressed L");
+            print("Extended: " + podAnimator.GetBool("Extended"));
+            print("Spinning: " + podAnimator.GetBool("Spinning"));
             if (podAnimator.GetBool("Extended") == false)
             {
                 podAnimator.SetBool("Extended", true);
@@ -28,6 +31,8 @@ public class TogglePods : MonoBehaviour
             {
                 podAnimator.SetBool("Spinning", false);
             }
+            print("Extended: " + podAnimator.GetBool("Extended"));
+            print("Spinning: " + podAnimator.GetBool("Spinning"));
 
         }
     }
