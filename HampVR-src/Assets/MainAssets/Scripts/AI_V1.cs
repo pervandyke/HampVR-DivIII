@@ -86,6 +86,7 @@ public class AI_V1 : MonoBehaviour
             RaycastHit forwardHit;
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out forwardHit, 40.0f) && laserTimer <= 0)
             {
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward),Color.white, 40.0f);
                 Shoot();
                 laserTimer = laserTimerDefault;
                 print("Raycast hit");

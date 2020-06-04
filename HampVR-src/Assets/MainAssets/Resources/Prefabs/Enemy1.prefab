@@ -127,7 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserSpawner: {fileID: 2119463654848673925}
   target: {fileID: 0}
-  speed: 15
+  speed: 40
   acceleration: 0
   decceleration: -5
   strafeSpeed: 5

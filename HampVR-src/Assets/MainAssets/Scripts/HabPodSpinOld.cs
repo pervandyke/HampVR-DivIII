@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HabPodSpin : MonoBehaviour
+public class HabPodSpinOld : MonoBehaviour
 {
     private void FixedUpdate()
     {
