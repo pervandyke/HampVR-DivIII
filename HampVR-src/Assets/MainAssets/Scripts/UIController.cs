@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIController : MonoBehaviour
 {
@@ -10,8 +11,8 @@ public class UIController : MonoBehaviour
     public GameObject speedDisplay;
     public GameObject player;
 
-    private Text healthText;
-    private Text speedText;
+    private TextMeshProUGUI healthText;
+    private TextMeshProUGUI speedText;
 
     private float currentSpeed;
     private int currentHealth;
@@ -19,8 +20,8 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        healthText = healthDisplay.GetComponent<Text>();
-        speedText = speedDisplay.GetComponent<Text>();
+        healthText = healthDisplay.GetComponent<TextMeshProUGUI>();
+        speedText = speedDisplay.GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -29,7 +30,7 @@ public class UIController : MonoBehaviour
         if (player.GetComponent<Rigidbody>().velocity.magnitude != currentSpeed)
         {
             currentSpeed = player.GetComponent<Rigidbody>().velocity.magnitude;
-            speedText.text = "Speed: " + currentSpeed + "m/s";
+            speedText.text = "Speed: " + (int)currentSpeed + "m/s";
         }
         if (GameObject.Find("TempPlayerController").GetComponent<TemporaryMovementController>().health != currentHealth)
         {
