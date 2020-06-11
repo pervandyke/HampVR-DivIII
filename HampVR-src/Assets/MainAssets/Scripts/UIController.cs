@@ -6,13 +6,13 @@ using TMPro;
 
 public class UIController : MonoBehaviour
 {
-
-    public GameObject healthDisplay;
-    public GameObject speedDisplay;
     public GameObject player;
+    private GameObject target;
 
-    private TextMeshProUGUI healthText;
-    private TextMeshProUGUI speedText;
+    public TextMeshProUGUI healthText;
+    public TextMeshProUGUI speedText;
+    public TextMeshProUGUI targetText;
+    private TemporaryMovementController playerController;
 
     private float currentSpeed;
     private int currentHealth;
@@ -20,8 +20,7 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        healthText = healthDisplay.GetComponent<TextMeshProUGUI>();
-        speedText = speedDisplay.GetComponent<TextMeshProUGUI>();
+        playerController = GameObject.Find("TempPlayerController").GetComponent<TemporaryMovementController>();
     }
 
     // Update is called once per frame
@@ -32,10 +31,19 @@ public class UIController : MonoBehaviour
             currentSpeed = player.GetComponent<Rigidbody>().velocity.magnitude;
             speedText.text = "Speed: " + (int)currentSpeed + "m/s";
         }
-        if (GameObject.Find("TempPlayerController").GetComponent<TemporaryMovementController>().health != currentHealth)
+        if (playerController.health != currentHealth)
         {
-            currentHealth = GameObject.Find("TempPlayerController").GetComponent<TemporaryMovementController>().health;
+            currentHealth = playerController.health;
             healthText.text = "Health: " + currentHealth;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            target = EnemyManager.enemyManager.GetNextEnemy();
+            targetText.text = "Target: " + target.name;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            //target closest enemy
         }
     }
 }

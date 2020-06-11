@@ -54,7 +54,7 @@ public class LaserScript : MonoBehaviour
             if (other.gameObject.tag == "Enemy")
             {
                 print("Hit enemy");
-                other.gameObject.GetComponent<AI_V1>().DoDamage(damage);
+                other.gameObject.GetComponent<IEnemy>().TakeDamage(damage);
             }
         }
         Destroy(gameObject);

@@ -132,7 +132,7 @@ MonoBehaviour:
   decceleration: -5
   strafeSpeed: 5
   rotateSpeed: 1
-  laserSpeed: 20
+  laserSpeed: 60
   laserTimerDefault: 0.1
   laserDamage: 1
   health: 30

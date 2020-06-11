@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AI_V1 : MonoBehaviour
+public class AI_V1 : MonoBehaviour, IEnemy
 {
     public GameObject laserSpawner;
     private Rigidbody RB;
@@ -30,6 +30,7 @@ public class AI_V1 : MonoBehaviour
     {
         RB = gameObject.GetComponent<Rigidbody>();
         laserTimer = laserTimerDefault;
+        EnemyManager.enemyManager.AddEnemy(gameObject);
     }
 
     // Update is called once per frame
@@ -48,6 +49,7 @@ public class AI_V1 : MonoBehaviour
     {
         if (health <= 0)
         {
+            EnemyManager.enemyManager.RemoveEnemy(gameObject);
             Destroy(gameObject);
         }
     }
@@ -68,33 +70,18 @@ public class AI_V1 : MonoBehaviour
             RB.velocity = transform.forward * speed;
         }
 
-        /*else
-        {
-            if (RB.velocity.magnitude > 0)
-            {
-                RB.velocity = RB.velocity + (transform.forward * decceleration);
-            }
-            else if (RB.velocity.magnitude <= 0)
-            {
-                RB.velocity = Vector3.zero;
-            }
-        }*/
-
         if (DistanceToTarget(target) < 40)
         {
             laserTimer -= Time.deltaTime;
-            RaycastHit forwardHit;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out forwardHit, 40.0f) && laserTimer <= 0)
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit forwardHit, 40.0f) && laserTimer <= 0)
             {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward),Color.white, 40.0f);
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward),Color.white, 200.0f);
                 Shoot();
                 laserTimer = laserTimerDefault;
                 print("Raycast hit");
                 if (forwardHit.transform.gameObject.layer == 10 && forwardHit.transform.gameObject.tag == "Player")
                 {
                     print("shooting");
-                    
-                    
                 }
             }
         }
@@ -110,7 +97,7 @@ public class AI_V1 : MonoBehaviour
         }
     }*/
 
-    public void DoDamage(int damage)
+    public void TakeDamage(int damage)
     {
         health -= damage;
         print("applied damage");
