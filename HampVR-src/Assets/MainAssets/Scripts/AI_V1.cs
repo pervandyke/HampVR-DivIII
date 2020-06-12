@@ -69,13 +69,14 @@ public class AI_V1 : MonoBehaviour, IEnemy
         {
             RB.velocity = transform.forward * speed;
         }
-
-        if (DistanceToTarget(target) < 40)
+        laserTimer -= Time.deltaTime;
+        int bitMask = 1 << 9;
+        bitMask = ~bitMask;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit forwardHit, 200.0f, bitMask))
         {
-            laserTimer -= Time.deltaTime;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit forwardHit, 40.0f) && laserTimer <= 0)
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 200.0f, Color.red);
+            if (laserTimer <= 0)
             {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward),Color.white, 200.0f);
                 Shoot();
                 laserTimer = laserTimerDefault;
                 print("Raycast hit");
@@ -84,6 +85,9 @@ public class AI_V1 : MonoBehaviour, IEnemy
                     print("shooting");
                 }
             }
+        } else
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 200.0f, Color.white);
         }
     }
 

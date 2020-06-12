@@ -39,7 +39,14 @@ public class UIController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             target = EnemyManager.enemyManager.GetNextEnemy();
-            targetText.text = "Target: " + target.name;
+            if (target == null)
+            {
+                targetText.text = "Target: ";
+            }
+            else
+            {
+                targetText.text = "Target: " + target.name;
+            } 
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
