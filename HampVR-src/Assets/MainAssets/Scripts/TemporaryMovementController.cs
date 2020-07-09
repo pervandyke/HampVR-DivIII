@@ -41,6 +41,7 @@ public class TemporaryMovementController : MonoBehaviour
         //Acceleration
         if (Input.GetKey(KeyCode.LeftShift) || GetLeftTriggerDown())
         {
+            print("Left Trigger Pull.");
             RB.AddRelativeForce(Vector3.forward * acceleration);
         }
         else if (Input.GetKey(KeyCode.LeftControl))
@@ -121,13 +122,11 @@ public class TemporaryMovementController : MonoBehaviour
 
     public bool GetLeftTriggerDown()
     {
-        print("Left Trigger Pull.");
         return leftTrigger.GetState(handType);
     }
 
     public bool GetRightTriggerDown()
-    {
-        print("Right Trigger Pull.");
+    {     
         return rightTrigger.GetState(handType);
     }
 
@@ -136,6 +135,7 @@ public class TemporaryMovementController : MonoBehaviour
         //Shooting
         if (Input.GetKeyDown(KeyCode.F) || GetRightTriggerDown())
         {
+            print("Right Trigger Pull.");
             Shoot();
         }
 
