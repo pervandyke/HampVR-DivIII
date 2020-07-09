@@ -32,5 +32,13 @@ namespace Valve.VR
                 return SteamVR_Actions.flight1_Right_Trigger;
             }
         }
+        
+        public virtual SteamVR_Action_Boolean NewAction
+        {
+            get
+            {
+                return SteamVR_Actions.flight1_NewAction;
+            }
+        }
     }
 }

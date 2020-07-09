@@ -91,6 +91,10 @@
       "name": "/actions/Flight1/in/Right Trigger",
       "type": "boolean",
       "requirement": "mandatory"
+    },
+    {
+      "name": "/actions/Flight1/in/NewAction",
+      "type": "boolean"
     }
   ],
   "action_sets": [

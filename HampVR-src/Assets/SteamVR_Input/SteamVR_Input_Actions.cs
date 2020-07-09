@@ -59,6 +59,8 @@ namespace Valve.VR
         
         private static SteamVR_Action_Boolean p_flight1_Right_Trigger;
         
+        private static SteamVR_Action_Boolean p_flight1_NewAction;
+        
         public static SteamVR_Action_Boolean default_InteractUI
         {
             get
@@ -227,6 +229,14 @@ namespace Valve.VR
             }
         }
         
+        public static SteamVR_Action_Boolean flight1_NewAction
+        {
+            get
+            {
+                return SteamVR_Actions.p_flight1_NewAction.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
         private static void InitializeActionArrays()
         {
             Valve.VR.SteamVR_Input.actions = new Valve.VR.SteamVR_Action[] {
@@ -250,7 +260,8 @@ namespace Valve.VR
                     SteamVR_Actions.buggy_Reset,
                     SteamVR_Actions.mixedreality_ExternalCamera,
                     SteamVR_Actions.flight1_Left_Trigger,
-                    SteamVR_Actions.flight1_Right_Trigger};
+                    SteamVR_Actions.flight1_Right_Trigger,
+                    SteamVR_Actions.flight1_NewAction};
             Valve.VR.SteamVR_Input.actionsIn = new Valve.VR.ISteamVR_Action_In[] {
                     SteamVR_Actions.default_InteractUI,
                     SteamVR_Actions.default_Teleport,
@@ -271,7 +282,8 @@ namespace Valve.VR
                     SteamVR_Actions.buggy_Reset,
                     SteamVR_Actions.mixedreality_ExternalCamera,
                     SteamVR_Actions.flight1_Left_Trigger,
-                    SteamVR_Actions.flight1_Right_Trigger};
+                    SteamVR_Actions.flight1_Right_Trigger,
+                    SteamVR_Actions.flight1_NewAction};
             Valve.VR.SteamVR_Input.actionsOut = new Valve.VR.ISteamVR_Action_Out[] {
                     SteamVR_Actions.default_Haptic};
             Valve.VR.SteamVR_Input.actionsVibration = new Valve.VR.SteamVR_Action_Vibration[] {
@@ -291,7 +303,8 @@ namespace Valve.VR
                     SteamVR_Actions.buggy_Brake,
                     SteamVR_Actions.buggy_Reset,
                     SteamVR_Actions.flight1_Left_Trigger,
-                    SteamVR_Actions.flight1_Right_Trigger};
+                    SteamVR_Actions.flight1_Right_Trigger,
+                    SteamVR_Actions.flight1_NewAction};
             Valve.VR.SteamVR_Input.actionsSingle = new Valve.VR.SteamVR_Action_Single[] {
                     SteamVR_Actions.default_Squeeze,
                     SteamVR_Actions.buggy_Throttle};
@@ -318,7 +331,8 @@ namespace Valve.VR
                     SteamVR_Actions.buggy_Brake,
                     SteamVR_Actions.buggy_Reset,
                     SteamVR_Actions.flight1_Left_Trigger,
-                    SteamVR_Actions.flight1_Right_Trigger};
+                    SteamVR_Actions.flight1_Right_Trigger,
+                    SteamVR_Actions.flight1_NewAction};
         }
         
         private static void PreInitActions()
@@ -344,6 +358,7 @@ namespace Valve.VR
             SteamVR_Actions.p_mixedreality_ExternalCamera = ((SteamVR_Action_Pose)(SteamVR_Action.Create<SteamVR_Action_Pose>("/actions/mixedreality/in/ExternalCamera")));
             SteamVR_Actions.p_flight1_Left_Trigger = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/Flight1/in/Left Trigger")));
             SteamVR_Actions.p_flight1_Right_Trigger = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/Flight1/in/Right Trigger")));
+            SteamVR_Actions.p_flight1_NewAction = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/Flight1/in/NewAction")));
         }
     }
 }
