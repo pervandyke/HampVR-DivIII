@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
 
 public class TemporaryMovementController : MonoBehaviour
 {
@@ -22,6 +23,10 @@ public class TemporaryMovementController : MonoBehaviour
 
     public int health;
 
+    public SteamVR_Input_Sources handType;
+    public SteamVR_Action_Boolean leftTrigger;
+    public SteamVR_Action_Boolean rightTrigger;
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +39,7 @@ public class TemporaryMovementController : MonoBehaviour
     void FixedUpdate()
     {
         //Acceleration
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) || GetLeftTriggerDown())
         {
             RB.AddRelativeForce(Vector3.forward * acceleration);
         }
@@ -114,10 +119,20 @@ public class TemporaryMovementController : MonoBehaviour
         }
     }
 
+    public bool GetLeftTriggerDown()
+    {
+        return leftTrigger.GetStateDown(handType);
+    }
+
+    public bool GetRightTriggerDown()
+    {
+        return rightTrigger.GetStateDown(handType);
+    }
+
     private void Update()
     {
         //Shooting
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) || GetRightTriggerDown())
         {
             Shoot();
         }

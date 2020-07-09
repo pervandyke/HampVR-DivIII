@@ -54,6 +54,13 @@ MonoBehaviour:
   laserSpeed: 60
   laserDamage: 10
   health: 100
+  handType: 0
+  leftTrigger:
+    actionPath: /actions/Flight1/in/Left Trigger
+    needsReinit: 0
+  rightTrigger:
+    actionPath: /actions/Flight1/in/Right Trigger
+    needsReinit: 0
 --- !u!1 &3428404760127221323
 GameObject:
   m_ObjectHideFlags: 0
