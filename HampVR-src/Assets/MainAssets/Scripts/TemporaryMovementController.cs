@@ -122,13 +122,13 @@ public class TemporaryMovementController : MonoBehaviour
     public bool GetLeftTriggerDown()
     {
         print("Left Trigger Pull.");
-        return leftTrigger.GetStateDown(handType);
+        return leftTrigger.GetState(handType);
     }
 
     public bool GetRightTriggerDown()
     {
         print("Right Trigger Pull.");
-        return rightTrigger.GetStateDown(handType);
+        return rightTrigger.GetState(handType);
     }
 
     private void Update()

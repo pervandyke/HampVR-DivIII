@@ -815,11 +815,6 @@ PrefabInstance:
       objectReference: {fileID: 830778479}
     - target: {fileID: 512619964470040197, guid: b733a32ea92788f42a148d12b1da3be8,
         type: 3}
-      propertyPath: m_RenderMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 512619964470040197, guid: b733a32ea92788f42a148d12b1da3be8,
-        type: 3}
       propertyPath: m_PlaneDistance
       value: 0.1
       objectReference: {fileID: 0}
