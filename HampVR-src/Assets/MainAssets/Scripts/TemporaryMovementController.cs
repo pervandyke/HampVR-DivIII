@@ -49,10 +49,9 @@ public class TemporaryMovementController : MonoBehaviour
         //Acceleration
         if (Input.GetKey(KeyCode.LeftShift) || GetAccelerateDown() || mainCamera.transform.localPosition.z > headsetZero.z)
         {
-            print("Left Trigger Pull.");
             RB.AddRelativeForce(Vector3.forward * acceleration);
         }
-        else if (Input.GetKey(KeyCode.LeftControl) || mainCamera.transform.localPosition.z < headsetZero.z)
+        else if (Input.GetKey(KeyCode.LeftControl) || GetDeccelerateDown() || mainCamera.transform.localPosition.z < headsetZero.z)
         {
             RB.AddRelativeForce(Vector3.forward * decceleration);
         }
@@ -128,6 +127,11 @@ public class TemporaryMovementController : MonoBehaviour
         return accelerate.GetState(handType);
     }
 
+    public bool GetDeccelerateDown()
+    {
+        return deccelerate.GetState(handType);
+    }
+
     public bool GetFireDown()
     {     
         return fire.GetState(handType);
@@ -143,7 +147,6 @@ public class TemporaryMovementController : MonoBehaviour
         //Shooting
         if (Input.GetKeyDown(KeyCode.F) || GetFireDown())
         {
-            print("Right Trigger Pull.");
             Shoot();
         }
 
