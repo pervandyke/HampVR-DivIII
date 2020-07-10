@@ -58,21 +58,21 @@ public class TemporaryMovementController : MonoBehaviour
         }
 
         //Strafe Up/Down
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) || mainCamera.transform.localPosition.y > headsetZero.y)
         {
             RB.AddRelativeForce(Vector3.up * strafeSpeed);
         }
-        else if (Input.GetKey(KeyCode.C))
+        else if (Input.GetKey(KeyCode.C) || mainCamera.transform.localPosition.y < headsetZero.y)
         {
             RB.AddRelativeForce(Vector3.up * -strafeSpeed);
         }
 
         //Strafe Left/Right
-        if (Input.GetKey(KeyCode.Z) || mainCamera.transform.localPosition.x > headsetZero.x)
+        if (Input.GetKey(KeyCode.Z) || mainCamera.transform.localPosition.x < headsetZero.x)
         {
             RB.AddRelativeForce(Vector3.right * -strafeSpeed);
         }
-        else if (Input.GetKey(KeyCode.X) || mainCamera.transform.localPosition.x < headsetZero.x)
+        else if (Input.GetKey(KeyCode.X) || mainCamera.transform.localPosition.x > headsetZero.x)
         {
             RB.AddRelativeForce(Vector3.right * strafeSpeed);
         }
