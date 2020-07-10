@@ -46,6 +46,7 @@ public class TemporaryMovementController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        print("Headset Location: " + mainCamera.transform.localPosition);
         //Acceleration
         if (Input.GetKey(KeyCode.LeftShift) || GetAccelerateDown() || mainCamera.transform.localPosition.z > headsetZero.z)
         {
