@@ -17,68 +17,83 @@ namespace Valve.VR
     public partial class SteamVR_Actions
     {
         
-        private static SteamVR_Action_Boolean p_flight1_Left_Trigger;
+        private static SteamVR_Action_Boolean p_flight1_Accelerate;
         
-        private static SteamVR_Action_Boolean p_flight1_Right_Trigger;
+        private static SteamVR_Action_Boolean p_flight1_Fire;
         
-        private static SteamVR_Action_Boolean p_flight1_NewAction;
+        private static SteamVR_Action_Boolean p_flight1_Recenter_Headset_Zero;
         
-        public static SteamVR_Action_Boolean flight1_Left_Trigger
+        private static SteamVR_Action_Boolean p_flight1_Decelerate;
+        
+        public static SteamVR_Action_Boolean flight1_Accelerate
         {
             get
             {
-                return SteamVR_Actions.p_flight1_Left_Trigger.GetCopy<SteamVR_Action_Boolean>();
+                return SteamVR_Actions.p_flight1_Accelerate.GetCopy<SteamVR_Action_Boolean>();
             }
         }
         
-        public static SteamVR_Action_Boolean flight1_Right_Trigger
+        public static SteamVR_Action_Boolean flight1_Fire
         {
             get
             {
-                return SteamVR_Actions.p_flight1_Right_Trigger.GetCopy<SteamVR_Action_Boolean>();
+                return SteamVR_Actions.p_flight1_Fire.GetCopy<SteamVR_Action_Boolean>();
             }
         }
         
-        public static SteamVR_Action_Boolean flight1_NewAction
+        public static SteamVR_Action_Boolean flight1_Recenter_Headset_Zero
         {
             get
             {
-                return SteamVR_Actions.p_flight1_NewAction.GetCopy<SteamVR_Action_Boolean>();
+                return SteamVR_Actions.p_flight1_Recenter_Headset_Zero.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean flight1_Decelerate
+        {
+            get
+            {
+                return SteamVR_Actions.p_flight1_Decelerate.GetCopy<SteamVR_Action_Boolean>();
             }
         }
         
         private static void InitializeActionArrays()
         {
             Valve.VR.SteamVR_Input.actions = new Valve.VR.SteamVR_Action[] {
-                    SteamVR_Actions.flight1_Left_Trigger,
-                    SteamVR_Actions.flight1_Right_Trigger,
-                    SteamVR_Actions.flight1_NewAction};
+                    SteamVR_Actions.flight1_Accelerate,
+                    SteamVR_Actions.flight1_Fire,
+                    SteamVR_Actions.flight1_Recenter_Headset_Zero,
+                    SteamVR_Actions.flight1_Decelerate};
             Valve.VR.SteamVR_Input.actionsIn = new Valve.VR.ISteamVR_Action_In[] {
-                    SteamVR_Actions.flight1_Left_Trigger,
-                    SteamVR_Actions.flight1_Right_Trigger,
-                    SteamVR_Actions.flight1_NewAction};
+                    SteamVR_Actions.flight1_Accelerate,
+                    SteamVR_Actions.flight1_Fire,
+                    SteamVR_Actions.flight1_Recenter_Headset_Zero,
+                    SteamVR_Actions.flight1_Decelerate};
             Valve.VR.SteamVR_Input.actionsOut = new Valve.VR.ISteamVR_Action_Out[0];
             Valve.VR.SteamVR_Input.actionsVibration = new Valve.VR.SteamVR_Action_Vibration[0];
             Valve.VR.SteamVR_Input.actionsPose = new Valve.VR.SteamVR_Action_Pose[0];
             Valve.VR.SteamVR_Input.actionsBoolean = new Valve.VR.SteamVR_Action_Boolean[] {
-                    SteamVR_Actions.flight1_Left_Trigger,
-                    SteamVR_Actions.flight1_Right_Trigger,
-                    SteamVR_Actions.flight1_NewAction};
+                    SteamVR_Actions.flight1_Accelerate,
+                    SteamVR_Actions.flight1_Fire,
+                    SteamVR_Actions.flight1_Recenter_Headset_Zero,
+                    SteamVR_Actions.flight1_Decelerate};
             Valve.VR.SteamVR_Input.actionsSingle = new Valve.VR.SteamVR_Action_Single[0];
             Valve.VR.SteamVR_Input.actionsVector2 = new Valve.VR.SteamVR_Action_Vector2[0];
             Valve.VR.SteamVR_Input.actionsVector3 = new Valve.VR.SteamVR_Action_Vector3[0];
             Valve.VR.SteamVR_Input.actionsSkeleton = new Valve.VR.SteamVR_Action_Skeleton[0];
             Valve.VR.SteamVR_Input.actionsNonPoseNonSkeletonIn = new Valve.VR.ISteamVR_Action_In[] {
-                    SteamVR_Actions.flight1_Left_Trigger,
-                    SteamVR_Actions.flight1_Right_Trigger,
-                    SteamVR_Actions.flight1_NewAction};
+                    SteamVR_Actions.flight1_Accelerate,
+                    SteamVR_Actions.flight1_Fire,
+                    SteamVR_Actions.flight1_Recenter_Headset_Zero,
+                    SteamVR_Actions.flight1_Decelerate};
         }
         
         private static void PreInitActions()
         {
-            SteamVR_Actions.p_flight1_Left_Trigger = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/Flight1/in/Left Trigger")));
-            SteamVR_Actions.p_flight1_Right_Trigger = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/Flight1/in/Right Trigger")));
-            SteamVR_Actions.p_flight1_NewAction = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/Flight1/in/NewAction")));
+            SteamVR_Actions.p_flight1_Accelerate = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/Flight1/in/Accelerate")));
+            SteamVR_Actions.p_flight1_Fire = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/Flight1/in/Fire")));
+            SteamVR_Actions.p_flight1_Recenter_Headset_Zero = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/Flight1/in/Recenter_Headset_Zero")));
+            SteamVR_Actions.p_flight1_Decelerate = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/Flight1/in/Decelerate")));
         }
     }
 }

@@ -55,11 +55,17 @@ MonoBehaviour:
   laserDamage: 10
   health: 100
   handType: 0
-  leftTrigger:
-    actionPath: /actions/Flight1/in/Left Trigger
+  accelerate:
+    actionPath: /actions/Flight1/in/Accelerate
     needsReinit: 0
-  rightTrigger:
-    actionPath: /actions/Flight1/in/Right Trigger
+  deccelerate:
+    actionPath: /actions/Flight1/in/Decelerate
+    needsReinit: 0
+  fire:
+    actionPath: /actions/Flight1/in/Fire
+    needsReinit: 0
+  resetHeadsetZero:
+    actionPath: /actions/Flight1/in/Recenter_Headset_Zero
     needsReinit: 0
 --- !u!1 &3428404760127221323
 GameObject:

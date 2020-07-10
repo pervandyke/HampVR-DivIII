@@ -1,18 +1,24 @@
 {
   "actions": [
     {
-      "name": "/actions/Flight1/in/Left Trigger",
+      "name": "/actions/Flight1/in/Accelerate",
       "type": "boolean",
       "requirement": "mandatory"
     },
     {
-      "name": "/actions/Flight1/in/Right Trigger",
+      "name": "/actions/Flight1/in/Fire",
       "type": "boolean",
       "requirement": "mandatory"
     },
     {
-      "name": "/actions/Flight1/in/NewAction",
-      "type": "boolean"
+      "name": "/actions/Flight1/in/Recenter_Headset_Zero",
+      "type": "boolean",
+      "requirement": "mandatory"
+    },
+    {
+      "name": "/actions/Flight1/in/Decelerate",
+      "type": "boolean",
+      "requirement": "mandatory"
     }
   ],
   "action_sets": [

@@ -24,8 +24,14 @@ public class TemporaryMovementController : MonoBehaviour
     public int health;
 
     public SteamVR_Input_Sources handType;
-    public SteamVR_Action_Boolean leftTrigger;
-    public SteamVR_Action_Boolean rightTrigger;
+    public SteamVR_Action_Boolean accelerate;
+    public SteamVR_Action_Boolean deccelerate;
+    public SteamVR_Action_Boolean fire;
+    public SteamVR_Action_Boolean resetHeadsetZero;
+
+    [SerializeField]
+    private Camera mainCamera;
+    private Vector3 headsetZero;
 
 
     // Start is called before the first frame update
@@ -33,28 +39,30 @@ public class TemporaryMovementController : MonoBehaviour
     {
         RB = player.GetComponent<Rigidbody>();
         originalRotation = transform.rotation;
+        headsetZero = mainCamera.transform.localPosition;
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         //Acceleration
-        if (Input.GetKey(KeyCode.LeftShift) || GetLeftTriggerDown())
+        if (Input.GetKey(KeyCode.LeftShift) || GetAccelerateDown() || mainCamera.transform.localPosition.z > headsetZero.z)
         {
             print("Left Trigger Pull.");
             RB.AddRelativeForce(Vector3.forward * acceleration);
         }
-        else if (Input.GetKey(KeyCode.LeftControl))
+        else if (Input.GetKey(KeyCode.LeftControl) || mainCamera.transform.localPosition.z < headsetZero.z)
         {
             RB.AddRelativeForce(Vector3.forward * decceleration);
         }
 
         //Strafe Up/Down
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) || mainCamera.transform.localPosition.x > headsetZero.x)
         {
             RB.AddRelativeForce(Vector3.up * strafeSpeed);
         }
-        else if (Input.GetKey(KeyCode.C))
+        else if (Input.GetKey(KeyCode.C) || mainCamera.transform.localPosition.x < headsetZero.x)
         {
             RB.AddRelativeForce(Vector3.up * -strafeSpeed);
         }
@@ -98,18 +106,13 @@ public class TemporaryMovementController : MonoBehaviour
         {
             player.transform.Rotate(new Vector3(0, -rotateSpeed, 0));
         }
-        /*else
+       
+        //Reset Control Zero
+        if (GetResetHeadsetDown())
         {
-            if (player.transform.localRotation.eulerAngles.x > 91)
-            {
-                player.transform.Rotate(new Vector3(0, rotateSpeed, 0));
-            }
-            else if (player.transform.localRotation.eulerAngles.x < 89)
-            {
-                player.transform.Rotate(new Vector3(0, -rotateSpeed, 0));
-            }
+            headsetZero = mainCamera.transform.localPosition;
         }
-        */
+
         if (Input.GetKey(KeyCode.B))
         {
             RB.velocity = Vector3.zero;
@@ -120,20 +123,25 @@ public class TemporaryMovementController : MonoBehaviour
         }
     }
 
-    public bool GetLeftTriggerDown()
+    public bool GetAccelerateDown()
     {
-        return leftTrigger.GetState(handType);
+        return accelerate.GetState(handType);
     }
 
-    public bool GetRightTriggerDown()
+    public bool GetFireDown()
     {     
-        return rightTrigger.GetState(handType);
+        return fire.GetState(handType);
+    }
+
+    public bool GetResetHeadsetDown()
+    {
+        return resetHeadsetZero.GetStateDown(handType);
     }
 
     private void Update()
     {
         //Shooting
-        if (Input.GetKeyDown(KeyCode.F) || GetRightTriggerDown())
+        if (Input.GetKeyDown(KeyCode.F) || GetFireDown())
         {
             print("Right Trigger Pull.");
             Shoot();

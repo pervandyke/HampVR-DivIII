@@ -17,27 +17,35 @@ namespace Valve.VR
     public class SteamVR_Input_ActionSet_Flight1 : Valve.VR.SteamVR_ActionSet
     {
         
-        public virtual SteamVR_Action_Boolean Left_Trigger
+        public virtual SteamVR_Action_Boolean Accelerate
         {
             get
             {
-                return SteamVR_Actions.flight1_Left_Trigger;
+                return SteamVR_Actions.flight1_Accelerate;
             }
         }
         
-        public virtual SteamVR_Action_Boolean Right_Trigger
+        public virtual SteamVR_Action_Boolean Fire
         {
             get
             {
-                return SteamVR_Actions.flight1_Right_Trigger;
+                return SteamVR_Actions.flight1_Fire;
             }
         }
         
-        public virtual SteamVR_Action_Boolean NewAction
+        public virtual SteamVR_Action_Boolean Recenter_Headset_Zero
         {
             get
             {
-                return SteamVR_Actions.flight1_NewAction;
+                return SteamVR_Actions.flight1_Recenter_Headset_Zero;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean Decelerate
+        {
+            get
+            {
+                return SteamVR_Actions.flight1_Decelerate;
             }
         }
     }
