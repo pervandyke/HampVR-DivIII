@@ -164,7 +164,7 @@ public class TemporaryMovementController : MonoBehaviour
 
     private void RotateToCamera()
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, mainCamera.transform.rotation, Time.deltaTime * rotateSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, mainCamera.transform.localRotation, Time.deltaTime * rotateSpeed);
     }
 
     public void Shoot()
