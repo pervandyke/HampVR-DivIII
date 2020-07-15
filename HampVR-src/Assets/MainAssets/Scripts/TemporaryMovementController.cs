@@ -32,6 +32,9 @@ public class TemporaryMovementController : MonoBehaviour
     [SerializeField]
     private Camera mainCamera;
     private Vector3 headsetZero;
+    private Vector3 direction;
+
+
 
 
     // Start is called before the first frame update
@@ -121,6 +124,8 @@ public class TemporaryMovementController : MonoBehaviour
         {
             RB.velocity = Vector3.ClampMagnitude(RB.velocity, maxSpeed);
         }
+
+        RotateToCamera();
     }
 
     public bool GetAccelerateDown()
@@ -155,6 +160,11 @@ public class TemporaryMovementController : MonoBehaviour
         {
             Destroy(player);
         }
+    }
+
+    private void RotateToCamera()
+    {
+        transform.rotation = Quaternion.Slerp(transform.rotation, mainCamera.transform.rotation, Time.deltaTime * rotateSpeed);
     }
 
     public void Shoot()
