@@ -49,7 +49,7 @@ public class TemporaryMovementController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        print("Headset Location: " + mainCamera.transform.localPosition);
+        //print("Headset Location: " + mainCamera.transform.localPosition);
         //Acceleration
         if (Input.GetKey(KeyCode.LeftShift) || GetAccelerateDown() || mainCamera.transform.localPosition.z > headsetZero.z)
         {
@@ -162,9 +162,20 @@ public class TemporaryMovementController : MonoBehaviour
         }
     }
 
+    private float timer = 0.0f;
+    private float timerMax = 1;
     private void RotateToCamera()
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, mainCamera.transform.localRotation, Time.deltaTime * rotateSpeed);
+        timer -= Time.deltaTime;
+        if (timer <= 0)
+        {
+            print("ship rotation: " + transform.rotation.eulerAngles);
+            print("camera rotation: " + mainCamera.transform.rotation.eulerAngles);
+            print("difference: " + (transform.rotation.eulerAngles - mainCamera.transform.rotation.eulerAngles));
+            timer = timerMax;
+        }
+        
+        transform.rotation = Quaternion.Slerp(transform.rotation, mainCamera.transform.rotation, Time.deltaTime * rotateSpeed);
     }
 
     public void Shoot()
