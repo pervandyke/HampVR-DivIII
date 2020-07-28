@@ -127,6 +127,7 @@ public class TemporaryMovementController : MonoBehaviour
 
         if (Global.global.rotationType == "relative")
         {
+            print("hello");
             RelativeRotateToCamera();
         }
         else if (Global.global.rotationType == "absolute")
