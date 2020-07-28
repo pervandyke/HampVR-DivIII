@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 784863143849717387}
   - component: {fileID: 784863143849717389}
   - component: {fileID: 784863143849717388}
+  - component: {fileID: 6862971009452610706}
   m_Layer: 0
   m_Name: Cockpit
   m_TagString: Untagged
@@ -80,6 +81,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 784863143849717386}
   m_Mesh: {fileID: -2432090755550338912, guid: 3d1906f32189c3a4d9285dbb51120d10, type: 3}
+--- !u!54 &6862971009452610706
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784863143849717386}
+  serializedVersion: 2
+  m_Mass: 4
+  m_Drag: 0
+  m_AngularDrag: 5
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &5150413727944368762
 PrefabInstance:
   m_ObjectHideFlags: 0
