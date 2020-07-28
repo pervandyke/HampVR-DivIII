@@ -175,7 +175,7 @@ public class TemporaryMovementController : MonoBehaviour
             timer = timerMax;
         }
         
-        transform.rotation = Quaternion.Slerp(transform.rotation, mainCamera.transform.rotation, Time.deltaTime * rotateSpeed);
+        player.transform.rotation = Quaternion.Slerp(player.transform.rotation, mainCamera.transform.rotation, Time.deltaTime * rotateSpeed);
     }
 
     public void Shoot()
