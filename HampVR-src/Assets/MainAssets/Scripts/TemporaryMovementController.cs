@@ -125,7 +125,15 @@ public class TemporaryMovementController : MonoBehaviour
             RB.velocity = Vector3.ClampMagnitude(RB.velocity, maxSpeed);
         }
 
-        RotateToCamera();
+        if (Global.global.rotationType == "relative")
+        {
+            RelativeRotateToCamera();
+        }
+        else if (Global.global.rotationType == "absolute")
+        {
+            AbsoluteRotateToCamera();
+        }
+        
     }
 
     public bool GetAccelerateDown()
@@ -162,20 +170,13 @@ public class TemporaryMovementController : MonoBehaviour
         }
     }
 
-    private float timer = 0.0f;
-    private float timerMax = 1;
-    private void RotateToCamera()
+    private void RelativeRotateToCamera()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0)
-        {
-            print("ship rotation: " + transform.rotation.eulerAngles);
-            print("camera rotation: " + mainCamera.transform.rotation.eulerAngles);
-            print("difference: " + (transform.rotation.eulerAngles - mainCamera.transform.rotation.eulerAngles));
-            timer = timerMax;
-        }
-        
         player.transform.rotation = Quaternion.Slerp(player.transform.rotation, mainCamera.transform.rotation, Time.deltaTime * rotateSpeed);
+    }
+    private void AbsoluteRotateToCamera()
+    {
+
     }
 
     public void Shoot()
