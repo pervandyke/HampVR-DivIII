@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 using Valve.VR;
 
 public class TemporaryMovementController : MonoBehaviour
 {
 
     public GameObject player;
+    public GameObject playerModel;
     public GameObject laserSpawner;
     public GameObject laserSpawner2;
     private Rigidbody RB;
@@ -43,6 +45,14 @@ public class TemporaryMovementController : MonoBehaviour
         RB = player.GetComponent<Rigidbody>();
         originalRotation = transform.rotation;
         headsetZero = mainCamera.transform.localPosition;
+        if (Global.global.rotationType == "relative")
+        {
+            playerModel.GetComponent<RotationConstraint>().constraintActive = true;
+        }
+        else if (Global.global.rotationType == "absolute")
+        {
+            playerModel.GetComponent<RotationConstraint>().constraintActive = false;
+        }
 
     }
 
@@ -176,7 +186,7 @@ public class TemporaryMovementController : MonoBehaviour
     }
     private void AbsoluteRotateToCamera()
     {
-
+        playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, mainCamera.transform.rotation, Time.deltaTime * rotateSpeed);
     }
 
     public void Shoot()
