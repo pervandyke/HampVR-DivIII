@@ -20,6 +20,9 @@ public class TemporaryMovementController : MonoBehaviour
     public float rotateSpeed;
     public float maxSpeed;
 
+    public AnimationCurve accelerationCurve;
+    public AnimationCurve deccelerationCurve;
+
     public float laserSpeed;
     public int laserDamage;
 
