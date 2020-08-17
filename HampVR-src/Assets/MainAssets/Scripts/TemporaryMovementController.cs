@@ -57,7 +57,8 @@ public class TemporaryMovementController : MonoBehaviour
         {
             playerModel.GetComponent<RotationConstraint>().constraintActive = false;
         }
-
+        maxForwardLean = new Vector3(0, 0, 2.0f);
+        maxRearwardLean = new Vector3(0, 0, -1.0f);
     }
 
     // Update is called once per frame
