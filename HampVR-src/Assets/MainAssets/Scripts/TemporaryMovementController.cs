@@ -21,6 +21,7 @@ public class TemporaryMovementController : MonoBehaviour
     public float maxSpeed;
 
     public AnimationCurve targetSpeedCurve;
+    public AnimationCurve targetReverseSpeedCurve;
 
     public float laserSpeed;
     public int laserDamage;
@@ -36,7 +37,8 @@ public class TemporaryMovementController : MonoBehaviour
     [SerializeField]
     private Camera mainCamera;
     private Vector3 headsetZero;
-    private Vector3 direction;
+    private Vector3 maxForwardLean;
+    private Vector3 maxRearwardLean;
 
 
 
@@ -128,13 +130,42 @@ public class TemporaryMovementController : MonoBehaviour
             headsetZero = mainCamera.transform.localPosition;
         }
 
+        //set max forward lean
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            maxForwardLean = mainCamera.transform.localPosition;
+        }
+
+        //set max rearward lean
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            maxRearwardLean = mainCamera.transform.localPosition;
+        }
+
+        //space break
         if (Input.GetKey(KeyCode.B))
         {
             RB.velocity = Vector3.zero;
         }
-        if (RB.velocity.magnitude > maxSpeed)
+
+        //get how much player is leaning and normalize
+        float lean;
+        float speedPercentage;
+        if (mainCamera.transform.localPosition.z >= headsetZero.z)
         {
-            RB.velocity = Vector3.ClampMagnitude(RB.velocity, maxSpeed);
+            lean = mainCamera.transform.localPosition.z / maxForwardLean.z;
+            speedPercentage = targetSpeedCurve.Evaluate(lean);
+        }
+        else
+        {
+            lean = mainCamera.transform.localPosition.z / maxRearwardLean.z;
+            speedPercentage = targetReverseSpeedCurve.Evaluate(lean);
+        }
+
+        //clamp max speed
+        if (RB.velocity.magnitude > maxSpeed * speedPercentage)
+        {
+            RB.velocity = Vector3.ClampMagnitude(RB.velocity, maxSpeed * speedPercentage);
         }
 
         if (Global.global.rotationType == "relative")
