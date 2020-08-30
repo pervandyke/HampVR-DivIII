@@ -69,6 +69,7 @@ public class TemporaryMovementController : MonoBehaviour
         print(mainCamera.transform.localPosition.z - headsetZero.z);
         if (Input.GetKey(KeyCode.LeftShift) || GetAccelerateDown() || mainCamera.transform.localPosition.z > headsetZero.z)
         {
+            print("forward");
             RB.AddRelativeForce(Vector3.forward * acceleration);
         }
         else if (Input.GetKey(KeyCode.LeftControl) || GetDeccelerateDown() || mainCamera.transform.localPosition.z < headsetZero.z)
@@ -155,7 +156,8 @@ public class TemporaryMovementController : MonoBehaviour
         float speedPercentage;
         if (mainCamera.transform.localPosition.z >= headsetZero.z)
         {
-            lean = mainCamera.transform.localPosition.z / maxForwardLean.z;
+            print("leaning forward");
+            lean = mainCamera.transform.localPosition.z - headsetZero.z / maxForwardLean.z;
             if (lean > 1.0f)
             {
                 lean = 1.0f;
@@ -164,7 +166,7 @@ public class TemporaryMovementController : MonoBehaviour
         }
         else if (mainCamera.transform.localPosition.z < headsetZero.z)
         {
-            lean = mainCamera.transform.localPosition.z / maxRearwardLean.z;
+            lean = mainCamera.transform.localPosition.z - headsetZero.z / maxRearwardLean.z;
             if (lean > 1.0f)
             {
                 lean = 1.0f;
