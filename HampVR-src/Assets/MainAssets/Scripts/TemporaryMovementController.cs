@@ -155,12 +155,24 @@ public class TemporaryMovementController : MonoBehaviour
         if (mainCamera.transform.localPosition.z >= headsetZero.z)
         {
             lean = mainCamera.transform.localPosition.z / maxForwardLean.z;
+            if (lean > 1.0f)
+            {
+                lean = 1.0f;
+            }
             speedPercentage = targetSpeedCurve.Evaluate(lean);
+        }
+        else if (mainCamera.transform.localPosition.z < headsetZero.z)
+        {
+            lean = mainCamera.transform.localPosition.z / maxRearwardLean.z;
+            if (lean > 1.0f)
+            {
+                lean = 1.0f;
+            }
+            speedPercentage = targetReverseSpeedCurve.Evaluate(lean);
         }
         else
         {
-            lean = mainCamera.transform.localPosition.z / maxRearwardLean.z;
-            speedPercentage = targetReverseSpeedCurve.Evaluate(lean);
+            speedPercentage = 0.0f;
         }
 
         //clamp max speed
@@ -223,17 +235,17 @@ public class TemporaryMovementController : MonoBehaviour
         playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, mainCamera.transform.rotation, Time.deltaTime * rotateSpeed);
     }
 
+    //Fire the lasers
     public void Shoot()
     {
-        Vector3 SpawnPosition = laserSpawner.transform.position;
-        Quaternion SpawnRotation = laserSpawner.transform.rotation;
-        GameObject LaserInstance;
-        LaserInstance = Instantiate(Resources.Load<GameObject>("Prefabs/Laser"), SpawnPosition, SpawnRotation) as GameObject;
-        LaserInstance.GetComponent<LaserScript>().speed = RB.velocity.magnitude + laserSpeed;
-        LaserInstance.GetComponent<LaserScript>().damage = laserDamage;
-        SpawnPosition = laserSpawner2.transform.position;
-        SpawnRotation = laserSpawner2.transform.rotation;
-        LaserInstance = Instantiate(Resources.Load<GameObject>("Prefabs/Laser"), SpawnPosition, SpawnRotation) as GameObject;
+        GenerateLaser("Prefabs/Laser", laserSpawner, laserSpeed, laserDamage);
+        GenerateLaser("Prefabs/Laser", laserSpawner2, laserSpeed, laserDamage);
+    }
+
+    //Generate a single laser
+    private void GenerateLaser(string prefabPath, GameObject laserSpawner, float laserSpeed, int laserDamage)
+    {
+        GameObject LaserInstance = Instantiate(Resources.Load<GameObject>(prefabPath), laserSpawner.transform.position, laserSpawner.transform.rotation) as GameObject;
         LaserInstance.GetComponent<LaserScript>().speed = RB.velocity.magnitude + laserSpeed;
         LaserInstance.GetComponent<LaserScript>().damage = laserDamage;
     }
