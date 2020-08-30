@@ -19,6 +19,11 @@
       "name": "/actions/Flight1/in/Decelerate",
       "type": "boolean",
       "requirement": "mandatory"
+    },
+    {
+      "name": "/actions/Flight1/in/poseTest",
+      "type": "pose",
+      "requirement": "suggested"
     }
   ],
   "action_sets": [

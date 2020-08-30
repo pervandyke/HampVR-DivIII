@@ -48,5 +48,13 @@ namespace Valve.VR
                 return SteamVR_Actions.flight1_Decelerate;
             }
         }
+        
+        public virtual SteamVR_Action_Pose poseTest
+        {
+            get
+            {
+                return SteamVR_Actions.flight1_poseTest;
+            }
+        }
     }
 }
