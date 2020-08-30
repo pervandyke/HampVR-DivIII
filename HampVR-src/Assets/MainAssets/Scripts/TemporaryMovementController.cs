@@ -57,8 +57,8 @@ public class TemporaryMovementController : MonoBehaviour
         {
             playerModel.GetComponent<RotationConstraint>().constraintActive = false;
         }
-        maxForwardLean = new Vector3(0, 0, 2.0f);
-        maxRearwardLean = new Vector3(0, 0, -1.0f);
+        maxForwardLean = new Vector3(0, 0, 0.75f);
+        maxRearwardLean = new Vector3(0, 0, -0.75f);
     }
 
     // Update is called once per frame
@@ -66,6 +66,7 @@ public class TemporaryMovementController : MonoBehaviour
     {
         //print("Headset Location: " + mainCamera.transform.localPosition);
         //Acceleration
+        print(mainCamera.transform.localPosition.z - headsetZero.z);
         if (Input.GetKey(KeyCode.LeftShift) || GetAccelerateDown() || mainCamera.transform.localPosition.z > headsetZero.z)
         {
             RB.AddRelativeForce(Vector3.forward * acceleration);
