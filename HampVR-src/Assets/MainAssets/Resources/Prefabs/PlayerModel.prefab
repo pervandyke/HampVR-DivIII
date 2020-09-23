@@ -333,14 +333,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d41eb388010fe98448fc6fbb353002ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  playerPhysics: {fileID: 0}
   playerModel: {fileID: 4263430021785689421}
   laserSpawner: {fileID: 4263430022694038438}
   laserSpawner2: {fileID: 8194421143144734473}
   acceleration: 50
   decceleration: -50
   strafeSpeed: 40
-  rotateSpeed: 1
+  rotateSpeed: 3
   maxSpeed: 17
   targetSpeedCurve:
     serializedVersion: 2

@@ -66,6 +66,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         //print("Headset Location: " + mainCamera.transform.localPosition);
         //Acceleration
+        /*
         print(mainCamera.transform.localPosition.z - headsetZero.z);
         if (Input.GetKey(KeyCode.LeftShift) || GetAccelerateDown() || mainCamera.transform.localPosition.z > headsetZero.z)
         {
@@ -75,6 +76,14 @@ public class PlayerMovementController : MonoBehaviour
         else if (Input.GetKey(KeyCode.LeftControl) || GetDeccelerateDown() || mainCamera.transform.localPosition.z < headsetZero.z)
         {
             RB.AddRelativeForce(Vector3.forward * decceleration);
+        }
+        */
+
+        //New Combined Acceleration
+
+        if (mainCamera.transform.localPosition != headsetZero)
+        {
+            RB.AddRelativeForce((mainCamera.transform.localPosition - headsetZero).normalized * acceleration);
         }
 
         //Temporarily disabled straifing until we can tune it better
