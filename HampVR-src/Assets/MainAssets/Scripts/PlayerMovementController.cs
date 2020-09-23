@@ -84,6 +84,10 @@ public class PlayerMovementController : MonoBehaviour
         if (mainCamera.transform.localPosition != headsetZero)
         {
             RB.AddRelativeForce((mainCamera.transform.localPosition - headsetZero).normalized * acceleration);
+            Vector3 adjustedPosition = playerPhysics.transform.position;
+            adjustedPosition.y += 1;
+            Ray movementRay = new Ray(adjustedPosition, mainCamera.transform.localPosition - headsetZero);
+            Debug.DrawRay(movementRay.origin, movementRay.direction * 10, Color.red);
         }
 
         //Temporarily disabled straifing until we can tune it better
