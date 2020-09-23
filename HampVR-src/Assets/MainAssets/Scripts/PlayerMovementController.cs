@@ -83,7 +83,9 @@ public class PlayerMovementController : MonoBehaviour
 
         if (mainCamera.transform.localPosition != headsetZero)
         {
-            RB.AddRelativeForce((mainCamera.transform.localPosition - headsetZero).normalized * acceleration);
+            RB.AddForce((mainCamera.transform.localPosition - headsetZero).normalized * acceleration);
+            
+            //Debug Raycast
             Vector3 adjustedPosition = playerPhysics.transform.position;
             adjustedPosition.y += 1;
             Ray movementRay = new Ray(adjustedPosition, mainCamera.transform.localPosition - headsetZero);
