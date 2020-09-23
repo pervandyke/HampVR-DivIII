@@ -7,7 +7,7 @@ using Valve.VR;
 public class PlayerMovementController : MonoBehaviour
 {
 
-    public GameObject player;
+    public GameObject playerPhysics;
     public GameObject playerModel;
     public GameObject laserSpawner;
     public GameObject laserSpawner2;
@@ -46,7 +46,7 @@ public class PlayerMovementController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        RB = player.GetComponent<Rigidbody>();
+        RB = playerPhysics.GetComponent<Rigidbody>();
         originalRotation = transform.rotation;
         headsetZero = mainCamera.transform.localPosition;
         if (Global.global.rotationType == "relative")
@@ -77,6 +77,9 @@ public class PlayerMovementController : MonoBehaviour
             RB.AddRelativeForce(Vector3.forward * decceleration);
         }
 
+        //Temporarily disabled straifing until we can tune it better
+
+        /*
         //Strafe Up/Down
         if (Input.GetKey(KeyCode.Space) || mainCamera.transform.localPosition.y > headsetZero.y)
         {
@@ -86,7 +89,9 @@ public class PlayerMovementController : MonoBehaviour
         {
             RB.AddRelativeForce(Vector3.up * -strafeSpeed);
         }
-
+        */
+        
+        /*
         //Strafe Left/Right
         if (Input.GetKey(KeyCode.Z) || mainCamera.transform.localPosition.x < headsetZero.x)
         {
@@ -96,35 +101,38 @@ public class PlayerMovementController : MonoBehaviour
         {
             RB.AddRelativeForce(Vector3.right * strafeSpeed);
         }
+        */
+
+        //Pitch, Roll, and Yaw are all keyboard only for now, all rotation handled with headset input
 
         //Pitch
         if (Input.GetKey(KeyCode.W))
         {
-            player.transform.Rotate(new Vector3(rotateSpeed, 0, 0));
+            playerPhysics.transform.Rotate(new Vector3(rotateSpeed, 0, 0));
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            player.transform.Rotate(new Vector3(-rotateSpeed, 0, 0));
+            playerPhysics.transform.Rotate(new Vector3(-rotateSpeed, 0, 0));
         }
 
         //Roll
         if (Input.GetKey(KeyCode.Q))
         {
-            player.transform.Rotate(new Vector3(0,0,rotateSpeed));
+            playerPhysics.transform.Rotate(new Vector3(0,0,rotateSpeed));
         }
         else if (Input.GetKey(KeyCode.E))
         {
-            player.transform.Rotate(new Vector3(0,0,-rotateSpeed));
+            playerPhysics.transform.Rotate(new Vector3(0,0,-rotateSpeed));
         }
 
         //Yaw
         if (Input.GetKey(KeyCode.D))
         {
-            player.transform.Rotate(new Vector3(0, rotateSpeed, 0));
+            playerPhysics.transform.Rotate(new Vector3(0, rotateSpeed, 0));
         }
         else if (Input.GetKey(KeyCode.A))
         {
-            player.transform.Rotate(new Vector3(0, -rotateSpeed, 0));
+            playerPhysics.transform.Rotate(new Vector3(0, -rotateSpeed, 0));
         }
        
         //Reset Control Zero
@@ -178,6 +186,8 @@ public class PlayerMovementController : MonoBehaviour
             speedPercentage = 0.0f;
         }
 
+        //Implement Rotation tracking of headset here
+
         //clamp max speed
         if (RB.velocity.magnitude > maxSpeed * speedPercentage)
         {
@@ -225,13 +235,13 @@ public class PlayerMovementController : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(player);
+            Destroy(playerPhysics);
         }
     }
 
     private void RelativeRotateToCamera()
     {
-        player.transform.rotation = Quaternion.Slerp(player.transform.rotation, mainCamera.transform.rotation, Time.deltaTime * rotateSpeed);
+        playerPhysics.transform.rotation = Quaternion.Slerp(playerPhysics.transform.rotation, mainCamera.transform.rotation, Time.deltaTime * rotateSpeed);
     }
     private void AbsoluteRotateToCamera()
     {
