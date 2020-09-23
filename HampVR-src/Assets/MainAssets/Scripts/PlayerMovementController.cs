@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Animations;
 using Valve.VR;
 
-public class TemporaryMovementController : MonoBehaviour
+public class PlayerMovementController : MonoBehaviour
 {
 
     public GameObject player;

@@ -49,7 +49,7 @@ public class LaserScript : MonoBehaviour
         {
             if (other.gameObject.tag == "Player")
             {
-                other.gameObject.GetComponentInChildren<TemporaryMovementController>().health -= damage;
+                other.gameObject.GetComponentInChildren<PlayerMovementController>().health -= damage;
             }
             if (other.gameObject.tag == "Enemy")
             {
