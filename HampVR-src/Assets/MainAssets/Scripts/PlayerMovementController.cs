@@ -37,8 +37,7 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField]
     private Camera mainCamera;
     private Vector3 headsetZero;
-    private Vector3 maxForwardLean;
-    private Vector3 maxRearwardLean;
+    private float maxLean;
 
 
 
@@ -57,8 +56,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             playerModel.GetComponent<RotationConstraint>().constraintActive = false;
         }
-        maxForwardLean = new Vector3(0, 0, 0.75f);
-        maxRearwardLean = new Vector3(0, 0, -0.75f);
+        maxLean = 0.75f;
     }
 
     // Update is called once per frame
@@ -105,7 +103,7 @@ public class PlayerMovementController : MonoBehaviour
             RB.AddRelativeForce(Vector3.up * -strafeSpeed);
         }
         */
-        
+
         /*
         //Strafe Left/Right
         if (Input.GetKey(KeyCode.Z) || mainCamera.transform.localPosition.x < headsetZero.x)
@@ -118,37 +116,7 @@ public class PlayerMovementController : MonoBehaviour
         }
         */
 
-        //Pitch, Roll, and Yaw are all keyboard only for now, all rotation handled with headset input
-
-        //Pitch
-        if (Input.GetKey(KeyCode.W))
-        {
-            playerPhysics.transform.Rotate(new Vector3(rotateSpeed, 0, 0));
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            playerPhysics.transform.Rotate(new Vector3(-rotateSpeed, 0, 0));
-        }
-
-        //Roll
-        if (Input.GetKey(KeyCode.Q))
-        {
-            playerPhysics.transform.Rotate(new Vector3(0,0,rotateSpeed));
-        }
-        else if (Input.GetKey(KeyCode.E))
-        {
-            playerPhysics.transform.Rotate(new Vector3(0,0,-rotateSpeed));
-        }
-
-        //Yaw
-        if (Input.GetKey(KeyCode.D))
-        {
-            playerPhysics.transform.Rotate(new Vector3(0, rotateSpeed, 0));
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            playerPhysics.transform.Rotate(new Vector3(0, -rotateSpeed, 0));
-        }
+        PitchRollYaw();
        
         //Reset Control Zero
         if (GetResetHeadsetDown())
@@ -159,13 +127,7 @@ public class PlayerMovementController : MonoBehaviour
         //set max forward lean
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            maxForwardLean = mainCamera.transform.localPosition;
-        }
-
-        //set max rearward lean
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            maxRearwardLean = mainCamera.transform.localPosition;
+            maxLean = mainCamera.transform.localPosition.z;
         }
 
         //space break
@@ -174,6 +136,7 @@ public class PlayerMovementController : MonoBehaviour
             RB.velocity = Vector3.zero;
         }
 
+        /*
         //get how much player is leaning and normalize
         float lean;
         float speedPercentage;
@@ -200,8 +163,23 @@ public class PlayerMovementController : MonoBehaviour
         {
             speedPercentage = 0.0f;
         }
+        */
 
-        //Implement Rotation tracking of headset here
+        float lean;
+        float speedPercentage;
+        if (mainCamera.transform.localPosition.z != headsetZero.z)
+        {
+            lean = (mainCamera.transform.localPosition - headsetZero).magnitude / maxLean;
+            if (lean > 1.0f)
+            {
+                lean = 1.0f;
+            }
+            speedPercentage = targetSpeedCurve.Evaluate(lean);
+        }
+        else
+        {
+            speedPercentage = 0.0f;
+        }
 
         //clamp max speed
         if (RB.velocity.magnitude > maxSpeed * speedPercentage)
@@ -276,5 +254,40 @@ public class PlayerMovementController : MonoBehaviour
         GameObject LaserInstance = Instantiate(Resources.Load<GameObject>(prefabPath), laserSpawner.transform.position, laserSpawner.transform.rotation) as GameObject;
         LaserInstance.GetComponent<LaserScript>().speed = RB.velocity.magnitude + laserSpeed;
         LaserInstance.GetComponent<LaserScript>().damage = laserDamage;
+    }
+
+    private void PitchRollYaw()
+    {
+        //Pitch, Roll, and Yaw are all keyboard only for now, all rotation handled with headset input
+
+        //Pitch
+        if (Input.GetKey(KeyCode.W))
+        {
+            playerPhysics.transform.Rotate(new Vector3(rotateSpeed, 0, 0));
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            playerPhysics.transform.Rotate(new Vector3(-rotateSpeed, 0, 0));
+        }
+
+        //Roll
+        if (Input.GetKey(KeyCode.Q))
+        {
+            playerPhysics.transform.Rotate(new Vector3(0, 0, rotateSpeed));
+        }
+        else if (Input.GetKey(KeyCode.E))
+        {
+            playerPhysics.transform.Rotate(new Vector3(0, 0, -rotateSpeed));
+        }
+
+        //Yaw
+        if (Input.GetKey(KeyCode.D))
+        {
+            playerPhysics.transform.Rotate(new Vector3(0, rotateSpeed, 0));
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            playerPhysics.transform.Rotate(new Vector3(0, -rotateSpeed, 0));
+        }
     }
 }
