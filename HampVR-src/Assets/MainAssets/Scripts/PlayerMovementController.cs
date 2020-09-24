@@ -248,7 +248,7 @@ public class PlayerMovementController : MonoBehaviour
         movementVector = mainCamera.transform.localPosition - headsetZero;
         movementVector.y = 0;
         verticalMarker.localPosition = new Vector3(verticalMarker.localPosition.x, verticalMarker.localPosition.y, movementVector.magnitude);
-        movementVector.y = verticalMarker.localPosition.y;
+        movementVector.y = verticalMarker.position.y - headsetZero.y;
     }
 
     private void PitchRollYaw()
