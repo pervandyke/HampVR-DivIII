@@ -38,9 +38,10 @@ public class PlayerMovementController : MonoBehaviour
     private Camera mainCamera;
     [SerializeField]
     private Transform verticalMarker;
+    [SerializeField]
+    private Vector3 movementVector;
 
     private Vector3 headsetZero;
-    private Vector3 movementVector;
     private float maxLean;
 
 
