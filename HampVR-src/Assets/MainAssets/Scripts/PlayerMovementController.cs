@@ -36,7 +36,11 @@ public class PlayerMovementController : MonoBehaviour
 
     [SerializeField]
     private Camera mainCamera;
+    [SerializeField]
+    private Transform verticalMarker;
+
     private Vector3 headsetZero;
+    private Vector3 movementVector;
     private float maxLean;
 
 
@@ -79,9 +83,11 @@ public class PlayerMovementController : MonoBehaviour
 
         //New Combined Acceleration
 
+        SetMovementVector();
+
         if (mainCamera.transform.localPosition != headsetZero)
         {
-            RB.AddForce((mainCamera.transform.localPosition - headsetZero).normalized * acceleration);
+            RB.AddForce(movementVector.normalized * acceleration);
             
             //Debug Raycast
             Vector3 adjustedPosition = playerPhysics.transform.position;
@@ -169,7 +175,7 @@ public class PlayerMovementController : MonoBehaviour
         float speedPercentage;
         if (mainCamera.transform.localPosition.z != headsetZero.z)
         {
-            lean = (mainCamera.transform.localPosition - headsetZero).magnitude / maxLean;
+            lean = movementVector.magnitude / maxLean;
             if (lean > 1.0f)
             {
                 lean = 1.0f;
@@ -198,26 +204,7 @@ public class PlayerMovementController : MonoBehaviour
         
     }
 
-    public bool GetAccelerateDown()
-    {
-        return accelerate.GetState(handType);
-    }
-
-    public bool GetDeccelerateDown()
-    {
-        return deccelerate.GetState(handType);
-    }
-
-    public bool GetFireDown()
-    {     
-        return fire.GetState(handType);
-    }
-
-    public bool GetResetHeadsetDown()
-    {
-        return resetHeadsetZero.GetStateDown(handType);
-    }
-
+    
     private void Update()
     {
         //Shooting
@@ -256,6 +243,14 @@ public class PlayerMovementController : MonoBehaviour
         LaserInstance.GetComponent<LaserScript>().damage = laserDamage;
     }
 
+    private void SetMovementVector()
+    {
+        movementVector = mainCamera.transform.localPosition - headsetZero;
+        movementVector.y = 0;
+        verticalMarker.localPosition = new Vector3(verticalMarker.localPosition.x, verticalMarker.localPosition.y, movementVector.magnitude);
+        movementVector.y = verticalMarker.localPosition.y;
+    }
+
     private void PitchRollYaw()
     {
         //Pitch, Roll, and Yaw are all keyboard only for now, all rotation handled with headset input
@@ -290,4 +285,25 @@ public class PlayerMovementController : MonoBehaviour
             playerPhysics.transform.Rotate(new Vector3(0, -rotateSpeed, 0));
         }
     }
+
+    public bool GetAccelerateDown()
+    {
+        return accelerate.GetState(handType);
+    }
+
+    public bool GetDeccelerateDown()
+    {
+        return deccelerate.GetState(handType);
+    }
+
+    public bool GetFireDown()
+    {
+        return fire.GetState(handType);
+    }
+
+    public bool GetResetHeadsetDown()
+    {
+        return resetHeadsetZero.GetStateDown(handType);
+    }
+
 }
