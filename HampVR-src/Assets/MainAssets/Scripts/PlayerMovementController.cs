@@ -39,7 +39,9 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField]
     private Transform verticalMarker;
     [SerializeField]
-    private Vector3 movementVector;
+    private Vector3 horizontalMovementVector;
+    [SerializeField]
+    private Vector3 verticalMovementVector;
 
     private Vector3 headsetZero;
     private float maxLean;
@@ -84,17 +86,18 @@ public class PlayerMovementController : MonoBehaviour
 
         //New Combined Acceleration
 
-        SetMovementVector();
+        SetMovementVectors();
 
         if (mainCamera.transform.localPosition != headsetZero)
         {
-            RB.AddForce(movementVector.normalized * acceleration);
+            RB.AddForce(horizontalMovementVector.normalized * acceleration);
+            RB.AddForce(verticalMovementVector.normalized * acceleration);
             
             //Debug Raycast
-            Vector3 adjustedPosition = playerPhysics.transform.position;
-            adjustedPosition.y += 1;
-            Ray movementRay = new Ray(adjustedPosition, mainCamera.transform.localPosition - headsetZero);
-            Debug.DrawRay(movementRay.origin, movementRay.direction * 10, Color.red);
+            Ray horizontalMovementRay = new Ray(mainCamera.transform.position, mainCamera.transform.localPosition - headsetZero);
+            Ray verticalMovementRay = new Ray(mainCamera.transform.position, Vector3.up);
+            Debug.DrawRay(horizontalMovementRay.origin, horizontalMovementRay.direction * 10, Color.red);
+            Debug.DrawRay(verticalMovementRay.origin, verticalMovementRay.direction * verticalMovementVector.magnitude, Color.yellow);
         }
 
         //Temporarily disabled straifing until we can tune it better
@@ -123,7 +126,7 @@ public class PlayerMovementController : MonoBehaviour
         }
         */
 
-        PitchRollYaw();
+        PitchRollYawKeyboard();
        
         //Reset Control Zero
         if (GetResetHeadsetDown())
@@ -176,7 +179,7 @@ public class PlayerMovementController : MonoBehaviour
         float speedPercentage;
         if (mainCamera.transform.localPosition.z != headsetZero.z)
         {
-            lean = movementVector.magnitude / maxLean;
+            lean = horizontalMovementVector.magnitude / maxLean;
             if (lean > 1.0f)
             {
                 lean = 1.0f;
@@ -244,15 +247,16 @@ public class PlayerMovementController : MonoBehaviour
         LaserInstance.GetComponent<LaserScript>().damage = laserDamage;
     }
 
-    private void SetMovementVector()
+    private void SetMovementVectors()
     {
-        movementVector = mainCamera.transform.localPosition - headsetZero;
-        movementVector.y = 0;
-        verticalMarker.localPosition = new Vector3(verticalMarker.localPosition.x, verticalMarker.localPosition.y, movementVector.magnitude);
-        movementVector.y = verticalMarker.position.y - mainCamera.transform.position.y;
+        horizontalMovementVector = mainCamera.transform.localPosition - headsetZero;
+        horizontalMovementVector.y = 0;
+        
+        verticalMarker.localPosition = new Vector3(verticalMarker.localPosition.x, verticalMarker.localPosition.y, horizontalMovementVector.magnitude);
+        verticalMovementVector.y = verticalMarker.position.y - headsetZero.y;
     }
 
-    private void PitchRollYaw()
+    private void PitchRollYawKeyboard()
     {
         //Pitch, Roll, and Yaw are all keyboard only for now, all rotation handled with headset input
 
