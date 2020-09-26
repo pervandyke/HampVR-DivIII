@@ -341,7 +341,7 @@ MonoBehaviour:
   decceleration: -50
   strafeSpeed: 40
   rotateSpeed: 3
-  maxSpeed: 17
+  maxSpeed: 170
   targetSpeedCurve:
     serializedVersion: 2
     m_Curve:
@@ -407,3 +407,6 @@ MonoBehaviour:
     actionPath: /actions/Flight1/in/Recenter_Headset_Zero
     needsReinit: 0
   mainCamera: {fileID: 0}
+  verticalMarker: {fileID: 0}
+  horizontalMovementVector: {x: 0, y: 0, z: 0}
+  verticalMovementVector: {x: 0, y: 0, z: 0}

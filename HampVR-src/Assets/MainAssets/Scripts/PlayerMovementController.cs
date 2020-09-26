@@ -9,6 +9,8 @@ public class PlayerMovementController : MonoBehaviour
 
     public GameObject playerPhysics;
     public GameObject playerModel;
+    public GameObject leftHand;
+    public GameObject rightHand;
     public GameObject laserSpawner;
     public GameObject laserSpawner2;
     private Rigidbody RB;
@@ -46,6 +48,11 @@ public class PlayerMovementController : MonoBehaviour
     private Vector3 headsetZero;
     private float maxLean;
 
+    private bool leftCocked;
+    private bool rightCocked;
+    private Vector3 leftLastPosition;
+    private Vector3 rightLastposition;
+
 
 
 
@@ -55,6 +62,8 @@ public class PlayerMovementController : MonoBehaviour
         RB = playerPhysics.GetComponent<Rigidbody>();
         originalRotation = transform.rotation;
         headsetZero = mainCamera.transform.localPosition;
+        leftCocked = false;
+        rightCocked = false;
         if (Global.global.rotationType == "relative")
         {
             playerModel.GetComponent<RotationConstraint>().constraintActive = true;
@@ -69,65 +78,17 @@ public class PlayerMovementController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //print("Headset Location: " + mainCamera.transform.localPosition);
-        //Acceleration
-        /*
-        print(mainCamera.transform.localPosition.z - headsetZero.z);
-        if (Input.GetKey(KeyCode.LeftShift) || GetAccelerateDown() || mainCamera.transform.localPosition.z > headsetZero.z)
-        {
-            print("forward");
-            RB.AddRelativeForce(Vector3.forward * acceleration);
-        }
-        else if (Input.GetKey(KeyCode.LeftControl) || GetDeccelerateDown() || mainCamera.transform.localPosition.z < headsetZero.z)
-        {
-            RB.AddRelativeForce(Vector3.forward * decceleration);
-        }
-        */
-
-        //New Combined Acceleration
-
         SetMovementVectors();
 
-        if (mainCamera.transform.localPosition != headsetZero)
-        {
-            RB.AddForce(horizontalMovementVector.normalized * acceleration);
-            RB.AddForce(verticalMovementVector.normalized * acceleration);
-            
-            //Debug Raycast
-            Ray horizontalMovementRay = new Ray(mainCamera.transform.position, mainCamera.transform.localPosition - headsetZero);
-            Ray verticalMovementRay = new Ray(mainCamera.transform.position, Vector3.up);
-            Debug.DrawRay(horizontalMovementRay.origin, horizontalMovementRay.direction * 10, Color.red);
-            Debug.DrawRay(verticalMovementRay.origin, verticalMovementRay.direction * verticalMovementVector.magnitude, Color.yellow);
-        }
+        ApplyForce();
 
-        //Temporarily disabled straifing until we can tune it better
+        ControllerBehaviorHandler();
 
-        /*
-        //Strafe Up/Down
-        if (Input.GetKey(KeyCode.Space) || mainCamera.transform.localPosition.y > headsetZero.y)
-        {
-            RB.AddRelativeForce(Vector3.up * strafeSpeed);
-        }
-        else if (Input.GetKey(KeyCode.C) || mainCamera.transform.localPosition.y < headsetZero.y)
-        {
-            RB.AddRelativeForce(Vector3.up * -strafeSpeed);
-        }
-        */
 
-        /*
-        //Strafe Left/Right
-        if (Input.GetKey(KeyCode.Z) || mainCamera.transform.localPosition.x < headsetZero.x)
-        {
-            RB.AddRelativeForce(Vector3.right * -strafeSpeed);
-        }
-        else if (Input.GetKey(KeyCode.X) || mainCamera.transform.localPosition.x > headsetZero.x)
-        {
-            RB.AddRelativeForce(Vector3.right * strafeSpeed);
-        }
-        */
 
-        PitchRollYawKeyboard();
-       
+
+
+
         //Reset Control Zero
         if (GetResetHeadsetDown())
         {
@@ -145,35 +106,6 @@ public class PlayerMovementController : MonoBehaviour
         {
             RB.velocity = Vector3.zero;
         }
-
-        /*
-        //get how much player is leaning and normalize
-        float lean;
-        float speedPercentage;
-        if (mainCamera.transform.localPosition.z >= headsetZero.z)
-        {
-            print("leaning forward");
-            lean = mainCamera.transform.localPosition.z - headsetZero.z / maxForwardLean.z;
-            if (lean > 1.0f)
-            {
-                lean = 1.0f;
-            }
-            speedPercentage = targetSpeedCurve.Evaluate(lean);
-        }
-        else if (mainCamera.transform.localPosition.z < headsetZero.z)
-        {
-            lean = mainCamera.transform.localPosition.z - headsetZero.z / maxRearwardLean.z;
-            if (lean > 1.0f)
-            {
-                lean = 1.0f;
-            }
-            speedPercentage = targetReverseSpeedCurve.Evaluate(lean);
-        }
-        else
-        {
-            speedPercentage = 0.0f;
-        }
-        */
 
         float lean;
         float speedPercentage;
@@ -256,39 +188,27 @@ public class PlayerMovementController : MonoBehaviour
         verticalMovementVector.y = verticalMarker.position.y - headsetZero.y;
     }
 
-    private void PitchRollYawKeyboard()
+    private void ApplyForce()
     {
-        //Pitch, Roll, and Yaw are all keyboard only for now, all rotation handled with headset input
+        if (mainCamera.transform.localPosition != headsetZero)
+        {
+            RB.AddForce(horizontalMovementVector.normalized * acceleration);
+            RB.AddForce(verticalMovementVector.normalized * acceleration);
 
-        //Pitch
-        if (Input.GetKey(KeyCode.W))
-        {
-            playerPhysics.transform.Rotate(new Vector3(rotateSpeed, 0, 0));
+            //Debug Raycast
+            Ray horizontalMovementRay = new Ray(mainCamera.transform.position, mainCamera.transform.localPosition - headsetZero);
+            Ray verticalMovementRay = new Ray(mainCamera.transform.position, Vector3.up);
+            Debug.DrawRay(horizontalMovementRay.origin, horizontalMovementRay.direction * 10, Color.red);
+            Debug.DrawRay(verticalMovementRay.origin, verticalMovementRay.direction * verticalMovementVector.magnitude, Color.yellow);
         }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            playerPhysics.transform.Rotate(new Vector3(-rotateSpeed, 0, 0));
-        }
+    }
 
-        //Roll
-        if (Input.GetKey(KeyCode.Q))
-        {
-            playerPhysics.transform.Rotate(new Vector3(0, 0, rotateSpeed));
-        }
-        else if (Input.GetKey(KeyCode.E))
-        {
-            playerPhysics.transform.Rotate(new Vector3(0, 0, -rotateSpeed));
-        }
+    private void ControllerBehaviorHandler()
+    {
+        Vector3 leftPosition = leftHand.transform.localPosition;
+        Vector3 rightPosition = rightHand.transform.localPosition;
 
-        //Yaw
-        if (Input.GetKey(KeyCode.D))
-        {
-            playerPhysics.transform.Rotate(new Vector3(0, rotateSpeed, 0));
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            playerPhysics.transform.Rotate(new Vector3(0, -rotateSpeed, 0));
-        }
+        //detect cocking here
     }
 
     public bool GetAccelerateDown()
