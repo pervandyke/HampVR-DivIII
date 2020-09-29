@@ -84,11 +84,6 @@ public class PlayerMovementController : MonoBehaviour
 
         ControllerBehaviorHandler();
 
-
-
-
-
-
         //Reset Control Zero
         if (GetResetHeadsetDown())
         {
@@ -184,8 +179,8 @@ public class PlayerMovementController : MonoBehaviour
         horizontalMovementVector = mainCamera.transform.localPosition - headsetZero;
         horizontalMovementVector.y = 0;
         
-        verticalMarker.localPosition = new Vector3(verticalMarker.localPosition.x, verticalMarker.localPosition.y, horizontalMovementVector.magnitude);
-        verticalMovementVector.y = verticalMarker.position.y - headsetZero.y;
+        //verticalMarker.localPosition = new Vector3(verticalMarker.localPosition.x, verticalMarker.localPosition.y, horizontalMovementVector.magnitude);
+        //verticalMovementVector.y = verticalMarker.position.y - headsetZero.y;
     }
 
     private void ApplyForce()
@@ -193,13 +188,13 @@ public class PlayerMovementController : MonoBehaviour
         if (mainCamera.transform.localPosition != headsetZero)
         {
             RB.AddForce(horizontalMovementVector.normalized * acceleration);
-            RB.AddForce(verticalMovementVector.normalized * acceleration);
+            //RB.AddForce(verticalMovementVector.normalized * acceleration);
 
             //Debug Raycast
             Ray horizontalMovementRay = new Ray(mainCamera.transform.position, mainCamera.transform.localPosition - headsetZero);
-            Ray verticalMovementRay = new Ray(mainCamera.transform.position, Vector3.up);
+            //Ray verticalMovementRay = new Ray(mainCamera.transform.position, Vector3.up);
             Debug.DrawRay(horizontalMovementRay.origin, horizontalMovementRay.direction * 10, Color.red);
-            Debug.DrawRay(verticalMovementRay.origin, verticalMovementRay.direction * verticalMovementVector.magnitude, Color.yellow);
+            //Debug.DrawRay(verticalMovementRay.origin, verticalMovementRay.direction * verticalMovementVector.magnitude, Color.yellow);
         }
     }
 
