@@ -21,6 +21,7 @@ public class PlayerMovementController : MonoBehaviour
     public float strafeSpeed;
     public float rotateSpeed;
     public float maxSpeed;
+    public float deadZone;
 
     public AnimationCurve targetSpeedCurve;
     public AnimationCurve targetReverseSpeedCurve;
@@ -176,7 +177,15 @@ public class PlayerMovementController : MonoBehaviour
 
     private void SetMovementVectors()
     {
-        horizontalMovementVector = mainCamera.transform.localPosition - headsetZero;
+        if ((mainCamera.transform.localPosition - headsetZero).magnitude > deadZone)
+        {
+            horizontalMovementVector = mainCamera.transform.localPosition - headsetZero;
+        }
+        else
+        {
+            horizontalMovementVector = new Vector3(0, 0, 0);
+        }
+        
         horizontalMovementVector.y = 0;
         
         //verticalMarker.localPosition = new Vector3(verticalMarker.localPosition.x, verticalMarker.localPosition.y, horizontalMovementVector.magnitude);
