@@ -3478,8 +3478,8 @@ PrefabInstance:
       objectReference: {fileID: 632123921}
     - target: {fileID: 3930032130077271513, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
-      propertyPath: deadZone
-      value: 0.25
+      propertyPath: acceleration
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4263430021785689417, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
@@ -3688,7 +3688,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 4
   m_Drag: 0
-  m_AngularDrag: 5
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0

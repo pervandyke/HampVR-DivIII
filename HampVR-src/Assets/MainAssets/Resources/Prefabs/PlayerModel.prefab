@@ -339,7 +339,7 @@ MonoBehaviour:
   rightHand: {fileID: 0}
   laserSpawner: {fileID: 4263430022694038438}
   laserSpawner2: {fileID: 8194421143144734473}
-  acceleration: 50
+  acceleration: 100
   decceleration: -50
   strafeSpeed: 40
   rotateSpeed: 3
