@@ -335,6 +335,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPhysics: {fileID: 0}
   playerModel: {fileID: 4263430021785689421}
+  leftHand: {fileID: 0}
+  rightHand: {fileID: 0}
   laserSpawner: {fileID: 4263430022694038438}
   laserSpawner2: {fileID: 8194421143144734473}
   acceleration: 50
@@ -342,6 +344,7 @@ MonoBehaviour:
   strafeSpeed: 40
   rotateSpeed: 3
   maxSpeed: 170
+  deadZone: 0.25
   targetSpeedCurve:
     serializedVersion: 2
     m_Curve:
