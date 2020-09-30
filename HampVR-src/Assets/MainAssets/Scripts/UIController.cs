@@ -20,7 +20,8 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerController = GameObject.Find("TempPlayerController").GetComponent<PlayerMovementController>();
+        playerController = GameObject.Find("PlayerController").GetComponent<PlayerMovementController>();
+        currentHealth = playerController.health;
     }
 
     // Update is called once per frame
