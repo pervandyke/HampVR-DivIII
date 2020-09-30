@@ -24,6 +24,8 @@ public class UIController : MonoBehaviour
         currentHealth = playerController.health;
     }
 
+
+
     // Update is called once per frame
     void Update()
     {
