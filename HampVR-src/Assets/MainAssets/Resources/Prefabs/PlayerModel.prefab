@@ -339,51 +339,25 @@ MonoBehaviour:
   rightHand: {fileID: 0}
   laserSpawner: {fileID: 4263430022694038438}
   laserSpawner2: {fileID: 8194421143144734473}
-  acceleration: 100
-  decceleration: -50
-  strafeSpeed: 40
+  acceleration: 60
   rotateSpeed: 3
   maxSpeed: 170
-  deadZone: 0.25
+  deadZone: 0.1
   targetSpeedCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 0.047937278
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: -0.0048305835
+      outSlope: -0.0048305835
       tangentMode: 0
-      weightedMode: 0
+      weightedMode: 3
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.47678977
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  targetReverseSpeedCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: -1
-      value: -1.0004103
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0
-      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -410,6 +384,4 @@ MonoBehaviour:
     actionPath: /actions/Flight1/in/Recenter_Headset_Zero
     needsReinit: 0
   mainCamera: {fileID: 0}
-  verticalMarker: {fileID: 0}
   horizontalMovementVector: {x: 0, y: 0, z: 0}
-  verticalMovementVector: {x: 0, y: 0, z: 0}
