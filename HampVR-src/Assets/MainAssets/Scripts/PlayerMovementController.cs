@@ -14,17 +14,13 @@ public class PlayerMovementController : MonoBehaviour
     public GameObject laserSpawner;
     public GameObject laserSpawner2;
     private Rigidbody RB;
-    private Quaternion originalRotation;
 
     public float acceleration;
-    public float decceleration;
-    public float strafeSpeed;
     public float rotateSpeed;
     public float maxSpeed;
     public float deadZone;
 
     public AnimationCurve targetSpeedCurve;
-    public AnimationCurve targetReverseSpeedCurve;
 
     public float laserSpeed;
     public int laserDamage;
@@ -40,11 +36,7 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField]
     private Camera mainCamera;
     [SerializeField]
-    private Transform verticalMarker;
-    [SerializeField]
     private Vector3 horizontalMovementVector;
-    [SerializeField]
-    private Vector3 verticalMovementVector;
 
     private Vector3 headsetZero;
     private float maxLean;
@@ -61,7 +53,6 @@ public class PlayerMovementController : MonoBehaviour
     void Start()
     {
         RB = playerPhysics.GetComponent<Rigidbody>();
-        originalRotation = transform.rotation;
         headsetZero = mainCamera.transform.localPosition;
         leftCocked = false;
         rightCocked = false;
