@@ -339,22 +339,22 @@ MonoBehaviour:
   rightHand: {fileID: 0}
   laserSpawner: {fileID: 4263430022694038438}
   laserSpawner2: {fileID: 8194421143144734473}
-  acceleration: 60
+  acceleration: 80
   rotateSpeed: 3
-  maxSpeed: 170
-  deadZone: 0.1
+  maxSpeed: 120
+  deadZone: 0.05
   targetSpeedCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.047937278
+      time: 0
       value: 0
-      inSlope: -0.0048305835
-      outSlope: -0.0048305835
+      inSlope: 0.0025376594
+      outSlope: 0.0025376594
       tangentMode: 0
       weightedMode: 3
       inWeight: 0
-      outWeight: 0.47678977
+      outWeight: 0.69989324
     - serializedVersion: 3
       time: 1
       value: 1
