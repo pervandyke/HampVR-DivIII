@@ -340,9 +340,9 @@ MonoBehaviour:
   laserSpawner: {fileID: 4263430022694038438}
   laserSpawner2: {fileID: 8194421143144734473}
   acceleration: 80
-  rotateSpeed: 3
+  rotateSpeed: 6
   maxSpeed: 120
-  deadZone: 0.05
+  deadZone: 0.1
   targetSpeedCurve:
     serializedVersion: 2
     m_Curve:
