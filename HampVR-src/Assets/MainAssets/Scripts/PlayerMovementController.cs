@@ -41,10 +41,12 @@ public class PlayerMovementController : MonoBehaviour
     private Vector3 headsetZero;
     private float maxLean;
 
+    public float handMoveLogTimerDefault;
+    private float handMoveLogTimer;
     private bool leftCocked;
     private bool rightCocked;
-    private Vector3 leftLastPosition;
-    private Vector3 rightLastposition;
+    private List<Vector3> leftLastPositions;
+    private List<Vector3> rightLastPositions;
 
 
 
@@ -54,6 +56,13 @@ public class PlayerMovementController : MonoBehaviour
     {
         RB = playerPhysics.GetComponent<Rigidbody>();
         headsetZero = mainCamera.transform.localPosition;
+        handMoveLogTimer = handMoveLogTimerDefault;
+        for(int i = 0; i == 9; i++)
+        {
+            leftLastPositions[i] = Vector3.zero;
+            rightLastPositions[i] = Vector3.zero;
+        }
+
         leftCocked = false;
         rightCocked = false;
         if (Global.global.rotationType == "relative")
@@ -151,13 +160,6 @@ public class PlayerMovementController : MonoBehaviour
         playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, mainCamera.transform.rotation, Time.deltaTime * rotateSpeed);
     }
 
-    //Fire the lasers
-    public void Shoot()
-    {
-        GenerateLaser("Prefabs/Laser", laserSpawner, laserSpeed, laserDamage);
-        GenerateLaser("Prefabs/Laser", laserSpawner2, laserSpeed, laserDamage);
-    }
-
     //Generate a single laser
     private void GenerateLaser(string prefabPath, GameObject laserSpawner, float laserSpeed, int laserDamage)
     {
@@ -166,6 +168,7 @@ public class PlayerMovementController : MonoBehaviour
         LaserInstance.GetComponent<LaserScript>().damage = laserDamage;
     }
 
+    //Set the vector to control the players movement
     private void SetMovementVectors()
     {
         if ((mainCamera.transform.localPosition - headsetZero).magnitude > deadZone)
@@ -183,6 +186,7 @@ public class PlayerMovementController : MonoBehaviour
         //verticalMovementVector.y = verticalMarker.position.y - headsetZero.y;
     }
 
+    //Apply the vector to the player as a force
     private void ApplyForce()
     {
         if (mainCamera.transform.localPosition != headsetZero)
@@ -198,12 +202,46 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
+    //Track controller positions and determine whether to shoot.
     private void ControllerBehaviorHandler()
     {
         Vector3 leftPosition = leftHand.transform.localPosition;
         Vector3 rightPosition = rightHand.transform.localPosition;
 
-        //detect cocking here
+        handMoveLogTimer = handMoveLogTimer - Time.deltaTime;
+        if (handMoveLogTimer <= 0)
+        {
+            leftLastPositions.Add(leftPosition);
+            rightLastPositions.Add(rightPosition);
+
+            if (leftLastPositions.Count > 10)
+            {
+                for (int i = leftLastPositions.Count-1; i <= 9; i--)
+                {
+                    leftLastPositions.RemoveAt(i);
+                }
+            }
+
+            if (rightLastPositions.Count > 10)
+            {
+                for (int i = rightLastPositions.Count-1; i <= 9; i--)
+                {
+                    rightLastPositions.RemoveAt(i);
+                }
+            }
+
+        }
+
+        //if player has punched forward, then shoot
+        if ((leftPosition.z - leftLastPositions[7].z) > .3)
+        {
+            GenerateLaser("Prefabs/Laser", laserSpawner, laserSpeed, laserDamage);
+        }
+        if ((rightPosition.z - rightLastPositions[7].z) > .3)
+        {
+            GenerateLaser("Prefabs/Laser", laserSpawner2, laserSpeed, laserDamage);
+        }
+
     }
 
     public bool GetAccelerateDown()
