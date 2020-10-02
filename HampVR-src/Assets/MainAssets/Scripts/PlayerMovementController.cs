@@ -6,25 +6,36 @@ using Valve.VR;
 
 public class PlayerMovementController : MonoBehaviour
 {
-
+    [Tooltip("The GameObject with the players RigidBody")]
     public GameObject playerPhysics;
+    [Tooltip("The GameObject representing the ship detached from the cockpit.")]
     public GameObject playerModel;
+    [Tooltip("The left controller.")]
     public GameObject leftHand;
+    [Tooltip("The right controller.")]
     public GameObject rightHand;
+    [Tooltip("The left laser spawner.")]
     public GameObject laserSpawner;
+    [Tooltip("The right laser spawner.")]
     public GameObject laserSpawner2;
     private Rigidbody RB;
 
+    [Tooltip("The base acceleration value to be modified by the curve.")]
     public float acceleration;
+    [Tooltip("How quickly the ship follows the players view.")]
     public float rotateSpeed;
+    [Tooltip("The maximum speed achiveable by the player.")]
     public float maxSpeed;
+    [Tooltip("THe area around the player where control inputs will not register in units.")]
     public float deadZone;
 
+    [Tooltip("The curve controlling how the ship achieves max speed throughout the players lean.")]
     public AnimationCurve targetSpeedCurve;
 
     public float laserSpeed;
     public int laserDamage;
-
+    
+    [Tooltip("The amount of health the player has.")]
     public int health;
 
     public SteamVR_Input_Sources handType;
@@ -34,16 +45,21 @@ public class PlayerMovementController : MonoBehaviour
     public SteamVR_Action_Boolean resetHeadsetZero;
 
     [SerializeField]
+    [Tooltip("The camera being used as the headset.")]
     private Camera mainCamera;
     [SerializeField]
+    [Tooltip("The vector of representing the force being applied to the ships rigidbody.")]
     private Vector3 horizontalMovementVector;
 
     private Vector3 headsetZero;
     private float maxLean;
 
+    [Tooltip("Interval between samples of controller positions in seconds.")]
     public float handMoveLogTimerDefault;
     private float handMoveLogTimer;
+    [Tooltip("How far does a punch need to go to register.")]
     public float fireDistance;
+    [Tooltip("Time between 0-9 tenths of a second, how long to sample for a punch.")]
     public int fireDetectionTime;
     private int fireDetectionIndex;
     private bool leftCocked;
