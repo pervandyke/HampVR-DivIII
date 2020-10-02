@@ -44,6 +44,7 @@ public class PlayerMovementController : MonoBehaviour
     public float handMoveLogTimerDefault;
     private float handMoveLogTimer;
     public float fireDistance;
+    public int fireDetectionTime;
     private bool leftCocked;
     private bool rightCocked;
     private List<Vector3> leftLastPositions;
@@ -231,11 +232,11 @@ public class PlayerMovementController : MonoBehaviour
         //if player has punched forward, then shoot
         if (GetFireDown())
         {
-            if ((leftPosition - leftLastPositions[7]).magnitude > fireDistance)
+            if ((leftPosition - leftLastPositions[fireDetectionTime]).magnitude > fireDistance)
             {
                 GenerateLaser("Prefabs/Laser", laserSpawner, laserSpeed, laserDamage);
             }
-            if ((rightPosition - rightLastPositions[7]).magnitude > fireDistance)
+            if ((rightPosition - rightLastPositions[fireDetectionTime]).magnitude > fireDistance)
             {
                 GenerateLaser("Prefabs/Laser", laserSpawner2, laserSpeed, laserDamage);
             }

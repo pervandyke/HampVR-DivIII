@@ -387,3 +387,4 @@ MonoBehaviour:
   horizontalMovementVector: {x: 0, y: 0, z: 0}
   handMoveLogTimerDefault: 0.1
   fireDistance: 0.2
+  fireDetectionTime: 7
