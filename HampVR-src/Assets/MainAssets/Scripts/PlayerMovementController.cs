@@ -203,6 +203,7 @@ public class PlayerMovementController : MonoBehaviour
     }
 
     //Track controller positions and determine whether to shoot.
+    //Currently doesn't account for facing of player, so is actually broken
     private void ControllerBehaviorHandler()
     {
         Vector3 leftPosition = leftHand.transform.localPosition;
