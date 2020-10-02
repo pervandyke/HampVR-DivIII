@@ -43,6 +43,7 @@ public class PlayerMovementController : MonoBehaviour
 
     public float handMoveLogTimerDefault;
     private float handMoveLogTimer;
+    public float fireDistance;
     private bool leftCocked;
     private bool rightCocked;
     private List<Vector3> leftLastPositions;
@@ -82,8 +83,6 @@ public class PlayerMovementController : MonoBehaviour
         SetMovementVectors();
 
         ApplyForce();
-
-        ControllerBehaviorHandler();
 
         //Reset Control Zero
         if (GetResetHeadsetDown())
@@ -139,11 +138,7 @@ public class PlayerMovementController : MonoBehaviour
     
     private void Update()
     {
-        //Shooting
-        if (Input.GetKeyDown(KeyCode.F) || GetFireDown())
-        {
-            Shoot();
-        }
+        ControllerBehaviorHandler();
 
         if (health <= 0)
         {
@@ -234,15 +229,17 @@ public class PlayerMovementController : MonoBehaviour
         }
 
         //if player has punched forward, then shoot
-        if ((leftPosition.z - leftLastPositions[7].z) > .3)
+        if (GetFireDown())
         {
-            GenerateLaser("Prefabs/Laser", laserSpawner, laserSpeed, laserDamage);
+            if ((leftPosition - leftLastPositions[7]).magnitude > fireDistance)
+            {
+                GenerateLaser("Prefabs/Laser", laserSpawner, laserSpeed, laserDamage);
+            }
+            if ((rightPosition - rightLastPositions[7]).magnitude > fireDistance)
+            {
+                GenerateLaser("Prefabs/Laser", laserSpawner2, laserSpeed, laserDamage);
+            }
         }
-        if ((rightPosition.z - rightLastPositions[7].z) > .3)
-        {
-            GenerateLaser("Prefabs/Laser", laserSpawner2, laserSpeed, laserDamage);
-        }
-
     }
 
     public bool GetAccelerateDown()
