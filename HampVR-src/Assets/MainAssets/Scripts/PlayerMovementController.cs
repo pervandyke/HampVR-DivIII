@@ -45,6 +45,7 @@ public class PlayerMovementController : MonoBehaviour
     private float handMoveLogTimer;
     public float fireDistance;
     public int fireDetectionTime;
+    private int fireDetectionIndex;
     private bool leftCocked;
     private bool rightCocked;
     private List<Vector3> leftLastPositions;
@@ -59,6 +60,7 @@ public class PlayerMovementController : MonoBehaviour
         RB = playerPhysics.GetComponent<Rigidbody>();
         headsetZero = mainCamera.transform.localPosition;
         handMoveLogTimer = handMoveLogTimerDefault;
+        TranslateFireDetectionTime();
         for(int i = 0; i == 9; i++)
         {
             leftLastPositions[i] = Vector3.zero;
@@ -232,14 +234,58 @@ public class PlayerMovementController : MonoBehaviour
         //if player has punched forward, then shoot
         if (GetFireDown())
         {
-            if ((leftPosition - leftLastPositions[fireDetectionTime]).magnitude > fireDistance)
+            if ((leftPosition - leftLastPositions[fireDetectionIndex]).magnitude > fireDistance)
             {
                 GenerateLaser("Prefabs/Laser", laserSpawner, laserSpeed, laserDamage);
             }
-            if ((rightPosition - rightLastPositions[fireDetectionTime]).magnitude > fireDistance)
+            if ((rightPosition - rightLastPositions[fireDetectionIndex]).magnitude > fireDistance)
             {
                 GenerateLaser("Prefabs/Laser", laserSpawner2, laserSpeed, laserDamage);
             }
+        }
+    }
+
+    private void TranslateFireDetectionTime()
+    {
+        if (fireDetectionTime == 0)
+        {
+            fireDetectionIndex = 9;
+        }
+        else if (fireDetectionTime == 1)
+        {
+            fireDetectionIndex = 8;
+        }
+        else if (fireDetectionTime == 2)
+        {
+            fireDetectionIndex = 7;
+        }
+        else if (fireDetectionTime == 3)
+        {
+            fireDetectionIndex = 6;
+        }
+        else if (fireDetectionTime == 4)
+        {
+            fireDetectionIndex = 5;
+        }
+        else if (fireDetectionTime == 5)
+        {
+            fireDetectionIndex = 4;
+        }
+        else if (fireDetectionTime == 6)
+        {
+            fireDetectionIndex = 3;
+        }
+        else if (fireDetectionTime == 7)
+        {
+            fireDetectionIndex = 2;
+        }
+        else if (fireDetectionTime == 8)
+        {
+            fireDetectionIndex = 1;
+        }
+        else if (fireDetectionTime == 9)
+        {
+            fireDetectionIndex = 0;
         }
     }
 
