@@ -245,6 +245,7 @@ public class PlayerMovementController : MonoBehaviour
                 }
             }
 
+            handMoveLogTimer = handMoveLogTimerDefault;
         }
 
         //if player has punched forward, then shoot
