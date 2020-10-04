@@ -178,6 +178,7 @@ public class PlayerMovementController : MonoBehaviour
     private void GenerateLaser(string prefabPath, GameObject laserSpawner, Quaternion rotation, float laserSpeed, int laserDamage)
     {
         GameObject LaserInstance = Instantiate(Resources.Load<GameObject>(prefabPath), laserSpawner.transform.position, laserSpawner.transform.rotation) as GameObject;
+        LaserInstance.transform.rotation = rotation;
         LaserInstance.GetComponent<LaserScript>().speed = RB.velocity.magnitude + laserSpeed;
         LaserInstance.GetComponent<LaserScript>().damage = laserDamage;
     }
