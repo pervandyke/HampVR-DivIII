@@ -175,7 +175,7 @@ public class PlayerMovementController : MonoBehaviour
     }
 
     //Generate a single laser
-    private void GenerateLaser(string prefabPath, GameObject laserSpawner, float laserSpeed, int laserDamage)
+    private void GenerateLaser(string prefabPath, GameObject laserSpawner, Quaternion rotation, float laserSpeed, int laserDamage)
     {
         GameObject LaserInstance = Instantiate(Resources.Load<GameObject>(prefabPath), laserSpawner.transform.position, laserSpawner.transform.rotation) as GameObject;
         LaserInstance.GetComponent<LaserScript>().speed = RB.velocity.magnitude + laserSpeed;
@@ -217,7 +217,6 @@ public class PlayerMovementController : MonoBehaviour
     }
 
     //Track controller positions and determine whether to shoot.
-    //Currently doesn't account for facing of player, so is actually broken
     private void ControllerBehaviorHandler()
     {
         Vector3 leftPosition = leftHand.transform.localPosition;
@@ -253,11 +252,15 @@ public class PlayerMovementController : MonoBehaviour
         {
             if ((leftPosition - leftLastPositions[fireDetectionIndex]).magnitude > fireDistance)
             {
-                GenerateLaser("Prefabs/Laser", laserSpawner, laserSpeed, laserDamage);
+                Quaternion leftWeaponRotation = new Quaternion();
+                leftWeaponRotation.eulerAngles = leftPosition - leftLastPositions[fireDetectionIndex];
+                GenerateLaser("Prefabs/Laser", laserSpawner, leftWeaponRotation, laserSpeed, laserDamage);
             }
             if ((rightPosition - rightLastPositions[fireDetectionIndex]).magnitude > fireDistance)
             {
-                GenerateLaser("Prefabs/Laser", laserSpawner2, laserSpeed, laserDamage);
+                Quaternion rightWeaponRotation = new Quaternion();
+                rightWeaponRotation.eulerAngles = leftPosition - leftLastPositions[fireDetectionIndex];
+                GenerateLaser("Prefabs/Laser", laserSpawner, rightWeaponRotation, laserSpeed, laserDamage);
             }
         }
     }
