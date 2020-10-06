@@ -10,11 +10,9 @@ public class GenerateHexGrid : MonoBehaviour
     public int sideLength;
 
     private Vector3 currentPosition;
-    private int currentLayer;
-    private bool generating;
     private float hexHeight;
     private float hexWidth;
-
+    
     private void Start()
     {
         currentPosition = Vector3.zero;
