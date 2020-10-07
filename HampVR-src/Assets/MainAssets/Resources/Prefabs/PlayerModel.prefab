@@ -386,5 +386,5 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   horizontalMovementVector: {x: 0, y: 0, z: 0}
   handMoveLogTimerDefault: 0.1
-  fireDistance: 0.2
-  fireDetectionTime: 2
+  fireDistance: 0.02
+  fireDetectionTime: 20
