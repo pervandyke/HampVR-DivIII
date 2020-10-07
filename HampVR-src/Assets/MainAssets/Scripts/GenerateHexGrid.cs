@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.IO;
 public class GenerateHexGrid : MonoBehaviour
 {
     [Tooltip("The number of rings of hexagons around the center.")]
@@ -12,6 +12,8 @@ public class GenerateHexGrid : MonoBehaviour
     private Vector3 currentPosition;
     private float hexHeight;
     private float hexWidth;
+
+    private MapObject mapData;
     
     private void Start()
     {
@@ -19,6 +21,7 @@ public class GenerateHexGrid : MonoBehaviour
         hexHeight = Mathf.Sqrt(3.0f) * sideLength;
         hexWidth = sideLength * 2;
         CreateGrid();
+        CreateFromJSON("JSONS/TestMapData");
     }
 
     private void CreateGrid()
@@ -78,6 +81,17 @@ public class GenerateHexGrid : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void GenerateMap()
+    {
+
+    }
+
+    public static MapObject CreateFromJSON(string path)
+    {
+        var jsonTextFile = Resources.Load<TextAsset>(path);
+        return JsonUtility.FromJson<MapObject>(jsonTextFile.ToString());
     }
 
     private void PlaceHex()

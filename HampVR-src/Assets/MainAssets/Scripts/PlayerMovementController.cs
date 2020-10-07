@@ -6,6 +6,7 @@ using Valve.VR;
 
 public class PlayerMovementController : MonoBehaviour
 {
+    [Header("GameObjects")]
     [Tooltip("The GameObject with the players RigidBody")]
     public GameObject playerPhysics;
     [Tooltip("The GameObject representing the ship detached from the cockpit.")]
@@ -18,8 +19,13 @@ public class PlayerMovementController : MonoBehaviour
     public GameObject laserSpawner;
     [Tooltip("The right laser spawner.")]
     public GameObject laserSpawner2;
+    [Tooltip("The camera being used as the headset.")]
+    [SerializeField]
+    private Camera mainCamera;
+    
     private Rigidbody RB;
 
+    [Header("Flight Model")]
     [Tooltip("The base acceleration value to be modified by the curve.")]
     public float acceleration;
     [Tooltip("How quickly the ship follows the players view.")]
@@ -29,6 +35,7 @@ public class PlayerMovementController : MonoBehaviour
     [Tooltip("THe area around the player where control inputs will not register in units.")]
     public float deadZone;
 
+    [Header("Weapons/Health")]
     [Tooltip("The curve controlling how the ship achieves max speed throughout the players lean.")]
     public AnimationCurve targetSpeedCurve;
 
@@ -38,22 +45,24 @@ public class PlayerMovementController : MonoBehaviour
     [Tooltip("The amount of health the player has.")]
     public int health;
 
+    [Header("SteamVR")]
     public SteamVR_Input_Sources handType;
     public SteamVR_Action_Boolean accelerate;
     public SteamVR_Action_Boolean deccelerate;
     public SteamVR_Action_Boolean fire;
     public SteamVR_Action_Boolean resetHeadsetZero;
 
+
     [SerializeField]
-    [Tooltip("The camera being used as the headset.")]
-    private Camera mainCamera;
-    [SerializeField]
+    
+    
     [Tooltip("The vector of representing the force being applied to the ships rigidbody.")]
     private Vector3 horizontalMovementVector;
 
     private Vector3 headsetZero;
     private float maxLean;
 
+    [Header("Punching")]
     [Tooltip("Interval between samples of controller positions in seconds.")]
     public float handMoveLogTimerDefault;
     private float handMoveLogTimer;
