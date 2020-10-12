@@ -1,0 +1,117 @@
+{
+    "sheets": [
+        {
+            "name": "depotTestJson",
+            "description": "A test of the depot system for making Map Json files",
+            "displayColumn": "guid",
+            "guid": "598326ff-a62e-4c9c-ab3b-3057ca90e860",
+            "columns": [
+                {
+                    "typeStr": "int",
+                    "guid": "0942b504-cec3-4b94-8e70-495f41cd8e0b",
+                    "description": "The x coordinate of the hex.",
+                    "name": "xCoord",
+                    "min": -10000,
+                    "max": 100000,
+                    "defaultValue": 0,
+                    "iconName": "newInt",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "min": "int",
+                        "max": "int",
+                        "defaultValue": "int"
+                    }
+                },
+                {
+                    "typeStr": "int",
+                    "guid": "42e161e9-4cfa-4327-a286-f75deec095d6",
+                    "description": "The z coordinate of the hex.",
+                    "name": "zCoord",
+                    "min": -10000,
+                    "max": 100000,
+                    "defaultValue": 0,
+                    "iconName": "newInt",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "min": "int",
+                        "max": "int",
+                        "defaultValue": "int"
+                    }
+                },
+                {
+                    "typeStr": "text",
+                    "guid": "72afeb77-4015-42ab-9419-38be19f3d9aa",
+                    "name": "hexType",
+                    "description": "The type of hex.",
+                    "defaultValue": "",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                }
+            ],
+            "lines": [
+                {
+                    "guid": "95c74928-15c0-42c8-8714-678a798e00b6",
+                    "id": "0",
+                    "zCoord": 0,
+                    "hexType": "reactor",
+                    "xCoord": 0
+                },
+                {
+                    "guid": "a791a55a-8007-486e-bfae-231ef859ce64",
+                    "id": "1",
+                    "xCoord": 5,
+                    "zCoord": 5,
+                    "hexType": "shieldGenerator"
+                },
+                {
+                    "guid": "69f4cfca-7aef-4fd8-84be-cb1b02e854a5",
+                    "id": "2",
+                    "hexType": "sheildGenerator",
+                    "xCoord": -5,
+                    "zCoord": -5
+                },
+                {
+                    "guid": "36bbf9c8-0afb-4d88-8606-62f9745ed42b",
+                    "id": "3",
+                    "xCoord": 3,
+                    "zCoord": 4,
+                    "hexType": "turret"
+                },
+                {
+                    "guid": "a98895c7-19c9-4a5e-8193-968c7f0747c8",
+                    "id": "4",
+                    "xCoord": 7,
+                    "zCoord": 7,
+                    "hexType": "turret"
+                },
+                {
+                    "guid": "51471fbb-c24c-44c6-8265-3581c4deb769",
+                    "id": "5",
+                    "xCoord": 6,
+                    "hexType": "turret",
+                    "zCoord": -8
+                }
+            ],
+            "hidden": false,
+            "configurable": {
+                "name": "text",
+                "description": "text",
+                "displayColumn": "columnSelect@name",
+                "columnSelect@name@displayColumn": {
+                    "allowedTypes": [
+                        "int",
+                        "float",
+                        "text",
+                        "longtext"
+                    ]
+                }
+            }
+        }
+    ]
+}

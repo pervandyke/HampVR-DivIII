@@ -1,13 +1,17 @@
 ﻿using System.IO;
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class MapObject
 {
-    public HexPiece[] tiles;
+    public List<HexPiece> tiles;
 }
 [System.Serializable]
 public class HexPiece
 {
-    int[] coordinates;
-    string catagory;
+    public int x;
+    public int z;
+    public string tileType;
 }

@@ -21,7 +21,8 @@ public class GenerateHexGrid : MonoBehaviour
         hexHeight = Mathf.Sqrt(3.0f) * sideLength;
         hexWidth = sideLength * 2;
         CreateGrid();
-        CreateFromJSON("JSONS/TestMapData");
+        //Add back in once maps are set up
+        //GenerateMap(CreateFromJSON("JSONS/TestMapData"));
     }
 
     private void CreateGrid()
@@ -83,11 +84,12 @@ public class GenerateHexGrid : MonoBehaviour
         }
     }
 
-    private void GenerateMap()
+    private void GenerateMap(MapObject mapData)
     {
 
     }
 
+    //Modified from Cosmia https://github.com/HampshireCollegeCompSci/cs327_f2019
     public static MapObject CreateFromJSON(string path)
     {
         var jsonTextFile = Resources.Load<TextAsset>(path);

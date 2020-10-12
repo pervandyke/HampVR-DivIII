@@ -1,0 +1,104 @@
+{
+    "tiles": [
+        {
+            "x": 10,
+            "z": 12,
+            "tileType": "reactor"
+        },
+        {
+            "x": 0,
+            "z": 0,
+            "tileType": "default"
+        },
+        {
+            "x": 0,
+            "z": 0,
+            "tileType": "default"
+        },
+        {
+            "x": 0,
+            "z": 0,
+            "tileType": "default"
+        },
+        {
+            "x": 0,
+            "z": 0,
+            "tileType": "default"
+        },
+        {
+            "x": 0,
+            "z": 0,
+            "tileType": "default"
+        },
+        {
+            "x": 0,
+            "z": 0,
+            "tileType": "default"
+        },
+        {
+            "x": 0,
+            "z": 0,
+            "tileType": "default"
+        },
+        {
+            "x": 0,
+            "z": 0,
+            "tileType": "default"
+        },
+        {
+            "x": 0,
+            "z": 0,
+            "tileType": "default"
+        },
+        {
+            "x": 0,
+            "z": 0,
+            "tileType": "default"
+        },
+        {
+            "x": 0,
+            "z": 0,
+            "tileType": "default"
+        },
+        {
+            "x": 0,
+            "z": 0,
+            "tileType": "default"
+        },
+        {
+            "x": 0,
+            "z": 0,
+            "tileType": "default"
+        },
+        {
+            "x": 0,
+            "z": 0,
+            "tileType": "default"
+        },
+        {
+            "x": 0,
+            "z": 0,
+            "tileType": "default"
+        },
+        {
+            "x": 0,
+            "z": 0,
+            "tileType": "default"
+        },
+        {
+            "x": 0,
+            "z": 0,
+            "tileType": "default"
+        },
+        {
+            "x": 0,
+            "z": 0,
+            "tileType": "default"
+        },
+        {
+            "x": 0,
+            "z": 0,
+            "tileType": "default"
+        }
+    ]
+}

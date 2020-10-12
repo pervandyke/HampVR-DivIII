@@ -6,6 +6,10 @@ using Valve.VR;
 
 public class PlayerMovementController : MonoBehaviour
 {
+    [Header("Debug")]
+    [Tooltip("Should debug messages be on?")]
+    public bool controllerDebug;
+
     [Header("GameObjects")]
     [Tooltip("The GameObject with the players RigidBody")]
     public GameObject playerPhysics;
@@ -262,12 +266,20 @@ public class PlayerMovementController : MonoBehaviour
         {
             if ((leftPosition - leftLastPositions[fireDetectionIndex]).magnitude > fireDistance)
             {
+                if (controllerDebug)
+                {
+                    print("Left Punch");
+                }
                 Quaternion leftWeaponRotation = new Quaternion();
                 leftWeaponRotation.eulerAngles = leftPosition - leftLastPositions[fireDetectionIndex];
                 GenerateLaser("Prefabs/Laser", laserSpawner, leftWeaponRotation, laserSpeed, laserDamage);
             }
             if ((rightPosition - rightLastPositions[fireDetectionIndex]).magnitude > fireDistance)
             {
+                if (controllerDebug)
+                {
+                    print("Right Punch");
+                }
                 Quaternion rightWeaponRotation = new Quaternion();
                 rightWeaponRotation.eulerAngles = leftPosition - leftLastPositions[fireDetectionIndex];
                 GenerateLaser("Prefabs/Laser", laserSpawner, rightWeaponRotation, laserSpeed, laserDamage);
