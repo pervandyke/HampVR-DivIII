@@ -86,6 +86,11 @@ public class GenerateHexGrid : MonoBehaviour
 
     private void GenerateMap(MapObject mapData)
     {
+        foreach(HexPiece hex in mapData.tiles)
+        {
+            
+        }
+
 
     }
 

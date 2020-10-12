@@ -7,6 +7,7 @@ public class Global : MonoBehaviour
     public static Global global;
 
     public string rotationType = "relative";
+    public List<List<HexPrefabReference>> hexSelectionLists;
 
     void Awake()
     {
@@ -20,4 +21,6 @@ public class Global : MonoBehaviour
             Destroy(gameObject); //deletes copies of global which do not need to exist, so right version is used to get info from
         }
     }
+
+
 }
