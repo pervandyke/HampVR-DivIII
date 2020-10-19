@@ -1,104 +1,49 @@
 {
-    "tiles": [
-        {
-            "x": 10,
-            "z": 12,
-            "tileType": "reactor"
-        },
-        {
-            "x": 0,
-            "z": 0,
-            "tileType": "default"
-        },
-        {
-            "x": 0,
-            "z": 0,
-            "tileType": "default"
-        },
-        {
-            "x": 0,
-            "z": 0,
-            "tileType": "default"
-        },
-        {
-            "x": 0,
-            "z": 0,
-            "tileType": "default"
-        },
-        {
-            "x": 0,
-            "z": 0,
-            "tileType": "default"
-        },
-        {
-            "x": 0,
-            "z": 0,
-            "tileType": "default"
-        },
-        {
-            "x": 0,
-            "z": 0,
-            "tileType": "default"
-        },
-        {
-            "x": 0,
-            "z": 0,
-            "tileType": "default"
-        },
-        {
-            "x": 0,
-            "z": 0,
-            "tileType": "default"
-        },
-        {
-            "x": 0,
-            "z": 0,
-            "tileType": "default"
-        },
-        {
-            "x": 0,
-            "z": 0,
-            "tileType": "default"
-        },
-        {
-            "x": 0,
-            "z": 0,
-            "tileType": "default"
-        },
-        {
-            "x": 0,
-            "z": 0,
-            "tileType": "default"
-        },
-        {
-            "x": 0,
-            "z": 0,
-            "tileType": "default"
-        },
-        {
-            "x": 0,
-            "z": 0,
-            "tileType": "default"
-        },
-        {
-            "x": 0,
-            "z": 0,
-            "tileType": "default"
-        },
-        {
-            "x": 0,
-            "z": 0,
-            "tileType": "default"
-        },
-        {
-            "x": 0,
-            "z": 0,
-            "tileType": "default"
-        },
-        {
-            "x": 0,
-            "z": 0,
-            "tileType": "default"
-        }
-    ]
+  "tiles": [
+    {
+      "x": 0,
+      "z": 0,
+      "tileType": "Hex"
+    },
+    {
+      "x": 0,
+      "z": 2,
+      "tileType": "Hex"
+    },
+    {
+      "x": 0,
+      "z": 4,
+      "tileType": "Hex"
+    },
+    {
+      "x": 1,
+      "z": 1,
+      "tileType": "Hex"
+    },
+    {
+      "x": 1,
+      "z": 3,
+      "tileType": "Hex"
+    },
+    {
+      "x": 1,
+      "z": 5,
+      "tileType": "Hex"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "tileType": "Hex"
+    },
+    {
+      "x": 5,
+      "z": 1,
+      "tileType": "Hex"
+    },
+    {
+      "x": 7,
+      "z": 3,
+      "tileType": "Hex"
+    }
+  ]
 }
