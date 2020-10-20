@@ -69,10 +69,11 @@ public class PlayerController : MonoBehaviour
     [Header("Punching")]
     [Tooltip("Interval between samples of controller positions in seconds.")]
     public float handMoveLogTimerDefault;
+    public int handMoveLogSize;
     private float handMoveLogTimer;
     [Tooltip("How far does a punch need to go to register.")]
     public float fireDistance;
-    [Tooltip("Time between 0-9 tenths of a second, how long to sample for a punch.")]
+    [Tooltip("How much time in handMoveLogTimer intervals the player has to punch fireDistance units.")]
     public int fireDetectionTime;
     private int fireDetectionIndex;
     private bool leftCocked;
@@ -89,8 +90,7 @@ public class PlayerController : MonoBehaviour
         RB = playerPhysics.GetComponent<Rigidbody>();
         headsetZero = mainCamera.transform.localPosition;
         handMoveLogTimer = handMoveLogTimerDefault;
-        TranslateFireDetectionTime();
-        for(int i = 0; i == 9; i++)
+        for(int i = 0; i == handMoveLogSize-1; i++)
         {
             leftLastPositions[i] = Vector3.zero;
             rightLastPositions[i] = Vector3.zero;
@@ -233,43 +233,43 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    //private void ControllerBehaviorHandler()
+    //{
+    //    Vector3 leftPosition = leftHand.transform.localPosition;
+    //    Vector3 rightPosition = rightHand.transform.localPosition;
+
+    //    handMoveLogTimer = handMoveLogTimer - Time.fixedUnscaledDeltaTime;
+
+
+
+
+    //}
+
+
+
+    //Track controller positions and determine whether to shoot.
     private void ControllerBehaviorHandler()
     {
         Vector3 leftPosition = leftHand.transform.localPosition;
         Vector3 rightPosition = rightHand.transform.localPosition;
 
         handMoveLogTimer = handMoveLogTimer - Time.fixedUnscaledDeltaTime;
-
-
-
-
-    }
-
-
-
-    //Track controller positions and determine whether to shoot.
-    private void OldControllerBehaviorHandler()
-    {
-        Vector3 leftPosition = leftHand.transform.localPosition;
-        Vector3 rightPosition = rightHand.transform.localPosition;
-
-        handMoveLogTimer = handMoveLogTimer - Time.deltaTime;
         if (handMoveLogTimer <= 0)
         {
-            leftLastPositions.Add(leftPosition);
-            rightLastPositions.Add(rightPosition);
+            leftLastPositions.Insert(0, leftPosition);
+            rightLastPositions.Insert(0, rightPosition);
 
-            if (leftLastPositions.Count > 10)
+            if (leftLastPositions.Count > handMoveLogSize)
             {
-                for (int i = leftLastPositions.Count-1; i <= 9; i--)
+                for (int i = leftLastPositions.Count-1; i < handMoveLogSize - 1; i--)
                 {
                     leftLastPositions.RemoveAt(i);
                 }
             }
 
-            if (rightLastPositions.Count > 10)
+            if (rightLastPositions.Count > handMoveLogSize)
             {
-                for (int i = rightLastPositions.Count-1; i <= 9; i--)
+                for (int i = rightLastPositions.Count-1; i < handMoveLogSize - 1; i--)
                 {
                     rightLastPositions.RemoveAt(i);
                 }
@@ -281,70 +281,26 @@ public class PlayerController : MonoBehaviour
         //if player has punched forward, then shoot
         if (GetFireDown())
         {
-            if ((leftPosition - leftLastPositions[fireDetectionIndex]).magnitude > fireDistance)
+            if ((leftPosition - leftLastPositions[fireDetectionTime]).magnitude > fireDistance)
             {
                 if (controllerDebug)
                 {
                     print("Left Punch");
                 }
                 Quaternion leftWeaponRotation = new Quaternion();
-                leftWeaponRotation.eulerAngles = leftPosition - leftLastPositions[fireDetectionIndex];
+                leftWeaponRotation.eulerAngles = leftPosition - leftLastPositions[fireDetectionTime];
                 GenerateLaser("Prefabs/Laser", laserSpawner, leftWeaponRotation, laserSpeed, laserDamage);
             }
-            if ((rightPosition - rightLastPositions[fireDetectionIndex]).magnitude > fireDistance)
+            if ((rightPosition - rightLastPositions[fireDetectionTime]).magnitude > fireDistance)
             {
                 if (controllerDebug)
                 {
                     print("Right Punch");
                 }
                 Quaternion rightWeaponRotation = new Quaternion();
-                rightWeaponRotation.eulerAngles = leftPosition - leftLastPositions[fireDetectionIndex];
+                rightWeaponRotation.eulerAngles = leftPosition - leftLastPositions[fireDetectionTime];
                 GenerateLaser("Prefabs/Laser", laserSpawner, rightWeaponRotation, laserSpeed, laserDamage);
             }
-        }
-    }
-
-    private void TranslateFireDetectionTime()
-    {
-        if (fireDetectionTime == 0)
-        {
-            fireDetectionIndex = 9;
-        }
-        else if (fireDetectionTime == 1)
-        {
-            fireDetectionIndex = 8;
-        }
-        else if (fireDetectionTime == 2)
-        {
-            fireDetectionIndex = 7;
-        }
-        else if (fireDetectionTime == 3)
-        {
-            fireDetectionIndex = 6;
-        }
-        else if (fireDetectionTime == 4)
-        {
-            fireDetectionIndex = 5;
-        }
-        else if (fireDetectionTime == 5)
-        {
-            fireDetectionIndex = 4;
-        }
-        else if (fireDetectionTime == 6)
-        {
-            fireDetectionIndex = 3;
-        }
-        else if (fireDetectionTime == 7)
-        {
-            fireDetectionIndex = 2;
-        }
-        else if (fireDetectionTime == 8)
-        {
-            fireDetectionIndex = 1;
-        }
-        else if (fireDetectionTime == 9)
-        {
-            fireDetectionIndex = 0;
         }
     }
 
