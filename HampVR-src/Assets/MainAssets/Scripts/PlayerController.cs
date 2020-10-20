@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Animations;
 using Valve.VR;
 
-public class PlayerMovementController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [Header("Debug")]
     [Tooltip("Should debug messages be on?")]
@@ -116,6 +116,8 @@ public class PlayerMovementController : MonoBehaviour
 
         ApplyForce();
 
+        ControllerBehaviorHandler();
+
         //Reset Control Zero
         if (GetResetHeadsetDown())
         {
@@ -170,7 +172,7 @@ public class PlayerMovementController : MonoBehaviour
     
     private void Update()
     {
-        ControllerBehaviorHandler();
+        //ControllerBehaviorHandler();
 
         if (health <= 0)
         {
@@ -230,8 +232,23 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
-    //Track controller positions and determine whether to shoot.
+
     private void ControllerBehaviorHandler()
+    {
+        Vector3 leftPosition = leftHand.transform.localPosition;
+        Vector3 rightPosition = rightHand.transform.localPosition;
+
+        handMoveLogTimer = handMoveLogTimer - Time.fixedUnscaledDeltaTime;
+
+
+
+
+    }
+
+
+
+    //Track controller positions and determine whether to shoot.
+    private void OldControllerBehaviorHandler()
     {
         Vector3 leftPosition = leftHand.transform.localPosition;
         Vector3 rightPosition = rightHand.transform.localPosition;

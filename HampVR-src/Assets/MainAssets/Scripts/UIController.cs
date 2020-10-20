@@ -12,7 +12,7 @@ public class UIController : MonoBehaviour
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI speedText;
     public TextMeshProUGUI targetText;
-    private PlayerMovementController playerController;
+    private PlayerController playerController;
 
     private float currentSpeed;
     private int currentHealth;
@@ -20,7 +20,7 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerController = GameObject.Find("PlayerController").GetComponent<PlayerMovementController>();
+        playerController = GameObject.Find("PlayerController").GetComponent<PlayerController>();
         currentHealth = playerController.health;
     }
 
