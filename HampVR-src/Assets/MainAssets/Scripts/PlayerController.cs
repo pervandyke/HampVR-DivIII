@@ -256,6 +256,11 @@ public class PlayerController : MonoBehaviour
         handMoveLogTimer = handMoveLogTimer - Time.fixedUnscaledDeltaTime;
         if (handMoveLogTimer <= 0)
         {
+            if (controllerDebug)
+            {
+                print("Logging Left hand at " + leftPosition);
+                print("Logging Right hand at " + rightPosition);
+            }
             leftLastPositions.Insert(0, leftPosition);
             rightLastPositions.Insert(0, rightPosition);
 
