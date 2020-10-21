@@ -7,8 +7,10 @@ using Valve.VR;
 public class PlayerController : MonoBehaviour
 {
     [Header("Debug")]
-    [Tooltip("Should debug messages be on?")]
+    [Tooltip("Should controller debug messages be on?")]
     public bool controllerDebug;
+    [Tooltip("Should Movement debug messages be on?")]
+    public bool movementDebug;
 
     [Header("GameObjects")]
     [Tooltip("The GameObject with the players RigidBody")]
@@ -146,6 +148,10 @@ public class PlayerController : MonoBehaviour
                 lean = 1.0f;
             }
             speedPercentage = targetSpeedCurve.Evaluate(lean);
+            if (movementDebug)
+            {
+                print("Speed percentage: " + speedPercentage + "%");
+            }
         }
         else
         {
@@ -156,6 +162,10 @@ public class PlayerController : MonoBehaviour
         if (RB.velocity.magnitude > maxSpeed * speedPercentage)
         {
             RB.velocity = Vector3.ClampMagnitude(RB.velocity, maxSpeed * speedPercentage);
+            if (movementDebug)
+            {
+                print("Velocity clamped to: " + RB.velocity);
+            }
         }
 
         if (Global.global.rotationType == "relative")
@@ -204,6 +214,10 @@ public class PlayerController : MonoBehaviour
         if ((mainCamera.transform.localPosition - headsetZero).magnitude > deadZone)
         {
             horizontalMovementVector = mainCamera.transform.localPosition - headsetZero;
+            if (movementDebug)
+            {
+                print("Movement Vector: " + horizontalMovementVector);
+            }
         }
         else
         {
@@ -222,13 +236,13 @@ public class PlayerController : MonoBehaviour
         if (mainCamera.transform.localPosition != headsetZero)
         {
             RB.AddForce(horizontalMovementVector.normalized * acceleration);
-            //RB.AddForce(verticalMovementVector.normalized * acceleration);
 
-            //Debug Raycast
-            Ray horizontalMovementRay = new Ray(mainCamera.transform.position, mainCamera.transform.localPosition - headsetZero);
-            //Ray verticalMovementRay = new Ray(mainCamera.transform.position, Vector3.up);
-            Debug.DrawRay(horizontalMovementRay.origin, horizontalMovementRay.direction * 10, Color.red);
-            //Debug.DrawRay(verticalMovementRay.origin, verticalMovementRay.direction * verticalMovementVector.magnitude, Color.yellow);
+            if (movementDebug)
+            {
+                //Debug Raycast
+                Ray horizontalMovementRay = new Ray(mainCamera.transform.position, mainCamera.transform.localPosition - headsetZero);
+                Debug.DrawRay(horizontalMovementRay.origin, horizontalMovementRay.direction * 10, Color.red);
+            } 
         }
     }
 
