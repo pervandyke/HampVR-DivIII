@@ -8104,11 +8104,6 @@ PrefabInstance:
       propertyPath: m_Sources.Array.data[0].sourceTransform
       value: 
       objectReference: {fileID: 7438613897389590804}
-    - target: {fileID: 574874254735040801, guid: 45f3532b54d18c045a38eece64a74cdd,
-        type: 3}
-      propertyPath: m_IsContraintActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3930032130077271513, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
       propertyPath: player
@@ -8268,11 +8263,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TranslationOffset.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6359594939886634183, guid: 45f3532b54d18c045a38eece64a74cdd,
-        type: 3}
-      propertyPath: m_IsContraintActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6359594939886634183, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}

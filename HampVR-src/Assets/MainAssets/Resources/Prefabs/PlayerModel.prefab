@@ -133,7 +133,7 @@ RotationConstraint:
   m_AffectRotationX: 0
   m_AffectRotationY: 1
   m_AffectRotationZ: 0
-  m_IsContraintActive: 0
+  m_IsContraintActive: 1
   m_IsLocked: 0
   m_Sources:
   - sourceTransform: {fileID: 0}
@@ -334,6 +334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerDebug: 0
+  movementDebug: 0
   playerPhysics: {fileID: 0}
   playerModel: {fileID: 4263430021785689421}
   leftHand: {fileID: 0}
