@@ -101,7 +101,9 @@ public class PlayerController : MonoBehaviour
         RB.mass = mass;
         headsetZero = mainCamera.transform.localPosition;
         handMoveLogTimer = handMoveLogTimerDefault;
-        for(int i = 0; i == handMoveLogSize-1; i++)
+        leftLastPositions = new List<Vector3>();
+        rightLastPositions = new List<Vector3>();
+        for (int i = 0; i == handMoveLogSize-1; i++)
         {
             leftLastPositions[i] = Vector3.zero;
             rightLastPositions[i] = Vector3.zero;
