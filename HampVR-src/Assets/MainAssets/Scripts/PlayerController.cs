@@ -282,6 +282,8 @@ public class PlayerController : MonoBehaviour
             {
                 print("Logging Left hand at " + leftPosition);
                 print("Logging Right hand at " + rightPosition);
+                print("leftLastPositions: " + leftLastPositions);
+                print("rightLastPositions: " + rightLastPositions);
             }
             leftLastPositions.Insert(0, leftPosition);
             rightLastPositions.Insert(0, rightPosition);
