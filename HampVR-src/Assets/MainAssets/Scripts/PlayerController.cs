@@ -40,11 +40,11 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed;
     [Tooltip("THe area around the player where control inputs will not register in units.")]
     public float deadZone;
-    [Tooltip("The mass of the ship.")]
+    [Tooltip("The mass of the ship. \n Overrides the rigidbody on the CameraRig.")]
     public float mass;
-    [Tooltip("The drag of the ship (probably leave at 0).")]
+    [Tooltip("The drag of the ship (probably leave at 0). \n Overrides the rigidbody on the CameraRig.")]
     public float drag;
-    [Tooltip("The angular drag of the ship (probably leave at 0).")]
+    [Tooltip("The angular drag of the ship (probably leave at 0). \n Overrides the rigidbody on the CameraRig.")]
     public float angularDrag;
 
     [Header("Weapons/Health")]
