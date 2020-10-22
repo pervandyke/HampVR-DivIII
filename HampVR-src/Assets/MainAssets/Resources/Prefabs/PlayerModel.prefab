@@ -346,7 +346,7 @@ MonoBehaviour:
   rotateSpeed: 6
   maxSpeed: 80
   deadZone: 0.1
-  mass: 4
+  mass: 2
   drag: 0
   angularDrag: 0
   targetSpeedCurve:
