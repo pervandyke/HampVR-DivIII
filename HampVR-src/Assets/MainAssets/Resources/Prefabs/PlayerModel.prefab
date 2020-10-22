@@ -342,12 +342,12 @@ MonoBehaviour:
   laserSpawner: {fileID: 4263430022694038438}
   laserSpawner2: {fileID: 8194421143144734473}
   mainCamera: {fileID: 0}
-  acceleration: 200
+  acceleration: 100
   rotateSpeed: 6
-  maxSpeed: 80
+  maxSpeed: 40
   deadZone: 0.1
   mass: 2
-  drag: 0
+  drag: 3
   angularDrag: 0
   targetSpeedCurve:
     serializedVersion: 2
