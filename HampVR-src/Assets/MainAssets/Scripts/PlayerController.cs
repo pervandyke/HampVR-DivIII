@@ -46,6 +46,8 @@ public class PlayerController : MonoBehaviour
     public float drag;
     [Tooltip("The angular drag of the ship (probably leave at 0). \n Overrides the rigidbody on the CameraRig.")]
     public float angularDrag;
+    [Tooltip("The distance in units the player has to lean from the zero to get max speed.")]
+    public float maxLean;
 
     [Header("Weapons/Health")]
     [Tooltip("The curve controlling how the ship achieves max speed throughout the players lean.")]
@@ -70,7 +72,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 horizontalMovementVector;
 
     private Vector3 headsetZero;
-    private float maxLean;
+    
 
     [Header("Punching")]
     [Tooltip("Interval between samples of controller positions in seconds.")]
@@ -115,7 +117,6 @@ public class PlayerController : MonoBehaviour
         {
             playerModel.GetComponent<RotationConstraint>().constraintActive = false;
         }
-        maxLean = 0.75f;
     }
 
     // Update is called once per frame
