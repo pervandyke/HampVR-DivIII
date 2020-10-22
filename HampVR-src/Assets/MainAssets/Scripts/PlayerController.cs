@@ -40,6 +40,12 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed;
     [Tooltip("THe area around the player where control inputs will not register in units.")]
     public float deadZone;
+    [Tooltip("The mass of the ship.")]
+    public float mass;
+    [Tooltip("The drag of the ship (probably leave at 0).")]
+    public float drag;
+    [Tooltip("The angular drag of the ship (probably leave at 0).")]
+    public float angularDrag;
 
     [Header("Weapons/Health")]
     [Tooltip("The curve controlling how the ship achieves max speed throughout the players lean.")]
@@ -60,8 +66,6 @@ public class PlayerController : MonoBehaviour
 
 
     [SerializeField]
-    
-    
     [Tooltip("The vector of representing the force being applied to the ships rigidbody.")]
     private Vector3 horizontalMovementVector;
 
@@ -90,6 +94,9 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         RB = playerPhysics.GetComponent<Rigidbody>();
+        RB.drag = drag;
+        RB.angularDrag = angularDrag;
+        RB.mass = mass;
         headsetZero = mainCamera.transform.localPosition;
         handMoveLogTimer = handMoveLogTimerDefault;
         for(int i = 0; i == handMoveLogSize-1; i++)
