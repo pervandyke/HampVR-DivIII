@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     [Header("Debug")]
     [Tooltip("Should controller debug messages be on?")]
     public bool controllerDebug;
+    [Tooltip("Should Weapon debug messages be on?")]
+    public bool weaponDebug;
     [Tooltip("Should Movement debug messages be on?")]
     public bool movementDebug;
 
@@ -314,22 +316,36 @@ public class PlayerController : MonoBehaviour
         {
             if ((leftPosition - leftLastPositions[fireDetectionTime]).magnitude > fireDistance)
             {
-                if (controllerDebug)
+                if (weaponDebug)
                 {
                     print("Left Punch");
                 }
+
                 Quaternion leftWeaponRotation = new Quaternion();
                 leftWeaponRotation.eulerAngles = leftPosition - leftLastPositions[fireDetectionTime];
+
+                if (weaponDebug)
+                {
+                    print("Left projectile rotation: " + leftWeaponRotation.eulerAngles);
+                }
+
                 GenerateLaser("Prefabs/Laser", laserSpawner, leftWeaponRotation, laserSpeed, laserDamage);
             }
             if ((rightPosition - rightLastPositions[fireDetectionTime]).magnitude > fireDistance)
             {
-                if (controllerDebug)
+                if (weaponDebug)
                 {
                     print("Right Punch");
                 }
+
                 Quaternion rightWeaponRotation = new Quaternion();
-                rightWeaponRotation.eulerAngles = leftPosition - leftLastPositions[fireDetectionTime];
+                rightWeaponRotation.eulerAngles = rightPosition - rightLastPositions[fireDetectionTime];
+
+                if (weaponDebug)
+                {
+                    print("Right projectile rotation: " + rightWeaponRotation.eulerAngles);
+                }
+
                 GenerateLaser("Prefabs/Laser", laserSpawner, rightWeaponRotation, laserSpeed, laserDamage);
             }
         }
