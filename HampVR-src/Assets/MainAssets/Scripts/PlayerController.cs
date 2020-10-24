@@ -322,8 +322,8 @@ public class PlayerController : MonoBehaviour
                     print("Left Position: " + leftPosition + "\nLeft Last Position: " + leftLastPositions[fireDetectionTime]);
                 }
 
-                Quaternion leftWeaponRotation = new Quaternion();
-                leftWeaponRotation.eulerAngles = leftPosition - leftLastPositions[fireDetectionTime];
+                Quaternion leftWeaponRotation;
+                leftWeaponRotation = Quaternion.LookRotation((leftPosition - leftLastPositions[fireDetectionTime]).normalized);
 
                 if (weaponDebug)
                 {
@@ -340,8 +340,8 @@ public class PlayerController : MonoBehaviour
                     print("Right Position: " + rightPosition + "\nRight Last Position: " + rightLastPositions[fireDetectionTime]);
                 }
 
-                Quaternion rightWeaponRotation = new Quaternion();
-                rightWeaponRotation.eulerAngles = rightPosition - rightLastPositions[fireDetectionTime];
+                Quaternion rightWeaponRotation;
+                rightWeaponRotation = Quaternion.LookRotation((rightPosition - rightLastPositions[fireDetectionTime]).normalized);
 
                 if (weaponDebug)
                 {
