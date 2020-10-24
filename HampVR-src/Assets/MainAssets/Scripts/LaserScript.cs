@@ -49,15 +49,16 @@ public class LaserScript : MonoBehaviour
         {
             if (other.gameObject.tag == "Player")
             {
-                other.gameObject.GetComponentInChildren<PlayerController>().health -= damage;
+                //other.gameObject.GetComponentInChildren<PlayerController>().health -= damage;
             }
             if (other.gameObject.tag == "Enemy")
             {
                 print("Hit enemy");
                 other.gameObject.GetComponent<IEnemy>().TakeDamage(damage);
+                Destroy(gameObject);
             }
         }
-        Destroy(gameObject);
+        
         //collisionflag = true;
     }
 }
