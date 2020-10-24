@@ -12864,7 +12864,7 @@ PrefabInstance:
     - target: {fileID: 3930032130077271513, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
       propertyPath: controllerDebug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3930032130077271513, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
@@ -12884,6 +12884,11 @@ PrefabInstance:
     - target: {fileID: 3930032130077271513, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
       propertyPath: maxLean
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3930032130077271513, guid: 45f3532b54d18c045a38eece64a74cdd,
+        type: 3}
+      propertyPath: weaponDebug
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4263430021785689417, guid: 45f3532b54d18c045a38eece64a74cdd,
