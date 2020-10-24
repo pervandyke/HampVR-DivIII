@@ -319,6 +319,7 @@ public class PlayerController : MonoBehaviour
                 if (weaponDebug)
                 {
                     print("Left Punch");
+                    print("Left Position: " + leftPosition + "\nLeft Last Position: " + leftLastPositions[fireDetectionTime]);
                 }
 
                 Quaternion leftWeaponRotation = new Quaternion();
@@ -336,6 +337,7 @@ public class PlayerController : MonoBehaviour
                 if (weaponDebug)
                 {
                     print("Right Punch");
+                    print("Right Position: " + rightPosition + "\nRight Last Position: " + rightLastPositions[fireDetectionTime]);
                 }
 
                 Quaternion rightWeaponRotation = new Quaternion();
