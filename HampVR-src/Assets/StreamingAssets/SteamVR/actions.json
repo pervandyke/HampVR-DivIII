@@ -6,7 +6,7 @@
       "requirement": "mandatory"
     },
     {
-      "name": "/actions/Flight1/in/Fire",
+      "name": "/actions/Flight1/in/LeftFire",
       "type": "boolean",
       "requirement": "mandatory"
     },
@@ -24,6 +24,11 @@
       "name": "/actions/Flight1/in/poseTest",
       "type": "pose",
       "requirement": "suggested"
+    },
+    {
+      "name": "/actions/Flight1/in/RightFire",
+      "type": "boolean",
+      "requirement": "mandatory"
     }
   ],
   "action_sets": [

@@ -25,11 +25,11 @@ namespace Valve.VR
             }
         }
         
-        public virtual SteamVR_Action_Boolean Fire
+        public virtual SteamVR_Action_Boolean LeftFire
         {
             get
             {
-                return SteamVR_Actions.flight1_Fire;
+                return SteamVR_Actions.flight1_LeftFire;
             }
         }
         
@@ -54,6 +54,14 @@ namespace Valve.VR
             get
             {
                 return SteamVR_Actions.flight1_poseTest;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean RightFire
+        {
+            get
+            {
+                return SteamVR_Actions.flight1_RightFire;
             }
         }
     }

@@ -61,11 +61,15 @@ public class PlayerController : MonoBehaviour
     [Tooltip("The amount of health the player has.")]
     public int health;
 
+    private bool leftWeaponCooldown = false;
+    private bool rightWeaponCooldown = false;
+
     [Header("SteamVR")]
     public SteamVR_Input_Sources handType;
     public SteamVR_Action_Boolean accelerate;
     public SteamVR_Action_Boolean deccelerate;
-    public SteamVR_Action_Boolean fire;
+    public SteamVR_Action_Boolean leftFire;
+    public SteamVR_Action_Boolean rightFire;
     public SteamVR_Action_Boolean resetHeadsetZero;
 
 
@@ -312,9 +316,9 @@ public class PlayerController : MonoBehaviour
         }
 
         //if player has punched forward, then shoot
-        if (GetFireDown())
+        if (GetLeftFireDown())
         {
-            if ((leftPosition - leftLastPositions[fireDetectionTime]).magnitude > fireDistance)
+            if ((leftPosition - leftLastPositions[fireDetectionTime]).magnitude > fireDistance && leftWeaponCooldown == false)
             {
                 if (weaponDebug)
                 {
@@ -330,9 +334,19 @@ public class PlayerController : MonoBehaviour
                     print("Left projectile rotation: " + leftWeaponRotation.eulerAngles);
                 }
 
-                GenerateLaser("Prefabs/Laser", laserSpawner, leftWeaponRotation, laserSpeed, laserDamage);
+                FireShotgun(leftWeaponRotation, laserSpawner);
+                leftWeaponCooldown = true;
             }
-            if ((rightPosition - rightLastPositions[fireDetectionTime]).magnitude > fireDistance)
+            
+            if ((leftPosition - leftLastPositions[fireDetectionTime]).magnitude > fireDistance)
+            {
+                leftWeaponCooldown = false;
+            }
+        }
+
+        if (GetRightFireDown())
+        {
+            if ((rightPosition - rightLastPositions[fireDetectionTime]).magnitude > fireDistance && rightWeaponCooldown == false)
             {
                 if (weaponDebug)
                 {
@@ -348,10 +362,31 @@ public class PlayerController : MonoBehaviour
                     print("Right projectile rotation: " + rightWeaponRotation.eulerAngles);
                 }
 
-                GenerateLaser("Prefabs/Laser", laserSpawner, rightWeaponRotation, laserSpeed, laserDamage);
+                FireShotgun(rightWeaponRotation, laserSpawner2);
+                rightWeaponCooldown = true;
+            }
+
+            if ((rightPosition - rightLastPositions[fireDetectionTime]).magnitude < fireDistance)
+            {
+                rightWeaponCooldown = false;
             }
         }
     }
+
+    private void FireShotgun(Quaternion aimRotation, GameObject spawner)
+    {
+        aimRotation.eulerAngles = new Vector3(0, aimRotation.eulerAngles.y, 0);
+        Quaternion adjustedAimRotation = aimRotation;
+        for (int i = -15; i < 14; i++)
+        {
+            adjustedAimRotation.y++;
+            GenerateLaser("Prefabs/Laser", spawner, adjustedAimRotation, laserSpeed, laserDamage);
+        }
+    }
+
+
+
+
 
     public bool GetAccelerateDown()
     {
@@ -363,9 +398,14 @@ public class PlayerController : MonoBehaviour
         return deccelerate.GetState(handType);
     }
 
-    public bool GetFireDown()
+    public bool GetLeftFireDown()
     {
-        return fire.GetState(handType);
+        return leftFire.GetState(handType);
+    }
+
+    public bool GetRightFireDown()
+    {
+        return rightFire.GetState(handType);
     }
 
     public bool GetResetHeadsetDown()
