@@ -338,7 +338,7 @@ public class PlayerController : MonoBehaviour
                     print("Left projectile rotation: " + leftWeaponRotation.eulerAngles);
                 }
 
-                FireShotgun(leftWeaponRotation, laserSpawner);
+                WeaponsLibrary.wepLib.FireShotgun(laserSpawner, RB,leftWeaponRotation, laserSpeed, laserDamage);
                 leftWeaponCooldown = true;
             }
             
@@ -366,7 +366,7 @@ public class PlayerController : MonoBehaviour
                     print("Right projectile rotation: " + rightWeaponRotation.eulerAngles);
                 }
 
-                FireShotgun(rightWeaponRotation, laserSpawner2);
+                WeaponsLibrary.wepLib.FireShotgun(laserSpawner, RB, rightWeaponRotation, laserSpeed, laserDamage);
                 rightWeaponCooldown = true;
             }
 
@@ -376,21 +376,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
-    private void FireShotgun(Quaternion aimRotation, GameObject spawner)
-    {
-        aimRotation.eulerAngles = new Vector3(0, aimRotation.eulerAngles.y, 0);
-        Quaternion adjustedAimRotation = aimRotation;
-        for (int i = -15; i < 14; i++)
-        {
-            adjustedAimRotation.y++;
-            GenerateLaser("Prefabs/Laser", spawner, adjustedAimRotation, laserSpeed, laserDamage);
-        }
-    }
-
-
-
-
 
     public bool GetAccelerateDown()
     {
