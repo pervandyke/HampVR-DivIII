@@ -15,10 +15,11 @@ public class LaserScript : MonoBehaviour, IProjectile
     void Start()
     {
         RB = gameObject.GetComponent<Rigidbody>();
-        MovementControl(speed, 0.0f);
+        
     }
     void FixedUpdate()
     {
+        MovementControl(speed, 0.0f);
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
