@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserScript : MonoBehaviour
+public class LaserScript : MonoBehaviour, IProjectile
 {
 
     public float speed = 30;
@@ -15,10 +15,10 @@ public class LaserScript : MonoBehaviour
     void Start()
     {
         RB = gameObject.GetComponent<Rigidbody>();
+        MovementControl(speed, 0.0f);
     }
     void FixedUpdate()
     {
-        RB.velocity = transform.forward * speed;
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
@@ -40,6 +40,11 @@ public class LaserScript : MonoBehaviour
         print("Bang!");
         RB.velocity = Vector3.zero;
         //GetComponentInChildren<ParticleSystem>().Play();
+    }
+
+    public void MovementControl(float speed, float turning)
+    {
+        RB.velocity = transform.forward * speed;
     }
 
     private void OnTriggerEnter(Collider other)

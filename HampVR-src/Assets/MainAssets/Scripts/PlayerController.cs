@@ -6,6 +6,10 @@ using Valve.VR;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController playerController;
+
+
+
     [Header("Debug")]
     [Tooltip("Should controller debug messages be on?")]
     public bool controllerDebug;
