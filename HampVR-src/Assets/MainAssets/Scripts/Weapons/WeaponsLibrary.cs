@@ -6,6 +6,18 @@ public class WeaponsLibrary : MonoBehaviour
 {
     public static WeaponsLibrary wepLib;
 
+    void Awake()
+    {
+        if (wepLib == null)
+        {
+            DontDestroyOnLoad(gameObject); //makes instance persist across scenes
+            wepLib = this;
+        }
+        else if (wepLib != this)
+        {
+            Destroy(gameObject);
+        }
+    }
     public void FireShotgun(GameObject spawner, Rigidbody sourceRB, Quaternion aimRotation, float laserSpeed, int laserDamage)
     {
         aimRotation.eulerAngles = new Vector3(0, aimRotation.eulerAngles.y, 0);

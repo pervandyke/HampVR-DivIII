@@ -338,7 +338,7 @@ public class PlayerController : MonoBehaviour
                     print("Left projectile rotation: " + leftWeaponRotation.eulerAngles);
                 }
 
-                WeaponsLibrary.wepLib.FireShotgun(laserSpawner, RB,leftWeaponRotation, laserSpeed, laserDamage);
+                WeaponsLibrary.wepLib.FireShotgun(laserSpawner, RB, leftWeaponRotation, laserSpeed, laserDamage);
                 leftWeaponCooldown = true;
             }
             
