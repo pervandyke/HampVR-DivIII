@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponsLibrary : MonoBehaviour
 {
-    private void FireShotgun(GameObject spawner, Rigidbody sourceRB, Quaternion aimRotation, )
+    private void FireShotgun(GameObject spawner, Rigidbody sourceRB, Quaternion aimRotation, float laserSpeed, int laserDamage)
     {
         aimRotation.eulerAngles = new Vector3(0, aimRotation.eulerAngles.y, 0);
         Quaternion adjustedAimRotation = aimRotation;
