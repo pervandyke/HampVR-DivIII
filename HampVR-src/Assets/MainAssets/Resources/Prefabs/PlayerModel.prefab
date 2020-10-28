@@ -334,6 +334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerDebug: 0
+  weaponDebug: 0
   movementDebug: 0
   playerPhysics: {fileID: 0}
   playerModel: {fileID: 4263430021785689421}
@@ -349,6 +350,7 @@ MonoBehaviour:
   mass: 2
   drag: 3
   angularDrag: 0
+  maxLean: 0
   targetSpeedCurve:
     serializedVersion: 2
     m_Curve:
@@ -383,8 +385,11 @@ MonoBehaviour:
   deccelerate:
     actionPath: /actions/Flight1/in/Decelerate
     needsReinit: 0
-  fire:
-    actionPath: /actions/Flight1/in/Fire
+  leftFire:
+    actionPath: /actions/Flight1/in/LeftFire
+    needsReinit: 0
+  rightFire:
+    actionPath: /actions/Flight1/in/RightFire
     needsReinit: 0
   resetHeadsetZero:
     actionPath: /actions/Flight1/in/Recenter_Headset_Zero
