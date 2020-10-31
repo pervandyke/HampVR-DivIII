@@ -394,6 +394,9 @@ MonoBehaviour:
   resetHeadsetZero:
     actionPath: /actions/Flight1/in/Recenter_Headset_Zero
     needsReinit: 0
+  select:
+    actionPath: /actions/Flight1/in/SelectionButton
+    needsReinit: 0
   horizontalMovementVector: {x: 0, y: 0, z: 0}
   handMoveLogTimerDefault: 0.02
   handMoveLogSize: 100
