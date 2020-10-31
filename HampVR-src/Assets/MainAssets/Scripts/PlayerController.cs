@@ -75,6 +75,7 @@ public class PlayerController : MonoBehaviour
     public SteamVR_Action_Boolean leftFire;
     public SteamVR_Action_Boolean rightFire;
     public SteamVR_Action_Boolean resetHeadsetZero;
+    public SteamVR_Action_Boolean select;
 
 
     [SerializeField]
@@ -99,6 +100,9 @@ public class PlayerController : MonoBehaviour
     private List<Vector3> leftLastPositions;
     private List<Vector3> rightLastPositions;
 
+    private bool selecting = false;
+    private List<Vector3> selectionPoints;
+
 
 
 
@@ -113,6 +117,7 @@ public class PlayerController : MonoBehaviour
         handMoveLogTimer = handMoveLogTimerDefault;
         leftLastPositions = new List<Vector3>();
         rightLastPositions = new List<Vector3>();
+        selectionPoints = new List<Vector3>();
         for (int i = 0; i == handMoveLogSize-1; i++)
         {
             leftLastPositions[i] = Vector3.zero;
@@ -319,6 +324,66 @@ public class PlayerController : MonoBehaviour
             handMoveLogTimer = handMoveLogTimerDefault;
         }
 
+        PunchCheck(leftPosition, rightPosition);
+
+        CircleCheck();
+    }
+
+    private void CircleCheck()
+    {
+        if (GetSelect())
+        {
+            /*
+             * While selection button is held down, log position of that controller
+             * when the player lets go of the selection button, find the average of point of all points
+             * make a sphere with a diameter matching twice the distance from the average to the furthest from the average
+             * Then raycast to every visable enemy, and see if the ray hits the sphere
+             * if it does, add it to the list of viable selection targets
+             * take the closest enemy to the player from the list, and select that one
+             */
+
+            if (!selecting)
+            {
+                selecting = true;
+            }
+            selectionPoints.Add(rightHand.transform.position);
+        }
+        else if (!GetSelect())
+        {
+            if (selecting)
+            {
+                selecting = false;
+                //do the selection algorithm
+                Vector3 averagePoint = Vector3.zero;
+                foreach (Vector3 point in selectionPoints)
+                {
+                    averagePoint = averagePoint + point;
+                }
+                averagePoint = averagePoint / selectionPoints.Count;
+                float farthestPointDistance = 0;
+                foreach (Vector3 point in selectionPoints)
+                {
+                    float distance = Vector3.Distance(point, averagePoint);
+                    if (distance > farthestPointDistance)
+                    {
+                        farthestPointDistance = distance;
+                    }
+                }
+                GameObject selectionSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                selectionSphere.transform.position = averagePoint;
+                selectionSphere.transform.localScale = new Vector3(farthestPointDistance * 2, farthestPointDistance * 2, farthestPointDistance * 2);
+                selectionSphere.AddComponent<SphereCollider>();
+                foreach(GameObject enemy in EnemyManager.enemyManager.enemies)
+                {
+                    //cast a ray to enemy
+
+                }
+                
+            }
+        }
+    }
+    private void PunchCheck(Vector3 leftPosition, Vector3 rightPosition)
+    {
         //if player has punched forward, then shoot
         if (GetLeftFireDown())
         {
@@ -341,8 +406,7 @@ public class PlayerController : MonoBehaviour
                 WeaponsLibrary.wepLib.FireShotgun(laserSpawner, RB, leftWeaponRotation, laserSpeed, laserDamage);
                 leftWeaponCooldown = true;
             }
-            
-            if ((leftPosition - leftLastPositions[fireDetectionTime]).magnitude > fireDistance)
+            else if ((leftPosition - leftLastPositions[fireDetectionTime]).magnitude > fireDistance)
             {
                 leftWeaponCooldown = false;
             }
@@ -369,8 +433,7 @@ public class PlayerController : MonoBehaviour
                 WeaponsLibrary.wepLib.FireShotgun(laserSpawner, RB, rightWeaponRotation, laserSpeed, laserDamage);
                 rightWeaponCooldown = true;
             }
-
-            if ((rightPosition - rightLastPositions[fireDetectionTime]).magnitude < fireDistance)
+            else if ((rightPosition - rightLastPositions[fireDetectionTime]).magnitude < fireDistance)
             {
                 rightWeaponCooldown = false;
             }
@@ -400,6 +463,11 @@ public class PlayerController : MonoBehaviour
     public bool GetResetHeadsetDown()
     {
         return resetHeadsetZero.GetStateDown(handType);
+    }
+
+    public bool GetSelect()
+    {
+        return select.GetState(handType);
     }
 
 }

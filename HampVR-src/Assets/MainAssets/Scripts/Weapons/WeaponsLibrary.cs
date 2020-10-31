@@ -24,8 +24,10 @@ public class WeaponsLibrary : MonoBehaviour
         Quaternion adjustedAimRotation = aimRotation;
         for (int i = -15; i < 14; i++)
         {
-            adjustedAimRotation.y++;
-            GenerateLaser("Prefabs/Laser", spawner, sourceRB, adjustedAimRotation, laserSpeed, laserDamage);
+            Vector3 aimVector = new Vector3(adjustedAimRotation.eulerAngles.x, adjustedAimRotation.eulerAngles.y + i, adjustedAimRotation.eulerAngles.z);
+            Quaternion finalAim = new Quaternion();
+            finalAim.eulerAngles = aimVector;
+            GenerateLaser("Prefabs/Laser", spawner, sourceRB, finalAim, laserSpeed, laserDamage);
         }
     }
 

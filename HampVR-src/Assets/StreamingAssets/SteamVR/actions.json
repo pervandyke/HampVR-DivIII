@@ -29,6 +29,11 @@
       "name": "/actions/Flight1/in/RightFire",
       "type": "boolean",
       "requirement": "mandatory"
+    },
+    {
+      "name": "/actions/Flight1/in/SelectionButton",
+      "type": "boolean",
+      "requirement": "mandatory"
     }
   ],
   "action_sets": [

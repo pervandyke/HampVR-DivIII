@@ -64,5 +64,13 @@ namespace Valve.VR
                 return SteamVR_Actions.flight1_RightFire;
             }
         }
+        
+        public virtual SteamVR_Action_Boolean SelectionButton
+        {
+            get
+            {
+                return SteamVR_Actions.flight1_SelectionButton;
+            }
+        }
     }
 }
