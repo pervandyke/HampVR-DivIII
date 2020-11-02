@@ -402,3 +402,6 @@ MonoBehaviour:
   handMoveLogSize: 100
   fireDistance: 0.2
   fireDetectionTime: 15
+  cockpitMask:
+    serializedVersion: 2
+    m_Bits: 1843

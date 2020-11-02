@@ -102,8 +102,7 @@ public class PlayerController : MonoBehaviour
 
     private bool selecting = false;
     private List<Vector3> selectionPoints;
-
-
+    public LayerMask cockpitMask;
 
 
     // Start is called before the first frame update
@@ -373,12 +372,42 @@ public class PlayerController : MonoBehaviour
                 selectionSphere.transform.position = averagePoint;
                 selectionSphere.transform.localScale = new Vector3(farthestPointDistance * 2, farthestPointDistance * 2, farthestPointDistance * 2);
                 selectionSphere.AddComponent<SphereCollider>();
+                selectionSphere.tag = "SelectionSphere";
+
+                List<GameObject> validSelections = new List<GameObject>();
                 foreach(GameObject enemy in EnemyManager.enemyManager.enemies)
                 {
                     //cast a ray to enemy
-
+                    Quaternion direction = Quaternion.LookRotation((enemy.transform.position - mainCamera.transform.position).normalized);
+                    RaycastHit hitData;
+                    if (Physics.Raycast(enemy.transform.position, direction.eulerAngles, out hitData, Vector3.Distance(enemy.transform.position, mainCamera.transform.position), cockpitMask, QueryTriggerInteraction.Collide))
+                    {
+                        if (hitData.collider.gameObject.tag == "SelectionSphere")
+                        {
+                            validSelections.Add(enemy);
+                        }
+                    }
                 }
-                
+
+                float selectionDistance = 0;
+                GameObject objectToSelect;
+                if (validSelections.Count != 0)
+                {
+                    objectToSelect = validSelections[0];
+                    selectionDistance = Vector3.Distance(validSelections[0].transform.position, mainCamera.transform.position);
+                    if (validSelections.Count > 1)
+                    {
+                        for (int i = 1; i < validSelections.Count; i++)
+                        {
+                            if (Vector3.Distance(validSelections[i].transform.position, mainCamera.transform.position) < selectionDistance)
+                            {
+                                selectionDistance = Vector3.Distance(validSelections[i].transform.position, mainCamera.transform.position);
+                                objectToSelect = validSelections[i];
+                            }
+                        }
+                    }
+                    Global.global.selectedTarget = objectToSelect;
+                }
             }
         }
     }

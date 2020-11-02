@@ -8,6 +8,7 @@ public class Global : MonoBehaviour
 
     public string rotationType = "relative";
     public List<List<HexPrefabReference>> hexSelectionLists;
+    public GameObject selectedTarget;
 
     void Awake()
     {

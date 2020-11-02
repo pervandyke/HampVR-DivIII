@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - SelectionSphere
   layers:
   - Default
   - TransparentFX
@@ -16,8 +17,8 @@ TagManager:
   - 
   - PostProcessing
   - Weapon
-  - Ship
-  - 
+  - PlayerShip
+  - PlayerCockpit
   - 
   - 
   - 

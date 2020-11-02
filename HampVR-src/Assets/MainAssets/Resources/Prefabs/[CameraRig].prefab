@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 7438613897517259250}
   - component: {fileID: 7438613897517259252}
   - component: {fileID: 7438613897517259253}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cockpit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
