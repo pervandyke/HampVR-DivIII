@@ -396,7 +396,9 @@ public class PlayerController : MonoBehaviour
                             }
                         }
                     }
+                    Global.global.selectedTarget.GetComponent<MeshRenderer>().material.color = Color.white;
                     Global.global.selectedTarget = objectToSelect;
+                    Global.global.selectedTarget.GetComponent<MeshRenderer>().material.color = Color.red;
                 }
             }
         }
