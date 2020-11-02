@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+
     void FixedUpdate()
     {
         SetMovementVectors();
@@ -203,7 +203,6 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    
     private void Update()
     {
         //ControllerBehaviorHandler();
@@ -223,15 +222,6 @@ public class PlayerController : MonoBehaviour
         playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, mainCamera.transform.rotation, Time.deltaTime * rotateSpeed);
     }
 
-    //Generate a single laser
-    private void GenerateLaser(string prefabPath, GameObject laserSpawner, Quaternion rotation, float laserSpeed, int laserDamage)
-    {
-        GameObject LaserInstance = Instantiate(Resources.Load<GameObject>(prefabPath), laserSpawner.transform.position, laserSpawner.transform.rotation) as GameObject;
-        LaserInstance.transform.rotation = rotation;
-        LaserInstance.GetComponent<LaserScript>().speed = RB.velocity.magnitude + laserSpeed;
-        LaserInstance.GetComponent<LaserScript>().damage = laserDamage;
-    }
-
     //Set the vector to control the players movement
     private void SetMovementVectors()
     {
@@ -249,9 +239,6 @@ public class PlayerController : MonoBehaviour
         }
         
         horizontalMovementVector.y = 0;
-        
-        //verticalMarker.localPosition = new Vector3(verticalMarker.localPosition.x, verticalMarker.localPosition.y, horizontalMovementVector.magnitude);
-        //verticalMovementVector.y = verticalMarker.position.y - headsetZero.y;
     }
 
     //Apply the vector to the player as a force
@@ -270,22 +257,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-    //private void ControllerBehaviorHandler()
-    //{
-    //    Vector3 leftPosition = leftHand.transform.localPosition;
-    //    Vector3 rightPosition = rightHand.transform.localPosition;
-
-    //    handMoveLogTimer = handMoveLogTimer - Time.fixedUnscaledDeltaTime;
-
-
-
-
-    //}
-
-
-
-    //Track controller positions and determine whether to shoot.
     private void ControllerBehaviorHandler()
     {
         Vector3 leftPosition = leftHand.transform.localPosition;
@@ -326,6 +297,25 @@ public class PlayerController : MonoBehaviour
         PunchCheck(leftPosition, rightPosition);
 
         CircleCheck();
+
+        SlapCheck();
+    }
+
+    private void SlapCheck()
+    {
+        /*
+         * Player rapidly moves hand while not holding fire button
+         * boost sheild in that quarter
+         * then after a tunable amount of time, drop the sheild for a tunable amount of time
+         * if both hands slap at the same time, sheild blast attack
+         */
+
+        if (true)
+        {
+            //calculate velocity of hand instead of distance?
+
+        }
+
     }
 
     private void CircleCheck()
