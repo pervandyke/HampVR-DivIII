@@ -55,7 +55,9 @@ public class LaserScript : MonoBehaviour, IProjectile
         {
             if (other.gameObject.tag == "Player")
             {
-                //other.gameObject.GetComponentInChildren<PlayerController>().health -= damage;
+                print("Hit player");
+                other.gameObject.GetComponentInChildren<PlayerController>().TakeHit(damage, gameObject);
+                Destroy(gameObject);
             }
             if (other.gameObject.tag == "Enemy")
             {

@@ -385,13 +385,14 @@ public class PlayerController : MonoBehaviour
             if (selecting)
             {
                 selecting = false;
-                //do the selection algorithm
+                //find the average point of the circle
                 Vector3 averagePoint = Vector3.zero;
                 foreach (Vector3 point in selectionPoints)
                 {
                     averagePoint = averagePoint + point;
                 }
                 averagePoint = averagePoint / selectionPoints.Count;
+                //find the point farthest from the average
                 float farthestPointDistance = 0;
                 foreach (Vector3 point in selectionPoints)
                 {
@@ -401,16 +402,19 @@ public class PlayerController : MonoBehaviour
                         farthestPointDistance = distance;
                     }
                 }
+                //create a sphere with a diameter == to twice the distance from the average point fo the furthest point
                 GameObject selectionSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 selectionSphere.transform.position = averagePoint;
                 selectionSphere.transform.localScale = new Vector3(farthestPointDistance * 2, farthestPointDistance * 2, farthestPointDistance * 2);
+                //give the sphere a collider and tag it as the selection sphere
                 selectionSphere.AddComponent<SphereCollider>();
                 selectionSphere.tag = "SelectionSphere";
 
+                //find eevry enemy that would be a valid selection
                 List<GameObject> validSelections = new List<GameObject>();
                 foreach(GameObject enemy in EnemyManager.enemyManager.enemies)
                 {
-                    //cast a ray to enemy
+                    //cast a ray to enemy, if it hits the selection sphere add it to the list
                     Quaternion direction = Quaternion.LookRotation((enemy.transform.position - mainCamera.transform.position).normalized);
                     RaycastHit hitData;
                     if (Physics.Raycast(enemy.transform.position, direction.eulerAngles, out hitData, Vector3.Distance(enemy.transform.position, mainCamera.transform.position), cockpitMask, QueryTriggerInteraction.Collide))
@@ -422,6 +426,7 @@ public class PlayerController : MonoBehaviour
                     }
                 }
 
+                //of the valid selections, actually select the closest enemy to the player
                 float selectionDistance = 0;
                 GameObject objectToSelect;
                 if (validSelections.Count != 0)
@@ -439,7 +444,11 @@ public class PlayerController : MonoBehaviour
                             }
                         }
                     }
-                    Global.global.selectedTarget.GetComponent<MeshRenderer>().material.color = Color.white;
+                    //color the selected target red, uncolor the previous target, actually select the target to be selected
+                    if(Global.global.selectedTarget != null)
+                    {
+                        Global.global.selectedTarget.GetComponent<MeshRenderer>().material.color = Color.white;
+                    }
                     Global.global.selectedTarget = objectToSelect;
                     Global.global.selectedTarget.GetComponent<MeshRenderer>().material.color = Color.red;
                 }
