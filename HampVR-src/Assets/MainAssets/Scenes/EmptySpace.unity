@@ -4717,12 +4717,6 @@ Transform:
   m_Father: {fileID: 45901427}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &830778479 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 7438613897649874302, guid: d4940f399d986b448a3838bf36f89fc7,
-    type: 3}
-  m_PrefabInstance: {fileID: 7438613897389590801}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &832998687
 GameObject:
   m_ObjectHideFlags: 0
@@ -12786,16 +12780,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 574874254735040801, guid: 45f3532b54d18c045a38eece64a74cdd,
-        type: 3}
-      propertyPath: m_Sources.Array.data[0].sourceTransform
-      value: 
-      objectReference: {fileID: 7438613897389590804}
-    - target: {fileID: 574874254735040801, guid: 45f3532b54d18c045a38eece64a74cdd,
-        type: 3}
-      propertyPath: m_IsLocked
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3930032130077271513, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
       propertyPath: player
@@ -12805,7 +12789,7 @@ PrefabInstance:
         type: 3}
       propertyPath: mainCamera
       value: 
-      objectReference: {fileID: 830778479}
+      objectReference: {fileID: 0}
     - target: {fileID: 3930032130077271513, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
       propertyPath: targetReverseSpeedCurve.m_Curve.Array.data[0].time
@@ -12860,7 +12844,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerPhysics
       value: 
-      objectReference: {fileID: 7438613897389590802}
+      objectReference: {fileID: 0}
     - target: {fileID: 3930032130077271513, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
       propertyPath: verticalMarker
@@ -12870,12 +12854,12 @@ PrefabInstance:
         type: 3}
       propertyPath: leftHand
       value: 
-      objectReference: {fileID: 7438613897389590806}
+      objectReference: {fileID: 0}
     - target: {fileID: 3930032130077271513, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
       propertyPath: rightHand
       value: 
-      objectReference: {fileID: 7438613897389590805}
+      objectReference: {fileID: 0}
     - target: {fileID: 3930032130077271513, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
       propertyPath: controllerDebug
@@ -12889,7 +12873,7 @@ PrefabInstance:
     - target: {fileID: 3930032130077271513, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
       propertyPath: maxLean
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3930032130077271513, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
@@ -12900,21 +12884,21 @@ PrefabInstance:
         type: 3}
       propertyPath: laserSpawner
       value: 
-      objectReference: {fileID: 4263430022834479331}
+      objectReference: {fileID: 4263430022834479330}
     - target: {fileID: 3930032130077271513, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
       propertyPath: laserSpawner2
       value: 
-      objectReference: {fileID: 4263430022834479330}
+      objectReference: {fileID: 4263430022834479331}
     - target: {fileID: 3930032130077271513, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
       propertyPath: cockpitMask.m_Bits
-      value: 1043
+      value: 1843
       objectReference: {fileID: 0}
     - target: {fileID: 3930032130077271513, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
       propertyPath: shieldDebug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4263430021785689417, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
@@ -13001,8 +12985,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerController
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 574874254735040801, guid: 45f3532b54d18c045a38eece64a74cdd, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45f3532b54d18c045a38eece64a74cdd, type: 3}
 --- !u!1 &4263430022834479328 stripped
 GameObject:

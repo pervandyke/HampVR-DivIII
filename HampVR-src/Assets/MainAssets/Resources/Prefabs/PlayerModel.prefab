@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5570201440834507263}
   - component: {fileID: 9201675519023189428}
   - component: {fileID: 6359594939886634183}
-  - component: {fileID: 574874254735040801}
   m_Layer: 10
   m_Name: PlayerModel
   m_TagString: Player
@@ -116,25 +115,6 @@ PositionConstraint:
   m_AffectTranslationZ: 1
   m_IsContraintActive: 1
   m_IsLocked: 1
-  m_Sources:
-  - sourceTransform: {fileID: 0}
-    weight: 1
---- !u!1818360609 &574874254735040801
-RotationConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4263430021785689421}
-  m_Enabled: 1
-  m_Weight: 1
-  m_RotationAtRest: {x: 0, y: 0, z: 0}
-  m_RotationOffset: {x: 0, y: 0, z: 0}
-  m_AffectRotationX: 0
-  m_AffectRotationY: 1
-  m_AffectRotationZ: 0
-  m_IsContraintActive: 1
-  m_IsLocked: 0
   m_Sources:
   - sourceTransform: {fileID: 0}
     weight: 1
