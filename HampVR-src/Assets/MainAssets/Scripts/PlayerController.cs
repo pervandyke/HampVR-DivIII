@@ -98,10 +98,21 @@ public class PlayerController : MonoBehaviour
     public float fireDistance;
     [Tooltip("How much time in handMoveLogTimer intervals the player has to punch fireDistance units.")]
     public int fireDetectionTime;
+
+    [Header("Shields")]
+    [Tooltip("The maximum value of the left shield.")]
+    public int leftShieldMax;
+    private int leftShieldValue;
+    [Tooltip("The maximum value of the right shield.")]
+    public int rightShieldMax;
+    private int rightShieldValue;
     [Tooltip("How far does a slap need to go to register.")]
     public float slapDistance;
     [Tooltip("How much time in handMoveLogTimer intervals the player has to slap slapDistance units.")]
     public int slapDetectionTime;
+    private bool leftShieldBoosted;
+    private bool rightShieldBoosted;
+
 
     private List<Vector3> leftLastPositions;
     private List<Vector3> rightLastPositions;
@@ -123,6 +134,8 @@ public class PlayerController : MonoBehaviour
         leftLastPositions = new List<Vector3>();
         rightLastPositions = new List<Vector3>();
         selectionPoints = new List<Vector3>();
+        leftShieldValue = leftShieldMax;
+        rightShieldValue = rightShieldMax;
         for (int i = 0; i == handMoveLogSize-1; i++)
         {
             leftLastPositions[i] = Vector3.zero;
@@ -324,7 +337,7 @@ public class PlayerController : MonoBehaviour
                     print("Left Slap");
                     print("Left Position: " + leftPosition + "\nLeft Last Position: " + leftLastPositions[slapDetectionTime]);
                 }
-
+                BoostShield("left");
             }
             else if ((leftPosition - leftLastPositions[slapDetectionTime]).magnitude > slapDistance)
             {
@@ -338,7 +351,7 @@ public class PlayerController : MonoBehaviour
                     print("Right Slap");
                     print("Right Position: " + rightPosition + "\nRight Last Position: " + rightLastPositions[slapDetectionTime]);
                 }
-
+                BoostShield("right");
             }
             else if ((rightPosition - rightLastPositions[slapDetectionTime]).magnitude < slapDistance)
             {
@@ -487,6 +500,63 @@ public class PlayerController : MonoBehaviour
             else if ((rightPosition - rightLastPositions[fireDetectionTime]).magnitude < fireDistance)
             {
                 rightWeaponCooldown = false;
+            }
+        }
+    }
+
+    private void BoostShield(string shield)
+    {
+        if (shield == "left")
+        {
+            leftShieldBoosted = true;
+        }
+        else if (shield == "right")
+        {
+            rightShieldBoosted = true;
+        }
+    }
+
+    public void TakeHit(int damage, GameObject projectile)
+    {
+        float collisionAngle = Vector3.SignedAngle(transform.position, projectile.transform.position, Vector3.up);
+        if (collisionAngle > 0)
+        {
+            if (rightShieldBoosted)
+            {
+                //no damage
+            }
+            else
+            {
+                int damageOverflow = damage - rightShieldValue;
+                if (damageOverflow > 0)
+                {
+                    rightShieldValue = 0;
+                    health = health - damageOverflow;
+                }
+                else
+                {
+                    rightShieldValue = rightShieldValue - damage;
+                }
+            }
+        }
+        else if (collisionAngle < 0)
+        {
+            if (leftShieldBoosted)
+            {
+                //no damage
+            }
+            else
+            {
+                int damageOverflow = damage - leftShieldValue;
+                if (damageOverflow > 0)
+                {
+                    leftShieldValue = 0;
+                    health = health - damageOverflow;
+                }
+                else
+                {
+                    leftShieldValue = leftShieldValue - damage;
+                }
             }
         }
     }
