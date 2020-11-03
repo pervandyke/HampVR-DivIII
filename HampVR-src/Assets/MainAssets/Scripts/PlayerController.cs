@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     public bool weaponDebug;
     [Tooltip("Should Movement debug messages be on?")]
     public bool movementDebug;
+    [Tooltip("Should Shield debug messages be on?")]
+    public bool shieldDebug;
 
     [Header("GameObjects")]
     [Tooltip("The GameObject with the players RigidBody")]
@@ -67,6 +69,8 @@ public class PlayerController : MonoBehaviour
 
     private bool leftWeaponCooldown = false;
     private bool rightWeaponCooldown = false;
+    private bool leftShieldCooldown = false;
+    private bool rightShieldCooldown = false;
 
     [Header("SteamVR")]
     public SteamVR_Input_Sources handType;
@@ -94,9 +98,11 @@ public class PlayerController : MonoBehaviour
     public float fireDistance;
     [Tooltip("How much time in handMoveLogTimer intervals the player has to punch fireDistance units.")]
     public int fireDetectionTime;
-    private int fireDetectionIndex;
-    private bool leftCocked;
-    private bool rightCocked;
+    [Tooltip("How far does a slap need to go to register.")]
+    public float slapDistance;
+    [Tooltip("How much time in handMoveLogTimer intervals the player has to slap slapDistance units.")]
+    public int slapDetectionTime;
+
     private List<Vector3> leftLastPositions;
     private List<Vector3> rightLastPositions;
 
@@ -123,8 +129,6 @@ public class PlayerController : MonoBehaviour
             rightLastPositions[i] = Vector3.zero;
         }
 
-        leftCocked = false;
-        rightCocked = false;
         if (Global.global.rotationType == "relative")
         {
             playerModel.GetComponent<RotationConstraint>().constraintActive = true;
@@ -298,10 +302,10 @@ public class PlayerController : MonoBehaviour
 
         CircleCheck();
 
-        SlapCheck();
+        SlapCheck(leftPosition, rightPosition);
     }
 
-    private void SlapCheck()
+    private void SlapCheck(Vector3 leftPosition, Vector3 rightPosition)
     {
         /*
          * Player rapidly moves hand while not holding fire button
@@ -310,10 +314,36 @@ public class PlayerController : MonoBehaviour
          * if both hands slap at the same time, sheild blast attack
          */
 
-        if (true)
+        if (true)  // put button here if we need one
         {
             //calculate velocity of hand instead of distance?
+            if ((leftPosition - leftLastPositions[slapDetectionTime]).magnitude > slapDistance && leftShieldCooldown == false)
+            {
+                if (shieldDebug)
+                {
+                    print("Left Slap");
+                    print("Left Position: " + leftPosition + "\nLeft Last Position: " + leftLastPositions[slapDetectionTime]);
+                }
 
+            }
+            else if ((leftPosition - leftLastPositions[slapDetectionTime]).magnitude > slapDistance)
+            {
+                leftShieldCooldown = false;
+            }
+
+            if ((rightPosition - rightLastPositions[slapDetectionTime]).magnitude > slapDistance && rightShieldCooldown == false)
+            {
+                if (shieldDebug)
+                {
+                    print("Right Slap");
+                    print("Right Position: " + rightPosition + "\nRight Last Position: " + rightLastPositions[slapDetectionTime]);
+                }
+
+            }
+            else if ((rightPosition - rightLastPositions[slapDetectionTime]).magnitude < slapDistance)
+            {
+                rightShieldCooldown = false;
+            }
         }
 
     }

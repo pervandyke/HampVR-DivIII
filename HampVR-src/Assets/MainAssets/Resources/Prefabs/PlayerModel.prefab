@@ -336,6 +336,7 @@ MonoBehaviour:
   controllerDebug: 0
   weaponDebug: 0
   movementDebug: 0
+  shieldDebug: 0
   playerPhysics: {fileID: 0}
   playerModel: {fileID: 4263430021785689421}
   leftHand: {fileID: 0}
@@ -402,6 +403,8 @@ MonoBehaviour:
   handMoveLogSize: 100
   fireDistance: 0.2
   fireDetectionTime: 15
+  slapDistance: 0.2
+  slapDetectionTime: 15
   cockpitMask:
     serializedVersion: 2
     m_Bits: 1843
