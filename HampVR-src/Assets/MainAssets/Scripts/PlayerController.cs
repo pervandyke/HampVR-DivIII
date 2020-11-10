@@ -507,6 +507,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
     private void PunchCheck(Vector3 leftPosition, Vector3 rightPosition)
     {
         //if player has punched forward, then shoot

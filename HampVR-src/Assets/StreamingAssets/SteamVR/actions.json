@@ -3,7 +3,7 @@
     {
       "name": "/actions/Flight1/in/Accelerate",
       "type": "boolean",
-      "requirement": "mandatory"
+      "requirement": "optional"
     },
     {
       "name": "/actions/Flight1/in/LeftFire",
@@ -18,7 +18,7 @@
     {
       "name": "/actions/Flight1/in/Decelerate",
       "type": "boolean",
-      "requirement": "mandatory"
+      "requirement": "optional"
     },
     {
       "name": "/actions/Flight1/in/poseTest",
