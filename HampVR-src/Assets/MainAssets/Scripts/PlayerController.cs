@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     public bool movementDebug;
     [Tooltip("Should Shield debug messages be on?")]
     public bool shieldDebug;
+    [Tooltip("Should Selection Sphere be visible?")]
+    public bool selectionDebug;
 
     [Header("GameObjects")]
     [Tooltip("The GameObject with the players RigidBody")]
@@ -110,6 +112,14 @@ public class PlayerController : MonoBehaviour
     public float slapDistance;
     [Tooltip("How much time in handMoveLogTimer intervals the player has to slap slapDistance units.")]
     public int slapDetectionTime;
+    [Tooltip("How long shield boost should last.")]
+    public float shieldBoostTime;
+    [Tooltip("How long shield should drop after boosting.")]
+    public float shieldCooldownTime;
+    private float leftBoostTimer;
+    private float rightBoostTimer;
+    private float leftBoostCooldownTimer;
+    private float rightBoostCooldownTimer;
     private bool leftShieldBoosted;
     private bool rightShieldBoosted;
 
@@ -136,6 +146,10 @@ public class PlayerController : MonoBehaviour
         selectionPoints = new List<Vector3>();
         leftShieldValue = leftShieldMax;
         rightShieldValue = rightShieldMax;
+        leftBoostTimer = shieldBoostTime;
+        rightBoostTimer = shieldBoostTime;
+        leftBoostCooldownTimer = 0.0f;
+        rightBoostCooldownTimer = 0.0f;
         for (int i = 0; i == handMoveLogSize-1; i++)
         {
             leftLastPositions[i] = Vector3.zero;
@@ -329,7 +343,7 @@ public class PlayerController : MonoBehaviour
 
         if (true)  // put button here if we need one
         {
-            //calculate velocity of hand instead of distance?
+            //left slap detection
             if ((leftPosition - leftLastPositions[slapDetectionTime]).magnitude > slapDistance && leftShieldCooldown == false)
             {
                 if (shieldDebug)
@@ -339,11 +353,30 @@ public class PlayerController : MonoBehaviour
                 }
                 BoostShield("left");
             }
-            else if ((leftPosition - leftLastPositions[slapDetectionTime]).magnitude > slapDistance)
+
+            //left timers
+            if (leftBoostTimer <= 0 && leftShieldBoosted == true)
             {
-                leftShieldCooldown = false;
+                leftShieldBoosted = false;
+                leftShieldCooldown = true;
+                leftBoostTimer = shieldBoostTime;
+            }
+            else if (leftBoostTimer > 0 && leftShieldBoosted == true)
+            {
+                leftBoostTimer = leftBoostTimer - Time.fixedDeltaTime;
             }
 
+            if (leftBoostCooldownTimer <= 0 && leftShieldCooldown == true)
+            {
+                leftShieldCooldown = false;
+                leftBoostCooldownTimer = shieldCooldownTime;
+            }
+            else if (leftBoostCooldownTimer > 0 && leftShieldCooldown == true)
+            {
+                leftBoostCooldownTimer = leftBoostCooldownTimer - Time.fixedDeltaTime;
+            }
+
+            //right slap detection
             if ((rightPosition - rightLastPositions[slapDetectionTime]).magnitude > slapDistance && rightShieldCooldown == false)
             {
                 if (shieldDebug)
@@ -353,9 +386,27 @@ public class PlayerController : MonoBehaviour
                 }
                 BoostShield("right");
             }
-            else if ((rightPosition - rightLastPositions[slapDetectionTime]).magnitude < slapDistance)
+
+            //right timers
+            if (rightBoostTimer <= 0 && rightShieldBoosted == true)
+            {
+                rightShieldBoosted = false;
+                rightShieldCooldown = true;
+                rightBoostTimer = shieldBoostTime;
+            }
+            else if (rightBoostTimer > 0 && rightShieldBoosted == true)
+            {
+                rightBoostTimer = rightBoostTimer - Time.fixedDeltaTime;
+            }
+
+            if (rightBoostCooldownTimer <= 0 && rightShieldCooldown == true)
             {
                 rightShieldCooldown = false;
+                rightBoostCooldownTimer = shieldCooldownTime;
+            }
+            else if (rightBoostCooldownTimer > 0 && rightShieldCooldown == true)
+            {
+                rightBoostCooldownTimer = rightBoostCooldownTimer - Time.fixedDeltaTime;
             }
         }
 
@@ -403,14 +454,15 @@ public class PlayerController : MonoBehaviour
                     }
                 }
                 //create a sphere with a diameter == to twice the distance from the average point fo the furthest point
-                GameObject selectionSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                GameObject selectionSphere = Instantiate(Resources.Load("Prefabs/SelectionSphere")) as GameObject;
+                if (!selectionDebug)
+                {
+                    selectionSphere.GetComponent<MeshRenderer>().enabled = false;
+                }
                 selectionSphere.transform.position = averagePoint;
                 selectionSphere.transform.localScale = new Vector3(farthestPointDistance * 2, farthestPointDistance * 2, farthestPointDistance * 2);
-                //give the sphere a collider and tag it as the selection sphere
-                selectionSphere.AddComponent<SphereCollider>();
-                selectionSphere.tag = "SelectionSphere";
 
-                //find eevry enemy that would be a valid selection
+                //find every enemy that would be a valid selection
                 List<GameObject> validSelections = new List<GameObject>();
                 foreach(GameObject enemy in EnemyManager.enemyManager.enemies)
                 {
@@ -530,44 +582,38 @@ public class PlayerController : MonoBehaviour
         float collisionAngle = Vector3.SignedAngle(transform.position, projectile.transform.position, Vector3.up);
         if (collisionAngle > 0)
         {
-            if (rightShieldBoosted)
-            {
-                //no damage
-            }
-            else
-            {
-                int damageOverflow = damage - rightShieldValue;
-                if (damageOverflow > 0)
-                {
-                    rightShieldValue = 0;
-                    health = health - damageOverflow;
-                }
-                else
-                {
-                    rightShieldValue = rightShieldValue - damage;
-                }
-            }
+            rightShieldValue = TakeDamage(rightShieldBoosted, damage, leftShieldValue);
         }
         else if (collisionAngle < 0)
         {
-            if (leftShieldBoosted)
+            leftShieldValue = TakeDamage(leftShieldBoosted, damage, leftShieldValue);
+        }
+    }
+
+    private int TakeDamage(bool shieldBoost, int damage, int shieldValue)
+    {
+        if (shieldBoost)
+        {
+            //no damage
+        }
+        else
+        {
+            int damageOverflow = damage - shieldValue;
+            if (damageOverflow > 0 && shieldValue > 0)
             {
-                //no damage
+                shieldValue = 0;
+            }
+            else if (shieldValue == 0)
+            {
+                health = health - damageOverflow;
             }
             else
             {
-                int damageOverflow = damage - leftShieldValue;
-                if (damageOverflow > 0)
-                {
-                    leftShieldValue = 0;
-                    health = health - damageOverflow;
-                }
-                else
-                {
-                    leftShieldValue = leftShieldValue - damage;
-                }
+                shieldValue = shieldValue - damage;
             }
         }
+
+        return shieldValue;
     }
 
     public bool GetAccelerateDown()
