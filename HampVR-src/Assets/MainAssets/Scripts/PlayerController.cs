@@ -481,7 +481,7 @@ public class PlayerController : MonoBehaviour
                         {
                             rayColor = Color.yellow;
                         }
-                        else if (hitData.collider.gameObject.tag == "SelectionSphere")
+                        else if (didHit && hitData.collider.gameObject.tag == "SelectionSphere")
                         {
                             rayColor = Color.red;
                         }
