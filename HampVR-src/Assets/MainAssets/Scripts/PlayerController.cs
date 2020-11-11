@@ -477,7 +477,11 @@ public class PlayerController : MonoBehaviour
                         print("Drawing Ray from enemy " + enemy + " Along direction " + direction.eulerAngles);
                         Ray selectionRay = new Ray(enemy.transform.position, mainCamera.transform.position);
                         Color rayColor;
-                        if (hitData.collider.gameObject.tag == "SelectionSphere")
+                        if (!didHit)
+                        {
+                            rayColor = Color.yellow;
+                        }
+                        else if (hitData.collider.gameObject.tag == "SelectionSphere")
                         {
                             rayColor = Color.red;
                         }
