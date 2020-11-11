@@ -475,7 +475,7 @@ public class PlayerController : MonoBehaviour
                     if (selectionDebug)
                     {
                         print("Drawing Ray from enemy " + enemy + " Along direction " + direction.eulerAngles);
-                        Ray selectionRay = new Ray(enemy.transform.position, mainCamera.transform.position);
+                        Ray selectionRay = new Ray(enemy.transform.position, direction.eulerAngles);
                         Color rayColor;
                         if (!didHit)
                         {
