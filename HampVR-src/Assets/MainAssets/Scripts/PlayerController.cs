@@ -472,6 +472,21 @@ public class PlayerController : MonoBehaviour
                     RaycastHit hitData;
                     if (Physics.Raycast(enemy.transform.position, direction.eulerAngles, out hitData, Vector3.Distance(enemy.transform.position, mainCamera.transform.position), cockpitMask, QueryTriggerInteraction.Collide))
                     {
+                        if (selectionDebug)
+                        {
+                            Ray selectionRay = new Ray(enemy.transform.position, mainCamera.transform.position);
+                            Color rayColor;
+                            if (hitData.collider.gameObject.tag == "SelectionSphere")
+                            {
+                                rayColor = Color.red;
+                            }
+                            else
+                            {
+                                rayColor = Color.yellow;
+                            }
+                            Debug.DrawRay(selectionRay.origin, selectionRay.direction * Vector3.Distance(mainCamera.transform.position, enemy.transform.position), rayColor, 10.0f);
+                        }
+                        
                         if (hitData.collider.gameObject.tag == "SelectionSphere")
                         {
                             validSelections.Add(enemy);
