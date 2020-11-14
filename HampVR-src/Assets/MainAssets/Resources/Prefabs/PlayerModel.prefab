@@ -317,6 +317,7 @@ MonoBehaviour:
   weaponDebug: 0
   movementDebug: 0
   shieldDebug: 0
+  selectionDebug: 0
   playerPhysics: {fileID: 0}
   playerModel: {fileID: 4263430021785689421}
   leftHand: {fileID: 0}
@@ -324,7 +325,7 @@ MonoBehaviour:
   laserSpawner: {fileID: 4263430022694038438}
   laserSpawner2: {fileID: 8194421143144734473}
   mainCamera: {fileID: 0}
-  acceleration: 100
+  acceleration: 99
   rotateSpeed: 6
   maxSpeed: 40
   deadZone: 0.1
@@ -383,8 +384,12 @@ MonoBehaviour:
   handMoveLogSize: 100
   fireDistance: 0.2
   fireDetectionTime: 15
+  leftShieldMax: 0
+  rightShieldMax: 0
   slapDistance: 0.2
   slapDetectionTime: 15
+  shieldBoostTime: 0
+  shieldCooldownTime: 0
   cockpitMask:
     serializedVersion: 2
     m_Bits: 1843
