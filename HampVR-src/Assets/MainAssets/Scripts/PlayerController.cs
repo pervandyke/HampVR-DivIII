@@ -468,7 +468,7 @@ public class PlayerController : MonoBehaviour
                 foreach(GameObject enemy in EnemyManager.enemyManager.enemies)
                 {
                     //cast a ray from enemy to headset, if it hits the selection sphere add it to the list
-                    Vector3 direction = (enemy.transform.position - mainCamera.transform.position).normalized;
+                    Vector3 direction = (mainCamera.transform.position - enemy.transform.position).normalized;
                     RaycastHit hitData;
                     bool didHit = Physics.Raycast(enemy.transform.position, direction, out hitData, Vector3.Distance(enemy.transform.position, mainCamera.transform.position), 
                         cockpitMask, QueryTriggerInteraction.Collide);
