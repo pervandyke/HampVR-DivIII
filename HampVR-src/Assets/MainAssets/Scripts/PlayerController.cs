@@ -461,6 +461,7 @@ public class PlayerController : MonoBehaviour
                 selectionSphere.transform.localPosition = averagePoint;
                 selectionSphere.transform.localScale = new Vector3(farthestPointDistance * 2, farthestPointDistance * 2, farthestPointDistance * 2);
                 selectionSphere.transform.parent = null;
+                selectionPoints.Clear();
 
                 //find every enemy that would be a valid selection
                 List<GameObject> validSelections = new List<GameObject>();
