@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SelectionSphereScript : MonoBehaviour
 {
-    public float timer = 2;
+    public float timer = 10.0f;
     void Update()
     {
         timer -= Time.deltaTime;

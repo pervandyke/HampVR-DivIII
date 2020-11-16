@@ -453,7 +453,7 @@ public class PlayerController : MonoBehaviour
                 }
                 //create a sphere with a diameter == to twice the distance from the average point fo the furthest point
                 GameObject selectionSphere = Instantiate(Resources.Load("Prefabs/SelectionSphere")) as GameObject;
-                selectionSphere.transform.parent = playerPhysics.transform;
+                //selectionSphere.transform.parent = playerPhysics.transform;
                 if (!selectionDebug)
                 {
                     selectionSphere.GetComponent<MeshRenderer>().enabled = false;
