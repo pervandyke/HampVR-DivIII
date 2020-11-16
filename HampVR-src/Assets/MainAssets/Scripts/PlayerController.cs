@@ -453,13 +453,14 @@ public class PlayerController : MonoBehaviour
                 }
                 //create a sphere with a diameter == to twice the distance from the average point fo the furthest point
                 GameObject selectionSphere = Instantiate(Resources.Load("Prefabs/SelectionSphere")) as GameObject;
-                //selectionSphere.transform.parent = playerPhysics.transform;
+                selectionSphere.transform.parent = playerPhysics.transform;
                 if (!selectionDebug)
                 {
                     selectionSphere.GetComponent<MeshRenderer>().enabled = false;
                 }
                 selectionSphere.transform.localPosition = averagePoint;
                 selectionSphere.transform.localScale = new Vector3(farthestPointDistance * 2, farthestPointDistance * 2, farthestPointDistance * 2);
+                selectionSphere.transform.parent = null;
 
                 //find every enemy that would be a valid selection
                 List<GameObject> validSelections = new List<GameObject>();
