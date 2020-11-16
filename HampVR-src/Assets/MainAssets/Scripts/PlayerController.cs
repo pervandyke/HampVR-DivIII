@@ -560,7 +560,7 @@ public class PlayerController : MonoBehaviour
                 WeaponsLibrary.wepLib.FireShotgun(laserSpawner, RB, leftWeaponRotation, laserSpeed, laserDamage);
                 leftWeaponCooldown = true;
             }
-            else if ((leftPosition - leftLastPositions[fireDetectionTime]).magnitude > fireDistance)
+            else if ((leftPosition - leftLastPositions[fireDetectionTime]).magnitude < fireDistance)
             {
                 leftWeaponCooldown = false;
             }

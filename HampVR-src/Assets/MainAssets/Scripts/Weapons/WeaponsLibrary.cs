@@ -22,7 +22,7 @@ public class WeaponsLibrary : MonoBehaviour
     {
         aimRotation.eulerAngles = new Vector3(0, aimRotation.eulerAngles.y, 0);
         Quaternion adjustedAimRotation = aimRotation;
-        for (int i = -15; i < 14; i++)
+        for (int i = -10; i < 9; i++)
         {
             Vector3 aimVector = new Vector3(adjustedAimRotation.eulerAngles.x, adjustedAimRotation.eulerAngles.y + i, adjustedAimRotation.eulerAngles.z);
             Quaternion finalAim = new Quaternion();
