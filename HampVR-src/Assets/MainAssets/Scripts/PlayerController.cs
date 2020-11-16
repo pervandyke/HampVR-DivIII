@@ -8,8 +8,6 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController playerController;
 
-
-
     [Header("Debug")]
     [Tooltip("Should controller debug messages be on?")]
     public bool controllerDebug;
@@ -474,7 +472,7 @@ public class PlayerController : MonoBehaviour
                         cockpitMask, QueryTriggerInteraction.Collide);
                     if (selectionDebug)
                     {
-                        print("Drawing Ray from enemy " + enemy + " Along direction " + direction);
+                        print("Drawing Ray from enemy " + enemy.name + " Along direction " + direction);
                         Ray selectionRay = new Ray(enemy.transform.position, direction);
                         Color rayColor;
                         if (!didHit)
@@ -487,14 +485,17 @@ public class PlayerController : MonoBehaviour
                         }
                         else
                         {
-                            rayColor = Color.yellow;
+                            rayColor = Color.green;
                         }
                         Debug.DrawRay(selectionRay.origin, selectionRay.direction * Vector3.Distance(mainCamera.transform.position, enemy.transform.position), rayColor, 10.0f);
                     }
 
                     if (didHit)
                     {
-                        
+                        if (selectionDebug)
+                        {
+                            print("Ray hit: " + hitData.collider.gameObject.name);
+                        }
                         
                         if (hitData.collider.gameObject.tag == "SelectionSphere")
                         {
