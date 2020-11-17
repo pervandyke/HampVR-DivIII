@@ -608,7 +608,8 @@ public class PlayerController : MonoBehaviour
 
     public void TakeHit(int damage, GameObject projectile)
     {
-        float collisionAngle = Vector3.SignedAngle(transform.position, projectile.transform.position, Vector3.up);
+        Vector3 hitDirection = projectile.transform.position - transform.position;
+        float collisionAngle = Vector3.SignedAngle(hitDirection, transform.forward, Vector3.up);
         if (collisionAngle > 0)
         {
             rightShieldValue = TakeDamage(rightShieldBoosted, damage, leftShieldValue);
