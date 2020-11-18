@@ -17,6 +17,7 @@ public class MissileScript : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * turningSpeed);
         //apply forward force
+        gameObject.GetComponent<Rigidbody>().velocity = transform.forward * speed;
 
         timer -= Time.fixedDeltaTime;
         if (timer <= 0)
