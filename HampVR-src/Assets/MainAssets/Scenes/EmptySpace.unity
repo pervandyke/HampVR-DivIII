@@ -9881,7 +9881,7 @@ PrefabInstance:
     - target: {fileID: 4263430021785689417, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4263430021785689417, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
@@ -9891,7 +9891,7 @@ PrefabInstance:
     - target: {fileID: 4263430021785689417, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4263430021785689417, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
@@ -9901,7 +9901,7 @@ PrefabInstance:
     - target: {fileID: 4263430021785689417, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 4263430021785689421, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
@@ -9913,6 +9913,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: LaserSpawnerRight
       objectReference: {fileID: 0}
+    - target: {fileID: 5570201440834507263, guid: 45f3532b54d18c045a38eece64a74cdd,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -2432090755550338912, guid: ec8cc7577ca86fe4d8879952fd2ef6f1,
+        type: 3}
     - target: {fileID: 6359594939886634183, guid: 45f3532b54d18c045a38eece64a74cdd,
         type: 3}
       propertyPath: m_Sources.Array.data[0].sourceTransform
