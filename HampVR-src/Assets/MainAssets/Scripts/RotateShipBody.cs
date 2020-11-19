@@ -8,7 +8,6 @@ public class RotateShipBody : MonoBehaviour
     public Transform cameraTransform;
     void Update()
     {
-        transform.rotation = Quaternion.Euler(0, cameraTransform.rotation.eulerAngles.y, 0);
-
+        //transform.rotation = Quaternion.Euler(0, cameraTransform.rotation.eulerAngles.y, 0);
     }
 }
