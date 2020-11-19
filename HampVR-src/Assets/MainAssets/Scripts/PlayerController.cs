@@ -249,6 +249,7 @@ public class PlayerController : MonoBehaviour
     private void AbsoluteRotateToCamera()
     {
         playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, mainCamera.transform.rotation, Time.deltaTime * rotateSpeed);
+        playerModel.transform.rotation = Quaternion.Euler(0,playerModel.transform.rotation.eulerAngles.y,0);
     }
 
     //Set the vector to control the players movement
