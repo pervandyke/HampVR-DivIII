@@ -357,9 +357,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  laserSpeed: 60
+  laserSpeed: 30
   laserDamage: 10
-  missileTurningSpeed: 5
+  missileTurningSpeed: 8
   health: 100
   handType: 0
   accelerate:
