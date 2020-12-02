@@ -38,4 +38,21 @@ public class WeaponsLibrary : MonoBehaviour
         LaserInstance.GetComponent<LaserScript>().speed = sourceRB.velocity.magnitude + laserSpeed;
         LaserInstance.GetComponent<LaserScript>().damage = laserDamage;
     }
+
+    public void FireLongRangeMissile(GameObject missileSpawner, Rigidbody sourceRB, Quaternion rotation, float missileSpeed, float missileTurningSpeed, int missileDamage)
+    {
+        
+        GenerateMissile("Prefabs/Missile", missileSpawner, sourceRB, rotation, missileSpeed, missileTurningSpeed, missileDamage, Global.global.selectedTarget);
+    }
+
+    private void GenerateMissile(string prefabPath, GameObject missileSpawner, Rigidbody sourceRB, Quaternion rotation, float missileSpeed, float missileTurningSpeed, int missileDamage, GameObject missileTarget)
+    {
+        GameObject MissileInstance = Instantiate(Resources.Load<GameObject>(prefabPath), missileSpawner.transform.position, missileSpawner.transform.rotation) as GameObject;
+        MissileScript missileScriptInstance = MissileInstance.GetComponent<MissileScript>();
+        MissileInstance.transform.rotation = rotation;
+        missileScriptInstance.speed = sourceRB.velocity.magnitude + missileSpeed;
+        missileScriptInstance.turningSpeed = missileTurningSpeed;
+        missileScriptInstance.damage = missileDamage;
+        missileScriptInstance.target = missileTarget;
+    }
 }

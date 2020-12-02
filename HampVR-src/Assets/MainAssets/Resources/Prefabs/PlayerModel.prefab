@@ -359,6 +359,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   laserSpeed: 60
   laserDamage: 10
+  missileTurningSpeed: 5
   health: 100
   handType: 0
   accelerate:

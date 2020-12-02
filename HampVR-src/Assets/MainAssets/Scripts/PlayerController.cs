@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
 
     public float laserSpeed;
     public int laserDamage;
+    public float missileTurningSpeed;
     
     [Tooltip("The amount of health the player has.")]
     public int health;
@@ -558,7 +559,7 @@ public class PlayerController : MonoBehaviour
                     print("Left projectile rotation: " + leftWeaponRotation.eulerAngles);
                 }
 
-                WeaponsLibrary.wepLib.FireShotgun(laserSpawner, RB, leftWeaponRotation, laserSpeed, laserDamage);
+                WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner, RB, leftWeaponRotation, laserSpeed, missileTurningSpeed, laserDamage);
                 leftWeaponCooldown = true;
             }
             else if ((leftPosition - leftLastPositions[fireDetectionTime]).magnitude < fireDistance)
@@ -585,7 +586,7 @@ public class PlayerController : MonoBehaviour
                     print("Right projectile rotation: " + rightWeaponRotation.eulerAngles);
                 }
 
-                WeaponsLibrary.wepLib.FireShotgun(laserSpawner, RB, rightWeaponRotation, laserSpeed, laserDamage);
+                WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner, RB, rightWeaponRotation, laserSpeed, missileTurningSpeed, laserDamage);
                 rightWeaponCooldown = true;
             }
             else if ((rightPosition - rightLastPositions[fireDetectionTime]).magnitude < fireDistance)
