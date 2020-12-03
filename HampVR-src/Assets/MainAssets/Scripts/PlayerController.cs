@@ -329,7 +329,7 @@ public class PlayerController : MonoBehaviour
 
         CircleCheck();
 
-        SlapCheck(leftPosition, rightPosition);
+        //SlapCheck(leftPosition, rightPosition);
     }
 
     private void SlapCheck(Vector3 leftPosition, Vector3 rightPosition)
@@ -509,9 +509,11 @@ public class PlayerController : MonoBehaviour
                 }
 
                 //of the valid selections, actually select the closest enemy to the player
-                float selectionDistance = 0;
+                //need to make this select enemy closest to the middle of the players vision, followed by the closest
+
+                /*float selectionDistance = 0;
                 GameObject objectToSelect;
-                if (validSelections.Count != 0)
+                if (validSelections.Count > 0)
                 {
                     objectToSelect = validSelections[0];
                     selectionDistance = Vector3.Distance(validSelections[0].transform.position, mainCamera.transform.position);
@@ -528,6 +530,43 @@ public class PlayerController : MonoBehaviour
                     }
                     //color the selected target red, uncolor the previous target, actually select the target to be selected
                     if(Global.global.selectedTarget != null)
+                    {
+                        Global.global.selectedTarget.GetComponent<MeshRenderer>().material.color = Color.white;
+                    }
+                    Global.global.selectedTarget = objectToSelect;
+                    Global.global.selectedTarget.GetComponent<MeshRenderer>().material.color = Color.red;
+                }*/
+
+                GameObject objectToSelect;
+                if (validSelections.Count > 0)
+                {
+                    objectToSelect = validSelections[0];
+                    if (validSelections.Count > 1)
+                    {
+                        List<float> angles = new List<float>();
+                        for (int i = 0; i < validSelections.Count; i++)
+                        {
+                            //get the angle
+                            Vector3 enemyDirection = validSelections[i].transform.position - mainCamera.transform.position;
+                            float collisionAngle = Vector3.SignedAngle(enemyDirection, mainCamera.transform.forward, Vector3.up);
+                            angles.Add(collisionAngle);
+                        }
+                        float smallestAngle = 1000;
+                        int smallestIndex = 0;
+                        float currentAngle;
+                        for (int i = 0; i < angles.Count; i++)
+                        {
+                            currentAngle = angles[i];
+                            if (Mathf.Abs(currentAngle) < smallestAngle)
+                            {
+                                smallestAngle = currentAngle;
+                                smallestIndex = i;
+                            }
+                        }
+                        objectToSelect = validSelections[smallestIndex];
+                    }
+                    //color the selected target red, uncolor the previous target, actually select the target to be selected
+                    if (Global.global.selectedTarget != null)
                     {
                         Global.global.selectedTarget.GetComponent<MeshRenderer>().material.color = Color.white;
                     }
