@@ -29,21 +29,24 @@ public class MissileScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //playParticle();
-        if (other.gameObject.layer == 10)
+        if (other.gameObject.tag == "Player")
         {
-            if (other.gameObject.tag == "Player")
-            {
-                print("Hit player");
-                other.gameObject.GetComponentInChildren<PlayerController>().TakeHit(damage, gameObject);
-                Destroy(gameObject);
-            }
-            if (other.gameObject.tag == "Enemy")
-            {
-                print("Hit enemy");
-                other.gameObject.GetComponent<IEnemy>().TakeDamage(damage);
-                Destroy(gameObject);
-            }
+            print("Hit player");
+            other.gameObject.GetComponentInChildren<PlayerController>().TakeHit(damage, gameObject);
+            Destroy(gameObject);
         }
+        else if (other.gameObject.tag == "Enemy")
+        {
+            print("Hit enemy");
+            other.gameObject.GetComponent<IEnemy>().TakeDamage(damage);
+            Destroy(gameObject);
+        }
+        else
+        {
+            print("Hit something");
+            Destroy(gameObject);
+        }
+
 
         //collisionflag = true;
     }
