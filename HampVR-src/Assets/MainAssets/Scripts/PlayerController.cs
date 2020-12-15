@@ -761,7 +761,7 @@ public class PlayerController : MonoBehaviour
                     print("Left projectile rotation: " + leftWeaponRotation.eulerAngles);
                 }
 
-                WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner, RB, leftWeaponRotation, laserSpeed, missileTurningSpeed, laserDamage);
+                WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner2, RB, leftWeaponRotation, laserSpeed, missileTurningSpeed, laserDamage, Global.global.leftSelectedTarget);
                 leftWeaponCooldown = true;
             }
             else if ((leftPosition - leftLastPositions[fireDetectionTime]).magnitude < fireDistance)
@@ -788,7 +788,7 @@ public class PlayerController : MonoBehaviour
                     print("Right projectile rotation: " + rightWeaponRotation.eulerAngles);
                 }
 
-                WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner, RB, rightWeaponRotation, laserSpeed, missileTurningSpeed, laserDamage);
+                WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner, RB, rightWeaponRotation, laserSpeed, missileTurningSpeed, laserDamage, Global.global.rightSelectedTarget);
                 rightWeaponCooldown = true;
             }
             else if ((rightPosition - rightLastPositions[fireDetectionTime]).magnitude < fireDistance)
