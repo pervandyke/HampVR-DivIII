@@ -31,7 +31,12 @@
       "requirement": "mandatory"
     },
     {
-      "name": "/actions/Flight1/in/SelectionButton",
+      "name": "/actions/Flight1/in/LeftSelect",
+      "type": "boolean",
+      "requirement": "mandatory"
+    },
+    {
+      "name": "/actions/Flight1/in/RightSelect",
       "type": "boolean",
       "requirement": "mandatory"
     }

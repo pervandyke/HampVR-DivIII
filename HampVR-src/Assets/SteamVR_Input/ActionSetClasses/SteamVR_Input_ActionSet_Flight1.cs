@@ -65,11 +65,19 @@ namespace Valve.VR
             }
         }
         
-        public virtual SteamVR_Action_Boolean SelectionButton
+        public virtual SteamVR_Action_Boolean LeftSelect
         {
             get
             {
-                return SteamVR_Actions.flight1_SelectionButton;
+                return SteamVR_Actions.flight1_LeftSelect;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean RightSelect
+        {
+            get
+            {
+                return SteamVR_Actions.flight1_RightSelect;
             }
         }
     }

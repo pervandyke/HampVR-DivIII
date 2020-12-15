@@ -80,7 +80,8 @@ public class PlayerController : MonoBehaviour
     public SteamVR_Action_Boolean leftFire;
     public SteamVR_Action_Boolean rightFire;
     public SteamVR_Action_Boolean resetHeadsetZero;
-    public SteamVR_Action_Boolean select;
+    public SteamVR_Action_Boolean leftSelect;
+    public SteamVR_Action_Boolean rightSelect;
 
 
     [SerializeField]
@@ -126,8 +127,10 @@ public class PlayerController : MonoBehaviour
     private List<Vector3> leftLastPositions;
     private List<Vector3> rightLastPositions;
 
-    private bool selecting = false;
-    private List<Vector3> selectionPoints;
+    private bool leftSelecting = false;
+    private bool rightSelecting = false;
+    private List<Vector3> leftSelectionPoints;
+    private List<Vector3> rightSelectionPoints;
     public LayerMask cockpitMask;
 
 
@@ -142,7 +145,8 @@ public class PlayerController : MonoBehaviour
         handMoveLogTimer = handMoveLogTimerDefault;
         leftLastPositions = new List<Vector3>();
         rightLastPositions = new List<Vector3>();
-        selectionPoints = new List<Vector3>();
+        leftSelectionPoints = new List<Vector3>();
+        rightSelectionPoints = new List<Vector3>();
         leftShieldValue = leftShieldMax;
         rightShieldValue = rightShieldMax;
         leftBoostTimer = shieldBoostTime;
@@ -327,7 +331,7 @@ public class PlayerController : MonoBehaviour
 
         PunchCheck(leftPosition, rightPosition);
 
-        CircleCheck();
+        SelectionButtonHeld();
 
         //SlapCheck(leftPosition, rightPosition);
     }
@@ -412,9 +416,168 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void CircleCheck()
+    private void SelectionButtonHeld()
     {
-        if (GetSelect())
+        if (GetLeftSelect())
+        {
+            if (!leftSelecting)
+            {
+                leftSelecting = true;
+            }
+            leftSelectionPoints.Add(leftHand.transform.localPosition);
+        }
+        else if (!GetLeftSelect() && leftSelecting)
+        {
+            leftSelecting = false;
+            List<GameObject> validSelections = RunSelectionAlgorithm(leftSelectionPoints);
+            if(validSelections.Count > 0)
+            {
+                GameObject objectToSelect = FinalSelection(validSelections);
+                if (Global.global.leftSelectedTarget != null)
+                {
+                    Global.global.leftSelectedTarget.GetComponent<MeshRenderer>().material.color = Color.white;
+                }
+                Global.global.leftSelectedTarget = objectToSelect;
+            }
+        }
+
+        if (GetRightSelect())
+        {
+            if (!rightSelecting)
+            {
+                rightSelecting = true;
+            }
+            rightSelectionPoints.Add(rightHand.transform.localPosition);
+        }
+        else if (!GetRightSelect() && rightSelecting)
+        {
+            rightSelecting = false;
+            List<GameObject> validSelections = RunSelectionAlgorithm(rightSelectionPoints);
+            if (validSelections.Count > 0)
+            {
+                GameObject objectToSelect = FinalSelection(validSelections);
+                if (Global.global.rightSelectedTarget != null)
+                {
+                    Global.global.rightSelectedTarget.GetComponent<MeshRenderer>().material.color = Color.white;
+                }
+                Global.global.rightSelectedTarget = objectToSelect;
+            }
+        }
+    }
+
+    
+
+    private List<GameObject> RunSelectionAlgorithm(List<Vector3> selectionPoints)
+    {
+        //find the average point of the circle
+        Vector3 averagePoint = Vector3.zero;
+        foreach (Vector3 point in selectionPoints)
+        {
+            averagePoint = averagePoint + point;
+        }
+        averagePoint = averagePoint / selectionPoints.Count;
+        //find the point farthest from the average
+        float farthestPointDistance = 0;
+        foreach (Vector3 point in selectionPoints)
+        {
+            float distance = Vector3.Distance(point, averagePoint);
+            if (distance > farthestPointDistance)
+            {
+                farthestPointDistance = distance;
+            }
+        }
+        //create a sphere with a diameter == to twice the distance from the average point fo the furthest point
+        GameObject selectionSphere = Instantiate(Resources.Load("Prefabs/SelectionSphere")) as GameObject;
+        selectionSphere.transform.parent = playerPhysics.transform;
+        if (!selectionDebug)
+        {
+            selectionSphere.GetComponent<MeshRenderer>().enabled = false;
+        }
+        selectionSphere.transform.localPosition = averagePoint;
+        selectionSphere.transform.localScale = new Vector3(farthestPointDistance * 2, farthestPointDistance * 2, farthestPointDistance * 2);
+        selectionSphere.transform.parent = null;
+        selectionPoints.Clear();
+
+        //find every enemy that would be a valid selection
+        List<GameObject> validSelections = new List<GameObject>();
+        foreach (GameObject enemy in EnemyManager.enemyManager.enemies)
+        {
+            //cast a ray from enemy to headset, if it hits the selection sphere add it to the list
+            Vector3 direction = (mainCamera.transform.position - enemy.transform.position).normalized;
+            RaycastHit hitData;
+            bool didHit = Physics.Raycast(enemy.transform.position, direction, out hitData, Vector3.Distance(enemy.transform.position, mainCamera.transform.position),
+                cockpitMask, QueryTriggerInteraction.Collide);
+            if (selectionDebug)
+            {
+                print("Drawing Ray from enemy " + enemy.name + " Along direction " + direction);
+                Ray selectionRay = new Ray(enemy.transform.position, direction);
+                Color rayColor;
+                if (!didHit)
+                {
+                    rayColor = Color.yellow;
+                }
+                else if (didHit && hitData.collider.gameObject.tag == "SelectionSphere")
+                {
+                    rayColor = Color.red;
+                }
+                else
+                {
+                    rayColor = Color.green;
+                }
+                Debug.DrawRay(selectionRay.origin, selectionRay.direction * Vector3.Distance(mainCamera.transform.position, enemy.transform.position), rayColor, 10.0f);
+            }
+
+            if (didHit)
+            {
+                if (selectionDebug)
+                {
+                    print("Ray hit: " + hitData.collider.gameObject.name);
+                }
+
+                if (hitData.collider.gameObject.tag == "SelectionSphere")
+                {
+                    validSelections.Add(enemy);
+                }
+            }
+        }
+        return validSelections;
+    }
+
+    private GameObject FinalSelection(List<GameObject> validSelections)
+    {
+        GameObject objectToSelect;
+            objectToSelect = validSelections[0];
+            if (validSelections.Count > 1)
+            {
+                List<float> angles = new List<float>();
+                for (int i = 0; i < validSelections.Count; i++)
+                {
+                    //get the angle
+                    Vector3 enemyDirection = validSelections[i].transform.position - mainCamera.transform.position;
+                    float collisionAngle = Vector3.SignedAngle(enemyDirection, mainCamera.transform.forward, Vector3.up);
+                    angles.Add(collisionAngle);
+                }
+                float smallestAngle = 1000;
+                int smallestIndex = 0;
+                float currentAngle;
+                for (int i = 0; i < angles.Count; i++)
+                {
+                    currentAngle = angles[i];
+                    if (Mathf.Abs(currentAngle) < smallestAngle)
+                    {
+                        smallestAngle = currentAngle;
+                        smallestIndex = i;
+                    }
+                }
+                objectToSelect = validSelections[smallestIndex];
+            }
+            objectToSelect.GetComponent<MeshRenderer>().material.color = Color.red;
+            return objectToSelect;
+    }
+
+    /*private void CircleCheck()
+    {
+        if (GetLeftSelect())
         {
             /*
              * While selection button is held down, log position of that controller
@@ -423,7 +586,7 @@ public class PlayerController : MonoBehaviour
              * Then raycast to every visable enemy, and see if the ray hits the sphere
              * if it does, add it to the list of viable selection targets
              * take the closest enemy to the player from the list, and select that one
-             */
+             
 
             if (!selecting)
             {
@@ -431,7 +594,7 @@ public class PlayerController : MonoBehaviour
             }
             selectionPoints.Add(rightHand.transform.localPosition);
         }
-        else if (!GetSelect())
+        else if (!GetLeftSelect())
         {
             if (selecting)
             {
@@ -535,7 +698,7 @@ public class PlayerController : MonoBehaviour
                     }
                     Global.global.selectedTarget = objectToSelect;
                     Global.global.selectedTarget.GetComponent<MeshRenderer>().material.color = Color.red;
-                }*/
+                }
 
                 GameObject objectToSelect;
                 if (validSelections.Count > 0)
@@ -575,7 +738,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 
     private void PunchCheck(Vector3 leftPosition, Vector3 rightPosition)
     {
@@ -712,9 +875,14 @@ public class PlayerController : MonoBehaviour
         return resetHeadsetZero.GetStateDown(handType);
     }
 
-    public bool GetSelect()
+    public bool GetLeftSelect()
     {
-        return select.GetState(handType);
+        return leftSelect.GetState(handType);
+    }
+
+    public bool GetRightSelect()
+    {
+        return rightSelect.GetState(handType);
     }
 
 }
