@@ -123,14 +123,23 @@ public class PlayerController : MonoBehaviour
     private bool leftShieldBoosted;
     private bool rightShieldBoosted;
 
+    [Header("Selection")]
+
+    public float viewAngleMin = 0.0f;
+    public float viewAngleMax = 110.0f;
+    public float viewAngleWeight;
+    public float distanceMin = 0.0f;
+    public float distanceMax;
+    public float distanceWeight;
 
     private List<Vector3> leftLastPositions;
     private List<Vector3> rightLastPositions;
-
     private bool leftSelecting = false;
     private bool rightSelecting = false;
     private List<Vector3> leftSelectionPoints;
     private List<Vector3> rightSelectionPoints;
+
+    [Header("Misc")]
     public LayerMask cockpitMask;
 
 
@@ -432,7 +441,7 @@ public class PlayerController : MonoBehaviour
             List<GameObject> validSelections = RunSelectionAlgorithm(leftSelectionPoints);
             if(validSelections.Count > 0)
             {
-                GameObject objectToSelect = FinalSelection(validSelections);
+                GameObject objectToSelect = RunSelectionPriorityAlgorithm(validSelections);
                 if (Global.global.leftSelectedTarget != null)
                 {
                     Global.global.leftSelectedTarget.GetComponent<MeshRenderer>().material.color = Color.white;
@@ -455,7 +464,7 @@ public class PlayerController : MonoBehaviour
             List<GameObject> validSelections = RunSelectionAlgorithm(rightSelectionPoints);
             if (validSelections.Count > 0)
             {
-                GameObject objectToSelect = FinalSelection(validSelections);
+                GameObject objectToSelect = RunSelectionPriorityAlgorithm(validSelections);
                 if (Global.global.rightSelectedTarget != null)
                 {
                     Global.global.rightSelectedTarget.GetComponent<MeshRenderer>().material.color = Color.white;
@@ -507,6 +516,7 @@ public class PlayerController : MonoBehaviour
             RaycastHit hitData;
             bool didHit = Physics.Raycast(enemy.transform.position, direction, out hitData, Vector3.Distance(enemy.transform.position, mainCamera.transform.position),
                 cockpitMask, QueryTriggerInteraction.Collide);
+            
             if (selectionDebug)
             {
                 print("Drawing Ray from enemy " + enemy.name + " Along direction " + direction);
@@ -543,36 +553,81 @@ public class PlayerController : MonoBehaviour
         return validSelections;
     }
 
+    private GameObject RunSelectionPriorityAlgorithm(List<GameObject> validSelections)
+    {
+        GameObject objectToSelect;
+        objectToSelect = validSelections[0];
+        List<TargetSelectionValues> validSelectionValues = new List<TargetSelectionValues>();
+        if (validSelections.Count > 1)
+        {
+            //for each valid selection
+            for (int i = 0; i < validSelections.Count; i++)
+            {
+                //create TargetSelectionValue entry
+                validSelectionValues.Add(new TargetSelectionValues() {potentialTarget = validSelections[i]});
+
+                //get the angle to player view
+                Vector3 enemyDirection = validSelections[i].transform.position - mainCamera.transform.position;
+                float viewAngle = Vector3.Angle(enemyDirection, mainCamera.transform.forward);
+                validSelectionValues[i].normalizedAngleToView = Mathf.InverseLerp(viewAngleMax, viewAngleMin, viewAngle);
+
+                //get the angle to the forward direction of the selection sphere
+
+                //get the distance to target
+                float distanceToSelectionCandidate = Vector3.Distance(mainCamera.transform.position, validSelectionValues[i].potentialTarget.transform.position);
+                validSelectionValues[i].normalizedDistance = Mathf.InverseLerp(distanceMax, distanceMin, distanceToSelectionCandidate);
+                //get the target threat value
+
+                //Multiply all the normalized values by multipliers and combine (currently addition)
+                validSelectionValues[i].selectionValue = (validSelectionValues[i].normalizedAngleToView * viewAngleWeight) + (validSelectionValues[i].normalizedDistance * distanceWeight);
+            }
+
+            //select the target with the highest SelectionValue
+            TargetSelectionValues currentTargetSelectionValues = validSelectionValues[0];
+            for (int i = 0; i < validSelectionValues.Count; i++)
+            {
+                if (currentTargetSelectionValues.selectionValue < validSelectionValues[i].selectionValue)
+                {
+                    currentTargetSelectionValues = validSelectionValues[i]; 
+                }
+            }
+            objectToSelect = currentTargetSelectionValues.potentialTarget;
+            
+        }
+        objectToSelect.GetComponent<MeshRenderer>().material.color = Color.red;
+        return objectToSelect;
+    }
+
     private GameObject FinalSelection(List<GameObject> validSelections)
     {
         GameObject objectToSelect;
-            objectToSelect = validSelections[0];
-            if (validSelections.Count > 1)
+        objectToSelect = validSelections[0];
+        if (validSelections.Count > 1)
+        {
+            List<float> angles = new List<float>();
+            for (int i = 0; i < validSelections.Count; i++)
             {
-                List<float> angles = new List<float>();
-                for (int i = 0; i < validSelections.Count; i++)
-                {
-                    //get the angle
-                    Vector3 enemyDirection = validSelections[i].transform.position - mainCamera.transform.position;
-                    float collisionAngle = Vector3.SignedAngle(enemyDirection, mainCamera.transform.forward, Vector3.up);
-                    angles.Add(collisionAngle);
-                }
-                float smallestAngle = 1000;
-                int smallestIndex = 0;
-                float currentAngle;
-                for (int i = 0; i < angles.Count; i++)
-                {
-                    currentAngle = angles[i];
-                    if (Mathf.Abs(currentAngle) < smallestAngle)
-                    {
-                        smallestAngle = currentAngle;
-                        smallestIndex = i;
-                    }
-                }
-                objectToSelect = validSelections[smallestIndex];
+                //get the angle
+                Vector3 enemyDirection = validSelections[i].transform.position - mainCamera.transform.position;
+                float collisionAngle = Vector3.SignedAngle(enemyDirection, mainCamera.transform.forward, Vector3.up);
+                angles.Add(collisionAngle);
             }
-            objectToSelect.GetComponent<MeshRenderer>().material.color = Color.red;
-            return objectToSelect;
+            float smallestAngle = 1000;
+            int smallestIndex = 0;
+            float currentAngle;
+            for (int i = 0; i < angles.Count; i++)
+            {
+                currentAngle = angles[i];
+                if (Mathf.Abs(currentAngle) < smallestAngle)
+                {
+                    smallestAngle = currentAngle;
+                    smallestIndex = i;
+                }
+            }
+            objectToSelect = validSelections[smallestIndex];
+        }
+        objectToSelect.GetComponent<MeshRenderer>().material.color = Color.red;
+        return objectToSelect;
     }
 
     /*private void CircleCheck()
@@ -885,4 +940,19 @@ public class PlayerController : MonoBehaviour
         return rightSelect.GetState(handType);
     }
 
+}
+
+public class TargetSelectionValues
+{
+    public GameObject potentialTarget;
+
+    public float normalizedDistance;
+
+    public float normalizedAngleToView;
+
+    public float normalizedAngleToSphere;
+
+    public float normalizedThreatRating;
+
+    public float selectionValue; //higher is better
 }

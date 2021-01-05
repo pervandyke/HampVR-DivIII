@@ -394,6 +394,12 @@ MonoBehaviour:
   slapDetectionTime: 15
   shieldBoostTime: 0
   shieldCooldownTime: 0
+  viewAngleMin: 0
+  viewAngleMax: 110
+  viewAngleWeight: 0.5
+  distanceMin: 0
+  distanceMax: 1000
+  distanceWeight: 0.5
   cockpitMask:
     serializedVersion: 2
     m_Bits: 1843
