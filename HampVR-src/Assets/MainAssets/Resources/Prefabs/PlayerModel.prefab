@@ -332,7 +332,7 @@ MonoBehaviour:
   mass: 2
   drag: 3
   angularDrag: 0
-  maxLean: 0
+  maxLean: 1
   targetSpeedCurve:
     serializedVersion: 2
     m_Curve:
@@ -359,7 +359,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   laserSpeed: 30
   laserDamage: 10
-  missileTurningSpeed: 8
+  missileTurningSpeed: 5
   health: 100
   handType: 0
   accelerate:
@@ -388,18 +388,18 @@ MonoBehaviour:
   handMoveLogSize: 100
   fireDistance: 0.2
   fireDetectionTime: 15
-  leftShieldMax: 0
-  rightShieldMax: 0
+  leftShieldMax: 100
+  rightShieldMax: 100
   slapDistance: 0.2
   slapDetectionTime: 15
-  shieldBoostTime: 0
-  shieldCooldownTime: 0
+  shieldBoostTime: 5
+  shieldCooldownTime: 5
   viewAngleMin: 0
   viewAngleMax: 110
-  viewAngleWeight: 0.5
+  viewAngleWeight: 0.75
   distanceMin: 0
   distanceMax: 1000
-  distanceWeight: 0.5
+  distanceWeight: 0.25
   cockpitMask:
     serializedVersion: 2
     m_Bits: 1843
