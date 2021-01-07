@@ -402,4 +402,4 @@ MonoBehaviour:
   distanceWeight: 0.25
   cockpitMask:
     serializedVersion: 2
-    m_Bits: 1843
+    m_Bits: 7185
