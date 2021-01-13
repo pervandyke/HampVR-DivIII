@@ -27,7 +27,7 @@ public class TurretAI : MonoBehaviour, IEnemy
     // Update is called once per frame
     void Update()
     {
-        
+        TrackPlayer();
     }
 
     private void TrackPlayer()
