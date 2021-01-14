@@ -9,6 +9,8 @@ public class TurretAI : MonoBehaviour, IEnemy
     public GameObject cap;
     public GameObject body;
 
+    public float laserSpeed;
+
     private GameObject player;
     private Quaternion lookRotation;
     private Vector3 direction;
@@ -21,7 +23,7 @@ public class TurretAI : MonoBehaviour, IEnemy
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.Find("[CameraRig]");
     }
 
     // Update is called once per frame
@@ -46,11 +48,30 @@ public class TurretAI : MonoBehaviour, IEnemy
 
     private void WhereToRotate(Vector3 target)
     {
-        direction = (target - transform.position).normalized;
+        direction = CalculateLead();
         lookRotation = Quaternion.LookRotation(direction);
     }
 
-
+    private Vector3 CalculateLead(int iterations = 3)
+    {
+        float flightTime = 0;
+        Vector3 targetMovementPerSec = Vector3.zero;
+        Vector3 estimatedHitPosition = Vector3.zero;
+        for(int i = 0; i < iterations; i++)
+        {
+            if (i == 0)
+            {
+                flightTime = (player.transform.position - gameObject.transform.position).magnitude / laserSpeed;
+            }
+            else
+            {
+                flightTime = (estimatedHitPosition - gameObject.transform.position).magnitude / laserSpeed;
+            }
+            targetMovementPerSec = player.GetComponent<Rigidbody>().velocity;
+            estimatedHitPosition = player.transform.position + (targetMovementPerSec * flightTime);
+        }
+        return estimatedHitPosition;
+    }
 
     public void TakeDamage(int damage)
     {
