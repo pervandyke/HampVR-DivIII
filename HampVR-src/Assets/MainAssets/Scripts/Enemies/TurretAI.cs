@@ -4,32 +4,46 @@ using UnityEngine;
 
 public class TurretAI : MonoBehaviour, IEnemy
 {
+    [Header("References")]
     public GameObject barrel;
     public GameObject pivot;
     public GameObject cap;
     public GameObject body;
+    public GameObject laserEmitter;
+    
 
+    [Header("Weapons")]
     public float laserSpeed;
+    [Tooltip("time in seconds between shots")]
+    public float fireRate;
+    public float trackingSpeed;
+    public float trackingDistance;
+    public float allowedShotAngle;
+    private float shotTimer;
 
     private GameObject player;
     private Quaternion lookRotation;
     private Vector3 direction;
+    private bool allowedToShoot = false;
 
+    [Header("General Stats")]
     public int health;
-    public float trackingSpeed;
-    public float trackingDistance;
+    
 
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("[CameraRig]");
+        shotTimer = fireRate;
     }
 
     // Update is called once per frame
     void Update()
     {
         TrackPlayer();
+        CheckShot(allowedShotAngle);
+        Shoot();
     }
 
     private void TrackPlayer()
@@ -71,6 +85,30 @@ public class TurretAI : MonoBehaviour, IEnemy
             estimatedHitPosition = player.transform.position + (targetMovementPerSec * flightTime);
         }
         return estimatedHitPosition;
+    }
+
+    private void CheckShot(float allowedAngle)
+    {
+        if (Vector3.Angle(barrel.transform.position, player.transform.position) < allowedAngle)
+        {
+            allowedToShoot = true;
+        }
+        else
+        {
+            allowedToShoot = false;
+        }
+    }
+
+    private void Shoot()
+    {
+        shotTimer -= Time.deltaTime;
+        if (allowedToShoot && shotTimer <= 0.0f)
+        {
+            GameObject shotInstance = GameObject.Instantiate(Resources.Load("Prefabs/Laser")) as GameObject;
+            shotInstance.transform.rotation = laserEmitter.transform.rotation;
+            shotInstance.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, laserSpeed);
+            shotTimer = fireRate;
+        }
     }
 
     public void TakeDamage(int damage)
