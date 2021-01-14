@@ -9,7 +9,6 @@ public class GenerateHexGrid : MonoBehaviour
     [Tooltip("The side length of the hexes being used.")]
     public int sideLength;
 
-    private Vector3 currentPosition;
     private float hexHeight;
     private float hexWidth;
 
@@ -17,14 +16,10 @@ public class GenerateHexGrid : MonoBehaviour
     
     private void Start()
     {
-        currentPosition = Vector3.zero;
         hexHeight = Mathf.Sqrt(3.0f) * sideLength;
         hexWidth = sideLength * 2;
         mapData = CreateFromJSON("JSONS/TestMapData");
         GenerateMap(mapData);
-        //CreateGrid();
-        //Add back in once maps are set up
-        //GenerateMap(CreateFromJSON("JSONS/TestMapData"));
     }
 
     private void GenerateMap(MapObject mapData)

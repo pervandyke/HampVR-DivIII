@@ -45,5 +45,15 @@
       "z": 3,
       "tileType": "Hex"
     }
+  ],
+  "otherTileKeys": [
+    "example1",
+    "example2",
+    "example3"
+  ],
+  "otherTileValues": [
+    0,
+    0,
+    0
   ]
 }

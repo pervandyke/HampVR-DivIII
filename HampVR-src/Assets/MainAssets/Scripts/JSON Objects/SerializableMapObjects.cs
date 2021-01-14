@@ -7,6 +7,8 @@ using System.Collections.Generic;
 public class MapObject
 {
     public List<HexPiece> tiles;
+    public List<string> otherTileKeys;
+    public List<int> otherTileValues;
 }
 [System.Serializable]
 public class HexPiece
