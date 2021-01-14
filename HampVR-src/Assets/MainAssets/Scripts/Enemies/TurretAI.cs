@@ -115,5 +115,9 @@ public class TurretAI : MonoBehaviour, IEnemy
     {
         health -= damage;
         print("applied damage");
+        if (health < 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

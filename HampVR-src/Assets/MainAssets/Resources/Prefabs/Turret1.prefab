@@ -350,8 +350,9 @@ MonoBehaviour:
   cap: {fileID: 8659390344361645059}
   body: {fileID: 3395772027657442062}
   laserEmitter: {fileID: 1918517076051774776}
-  laserSpeed: 0
-  fireRate: 0
-  trackingSpeed: 0
-  trackingDistance: 0
-  health: 0
+  laserSpeed: 20
+  fireRate: 1.5
+  trackingSpeed: 10
+  trackingDistance: 500
+  allowedShotAngle: 45
+  health: 1
