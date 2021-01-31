@@ -9,6 +9,8 @@ public class GenerateHexGrid : MonoBehaviour
     [Tooltip("The side length of the hexes being used.")]
     public int sideLength;
 
+    public List<GameObject> hexTypes;
+
     private float hexHeight;
     private float hexWidth;
 
@@ -24,9 +26,35 @@ public class GenerateHexGrid : MonoBehaviour
 
     private void GenerateMap(MapObject mapData)
     {
+        print("Width: " + mapData.mapWidth);
+        print("Height: " + mapData.mapHeight);
+        GameMap.gameMap.InitilizeMapData(mapData.mapWidth, mapData.mapHeight);
+
         foreach(HexPiece hex in mapData.tiles)
         {
             PlaceHex(hex.x, hex.z, hex.tileType);
+            GameMap.gameMap.PlaceHex(hex.x, hex.z, hex);
+        }
+
+        for (int i = 0; i < mapData.mapWidth; i++)
+        {
+            int start;
+            if (i % 2 == 0)
+            {
+                start = 0;
+            }
+            else
+            {
+                start = 1;
+            }
+            for (int y = start; y < mapData.mapHeight; y = y + 2)
+            {
+                if (GameMap.gameMap.GetHexData(i,y) == null)
+                {
+                    PlaceHex(i, y, "HexFiller");
+                    GameMap.gameMap.PlaceHex(i, y, new HexPiece {z = i, x = y, tileType = "HexFiller"});
+                }
+            }
         }
     }
 
