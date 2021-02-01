@@ -26,35 +26,56 @@ public class GenerateHexGrid : MonoBehaviour
 
     private void GenerateMap(MapObject mapData)
     {
-        print("Width: " + mapData.mapWidth);
-        print("Height: " + mapData.mapHeight);
         GameMap.gameMap.InitilizeMapData(mapData.mapWidth, mapData.mapHeight);
 
+        //place hexes with defined positions
         foreach(HexPiece hex in mapData.tiles)
         {
-            PlaceHex(hex.x, hex.z, hex.tileType);
-            GameMap.gameMap.PlaceHex(hex.x, hex.z, hex);
+            PlaceHex(hex.z, hex.x, hex.tileType);
+            GameMap.gameMap.PlaceHex(hex);
         }
 
-        for (int i = 0; i < mapData.mapHeight; i++)
+        List<Vector2> emptyHexes = GameMap.gameMap.GetEmptyHexes();
+        List<string> presenceHexes = new List<string>();
+
+        //ready hexes with defined presence but not location
+        for (int i = 0; i < mapData.otherTileKeys.Count; i++)
         {
-            int start;
-            if (i % 2 == 0)
+            for (int y = 0; y < mapData.otherTileValues[i]; y++)
             {
-                start = 0;
+                presenceHexes.Add(mapData.otherTileKeys[i]);
+            }
+        }
+
+        //shuffle presence hexes
+        presenceHexes.Shuffle();
+        //shuffle empty hexes
+        emptyHexes.Shuffle();
+
+        //place presence hexes
+        foreach (string hex in presenceHexes)
+        {
+            if (emptyHexes.Count > 0)
+            {
+                Vector2 coords = emptyHexes[0];
+                emptyHexes.RemoveAt(0);
+                PlaceHex((int)coords.x, (int)coords.y, hex);
+                GameMap.gameMap.PlaceHex(new HexPiece {z = (int)coords.x, x = (int)coords.y, tileType = hex});
             }
             else
             {
-                start = 1;
+                break;
             }
-            for (int y = start; y < mapData.mapWidth; y = y + 2)
-            {
-                if (GameMap.gameMap.GetHexData(i,y) == null)
-                {
-                    PlaceHex(i, y, "HexFiller");
-                    GameMap.gameMap.PlaceHex(i, y, new HexPiece {z = i, x = y, tileType = "HexFiller"});
-                }
-            }
+        }
+
+        //place filler hexes
+        emptyHexes.Clear();
+        emptyHexes = GameMap.gameMap.GetEmptyHexes();
+
+        foreach (Vector2 hex in emptyHexes)
+        {
+            PlaceHex((int)hex.x, (int)hex.y, "HexFiller");
+            GameMap.gameMap.PlaceHex(new HexPiece { z = (int)hex.x, x = (int)hex.y, tileType = "HexFiller" });
         }
     }
 
@@ -65,7 +86,7 @@ public class GenerateHexGrid : MonoBehaviour
         return JsonUtility.FromJson<MapObject>(jsonTextFile.ToString());
     }
 
-    private void PlaceHex(int hexX, int hexZ, string tileType)
+    private void PlaceHex(int hexZ, int hexX, string tileType)
     {
         Quaternion rotation = new Quaternion();
         rotation.eulerAngles = Vector3.zero;    

@@ -22,15 +22,11 @@
     }
   ],
   "otherTileKeys": [
-    "example1",
-    "example2",
-    "example3"
+    "HexPresence"
   ],
   "otherTileValues": [
-    0,
-    0,
-    0
+    10
   ],
-  "mapWidth": 100,
-  "mapHeight":  100
+  "mapWidth": 8,
+  "mapHeight":  12
 }
