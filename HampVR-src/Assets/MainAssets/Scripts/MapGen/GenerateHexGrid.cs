@@ -36,7 +36,7 @@ public class GenerateHexGrid : MonoBehaviour
             GameMap.gameMap.PlaceHex(hex.x, hex.z, hex);
         }
 
-        for (int i = 0; i < mapData.mapWidth; i++)
+        for (int i = 0; i < mapData.mapHeight; i++)
         {
             int start;
             if (i % 2 == 0)
@@ -47,7 +47,7 @@ public class GenerateHexGrid : MonoBehaviour
             {
                 start = 1;
             }
-            for (int y = start; y < mapData.mapHeight; y = y + 2)
+            for (int y = start; y < mapData.mapWidth; y = y + 2)
             {
                 if (GameMap.gameMap.GetHexData(i,y) == null)
                 {
