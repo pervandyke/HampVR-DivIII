@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameMap : MonoBehaviour
 {
-    private Hashtable map;
     private Dictionary<Vector2, HexPiece> dictMap;
     private int width;
     private int height;
@@ -51,18 +50,18 @@ public class GameMap : MonoBehaviour
     public List<Vector2> GetEmptyHexes()
     {
         List<Vector2> emptyHexes = new List<Vector2>();
-        for (int i = 0; i < width; i++)
+        for (int i = -(width / 2); i < width / 2; i++)
         {
             int start;
             if (i % 2 == 0)
             {
-                start = 0;
+                start = -(height / 2);
             }
             else
             {
-                start = 1;
+                start = -(height / 2) + 1;
             }
-            for (int y = start; y < height; y = y + 2)
+            for (int y = start; y < height / 2; y = y + 2)
             {
                 if (GetHexData(i, y) == null)
                 {

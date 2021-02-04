@@ -1,32 +1,39 @@
 {
   "tiles": [
     {
-      "z": 0,
-      "x": 0,
+      "z": 4,
+      "x": 4,
       "tileType": "Hex"
     },
     {
-      "z": 2,
-      "x": 0,
+      "z": 3,
+      "x": 5,
+      "tileType": "Hex"
+    },
+    {
+      "z": 5,
+      "x": 5,
       "tileType": "Hex"
     },
     {
       "z": 4,
-      "x": 0,
+      "x": 6,
       "tileType": "Hex"
     },
     {
-      "z": 6,
-      "x": 0,
+      "z": 1,
+      "x": -1,
       "tileType": "Hex"
     }
   ],
   "otherTileKeys": [
-    "HexPresence"
+    "HexPresence",
+    "HexPresence2"
   ],
   "otherTileValues": [
+    15,
     10
   ],
-  "mapWidth": 8,
-  "mapHeight":  12
+  "mapWidth": 20,
+  "mapHeight":  20
 }
