@@ -97,5 +97,6 @@ public class GenerateHexGrid : MonoBehaviour
         GameObject HexInstance = Instantiate(Resources.Load<GameObject>("Prefabs/"+tileType), position, rotation) as GameObject;
         HexInstance.GetComponent<HexData>().x = hexX;
         HexInstance.GetComponent<HexData>().z = hexZ;
+        HexInstance.GetComponent<HexInit>().SpawnTurrets(2);
     }
 }
