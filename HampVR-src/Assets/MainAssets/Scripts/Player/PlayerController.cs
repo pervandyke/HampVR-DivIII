@@ -168,14 +168,14 @@ public class PlayerController : MonoBehaviour
             rightLastPositions[i] = Vector3.zero;
         }
 
-        if (Global.global.rotationType == "relative")
+        /*if (Global.global.rotationType == "relative")
         {
             playerModel.GetComponent<RotationConstraint>().constraintActive = true;
         }
         else if (Global.global.rotationType == "absolute")
         {
             playerModel.GetComponent<RotationConstraint>().constraintActive = false;
-        }
+        }*/
     }
 
 

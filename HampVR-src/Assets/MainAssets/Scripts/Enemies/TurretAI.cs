@@ -16,15 +16,16 @@ public class TurretAI : MonoBehaviour, IEnemy
     public float laserSpeed;
     [Tooltip("time in seconds between shots")]
     public float fireRate;
+    public float damage;
     public float trackingSpeed;
     public float trackingDistance;
     public float allowedShotAngle;
+    public bool playerInRange;
     private float shotTimer;
 
     private GameObject player;
     private Quaternion lookRotation;
-    private Vector3 direction;
-    private bool allowedToShoot = false;
+    public bool allowedToShoot = true;
 
     [Header("General Stats")]
     public int health;
@@ -42,7 +43,7 @@ public class TurretAI : MonoBehaviour, IEnemy
     void Update()
     {
         TrackPlayer();
-        CheckShot(allowedShotAngle);
+        //CheckShot(allowedShotAngle);
         Shoot();
     }
 
@@ -50,19 +51,27 @@ public class TurretAI : MonoBehaviour, IEnemy
     {
         if (Vector3.Distance(gameObject.transform.position, player.transform.position) < trackingDistance)
         {
+            playerInRange = true;
             WhereToRotate(player.transform.position);
 
-            cap.transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * trackingSpeed);
+            cap.transform.rotation = Quaternion.Slerp(cap.transform.rotation, lookRotation, Time.deltaTime * trackingSpeed);
             cap.transform.rotation.eulerAngles.Set(0, cap.transform.rotation.eulerAngles.y, 0);
 
-            pivot.transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * trackingSpeed);
+            pivot.transform.rotation = Quaternion.Slerp(pivot.transform.rotation, lookRotation, Time.deltaTime * trackingSpeed);
             pivot.transform.rotation.eulerAngles.Set(pivot.transform.rotation.eulerAngles.x, 0, 0);
+        }
+        else
+        {
+            playerInRange = false;
         }
     }
 
     private void WhereToRotate(Vector3 target)
     {
-        direction = CalculateLead();
+        Vector3 aimPoint = CalculateLead();
+        Vector3 direction = (aimPoint - gameObject.transform.position).normalized;
+        //print(gameObject + " should be aiming in direction " + direction);
+        //Debug.DrawLine(gameObject.transform.position, gameObject.transform.position + direction * 10, Color.red, Mathf.Infinity);
         lookRotation = Quaternion.LookRotation(direction);
     }
 
@@ -84,11 +93,13 @@ public class TurretAI : MonoBehaviour, IEnemy
             targetMovementPerSec = player.GetComponent<Rigidbody>().velocity;
             estimatedHitPosition = player.transform.position + (targetMovementPerSec * flightTime);
         }
+        //print(gameObject.name + " estimated hit position is " + estimatedHitPosition);
         return estimatedHitPosition;
     }
 
     private void CheckShot(float allowedAngle)
     {
+        //print("Angle to player is: " + Vector3.Angle(barrel.transform.position, player.transform.position));
         if (Vector3.Angle(barrel.transform.position, player.transform.position) < allowedAngle)
         {
             allowedToShoot = true;
@@ -104,10 +115,10 @@ public class TurretAI : MonoBehaviour, IEnemy
         shotTimer -= Time.deltaTime;
         if (allowedToShoot && shotTimer <= 0.0f)
         {
-            GameObject shotInstance = GameObject.Instantiate(Resources.Load("Prefabs/Laser")) as GameObject;
-            shotInstance.transform.rotation = laserEmitter.transform.rotation;
+            GameObject shotInstance = Instantiate(Resources.Load("Prefabs/Laser"), laserEmitter.transform.position, laserEmitter.transform.rotation) as GameObject;
             shotInstance.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, laserSpeed);
             shotTimer = fireRate;
+            print("pew");
         }
     }
 

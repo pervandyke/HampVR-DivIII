@@ -89,7 +89,7 @@ public class GenerateHexGrid : MonoBehaviour
     private void PlaceHex(int hexZ, int hexX, string tileType)
     {
         Quaternion rotation = new Quaternion();
-        rotation.eulerAngles = Vector3.zero;    
+        rotation.eulerAngles = Vector3.zero;
         Vector3 position = new Vector3();
         position.x = hexX * hexHeight / 2;
         position.z = hexZ * hexWidth * .75f;
