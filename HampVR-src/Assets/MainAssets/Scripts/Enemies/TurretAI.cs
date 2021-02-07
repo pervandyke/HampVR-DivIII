@@ -84,11 +84,11 @@ public class TurretAI : MonoBehaviour, IEnemy
         {
             if (i == 0)
             {
-                flightTime = (player.transform.position - gameObject.transform.position).magnitude / laserSpeed;
+                flightTime = (player.transform.position - pivot.transform.position).magnitude / laserSpeed;
             }
             else
             {
-                flightTime = (estimatedHitPosition - gameObject.transform.position).magnitude / laserSpeed;
+                flightTime = (estimatedHitPosition - pivot.transform.position).magnitude / laserSpeed;
             }
             targetMovementPerSec = player.GetComponent<Rigidbody>().velocity;
             estimatedHitPosition = player.transform.position + (targetMovementPerSec * flightTime);
