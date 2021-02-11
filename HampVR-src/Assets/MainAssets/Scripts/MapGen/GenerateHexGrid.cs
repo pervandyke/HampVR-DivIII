@@ -70,6 +70,7 @@ public class GenerateHexGrid : MonoBehaviour
 
         //place filler hexes
         emptyHexes.Clear();
+        //print("trying to call get empty hexes");
         emptyHexes = GameMap.gameMap.GetEmptyHexes();
 
         foreach (Vector2 hex in emptyHexes)

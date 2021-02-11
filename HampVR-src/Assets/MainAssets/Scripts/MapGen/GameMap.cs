@@ -49,25 +49,57 @@ public class GameMap : MonoBehaviour
 
     public List<Vector2> GetEmptyHexes()
     {
+        print("getting empty hexes");
         List<Vector2> emptyHexes = new List<Vector2>();
-        for (int i = -(width / 2); i < width / 2; i++)
+        int workingWidth = width;
+        int workingHeight = height;
+        bool oddWidth = false;
+        bool oddHeight = false;
+        int oddWidthAdjustment = 0;
+        int oddHeightAdjustment = 0;
+
+        if (width % 2 != 0)
         {
+            print("width is odd");
+            workingWidth = width + 1;
+            oddWidth = true;
+            oddWidthAdjustment = 1;
+        }
+        if (height % 2 != 0)
+        {
+            print("height is odd");
+            workingHeight = height + 1;
+            oddHeight = true;
+            oddHeightAdjustment = 1;
+        }
+        for (int i = -(workingWidth / 2); i < (workingWidth / 2) - oddWidthAdjustment; i++)
+        {
+            if (oddWidth && i + 1 == workingWidth)
+            {
+                break;
+            }
+
             int start;
             if (i % 2 == 0)
             {
-                start = -(height / 2);
+                start = -(workingHeight / 2);
             }
             else
             {
-                start = -(height / 2) + 1;
+                start = -(workingHeight / 2) + 1;
             }
-            for (int y = start; y < height / 2; y = y + 2)
+
+            for (int y = start; y < (workingHeight / 2) - oddHeightAdjustment; y = y + 2)
             {
+                if (oddHeight && y + 1 == workingHeight)
+                {
+                    break;
+                }
                 if (GetHexData(i, y) == null)
                 {
                     emptyHexes.Add(new Vector2(i, y));
                 }
-            }
+            }   
         }
         return emptyHexes;
     }
