@@ -74,6 +74,7 @@ public class GenerateHexGrid : MonoBehaviour
 
         foreach (Vector2 hex in emptyHexes)
         {
+            print("placing hex at: (" + hex.x + ", " + hex.y + ")");
             PlaceHex((int)hex.x, (int)hex.y, "HexFiller");
             GameMap.gameMap.PlaceHex(new HexPiece { z = (int)hex.x, x = (int)hex.y, tileType = "HexFiller" });
         }

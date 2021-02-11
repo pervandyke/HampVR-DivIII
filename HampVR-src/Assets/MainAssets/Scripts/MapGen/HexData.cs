@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class HexData : MonoBehaviour
 {
-    public int x;
     public int z;
+    public int x;
 }
