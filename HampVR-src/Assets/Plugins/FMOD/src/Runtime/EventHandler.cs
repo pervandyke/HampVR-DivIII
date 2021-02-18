@@ -18,7 +18,7 @@ namespace FMODUnity
 
         void OnTriggerEnter(Collider other)
         {
-            if (string.IsNullOrEmpty(CollisionTag) || other.CompareTag(CollisionTag))
+            if (string.IsNullOrEmpty(CollisionTag) || other.CompareTag(CollisionTag) || (other.attachedRigidbody && other.attachedRigidbody.CompareTag(CollisionTag)))
             {
                 HandleGameEvent(EmitterGameEvent.TriggerEnter);
             }
@@ -26,7 +26,7 @@ namespace FMODUnity
 
         void OnTriggerExit(Collider other)
         {
-            if (string.IsNullOrEmpty(CollisionTag) || other.CompareTag(CollisionTag))
+            if (string.IsNullOrEmpty(CollisionTag) || other.CompareTag(CollisionTag) || (other.attachedRigidbody && other.attachedRigidbody.CompareTag(CollisionTag)))
             {
                 HandleGameEvent(EmitterGameEvent.TriggerExit);
             }

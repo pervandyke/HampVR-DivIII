@@ -77,6 +77,16 @@ namespace FMODUnity
             }
         }
 
+        void OnEnable()
+        {
+            HandleGameEvent(LoaderGameEvent.ObjectEnable);
+        }
+
+        void OnDisable()
+        {
+            HandleGameEvent(LoaderGameEvent.ObjectDisable);
+        }
+
         public void Load()
         {
             foreach (var bankRef in Banks)

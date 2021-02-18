@@ -181,6 +181,13 @@ namespace FMODUnity
             if (system.isValid())
             {
                 CheckResult(system.update());
+
+                if (speakerMode != Settings.Instance.GetEditorSpeakerMode())
+                {
+                    PreviewStop();
+                    DestroySystem();
+                    CreateSystem();
+                }
             }
 
             if (previewEventInstance.isValid())
@@ -195,6 +202,7 @@ namespace FMODUnity
         }
 
         static FMOD.Studio.System system;
+        static FMOD.SPEAKERMODE speakerMode;
 
         static void DestroySystem()
         {
@@ -223,7 +231,8 @@ namespace FMODUnity
             CheckResult(system.getCoreSystem(out lowlevel));
 
             // Use play-in-editor speaker mode for event browser preview and metering
-            lowlevel.setSoftwareFormat(0, (FMOD.SPEAKERMODE)Settings.Instance.GetSpeakerMode(FMODPlatform.Default),0 );
+            speakerMode = Settings.Instance.GetEditorSpeakerMode();
+            CheckResult(lowlevel.setSoftwareFormat(0, speakerMode, 0));
 
             CheckResult(system.initialize(256, FMOD.Studio.INITFLAGS.ALLOW_MISSING_PLUGINS | FMOD.Studio.INITFLAGS.SYNCHRONOUS_UPDATE, FMOD.INITFLAGS.NORMAL, IntPtr.Zero));
 
@@ -672,10 +681,10 @@ namespace FMODUnity
             int channels;
             lowlevel.getSpeakerModeChannels(mode, out channels);
 
-            float[] data = new float[outputMetering.numchannels > 0 ? outputMetering.numchannels : channels];
+            float[] data = new float[channels];
             if (outputMetering.numchannels > 0)
             {
-                Array.Copy(outputMetering.rmslevel, data, outputMetering.numchannels);
+                Array.Copy(outputMetering.rmslevel, data, channels);
             }
             return data;
         }
@@ -833,6 +842,7 @@ namespace FMODUnity
             }
             catch (Exception)
             {
+                Debug.LogWarning("[FMOD] File used by another application. Failed to open " + path);
             }
             return open;
         }
@@ -909,6 +919,35 @@ namespace FMODUnity
 
             string eventGuid = GetScriptOutput(string.Format("event.id;"));
             return eventGuid;
+        }
+
+        [InitializeOnLoadMethod]
+        private static void CleanObsoleteFiles()
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode)
+            {
+                // Messing with the asset database while entering play mode causes a NullReferenceException
+                return;
+            }
+            if (AssetDatabase.IsValidFolder("Assets/Plugins/FMOD/obsolete"))
+            {
+                EditorApplication.LockReloadAssemblies();
+
+                string[] guids = AssetDatabase.FindAssets(string.Empty, new string[] { "Assets/Plugins/FMOD/obsolete" });
+                foreach (string guid in guids)
+                {
+                    string path = AssetDatabase.GUIDToAssetPath(guid);
+                    if (AssetDatabase.DeleteAsset(path))
+                    {
+                        Debug.LogFormat("FMOD: Removed obsolete file {0}", path);
+                    }
+                }
+                if(AssetDatabase.MoveAssetToTrash("Assets/Plugins/FMOD/obsolete"))
+                {
+                    Debug.LogFormat("FMOD: Removed obsolete folder Assets/Plugins/FMOD/obsolete");
+                }
+                EditorApplication.UnlockReloadAssemblies();
+            }
         }
     }
 }
