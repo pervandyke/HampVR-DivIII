@@ -33,6 +33,10 @@ namespace Valve.VR
         
         private static SteamVR_Action_Boolean p_flight1_RightSelect;
         
+        private static SteamVR_Action_Vibration p_flight1_LeftHaptic;
+        
+        private static SteamVR_Action_Vibration p_flight1_RightHaptic;
+        
         public static SteamVR_Action_Boolean flight1_Accelerate
         {
             get
@@ -97,6 +101,22 @@ namespace Valve.VR
             }
         }
         
+        public static SteamVR_Action_Vibration flight1_LeftHaptic
+        {
+            get
+            {
+                return SteamVR_Actions.p_flight1_LeftHaptic.GetCopy<SteamVR_Action_Vibration>();
+            }
+        }
+        
+        public static SteamVR_Action_Vibration flight1_RightHaptic
+        {
+            get
+            {
+                return SteamVR_Actions.p_flight1_RightHaptic.GetCopy<SteamVR_Action_Vibration>();
+            }
+        }
+        
         private static void InitializeActionArrays()
         {
             Valve.VR.SteamVR_Input.actions = new Valve.VR.SteamVR_Action[] {
@@ -107,7 +127,9 @@ namespace Valve.VR
                     SteamVR_Actions.flight1_poseTest,
                     SteamVR_Actions.flight1_RightFire,
                     SteamVR_Actions.flight1_LeftSelect,
-                    SteamVR_Actions.flight1_RightSelect};
+                    SteamVR_Actions.flight1_RightSelect,
+                    SteamVR_Actions.flight1_LeftHaptic,
+                    SteamVR_Actions.flight1_RightHaptic};
             Valve.VR.SteamVR_Input.actionsIn = new Valve.VR.ISteamVR_Action_In[] {
                     SteamVR_Actions.flight1_Accelerate,
                     SteamVR_Actions.flight1_LeftFire,
@@ -117,8 +139,12 @@ namespace Valve.VR
                     SteamVR_Actions.flight1_RightFire,
                     SteamVR_Actions.flight1_LeftSelect,
                     SteamVR_Actions.flight1_RightSelect};
-            Valve.VR.SteamVR_Input.actionsOut = new Valve.VR.ISteamVR_Action_Out[0];
-            Valve.VR.SteamVR_Input.actionsVibration = new Valve.VR.SteamVR_Action_Vibration[0];
+            Valve.VR.SteamVR_Input.actionsOut = new Valve.VR.ISteamVR_Action_Out[] {
+                    SteamVR_Actions.flight1_LeftHaptic,
+                    SteamVR_Actions.flight1_RightHaptic};
+            Valve.VR.SteamVR_Input.actionsVibration = new Valve.VR.SteamVR_Action_Vibration[] {
+                    SteamVR_Actions.flight1_LeftHaptic,
+                    SteamVR_Actions.flight1_RightHaptic};
             Valve.VR.SteamVR_Input.actionsPose = new Valve.VR.SteamVR_Action_Pose[] {
                     SteamVR_Actions.flight1_poseTest};
             Valve.VR.SteamVR_Input.actionsBoolean = new Valve.VR.SteamVR_Action_Boolean[] {
@@ -153,6 +179,8 @@ namespace Valve.VR
             SteamVR_Actions.p_flight1_RightFire = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/Flight1/in/RightFire")));
             SteamVR_Actions.p_flight1_LeftSelect = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/Flight1/in/LeftSelect")));
             SteamVR_Actions.p_flight1_RightSelect = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/Flight1/in/RightSelect")));
+            SteamVR_Actions.p_flight1_LeftHaptic = ((SteamVR_Action_Vibration)(SteamVR_Action.Create<SteamVR_Action_Vibration>("/actions/Flight1/out/LeftHaptic")));
+            SteamVR_Actions.p_flight1_RightHaptic = ((SteamVR_Action_Vibration)(SteamVR_Action.Create<SteamVR_Action_Vibration>("/actions/Flight1/out/RightHaptic")));
         }
     }
 }

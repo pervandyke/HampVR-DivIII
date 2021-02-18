@@ -80,5 +80,21 @@ namespace Valve.VR
                 return SteamVR_Actions.flight1_RightSelect;
             }
         }
+        
+        public virtual SteamVR_Action_Vibration LeftHaptic
+        {
+            get
+            {
+                return SteamVR_Actions.flight1_LeftHaptic;
+            }
+        }
+        
+        public virtual SteamVR_Action_Vibration RightHaptic
+        {
+            get
+            {
+                return SteamVR_Actions.flight1_RightHaptic;
+            }
+        }
     }
 }

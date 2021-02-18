@@ -181,7 +181,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        SetMovementVectors();
+        horizontalMovementVector = SetMovementVectors();
 
         ApplyForce();
 
@@ -267,22 +267,20 @@ public class PlayerController : MonoBehaviour
     }
 
     //Set the vector to control the players movement
-    private void SetMovementVectors()
+    private Vector3 SetMovementVectors()
     {
+        Vector3 localHorizontalMovementVector = Vector3.zero;
         if ((mainCamera.transform.localPosition - headsetZero).magnitude > deadZone)
         {
-            horizontalMovementVector = mainCamera.transform.localPosition - headsetZero;
+            localHorizontalMovementVector = mainCamera.transform.localPosition - headsetZero;
             if (movementDebug)
             {
                 print("Movement Vector: " + horizontalMovementVector);
             }
         }
-        else
-        {
-            horizontalMovementVector = new Vector3(0, 0, 0);
-        }
-        
-        horizontalMovementVector.y = 0;
+
+        localHorizontalMovementVector.y = 0;
+        return localHorizontalMovementVector;
     }
 
     //Apply the vector to the player as a force
@@ -444,7 +442,7 @@ public class PlayerController : MonoBehaviour
                 GameObject objectToSelect = RunSelectionPriorityAlgorithm(validSelections);
                 if (Global.global.leftSelectedTarget != null)
                 {
-                    Global.global.leftSelectedTarget.GetComponent<MeshRenderer>().material.color = Color.white;
+                    //Global.global.leftSelectedTarget.GetComponent<MeshRenderer>().material.color = Color.white;
                 }
                 Global.global.leftSelectedTarget = objectToSelect;
             }
@@ -467,7 +465,7 @@ public class PlayerController : MonoBehaviour
                 GameObject objectToSelect = RunSelectionPriorityAlgorithm(validSelections);
                 if (Global.global.rightSelectedTarget != null)
                 {
-                    Global.global.rightSelectedTarget.GetComponent<MeshRenderer>().material.color = Color.white;
+                    //Global.global.rightSelectedTarget.GetComponent<MeshRenderer>().material.color = Color.white;
                 }
                 Global.global.rightSelectedTarget = objectToSelect;
             }
@@ -594,7 +592,7 @@ public class PlayerController : MonoBehaviour
             objectToSelect = currentTargetSelectionValues.potentialTarget;
             
         }
-        objectToSelect.GetComponent<MeshRenderer>().material.color = Color.red;
+        //objectToSelect.GetComponent<MeshRenderer>().material.color = Color.red;
         return objectToSelect;
     }
 
@@ -630,171 +628,6 @@ public class PlayerController : MonoBehaviour
         return objectToSelect;
     }
 
-    /*private void CircleCheck()
-    {
-        if (GetLeftSelect())
-        {
-            /*
-             * While selection button is held down, log position of that controller
-             * when the player lets go of the selection button, find the average of point of all points
-             * make a sphere with a diameter matching twice the distance from the average to the furthest from the average
-             * Then raycast to every visable enemy, and see if the ray hits the sphere
-             * if it does, add it to the list of viable selection targets
-             * take the closest enemy to the player from the list, and select that one
-             
-
-            if (!selecting)
-            {
-                selecting = true;
-            }
-            selectionPoints.Add(rightHand.transform.localPosition);
-        }
-        else if (!GetLeftSelect())
-        {
-            if (selecting)
-            {
-                selecting = false;
-                //find the average point of the circle
-                Vector3 averagePoint = Vector3.zero;
-                foreach (Vector3 point in selectionPoints)
-                {
-                    averagePoint = averagePoint + point;
-                }
-                averagePoint = averagePoint / selectionPoints.Count;
-                //find the point farthest from the average
-                float farthestPointDistance = 0;
-                foreach (Vector3 point in selectionPoints)
-                {
-                    float distance = Vector3.Distance(point, averagePoint);
-                    if (distance > farthestPointDistance)
-                    {
-                        farthestPointDistance = distance;
-                    }
-                }
-                //create a sphere with a diameter == to twice the distance from the average point fo the furthest point
-                GameObject selectionSphere = Instantiate(Resources.Load("Prefabs/SelectionSphere")) as GameObject;
-                selectionSphere.transform.parent = playerPhysics.transform;
-                if (!selectionDebug)
-                {
-                    selectionSphere.GetComponent<MeshRenderer>().enabled = false;
-                }
-                selectionSphere.transform.localPosition = averagePoint;
-                selectionSphere.transform.localScale = new Vector3(farthestPointDistance * 2, farthestPointDistance * 2, farthestPointDistance * 2);
-                selectionSphere.transform.parent = null;
-                selectionPoints.Clear();
-
-                //find every enemy that would be a valid selection
-                List<GameObject> validSelections = new List<GameObject>();
-                foreach(GameObject enemy in EnemyManager.enemyManager.enemies)
-                {
-                    //cast a ray from enemy to headset, if it hits the selection sphere add it to the list
-                    Vector3 direction = (mainCamera.transform.position - enemy.transform.position).normalized;
-                    RaycastHit hitData;
-                    bool didHit = Physics.Raycast(enemy.transform.position, direction, out hitData, Vector3.Distance(enemy.transform.position, mainCamera.transform.position), 
-                        cockpitMask, QueryTriggerInteraction.Collide);
-                    if (selectionDebug)
-                    {
-                        print("Drawing Ray from enemy " + enemy.name + " Along direction " + direction);
-                        Ray selectionRay = new Ray(enemy.transform.position, direction);
-                        Color rayColor;
-                        if (!didHit)
-                        {
-                            rayColor = Color.yellow;
-                        }
-                        else if (didHit && hitData.collider.gameObject.tag == "SelectionSphere")
-                        {
-                            rayColor = Color.red;
-                        }
-                        else
-                        {
-                            rayColor = Color.green;
-                        }
-                        Debug.DrawRay(selectionRay.origin, selectionRay.direction * Vector3.Distance(mainCamera.transform.position, enemy.transform.position), rayColor, 10.0f);
-                    }
-
-                    if (didHit)
-                    {
-                        if (selectionDebug)
-                        {
-                            print("Ray hit: " + hitData.collider.gameObject.name);
-                        }
-                        
-                        if (hitData.collider.gameObject.tag == "SelectionSphere")
-                        {
-                            validSelections.Add(enemy);
-                        }
-                    }
-                }
-
-                //of the valid selections, actually select the closest enemy to the player
-                //need to make this select enemy closest to the middle of the players vision, followed by the closest
-
-                /*float selectionDistance = 0;
-                GameObject objectToSelect;
-                if (validSelections.Count > 0)
-                {
-                    objectToSelect = validSelections[0];
-                    selectionDistance = Vector3.Distance(validSelections[0].transform.position, mainCamera.transform.position);
-                    if (validSelections.Count > 1)
-                    {
-                        for (int i = 1; i < validSelections.Count; i++)
-                        {
-                            if (Vector3.Distance(validSelections[i].transform.position, mainCamera.transform.position) < selectionDistance)
-                            {
-                                selectionDistance = Vector3.Distance(validSelections[i].transform.position, mainCamera.transform.position);
-                                objectToSelect = validSelections[i];
-                            }
-                        }
-                    }
-                    //color the selected target red, uncolor the previous target, actually select the target to be selected
-                    if(Global.global.selectedTarget != null)
-                    {
-                        Global.global.selectedTarget.GetComponent<MeshRenderer>().material.color = Color.white;
-                    }
-                    Global.global.selectedTarget = objectToSelect;
-                    Global.global.selectedTarget.GetComponent<MeshRenderer>().material.color = Color.red;
-                }
-
-                GameObject objectToSelect;
-                if (validSelections.Count > 0)
-                {
-                    objectToSelect = validSelections[0];
-                    if (validSelections.Count > 1)
-                    {
-                        List<float> angles = new List<float>();
-                        for (int i = 0; i < validSelections.Count; i++)
-                        {
-                            //get the angle
-                            Vector3 enemyDirection = validSelections[i].transform.position - mainCamera.transform.position;
-                            float collisionAngle = Vector3.SignedAngle(enemyDirection, mainCamera.transform.forward, Vector3.up);
-                            angles.Add(collisionAngle);
-                        }
-                        float smallestAngle = 1000;
-                        int smallestIndex = 0;
-                        float currentAngle;
-                        for (int i = 0; i < angles.Count; i++)
-                        {
-                            currentAngle = angles[i];
-                            if (Mathf.Abs(currentAngle) < smallestAngle)
-                            {
-                                smallestAngle = currentAngle;
-                                smallestIndex = i;
-                            }
-                        }
-                        objectToSelect = validSelections[smallestIndex];
-                    }
-                    //color the selected target red, uncolor the previous target, actually select the target to be selected
-                    if (Global.global.selectedTarget != null)
-                    {
-                        Global.global.selectedTarget.GetComponent<MeshRenderer>().material.color = Color.white;
-                    }
-                    Global.global.selectedTarget = objectToSelect;
-                    Global.global.selectedTarget.GetComponent<MeshRenderer>().material.color = Color.red;
-                }
-            }
-        }
-    }*/
-
     private void PunchCheck(Vector3 leftPosition, Vector3 rightPosition)
     {
         //if player has punched forward, then shoot
@@ -816,7 +649,7 @@ public class PlayerController : MonoBehaviour
                     print("Left projectile rotation: " + leftWeaponRotation.eulerAngles);
                 }
 
-                WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner2, RB, leftWeaponRotation, laserSpeed, missileTurningSpeed, laserDamage, Global.global.leftSelectedTarget);
+                WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner2, RB, leftWeaponRotation, laserSpeed, missileTurningSpeed, laserDamage, Global.global.leftSelectedTarget, SteamVR_Input_Sources.LeftHand);
                 leftWeaponCooldown = true;
             }
             else if ((leftPosition - leftLastPositions[fireDetectionTime]).magnitude < fireDistance)
@@ -843,7 +676,7 @@ public class PlayerController : MonoBehaviour
                     print("Right projectile rotation: " + rightWeaponRotation.eulerAngles);
                 }
 
-                WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner, RB, rightWeaponRotation, laserSpeed, missileTurningSpeed, laserDamage, Global.global.rightSelectedTarget);
+                WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner, RB, rightWeaponRotation, laserSpeed, missileTurningSpeed, laserDamage, Global.global.rightSelectedTarget, SteamVR_Input_Sources.RightHand);
                 rightWeaponCooldown = true;
             }
             else if ((rightPosition - rightLastPositions[fireDetectionTime]).magnitude < fireDistance)

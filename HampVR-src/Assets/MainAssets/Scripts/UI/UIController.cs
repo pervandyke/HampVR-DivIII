@@ -37,21 +37,13 @@ public class UIController : MonoBehaviour
             currentHealth = playerController.health;
             healthText.text = "Health: " + currentHealth;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Global.global.rightSelectedTarget != null)
         {
-            target = EnemyManager.enemyManager.GetNextEnemy();
-            if (target == null)
-            {
-                targetText.text = "Target: ";
-            }
-            else
-            {
-                targetText.text = "Target: " + target.name;
-            } 
+            targetText.text = "Target: " + Global.global.rightSelectedTarget.name;
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else
         {
-            //target closest enemy
+            targetText.text = "Target: ";
         }
     }
 }

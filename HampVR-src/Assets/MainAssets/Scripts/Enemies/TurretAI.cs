@@ -37,6 +37,7 @@ public class TurretAI : MonoBehaviour, IEnemy
     {
         player = GameObject.Find("[CameraRig]");
         shotTimer = fireRate;
+        EnemyManager.enemyManager.AddEnemy(gameObject);
     }
 
     // Update is called once per frame
@@ -75,7 +76,7 @@ public class TurretAI : MonoBehaviour, IEnemy
         lookRotation = Quaternion.LookRotation(direction);
     }
 
-    private Vector3 CalculateLead(int iterations = 3)
+    private Vector3 CalculateLead(int iterations = 3, float leadScaleAdjustment = 0.5f)
     {
         float flightTime = 0;
         Vector3 targetMovementPerSec = Vector3.zero;
@@ -91,7 +92,7 @@ public class TurretAI : MonoBehaviour, IEnemy
                 flightTime = (estimatedHitPosition - pivot.transform.position).magnitude / laserSpeed;
             }
             targetMovementPerSec = player.GetComponent<Rigidbody>().velocity;
-            estimatedHitPosition = player.transform.position + (targetMovementPerSec * flightTime);
+            estimatedHitPosition = player.transform.position + (targetMovementPerSec * flightTime) * leadScaleAdjustment ;
         }
         //print(gameObject.name + " estimated hit position is " + estimatedHitPosition);
         return estimatedHitPosition;

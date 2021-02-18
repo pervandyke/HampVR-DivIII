@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
 
 public class WeaponsLibrary : MonoBehaviour
 {
@@ -39,10 +40,11 @@ public class WeaponsLibrary : MonoBehaviour
         LaserInstance.GetComponent<LaserScript>().damage = laserDamage;
     }
 
-    public void FireLongRangeMissile(GameObject missileSpawner, Rigidbody sourceRB, Quaternion rotation, float missileSpeed, float missileTurningSpeed, int missileDamage, GameObject missileTarget)
+    public void FireLongRangeMissile(GameObject missileSpawner, Rigidbody sourceRB, Quaternion rotation, float missileSpeed, float missileTurningSpeed, int missileDamage, GameObject missileTarget, SteamVR_Input_Sources source)
     {
         
         GenerateMissile("Prefabs/Missile", missileSpawner, sourceRB, rotation, missileSpeed, missileTurningSpeed, missileDamage, missileTarget);
+        Global.global.HapticPulse(.5f, 150, 75, source);
     }
 
     private void GenerateMissile(string prefabPath, GameObject missileSpawner, Rigidbody sourceRB, Quaternion rotation, float missileSpeed, float missileTurningSpeed, int missileDamage, GameObject missileTarget)

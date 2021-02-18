@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1687211555646764122}
   - component: {fileID: 1495629480877601188}
   - component: {fileID: 8434203993932305799}
-  - component: {fileID: 361875777908238223}
   m_Layer: 0
   m_Name: BarrelPivot
   m_TagString: Untagged
@@ -81,19 +80,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &361875777908238223
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 75958904518920507}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1918517076051774776
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,9 +359,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5282654231850539051}
   - component: {fileID: 651143982885623632}
+  - component: {fileID: 2046278743272514590}
   m_Layer: 0
   m_Name: Turret1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -413,7 +400,7 @@ MonoBehaviour:
   cap: {fileID: 8659390344361645059}
   body: {fileID: 3395772027657442062}
   laserEmitter: {fileID: 1918517076051774776}
-  laserSpeed: 20
+  laserSpeed: 40
   fireRate: 1.5
   damage: 1
   trackingSpeed: 10
@@ -422,3 +409,17 @@ MonoBehaviour:
   playerInRange: 0
   allowedToShoot: 1
   health: 1
+--- !u!136 &2046278743272514590
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9157115268315261496}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.78
+  m_Height: 9.66
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.87, z: 0}
