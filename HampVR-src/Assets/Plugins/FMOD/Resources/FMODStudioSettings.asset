@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8688123962282822084
+--- !u!114 &-8571993502225753723
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -21,8 +21,8 @@ MonoBehaviour:
       Value: 1
       HasValue: 1
     LiveUpdatePort:
-      Value: 9264
-      HasValue: 1
+      Value: 0
+      HasValue: 0
     Overlay:
       Value: 1
       HasValue: 1
@@ -350,10 +350,8 @@ MonoBehaviour:
   VirtualChannelSettings: []
   RealChannelSettings: []
   Plugins: []
-  MasterBanks:
-  - Master
-  Banks:
-  - Sounds
+  MasterBanks: []
+  Banks: []
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
