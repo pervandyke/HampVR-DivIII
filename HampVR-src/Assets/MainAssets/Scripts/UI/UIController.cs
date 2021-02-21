@@ -21,7 +21,8 @@ public class UIController : MonoBehaviour
     void Start()
     {
         playerController = GameObject.Find("PlayerController").GetComponent<PlayerController>();
-        gameObject.GetComponent<Canvas>().worldCamera = playerController.mainCamera;
+        player = playerController.playerPhysics;
+        //gameObject.GetComponent<Canvas>().worldCamera = playerController.mainCamera;
         currentHealth = playerController.health;
     }
 
