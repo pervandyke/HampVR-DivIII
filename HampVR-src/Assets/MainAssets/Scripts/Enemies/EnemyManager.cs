@@ -52,7 +52,7 @@ public class EnemyManager : MonoBehaviour
             selectedEnemyIndex = 0;
             
         }
-        else if (selectedEnemyIndex+1 < enemies.Count)
+        else if (selectedEnemyIndex + 1 < enemies.Count)
         {
             selectedEnemyIndex += 1;
         }
@@ -67,5 +67,15 @@ public class EnemyManager : MonoBehaviour
     public GameObject GetSelectedEnemy()
     {
         return (selectedEnemy);
+    }
+
+    public bool CheckEmpty()
+    {
+        bool status = true;
+        if (enemies.Count != 0)
+        {
+            status = false;
+        }
+        return status;
     }
 }

@@ -34,8 +34,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("The right laser spawner.")]
     public GameObject laserSpawner2;
     [Tooltip("The camera being used as the headset.")]
-    [SerializeField]
-    private Camera mainCamera;
+    public Camera mainCamera;
     
     private Rigidbody RB;
 
@@ -146,6 +145,10 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerPhysics = GameObject.Find("[CameraRig]");
+        leftHand = GameObject.Find("Controller (left)");
+        rightHand = GameObject.Find("Controller (right)");
+        mainCamera = GameObject.Find("Camera").GetComponent<Camera>();
         RB = playerPhysics.GetComponent<Rigidbody>();
         RB.drag = drag;
         RB.angularDrag = angularDrag;
