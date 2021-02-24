@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerPhysics = GameObject.Find("[CameraRig]");
+        playerPhysics = GameObject.Find("[CameraRig](Clone)");
         leftHand = GameObject.Find("Controller (left)");
         rightHand = GameObject.Find("Controller (right)");
         mainCamera = GameObject.Find("Camera").GetComponent<Camera>();

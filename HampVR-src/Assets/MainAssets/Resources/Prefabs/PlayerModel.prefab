@@ -99,7 +99,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: -2432090755550338912, guid: 508f1133e232c38449a021f023161c34, type: 3}
+  m_Mesh: {fileID: -2432090755550338912, guid: ec8cc7577ca86fe4d8879952fd2ef6f1, type: 3}
 --- !u!1818360608 &6359594939886634183
 PositionConstraint:
   m_ObjectHideFlags: 0
@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 2739497789454770634}
   - component: {fileID: 3930032130077271513}
   m_Layer: 10
-  m_Name: TempPlayerController
+  m_Name: PlayerController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

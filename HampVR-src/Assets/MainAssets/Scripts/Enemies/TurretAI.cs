@@ -35,7 +35,7 @@ public class TurretAI : MonoBehaviour, IEnemy
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("[CameraRig]");
+        
         shotTimer = fireRate;
         EnemyManager.enemyManager.AddEnemy(gameObject);
     }
@@ -43,6 +43,10 @@ public class TurretAI : MonoBehaviour, IEnemy
     // Update is called once per frame
     void Update()
     {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
         TrackPlayer();
         //CheckShot(allowedShotAngle);
         Shoot();
