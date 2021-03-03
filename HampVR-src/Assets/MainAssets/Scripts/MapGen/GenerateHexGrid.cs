@@ -4,8 +4,6 @@ using UnityEngine;
 using System.IO;
 public class GenerateHexGrid : MonoBehaviour
 {
-    [Tooltip("The number of rings of hexagons around the center.")]
-    public int layers;
     [Tooltip("The side length of the hexes being used.")]
     public int sideLength;
 

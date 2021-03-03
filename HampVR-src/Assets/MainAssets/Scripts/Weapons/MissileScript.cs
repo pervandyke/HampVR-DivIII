@@ -13,9 +13,13 @@ public class MissileScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //rotate to face target
-        Quaternion targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * turningSpeed);
+        if (target != null)
+        {
+            //rotate to face target
+            Quaternion targetRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * turningSpeed);
+        }
+
         //apply forward force
         gameObject.GetComponent<Rigidbody>().velocity = transform.forward * speed;
 
@@ -26,19 +30,14 @@ public class MissileScript : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
         //playParticle();
-        if (other.gameObject.tag == "Player")
-        {
-            print("Hit player");
-            other.gameObject.GetComponentInChildren<PlayerController>().TakeHit(damage, gameObject);
-            Destroy(gameObject);
-        }
-        else if (other.gameObject.tag == "Enemy")
+
+        if (collision.gameObject.tag == "Enemy")
         {
             print("Hit enemy");
-            other.gameObject.GetComponent<IEnemy>().TakeDamage(damage);
+            collision.gameObject.GetComponent<IEnemy>().TakeDamage(damage);
             Destroy(gameObject);
         }
         else
@@ -50,5 +49,4 @@ public class MissileScript : MonoBehaviour
 
         //collisionflag = true;
     }
-
 }

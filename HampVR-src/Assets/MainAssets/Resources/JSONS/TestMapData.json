@@ -2,18 +2,20 @@
   "tiles": [
     {
       "z": -1,
-      "x": 0,
+      "x": 1,
       "tileType": "Hex"
     }
   ],
   "otherTileKeys": [
     "HexPresence",
-    "HexPresence2"
+    "HexPresence2",
+    "SpawnHex"
   ],
   "otherTileValues": [
     0,
-    0
+    0,
+    1
   ],
   "mapWidth": 7,
-  "mapHeight": 6
+  "mapHeight": 12
 }

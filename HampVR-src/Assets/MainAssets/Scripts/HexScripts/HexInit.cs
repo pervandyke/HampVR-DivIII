@@ -6,7 +6,7 @@ public class HexInit : MonoBehaviour
 {
     public void SpawnTurrets(int turretCount)
     {
-        TurretSpawnerScript[] turretSpawners = gameObject.GetComponentsInChildren<TurretSpawnerScript>();
+        /*TurretSpawnerScript[] turretSpawners = gameObject.GetComponentsInChildren<TurretSpawnerScript>();
         List<TurretSpawnerScript> spawnerList = new List<TurretSpawnerScript>();
         foreach (TurretSpawnerScript s in turretSpawners)
         {
@@ -19,6 +19,6 @@ public class HexInit : MonoBehaviour
             int turretIndex = Random.Range(0, spawnerList.Count);
             spawnerList[turretIndex].SpawnTurret();
             spawnerList.RemoveAt(turretIndex);
-        }
+        }*/
     }
 }

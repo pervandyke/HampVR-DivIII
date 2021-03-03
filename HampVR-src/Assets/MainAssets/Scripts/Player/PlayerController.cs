@@ -145,10 +145,6 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerPhysics = GameObject.Find("[CameraRig](Clone)");
-        leftHand = GameObject.Find("Controller (left)");
-        rightHand = GameObject.Find("Controller (right)");
-        mainCamera = GameObject.Find("Camera").GetComponent<Camera>();
         RB = playerPhysics.GetComponent<Rigidbody>();
         RB.drag = drag;
         RB.angularDrag = angularDrag;
@@ -170,15 +166,6 @@ public class PlayerController : MonoBehaviour
             leftLastPositions[i] = Vector3.zero;
             rightLastPositions[i] = Vector3.zero;
         }
-
-        /*if (Global.global.rotationType == "relative")
-        {
-            playerModel.GetComponent<RotationConstraint>().constraintActive = true;
-        }
-        else if (Global.global.rotationType == "absolute")
-        {
-            playerModel.GetComponent<RotationConstraint>().constraintActive = false;
-        }*/
     }
 
 
@@ -599,38 +586,7 @@ public class PlayerController : MonoBehaviour
         return objectToSelect;
     }
 
-    private GameObject FinalSelection(List<GameObject> validSelections)
-    {
-        GameObject objectToSelect;
-        objectToSelect = validSelections[0];
-        if (validSelections.Count > 1)
-        {
-            List<float> angles = new List<float>();
-            for (int i = 0; i < validSelections.Count; i++)
-            {
-                //get the angle
-                Vector3 enemyDirection = validSelections[i].transform.position - mainCamera.transform.position;
-                float collisionAngle = Vector3.SignedAngle(enemyDirection, mainCamera.transform.forward, Vector3.up);
-                angles.Add(collisionAngle);
-            }
-            float smallestAngle = 1000;
-            int smallestIndex = 0;
-            float currentAngle;
-            for (int i = 0; i < angles.Count; i++)
-            {
-                currentAngle = angles[i];
-                if (Mathf.Abs(currentAngle) < smallestAngle)
-                {
-                    smallestAngle = currentAngle;
-                    smallestIndex = i;
-                }
-            }
-            objectToSelect = validSelections[smallestIndex];
-        }
-        objectToSelect.GetComponent<MeshRenderer>().material.color = Color.red;
-        return objectToSelect;
-    }
-
+   
     private void PunchCheck(Vector3 leftPosition, Vector3 rightPosition)
     {
         //if player has punched forward, then shoot
