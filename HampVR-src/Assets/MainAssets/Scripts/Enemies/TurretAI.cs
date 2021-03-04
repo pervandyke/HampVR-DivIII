@@ -74,7 +74,7 @@ public class TurretAI : MonoBehaviour, IEnemy
     private void WhereToRotate(Vector3 target)
     {
         Vector3 aimPoint = CalculateLead();
-        Vector3 direction = (aimPoint - gameObject.transform.position).normalized;
+        Vector3 direction = (aimPoint - pivot.transform.position).normalized;
         //print(gameObject + " should be aiming in direction " + direction);
         //Debug.DrawLine(gameObject.transform.position, gameObject.transform.position + direction * 10, Color.red, Mathf.Infinity);
         lookRotation = Quaternion.LookRotation(direction);
@@ -82,8 +82,8 @@ public class TurretAI : MonoBehaviour, IEnemy
 
     private Vector3 CalculateLead(int iterations = 3, float leadScaleAdjustment = 0.5f)
     {
-        float flightTime = 0;
-        Vector3 targetMovementPerSec = Vector3.zero;
+        float flightTime;
+        Vector3 targetMovementPerSec;
         Vector3 estimatedHitPosition = Vector3.zero;
         for(int i = 0; i < iterations; i++)
         {

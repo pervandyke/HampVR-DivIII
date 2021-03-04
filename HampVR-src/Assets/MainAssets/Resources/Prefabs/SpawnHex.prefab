@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8653768005082649670}
   - component: {fileID: 7929535384067901135}
   - component: {fileID: 5016120608000559086}
-  - component: {fileID: 3965668567964887642}
   m_Layer: 0
   m_Name: SpawnHex
   m_TagString: Untagged
@@ -96,18 +95,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   z: 0
   x: 0
---- !u!114 &3965668567964887642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4384507694715237188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c30955c805522f4086dae0afd47da91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5927322004205110813
 GameObject:
   m_ObjectHideFlags: 0
