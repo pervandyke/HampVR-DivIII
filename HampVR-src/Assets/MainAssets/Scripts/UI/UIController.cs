@@ -6,13 +6,17 @@ using TMPro;
 
 public class UIController : MonoBehaviour
 {
-    public GameObject player;
+    private Rigidbody playerPhysics;
     private GameObject target;
+
+    public GameObject GameplayUI;
+    public GameObject MenuUI;
 
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI speedText;
-    public TextMeshProUGUI targetText;
-    private PlayerController playerController;
+    public TextMeshProUGUI leftTargetText;
+    public TextMeshProUGUI rightTargetText;
+    public PlayerController playerController;
 
     private float currentSpeed;
     private int currentHealth;
@@ -20,32 +24,82 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerController = GameObject.Find("PlayerController").GetComponent<PlayerController>();
-        player = playerController.playerPhysics;
-        //gameObject.GetComponent<Canvas>().worldCamera = playerController.mainCamera;
-        currentHealth = playerController.health;
+        playerPhysics = playerController.RB;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (player.GetComponent<Rigidbody>().velocity.magnitude != currentSpeed)
+        ActiveUI();
+        ShipStatusPanel();
+        TargetPanel();
+        StartPanel();
+        LevelPanel();
+    }
+
+    private void ActiveUI()
+    {
+        if (LevelState.levelState.levelStatus == 1 && !GameplayUI.activeInHierarchy)
         {
-            currentSpeed = player.GetComponent<Rigidbody>().velocity.magnitude;
-            speedText.text = "Speed: " + (int)currentSpeed + "m/s";
+            GameplayUI.SetActive(true);
         }
-        if (playerController.health != currentHealth)
+        else if (LevelState.levelState.levelStatus != 1 && GameplayUI.activeInHierarchy)
         {
-            currentHealth = playerController.health;
-            healthText.text = "Health: " + currentHealth;
+            GameplayUI.SetActive(false);
         }
-        if (Global.global.rightSelectedTarget != null)
+        
+        if (LevelState.levelState.levelStatus == 0 && !MenuUI.activeInHierarchy)
         {
-            targetText.text = "Target: " + Global.global.rightSelectedTarget.name;
+            MenuUI.SetActive(true);
         }
-        else
+        else if (LevelState.levelState.levelStatus != 0 && MenuUI.activeInHierarchy)
         {
-            targetText.text = "Target: ";
+            MenuUI.SetActive(false);
+        }
+
+    }
+
+
+    private void ShipStatusPanel()
+    {
+        if (LevelState.levelState.levelStatus == 1)
+        {
+            healthText.text = "HEALTH: " + playerController.health;
+
+            speedText.text = "SPEED: " + (int)playerPhysics.velocity.magnitude;
+        }
+        
+    }
+
+    private void TargetPanel()
+    {
+        if (LevelState.levelState.levelStatus == 1)
+        {
+            if (!GameplayUI.activeInHierarchy)
+            {
+                GameplayUI.SetActive(true);
+            }
+            
+        }
+        else if (LevelState.levelState.levelStatus != 1 && GameplayUI.activeInHierarchy)
+        {
+            GameplayUI.SetActive(false);
+        }
+    }
+
+    private void StartPanel()
+    {
+        if (LevelState.levelState.levelStatus == 0)
+        {
+
+        }
+    }
+
+    private void LevelPanel()
+    {
+        if (LevelState.levelState.levelStatus == 0)
+        {
+
         }
     }
 }

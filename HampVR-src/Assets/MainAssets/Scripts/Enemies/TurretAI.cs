@@ -59,11 +59,11 @@ public class TurretAI : MonoBehaviour, IEnemy
             playerInRange = true;
             WhereToRotate(player.transform.position);
 
-            cap.transform.rotation = Quaternion.Slerp(cap.transform.rotation, lookRotation, Time.deltaTime * trackingSpeed);
-            cap.transform.rotation.eulerAngles.Set(0, cap.transform.rotation.eulerAngles.y, 0);
+            //cap.transform.rotation = Quaternion.Slerp(cap.transform.rotation, lookRotation, Time.deltaTime * trackingSpeed);
+            //cap.transform.rotation.eulerAngles.Set(0, cap.transform.rotation.eulerAngles.y, 0);
 
             pivot.transform.rotation = Quaternion.Slerp(pivot.transform.rotation, lookRotation, Time.deltaTime * trackingSpeed);
-            pivot.transform.rotation.eulerAngles.Set(pivot.transform.rotation.eulerAngles.x, 0, 0);
+            //pivot.transform.rotation.eulerAngles.Set(pivot.transform.rotation.eulerAngles.x, 0, 0);
         }
         else
         {
@@ -80,7 +80,7 @@ public class TurretAI : MonoBehaviour, IEnemy
         lookRotation = Quaternion.LookRotation(direction);
     }
 
-    private Vector3 CalculateLead(int iterations = 3, float leadScaleAdjustment = 0.5f)
+    private Vector3 CalculateLead(int iterations = 3, float leadScaleAdjustment = 1.0f)
     {
         float flightTime;
         Vector3 targetMovementPerSec;
@@ -133,6 +133,14 @@ public class TurretAI : MonoBehaviour, IEnemy
         print("applied damage");
         if (health < 0)
         {
+            if(Global.global.leftSelectedTarget == gameObject)
+            {
+                Global.global.leftSelectedTarget = null;
+            }
+            else if (Global.global.rightSelectedTarget == gameObject)
+            {
+                Global.global.rightSelectedTarget = null;
+            }
             Destroy(gameObject);
         }
     }

@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("The camera being used as the headset.")]
     public Camera mainCamera;
     
-    private Rigidbody RB;
+    public Rigidbody RB;
 
     [Header("Flight Model")]
     [Tooltip("The base acceleration value to be modified by the curve.")]
