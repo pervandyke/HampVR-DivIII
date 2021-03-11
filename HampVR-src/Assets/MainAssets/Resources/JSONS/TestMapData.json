@@ -2,7 +2,7 @@
   "tiles": [
     {
       "z": -1,
-      "x": 1,
+      "x": 0,
       "tileType": "Hex"
     }
   ],
@@ -16,6 +16,6 @@
     0,
     1
   ],
-  "mapWidth": 7,
-  "mapHeight": 12
+  "mapWidth": 4,
+  "mapHeight": 6
 }
