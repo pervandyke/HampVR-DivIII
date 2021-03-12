@@ -21,10 +21,10 @@ MonoBehaviour:
       Value: 1
       HasValue: 1
     LiveUpdatePort:
-      Value: 0
-      HasValue: 0
+      Value: 9264
+      HasValue: 1
     Overlay:
-      Value: 1
+      Value: 0
       HasValue: 1
     Logging:
       Value: 0
@@ -350,8 +350,10 @@ MonoBehaviour:
   VirtualChannelSettings: []
   RealChannelSettings: []
   Plugins: []
-  MasterBanks: []
-  Banks: []
+  MasterBanks:
+  - Master
+  Banks:
+  - Sounds
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
@@ -627,7 +629,7 @@ MonoBehaviour:
   identifier: 2c5177b11d81d824dbb064f9ac8527da
   parentIdentifier: default
   displaySortOrder: 0
-  active: 0
+  active: 1
   Properties:
     LiveUpdate:
       Value: 0
