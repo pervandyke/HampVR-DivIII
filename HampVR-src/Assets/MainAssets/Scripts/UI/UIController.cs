@@ -25,6 +25,7 @@ public class UIController : MonoBehaviour
     void Start()
     {
         playerPhysics = playerController.RB;
+        LevelState.levelState.levelStatus = 1; //brute force the levelStatus to 1 (in play)
     }
 
     // Update is called once per frame
@@ -56,6 +57,8 @@ public class UIController : MonoBehaviour
         {
             MenuUI.SetActive(false);
         }
+
+        Debug.Log("Level Status:" + LevelState.levelState.levelStatus);
 
     }
 
