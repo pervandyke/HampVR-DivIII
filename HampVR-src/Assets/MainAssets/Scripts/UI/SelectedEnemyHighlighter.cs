@@ -105,7 +105,7 @@ public class SelectedEnemyHighlighter : MonoBehaviour
                 gameObject.transform.position), highlightMask, QueryTriggerInteraction.Collide);
             highlight.transform.position = hitData.point;
 
-            highlight.transform.rotation.SetLookRotation(direction);
+            highlight.transform.rotation = Quaternion.LookRotation((highlight.transform.position - target.transform.position).normalized);
         }
         else
         {
