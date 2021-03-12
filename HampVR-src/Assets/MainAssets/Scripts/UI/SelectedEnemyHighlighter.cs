@@ -48,9 +48,9 @@ public class SelectedEnemyHighlighter : MonoBehaviour
             RaycastHit hitData;
             Physics.Raycast(currentLeftTarget.transform.position, direction, out hitData, Vector3.Distance(currentLeftTarget.transform.position, 
                 gameObject.transform.position), highlightMask, QueryTriggerInteraction.Collide);
-            currentLeftTarget.transform.position = hitData.point;
+            leftHighlight.transform.position = hitData.point;
 
-            currentLeftTarget.transform.rotation.SetLookRotation(direction);
+            leftHighlight.transform.rotation.SetLookRotation(direction);
         }
         else
         {
@@ -74,9 +74,9 @@ public class SelectedEnemyHighlighter : MonoBehaviour
             RaycastHit hitData;
             Physics.Raycast(currentRightTarget.transform.position, direction, out hitData, Vector3.Distance(currentRightTarget.transform.position,
                 gameObject.transform.position), highlightMask, QueryTriggerInteraction.Collide);
-            currentRightTarget.transform.position = hitData.point;
+            rightHighlight.transform.position = hitData.point;
 
-            currentRightTarget.transform.rotation.SetLookRotation(direction);
+            rightHighlight.transform.rotation.SetLookRotation(direction);
         }
         else
         {
