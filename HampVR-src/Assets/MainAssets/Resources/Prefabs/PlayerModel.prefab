@@ -1682,6 +1682,7 @@ MonoBehaviour:
   handMoveLogSize: 100
   fireDistance: 0.2
   fireDetectionTime: 15
+  missileCooldownDefault: 3
   leftShieldMax: 100
   rightShieldMax: 100
   slapDistance: 0.2

@@ -100,6 +100,10 @@ public class PlayerController : MonoBehaviour
     [Tooltip("How much time in handMoveLogTimer intervals the player has to punch fireDistance units.")]
     public int fireDetectionTime;
 
+    public float missileCooldownDefault;
+    private float leftCooldownTimer;
+    private float rightCooldownTimer;
+
     [Header("Shields")]
     [Tooltip("The maximum value of the left shield.")]
     public int leftShieldMax;
@@ -161,6 +165,8 @@ public class PlayerController : MonoBehaviour
         rightBoostTimer = shieldBoostTime;
         leftBoostCooldownTimer = 0.0f;
         rightBoostCooldownTimer = 0.0f;
+        leftCooldownTimer = missileCooldownDefault;
+        rightCooldownTimer = missileCooldownDefault;
         for (int i = 0; i == handMoveLogSize-1; i++)
         {
             leftLastPositions[i] = Vector3.zero;
@@ -600,19 +606,16 @@ public class PlayerController : MonoBehaviour
                     print("Left Position: " + leftPosition + "\nLeft Last Position: " + leftLastPositions[fireDetectionTime]);
                 }
 
-                Quaternion leftWeaponRotation;
-                leftWeaponRotation = Quaternion.LookRotation((leftPosition - leftLastPositions[fireDetectionTime]).normalized);
-
-                if (weaponDebug)
-                {
-                    print("Left projectile rotation: " + leftWeaponRotation.eulerAngles);
-                }
-
-                WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner2, RB, leftWeaponRotation, laserSpeed, missileTurningSpeed, laserDamage, Global.global.leftSelectedTarget, SteamVR_Input_Sources.LeftHand);
+                WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner2, RB, laserSpawner2.transform.rotation, laserSpeed, missileTurningSpeed, laserDamage, Global.global.leftSelectedTarget, SteamVR_Input_Sources.LeftHand);
                 leftWeaponCooldown = true;
             }
-            else if ((leftPosition - leftLastPositions[fireDetectionTime]).magnitude < fireDistance)
+        }
+        if (leftWeaponCooldown)
+        {
+            leftCooldownTimer -= Time.fixedDeltaTime;
+            if (leftCooldownTimer <= 0)
             {
+                leftCooldownTimer = missileCooldownDefault;
                 leftWeaponCooldown = false;
             }
         }
@@ -627,19 +630,16 @@ public class PlayerController : MonoBehaviour
                     print("Right Position: " + rightPosition + "\nRight Last Position: " + rightLastPositions[fireDetectionTime]);
                 }
 
-                Quaternion rightWeaponRotation;
-                rightWeaponRotation = Quaternion.LookRotation((rightPosition - rightLastPositions[fireDetectionTime]).normalized);
-
-                if (weaponDebug)
-                {
-                    print("Right projectile rotation: " + rightWeaponRotation.eulerAngles);
-                }
-
-                WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner, RB, rightWeaponRotation, laserSpeed, missileTurningSpeed, laserDamage, Global.global.rightSelectedTarget, SteamVR_Input_Sources.RightHand);
+                WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner, RB, laserSpawner.transform.rotation, laserSpeed, missileTurningSpeed, laserDamage, Global.global.rightSelectedTarget, SteamVR_Input_Sources.RightHand);
                 rightWeaponCooldown = true;
             }
-            else if ((rightPosition - rightLastPositions[fireDetectionTime]).magnitude < fireDistance)
+        }
+        if (rightWeaponCooldown)
+        {
+            rightCooldownTimer -= Time.fixedDeltaTime;
+            if (rightCooldownTimer <= 0)
             {
+                rightCooldownTimer = missileCooldownDefault;
                 rightWeaponCooldown = false;
             }
         }
