@@ -95,6 +95,7 @@ public class GenerateHexGrid : MonoBehaviour
         position.z = hexZ * hexWidth * .75f;
         position.y = 0;
         GameObject HexInstance = Instantiate(Resources.Load<GameObject>("Prefabs/"+tileType), position, rotation) as GameObject;
+        HexInstance.transform.localScale = new Vector3(sideLength, 1.0f, sideLength);
         HexInstance.GetComponent<HexData>().x = hexX;
         HexInstance.GetComponent<HexData>().z = hexZ;
         if (HexInstance.TryGetComponent<HexInit>(out HexInit init))
