@@ -28,7 +28,7 @@ public class Global : MonoBehaviour
 
     public void HapticPulse(float duration, float frequency, float amplitude, SteamVR_Input_Sources source)
     {
-        hapticAction.Execute(0, duration, frequency, amplitude, source);
+        //hapticAction.Execute(0, duration, frequency, amplitude, source);
     }
 
 }

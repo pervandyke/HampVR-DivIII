@@ -183,6 +183,28 @@ public class PlayerController : MonoBehaviour
 
         ControllerBehaviorHandler();
 
+        if (leftWeaponCooldown)
+        {
+            leftCooldownTimer -= Time.fixedDeltaTime;
+            print("left cooldown: " + leftCooldownTimer);
+            if (leftCooldownTimer <= 0)
+            {
+                leftCooldownTimer = missileCooldownDefault;
+                leftWeaponCooldown = false;
+            }
+        }
+
+        if (rightWeaponCooldown)
+        {
+            rightCooldownTimer -= Time.fixedDeltaTime;
+            print("right cooldown: " + rightCooldownTimer);
+            if (rightCooldownTimer <= 0)
+            {
+                rightCooldownTimer = missileCooldownDefault;
+                rightWeaponCooldown = false;
+            }
+        }
+
         //Reset Control Zero
         if (GetResetHeadsetDown())
         {
@@ -244,11 +266,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        //ControllerBehaviorHandler();
-
         if (health <= 0)
         {
-            Destroy(playerPhysics);
+            //opaque canopy and change to state 2
         }
     }
 
@@ -598,7 +618,7 @@ public class PlayerController : MonoBehaviour
         //if player has punched forward, then shoot
         if (GetLeftFireDown())
         {
-            if ((leftPosition - leftLastPositions[fireDetectionTime]).magnitude > fireDistance && leftWeaponCooldown == false)
+            if ((leftPosition - leftLastPositions[fireDetectionTime]).magnitude > fireDistance && !leftWeaponCooldown)
             {
                 if (weaponDebug)
                 {
@@ -610,19 +630,12 @@ public class PlayerController : MonoBehaviour
                 leftWeaponCooldown = true;
             }
         }
-        if (leftWeaponCooldown)
-        {
-            leftCooldownTimer -= Time.fixedDeltaTime;
-            if (leftCooldownTimer <= 0)
-            {
-                leftCooldownTimer = missileCooldownDefault;
-                leftWeaponCooldown = false;
-            }
-        }
+
+        
 
         if (GetRightFireDown())
         {
-            if ((rightPosition - rightLastPositions[fireDetectionTime]).magnitude > fireDistance && rightWeaponCooldown == false)
+            if ((rightPosition - rightLastPositions[fireDetectionTime]).magnitude > fireDistance && !rightWeaponCooldown)
             {
                 if (weaponDebug)
                 {
@@ -634,15 +647,8 @@ public class PlayerController : MonoBehaviour
                 rightWeaponCooldown = true;
             }
         }
-        if (rightWeaponCooldown)
-        {
-            rightCooldownTimer -= Time.fixedDeltaTime;
-            if (rightCooldownTimer <= 0)
-            {
-                rightCooldownTimer = missileCooldownDefault;
-                rightWeaponCooldown = false;
-            }
-        }
+
+       
     }
 
     private void BoostShield(string shield)
