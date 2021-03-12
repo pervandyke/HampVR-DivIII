@@ -1407,6 +1407,8 @@ MonoBehaviour:
   leftTargetText: {fileID: 3110169846683431571}
   rightTargetText: {fileID: 2794215516586485830}
   playerController: {fileID: 3930032130077271513}
+  heightOffsetBelowHeadset: 0.2
+  UIParent: {fileID: 2848340565836769025}
 --- !u!1 &7270267465244786604
 GameObject:
   m_ObjectHideFlags: 0

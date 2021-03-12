@@ -8,7 +8,7 @@ public class UIController : MonoBehaviour
 {
     private Rigidbody playerPhysics;
     private GameObject target;
-
+    
     public GameObject GameplayUI;
     public GameObject MenuUI;
 
@@ -17,6 +17,9 @@ public class UIController : MonoBehaviour
     public TextMeshProUGUI leftTargetText;
     public TextMeshProUGUI rightTargetText;
     public PlayerController playerController;
+
+    public float heightOffsetBelowHeadset = .2f; //how far below the headset to put the UI when changing the UI height
+    public GameObject UIParent; //the empty parent we use to move all the UI up or down
 
     private float currentSpeed;
     private int currentHealth;
