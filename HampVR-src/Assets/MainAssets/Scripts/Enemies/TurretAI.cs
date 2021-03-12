@@ -131,7 +131,7 @@ public class TurretAI : MonoBehaviour, IEnemy
     {
         health -= damage;
         print("applied damage");
-        if (health < 0)
+        if (health <= 0)
         {
             if(Global.global.leftSelectedTarget == gameObject)
             {
