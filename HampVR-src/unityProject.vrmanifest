@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.hampvrsrc.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "D:\\Unity Projects\\HampVR DivIII\\HampVR-DivIII\\HampVR-src\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "action_manifest_path": "C:\\Users\\sylfaen\\Documents\\GitHub\\HampVR-DivIII\\HampVR-src\\Assets\\StreamingAssets\\SteamVR\\actions.json",
       "strings": {
         "en_us": {
           "name": "HampVR-src [Testing]"
