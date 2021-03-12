@@ -94,8 +94,8 @@ public class GenerateHexGrid : MonoBehaviour
         position.x = hexX * hexHeight / 2;
         position.z = hexZ * hexWidth * .75f;
         position.y = 0;
-        GameObject HexInstance = Instantiate(Resources.Load<GameObject>("Prefabs/"+tileType), position, rotation) as GameObject;
-        HexInstance.transform.localScale = new Vector3(sideLength, 1.0f, sideLength);
+        GameObject HexInstance = Instantiate(Resources.Load<GameObject>("Prefabs/"+tileType), position, rotation) as GameObject; //place each hex
+        HexInstance.transform.localScale = new Vector3(sideLength, 1.0f, sideLength);   //scale up each placed hex appropriately
         HexInstance.GetComponent<HexData>().x = hexX;
         HexInstance.GetComponent<HexData>().z = hexZ;
         if (HexInstance.TryGetComponent<HexInit>(out HexInit init))
