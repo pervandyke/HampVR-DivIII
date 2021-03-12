@@ -30,10 +30,12 @@ public class SelectedEnemyHighlighter : MonoBehaviour
             currentRightTarget = null;
         }
 
-        ProcessLeftHighlight();
-        ProcessRightHighlight();
+        ProcessHighlight(leftHighlight, currentLeftTarget);
+        ProcessHighlight(rightHighlight, currentRightTarget);
+        //ProcessLeftHighlight();
+        //ProcessRightHighlight();
     }
-
+    /*
     private void ProcessLeftHighlight()
     {
         if (currentLeftTarget != null)
@@ -83,6 +85,33 @@ public class SelectedEnemyHighlighter : MonoBehaviour
             if (rightHighlight.activeInHierarchy)
             {
                 rightHighlight.SetActive(false);
+            }
+        }
+    }
+    */
+    private void ProcessHighlight(GameObject highlight, GameObject target)
+    {
+        if (target != null)
+        {
+            if (!highlight.activeInHierarchy)
+            {
+                highlight.SetActive(true);
+            }
+            //move highlight to correct position
+            //cast a ray from enemy to headset, if it hits the selection sphere add it to the list
+            Vector3 direction = (gameObject.transform.position - target.transform.position).normalized;
+            RaycastHit hitData;
+            Physics.Raycast(target.transform.position, direction, out hitData, Vector3.Distance(target.transform.position,
+                gameObject.transform.position), highlightMask, QueryTriggerInteraction.Collide);
+            highlight.transform.position = hitData.point;
+
+            highlight.transform.rotation.SetLookRotation(direction);
+        }
+        else
+        {
+            if (highlight.activeInHierarchy)
+            {
+                highlight.SetActive(false);
             }
         }
     }
