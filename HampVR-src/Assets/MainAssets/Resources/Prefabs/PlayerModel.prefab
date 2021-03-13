@@ -1788,7 +1788,7 @@ MonoBehaviour:
   distanceWeight: 0.25
   cockpitMask:
     serializedVersion: 2
-    m_Bits: 7185
+    m_Bits: 53265
   uiParentScript: {fileID: 0}
 --- !u!114 &2169872460634575079
 MonoBehaviour:
