@@ -18,9 +18,6 @@ public class UIController : MonoBehaviour
     public TextMeshProUGUI rightTargetText;
     public PlayerController playerController;
 
-    public float heightOffsetBelowHeadset = .2f; //how far below the headset to put the UI when changing the UI height
-    public GameObject UIParent; //the empty parent we use to move all the UI up or down
-
     private float currentSpeed;
     private int currentHealth;
 
@@ -60,8 +57,6 @@ public class UIController : MonoBehaviour
         {
             MenuUI.SetActive(false);
         }
-
-        Debug.Log("Level Status:" + LevelState.levelState.levelStatus);
 
     }
 

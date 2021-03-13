@@ -144,6 +144,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Misc")]
     public LayerMask cockpitMask;
+    public UIParentScript consoleScript;
 
 
     // Start is called before the first frame update
@@ -209,6 +210,8 @@ public class PlayerController : MonoBehaviour
         if (GetResetHeadsetDown())
         {
             headsetZero = mainCamera.transform.localPosition;
+            consoleScript.ChangeUIHeight(headsetZero);
+            
         }
 
         //set max forward lean

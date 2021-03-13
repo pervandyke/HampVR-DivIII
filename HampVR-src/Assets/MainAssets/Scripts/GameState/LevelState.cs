@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelState : MonoBehaviour
 {
     public static LevelState levelState;
-    public int levelStatus = 1; //0 = menu, 1 = in progress, 2 = level complete (win/lose)
+    public int levelStatus; //0 = menu, 1 = in progress, 2 = level complete (win/lose)
 
     private void Awake()
     {
