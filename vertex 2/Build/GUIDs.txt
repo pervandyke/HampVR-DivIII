@@ -1,9 +1,0 @@
-{d1f04af3-9396-4f06-b284-84f152ddc400} bank:/Master
-{49ed6a27-e2ed-0344-34cd-0e0fa32ec298} bank:/Master.strings
-{5683e5a0-997d-4df4-a04a-f19d2b9878d0} bus:/
-{e37ea02e-ab6e-4876-af01-1aec6aa1b37f} bus:/Reverb
-{2dd0fa91-de28-44b4-a4eb-aa1c795144e3} bus:/SFX
-{58a4e663-6ab6-4f31-9415-19a385cda9b8} bus:/SFX/Reverb
-{8d01dc34-28e8-4d30-b724-f4c3a8f25a61} event:/Tank
-{c7313b97-6a44-43dd-b011-1da9d0a6432b} parameter:/Vehicles/Load
-{8706ae1a-bb61-4314-abee-7e5ab599c8c6} parameter:/Vehicles/Ride-on Mower/RPM
