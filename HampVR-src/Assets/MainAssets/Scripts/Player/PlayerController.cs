@@ -281,7 +281,9 @@ public class PlayerController : MonoBehaviour
     }
     private void AbsoluteRotateToCamera()
     {
+        //set rotation
         playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, mainCamera.transform.rotation, Time.deltaTime * rotateSpeed);
+        //zero out x and z rotations
         playerModel.transform.rotation = Quaternion.Euler(0,playerModel.transform.rotation.eulerAngles.y,0);
     }
 
@@ -593,6 +595,7 @@ public class PlayerController : MonoBehaviour
                 //get the distance to target
                 float distanceToSelectionCandidate = Vector3.Distance(mainCamera.transform.position, validSelectionValues[i].potentialTarget.transform.position);
                 validSelectionValues[i].normalizedDistance = Mathf.InverseLerp(distanceMax, distanceMin, distanceToSelectionCandidate);
+                
                 //get the target threat value
 
                 //Multiply all the normalized values by multipliers and combine (currently addition)

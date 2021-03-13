@@ -492,6 +492,7 @@ GameObject:
   - component: {fileID: 4263430021785689419}
   - component: {fileID: 5570201440834507263}
   - component: {fileID: 9201675519023189428}
+  - component: {fileID: 9084143937810047295}
   - component: {fileID: 6359594939886634183}
   m_Layer: 10
   m_Name: PlayerModel
@@ -580,6 +581,22 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2432090755550338912, guid: ec8cc7577ca86fe4d8879952fd2ef6f1, type: 3}
+--- !u!54 &9084143937810047295
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4263430021785689421}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1818360608 &6359594939886634183
 PositionConstraint:
   m_ObjectHideFlags: 0
@@ -1729,4 +1746,4 @@ MonoBehaviour:
   cockpitMask:
     serializedVersion: 2
     m_Bits: 7185
-  consoleScript: {fileID: 0}
+  uiParentScript: {fileID: 0}
