@@ -611,7 +611,7 @@ PositionConstraint:
   m_TranslationAtRest: {x: 0, y: 6.5, z: 0}
   m_TranslationOffset: {x: 0, y: 0.9, z: 0}
   m_AffectTranslationX: 1
-  m_AffectTranslationY: 0
+  m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
   m_IsContraintActive: 1
   m_IsLocked: 1

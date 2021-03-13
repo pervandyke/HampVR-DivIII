@@ -177,7 +177,7 @@ MonoBehaviour:
   Path: ../vertex FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637512420582450342
+  lastModified: 637512421185645163
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -435,7 +435,7 @@ MonoBehaviour:
   - {fileID: -3374053040280374850}
   StringsBanks:
   - {fileID: 5023197787500889396}
-  stringsBankWriteTime: 637512420582524319
+  stringsBankWriteTime: 637512421185704959
   cacheVersion: 6
 --- !u!114 &625463347826010311
 MonoBehaviour:
@@ -495,7 +495,7 @@ MonoBehaviour:
   Path: ../vertex FMOD/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 637512420582683876
+  lastModified: 637512421185834924
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -554,9 +554,29 @@ MonoBehaviour:
   Path: ../vertex FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637512420582713793
+  lastModified: 637512421185854911
   LoadResult: 0
   FileSizes: []
+  Exists: 1
+--- !u!114 &3856434626190702571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TankMovement/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 2000
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
   Exists: 1
 --- !u!114 &4501925329182734563
 MonoBehaviour:
@@ -618,11 +638,31 @@ MonoBehaviour:
   Path: ../vertex FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637512420582524319
+  lastModified: 637512421185704959
   LoadResult: 0
   FileSizes:
   - Name: Desktop
     Value: 1158
+  Exists: 1
+--- !u!114 &5687485809493509825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TankMovement/Load
+  m_EditorClassIdentifier: 
+  Name: Load
+  Min: -1
+  Max: 1
+  Default: -1
+  ID:
+    data1: 0
+    data2: 0
   Exists: 1
 --- !u!114 &5833851976804796713
 MonoBehaviour:
@@ -644,8 +684,8 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -5432688583716351306}
-  - {fileID: -7337691959638313632}
+  - {fileID: 3856434626190702571}
+  - {fileID: 5687485809493509825}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
