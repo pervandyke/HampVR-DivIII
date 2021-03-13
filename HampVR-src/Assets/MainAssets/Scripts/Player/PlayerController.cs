@@ -144,7 +144,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Misc")]
     public LayerMask cockpitMask;
-    public UIParentScript consoleScript;
+    public UIParentScript uiParentScript; //include the ui parent script as a variable in this script so that we can call the height adjustment function
 
 
     // Start is called before the first frame update
@@ -186,12 +186,12 @@ public class PlayerController : MonoBehaviour
 
         if (leftWeaponCooldown)
         {
-            leftCooldownTimer -= Time.fixedDeltaTime;
+            leftCooldownTimer -= Time.fixedDeltaTime; //subtract elapsed time from the reload timer
             print("left cooldown: " + leftCooldownTimer);
             if (leftCooldownTimer <= 0)
             {
                 leftCooldownTimer = missileCooldownDefault;
-                leftWeaponCooldown = false;
+                leftWeaponCooldown = false; //set left missile to fireable
             }
         }
 
@@ -209,8 +209,8 @@ public class PlayerController : MonoBehaviour
         //Reset Control Zero
         if (GetResetHeadsetDown())
         {
-            headsetZero = mainCamera.transform.localPosition;
-            consoleScript.ChangeUIHeight(headsetZero);
+            headsetZero = mainCamera.transform.localPosition; //set the control space center to the current headset location
+            uiParentScript.ChangeUIHeight(headsetZero); //update ui height
             
         }
 
@@ -318,15 +318,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void ControllerBehaviorHandler()
+    private void ControllerBehaviorHandler() //this function is called once per fixed update, on line 185 as of March 13 2021
     {
         Vector3 leftPosition = leftHand.transform.localPosition;
         Vector3 rightPosition = rightHand.transform.localPosition;
 
-        handMoveLogTimer = handMoveLogTimer - Time.fixedUnscaledDeltaTime;
-        if (handMoveLogTimer <= 0)
+        handMoveLogTimer = handMoveLogTimer - Time.fixedUnscaledDeltaTime; //subtract elapsed real time since last fixed update tick
+        if (handMoveLogTimer <= 0)  //check if elapsed time since last hand location recorded has exceeded the value of HandMoveLogTimerDefault
         {
-            if (controllerDebug)
+            if (controllerDebug) //this block runs (once per fixed update) if the "Controller Debug" box is checked
             {
                 print("Logging Left hand at " + leftPosition);
                 print("Logging Right hand at " + rightPosition);
@@ -338,7 +338,7 @@ public class PlayerController : MonoBehaviour
 
             if (leftLastPositions.Count > handMoveLogSize)
             {
-                for (int i = leftLastPositions.Count-1; i < handMoveLogSize - 1; i--)
+                for (int i = leftLastPositions.Count-1; i < handMoveLogSize - 1; i--) //remove the last item from the end of leftLastPositions.Count until the lenghth of leftLastPositions.count is less than the tuned value
                 {
                     leftLastPositions.RemoveAt(i);
                 }
@@ -352,7 +352,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            handMoveLogTimer = handMoveLogTimerDefault;
+            handMoveLogTimer = handMoveLogTimerDefault; //reset the timer
         }
 
         PunchCheck(leftPosition, rightPosition);
@@ -616,14 +616,14 @@ public class PlayerController : MonoBehaviour
     }
 
    
-    private void PunchCheck(Vector3 leftPosition, Vector3 rightPosition)
+    private void PunchCheck(Vector3 leftPosition, Vector3 rightPosition) //called once per fixedUpdate, during ControllerBehaviorHandler
     {
         //if player has punched forward, then shoot
         if (GetLeftFireDown())
         {
-            if ((leftPosition - leftLastPositions[fireDetectionTime]).magnitude > fireDistance && !leftWeaponCooldown)
+            if ((leftPosition - leftLastPositions[fireDetectionTime]).magnitude > fireDistance && !leftWeaponCooldown)  //only if the weapon is not reloading, and the distance traveled since the location recorded fireDetectionTime ago is greater than the tuned firDistance
             {
-                if (weaponDebug)
+                if (weaponDebug)    //this block runs only if "Weapon Debug[]" is checked
                 {
                     print("Left Punch");
                     print("Left Position: " + leftPosition + "\nLeft Last Position: " + leftLastPositions[fireDetectionTime]);
