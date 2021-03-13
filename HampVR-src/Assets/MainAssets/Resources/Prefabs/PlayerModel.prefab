@@ -1407,8 +1407,6 @@ MonoBehaviour:
   leftTargetText: {fileID: 3110169846683431571}
   rightTargetText: {fileID: 2794215516586485830}
   playerController: {fileID: 3930032130077271513}
-  heightOffsetBelowHeadset: 0.2
-  UIParent: {fileID: 2848340565836769025}
 --- !u!1 &7270267465244786604
 GameObject:
   m_ObjectHideFlags: 0
@@ -1652,9 +1650,9 @@ MonoBehaviour:
   laserSpawner2: {fileID: 8194421143144734473}
   mainCamera: {fileID: 0}
   RB: {fileID: 0}
-  acceleration: 99
+  acceleration: 120
   rotateSpeed: 0.7
-  maxSpeed: 40
+  maxSpeed: 69
   deadZone: 0.1
   mass: 2
   drag: 3
@@ -1731,3 +1729,4 @@ MonoBehaviour:
   cockpitMask:
     serializedVersion: 2
     m_Bits: 7185
+  consoleScript: {fileID: 0}
