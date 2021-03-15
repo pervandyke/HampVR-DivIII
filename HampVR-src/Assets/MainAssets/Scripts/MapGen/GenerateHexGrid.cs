@@ -88,20 +88,33 @@ public class GenerateHexGrid : MonoBehaviour
 
     private void PlaceHex(int hexZ, int hexX, string tileType)
     {
+        //Set Rotation
         Quaternion rotation = new Quaternion();
         rotation.eulerAngles = Vector3.zero;
+        
+        //Set Position
         Vector3 position = new Vector3();
         position.x = hexX * hexHeight / 2;
         position.z = hexZ * hexWidth * .75f;
         position.y = 0;
-        GameObject HexInstance = Instantiate(Resources.Load<GameObject>("Prefabs/"+tileType), position, rotation) as GameObject; //place each hex
-        HexInstance.transform.localScale = new Vector3(sideLength, 1.0f, sideLength);   //scale up each placed hex appropriately
+        
+        //Instantiate using rotation and position
+        GameObject HexInstance = Instantiate(Resources.Load<GameObject>("Prefabs/"+tileType), position, rotation) as GameObject;
+
+        //scale up each placed hex appropriately
+        HexInstance.transform.localScale = new Vector3(sideLength, 1.0f, sideLength);
+
+        //setup coordinates to display in editor
         HexInstance.GetComponent<HexData>().x = hexX;
         HexInstance.GetComponent<HexData>().z = hexZ;
+
+        //spawn turrets if present
         if (HexInstance.TryGetComponent<HexInit>(out HexInit init))
         {
             init.SpawnTurrets(2);
         }
+
+        //set parent of hex to MapHolder
         HexInstance.transform.parent = GameObject.Find("MapHolder").transform;
     }
 }

@@ -528,44 +528,47 @@ public class PlayerController : MonoBehaviour
 
         //find every enemy that would be a valid selection
         List<GameObject> validSelections = new List<GameObject>();
-        foreach (GameObject enemy in EnemyManager.enemyManager.enemies)
+        if (EnemyManager.enemyManager.CheckEmpty() == false)
         {
-            //cast a ray from enemy to headset, if it hits the selection sphere add it to the list
-            Vector3 direction = (mainCamera.transform.position - enemy.transform.position).normalized;
-            RaycastHit hitData;
-            bool didHit = Physics.Raycast(enemy.transform.position, direction, out hitData, Vector3.Distance(enemy.transform.position, mainCamera.transform.position),
-                cockpitMask, QueryTriggerInteraction.Collide);
-            
-            if (selectionDebug)
+            foreach (GameObject enemy in EnemyManager.enemyManager.enemies)
             {
-                print("Drawing Ray from enemy " + enemy.name + " Along direction " + direction);
-                Ray selectionRay = new Ray(enemy.transform.position, direction);
-                Color rayColor;
-                if (!didHit)
-                {
-                    rayColor = Color.yellow;
-                }
-                else if (didHit && hitData.collider.gameObject.tag == "SelectionSphere")
-                {
-                    rayColor = Color.red;
-                }
-                else
-                {
-                    rayColor = Color.green;
-                }
-                Debug.DrawRay(selectionRay.origin, selectionRay.direction * Vector3.Distance(mainCamera.transform.position, enemy.transform.position), rayColor, 10.0f);
-            }
+                //cast a ray from enemy to headset, if it hits the selection sphere add it to the list
+                Vector3 direction = (mainCamera.transform.position - enemy.transform.position).normalized;
+                RaycastHit hitData;
+                bool didHit = Physics.Raycast(enemy.transform.position, direction, out hitData, Vector3.Distance(enemy.transform.position, mainCamera.transform.position),
+                    cockpitMask, QueryTriggerInteraction.Collide);
 
-            if (didHit)
-            {
                 if (selectionDebug)
                 {
-                    print("Ray hit: " + hitData.collider.gameObject.name);
+                    print("Drawing Ray from enemy " + enemy.name + " Along direction " + direction);
+                    Ray selectionRay = new Ray(enemy.transform.position, direction);
+                    Color rayColor;
+                    if (!didHit)
+                    {
+                        rayColor = Color.yellow;
+                    }
+                    else if (didHit && hitData.collider.gameObject.tag == "SelectionSphere")
+                    {
+                        rayColor = Color.red;
+                    }
+                    else
+                    {
+                        rayColor = Color.green;
+                    }
+                    Debug.DrawRay(selectionRay.origin, selectionRay.direction * Vector3.Distance(mainCamera.transform.position, enemy.transform.position), rayColor, 10.0f);
                 }
 
-                if (hitData.collider.gameObject.tag == "SelectionSphere")
+                if (didHit)
                 {
-                    validSelections.Add(enemy);
+                    if (selectionDebug)
+                    {
+                        print("Ray hit: " + hitData.collider.gameObject.name);
+                    }
+
+                    if (hitData.collider.gameObject.tag == "SelectionSphere")
+                    {
+                        validSelections.Add(enemy);
+                    }
                 }
             }
         }
