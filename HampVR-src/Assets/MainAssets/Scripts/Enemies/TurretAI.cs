@@ -141,6 +141,7 @@ public class TurretAI : MonoBehaviour, IEnemy
             {
                 Global.global.rightSelectedTarget = null;
             }
+            EnemyManager.enemyManager.RemoveEnemy(gameObject);
             Destroy(gameObject);
         }
     }

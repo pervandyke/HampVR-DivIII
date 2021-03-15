@@ -625,7 +625,7 @@ public class PlayerController : MonoBehaviour
     private void PunchCheck(Vector3 leftPosition, Vector3 rightPosition) //called once per fixedUpdate, during ControllerBehaviorHandler
     {
         //if player has punched forward, then shoot
-        if (GetLeftFireDown())
+        if (GetLeftFireDown() && leftLastPositions.Count > fireDetectionTime)
         {
             if ((leftPosition - leftLastPositions[fireDetectionTime]).magnitude > fireDistance && !leftWeaponCooldown)  //only if the weapon is not reloading, and the distance traveled since the location recorded fireDetectionTime ago is greater than the tuned firDistance
             {
@@ -642,7 +642,7 @@ public class PlayerController : MonoBehaviour
 
         
 
-        if (GetRightFireDown())
+        if (GetRightFireDown() && rightLastPositions.Count > fireDetectionTime)
         {
             if ((rightPosition - rightLastPositions[fireDetectionTime]).magnitude > fireDistance && !rightWeaponCooldown)
             {
