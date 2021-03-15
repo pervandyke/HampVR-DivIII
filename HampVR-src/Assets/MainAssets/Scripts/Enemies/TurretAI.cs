@@ -118,7 +118,7 @@ public class TurretAI : MonoBehaviour, IEnemy
     private void Shoot()
     {
         shotTimer -= Time.deltaTime;
-        if (allowedToShoot && shotTimer <= 0.0f)
+        if (playerInRange && shotTimer <= 0.0f)
         {
             GameObject shotInstance = Instantiate(Resources.Load("Prefabs/Laser"), laserEmitter.transform.position, laserEmitter.transform.rotation) as GameObject;
             shotInstance.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, laserSpeed);
