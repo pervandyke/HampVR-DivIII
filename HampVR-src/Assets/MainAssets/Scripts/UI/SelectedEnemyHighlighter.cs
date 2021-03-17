@@ -32,63 +32,8 @@ public class SelectedEnemyHighlighter : MonoBehaviour
 
         ProcessHighlight(leftHighlight, currentLeftTarget);
         ProcessHighlight(rightHighlight, currentRightTarget);
-        //ProcessLeftHighlight();
-        //ProcessRightHighlight();
     }
-    /*
-    private void ProcessLeftHighlight()
-    {
-        if (currentLeftTarget != null)
-        {
-            if (!leftHighlight.activeInHierarchy)
-            {
-                leftHighlight.SetActive(true);
-            }
-            //move highlight to correct position
-            //cast a ray from enemy to headset, if it hits the selection sphere add it to the list
-            Vector3 direction = (gameObject.transform.position - currentLeftTarget.transform.position).normalized;
-            RaycastHit hitData;
-            Physics.Raycast(currentLeftTarget.transform.position, direction, out hitData, Vector3.Distance(currentLeftTarget.transform.position, 
-                gameObject.transform.position), highlightMask, QueryTriggerInteraction.Collide);
-            leftHighlight.transform.position = hitData.point;
 
-            leftHighlight.transform.rotation.SetLookRotation(direction);
-        }
-        else
-        {
-            if (leftHighlight.activeInHierarchy)
-            {
-                leftHighlight.SetActive(false);
-            }
-        }
-    }
-    private void ProcessRightHighlight()
-    {
-        if (currentRightTarget != null)
-        {
-            if (!rightHighlight.activeInHierarchy)
-            {
-                rightHighlight.SetActive(true);
-            }
-            //move highlight to correct position
-            //cast a ray from enemy to headset, if it hits the selection sphere add it to the list
-            Vector3 direction = (gameObject.transform.position - currentRightTarget.transform.position).normalized;
-            RaycastHit hitData;
-            Physics.Raycast(currentRightTarget.transform.position, direction, out hitData, Vector3.Distance(currentRightTarget.transform.position,
-                gameObject.transform.position), highlightMask, QueryTriggerInteraction.Collide);
-            rightHighlight.transform.position = hitData.point;
-
-            rightHighlight.transform.rotation.SetLookRotation(direction);
-        }
-        else
-        {
-            if (rightHighlight.activeInHierarchy)
-            {
-                rightHighlight.SetActive(false);
-            }
-        }
-    }
-    */
     private void ProcessHighlight(GameObject highlight, GameObject target)
     {
         if (target != null)
@@ -98,7 +43,6 @@ public class SelectedEnemyHighlighter : MonoBehaviour
                 highlight.SetActive(true);
             }
             //move highlight to correct position
-            //cast a ray from enemy to headset, if it hits the selection sphere add it to the list
             Vector3 direction = (gameObject.transform.position - target.transform.position).normalized;
             RaycastHit hitData;
             Physics.Raycast(target.transform.position, direction, out hitData, Vector3.Distance(target.transform.position,

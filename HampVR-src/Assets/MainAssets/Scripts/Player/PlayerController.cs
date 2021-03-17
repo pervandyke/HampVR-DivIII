@@ -267,14 +267,6 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    private void Update()
-    {
-        if (health <= 0)
-        {
-            //opaque canopy and change to state 2
-        }
-    }
-
     private void RelativeRotateToCamera()
     {
         playerPhysics.transform.rotation = Quaternion.Slerp(playerPhysics.transform.rotation, mainCamera.transform.rotation, Time.deltaTime * rotateSpeed);

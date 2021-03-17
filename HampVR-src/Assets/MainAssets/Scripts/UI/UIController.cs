@@ -11,11 +11,13 @@ public class UIController : MonoBehaviour
     
     public GameObject GameplayUI;
     public GameObject MenuUI;
+    public GameObject EndUI;
 
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI speedText;
     public TextMeshProUGUI leftTargetText;
     public TextMeshProUGUI rightTargetText;
+    public TextMeshProUGUI WinLoseMessage;
     public PlayerController playerController;
 
     private float currentSpeed;
@@ -25,7 +27,6 @@ public class UIController : MonoBehaviour
     void Start()
     {
         playerPhysics = playerController.RB;
-        LevelState.levelState.levelStatus = 1; //brute force the levelStatus to 1 (in play)
     }
 
     // Update is called once per frame
@@ -40,6 +41,15 @@ public class UIController : MonoBehaviour
 
     private void ActiveUI()
     {
+        if (LevelState.levelState.levelStatus == 0 && !MenuUI.activeInHierarchy)
+        {
+            MenuUI.SetActive(true);
+        }
+        else if (LevelState.levelState.levelStatus != 0 && MenuUI.activeInHierarchy)
+        {
+            MenuUI.SetActive(false);
+        }
+
         if (LevelState.levelState.levelStatus == 1 && !GameplayUI.activeInHierarchy)
         {
             GameplayUI.SetActive(true);
@@ -48,14 +58,14 @@ public class UIController : MonoBehaviour
         {
             GameplayUI.SetActive(false);
         }
-        
-        if (LevelState.levelState.levelStatus == 0 && !MenuUI.activeInHierarchy)
+
+        if (LevelState.levelState.levelStatus == 2 && !EndUI.activeInHierarchy)
         {
-            MenuUI.SetActive(true);
+            EndUI.SetActive(true);
         }
-        else if (LevelState.levelState.levelStatus != 0 && MenuUI.activeInHierarchy)
+        else if (LevelState.levelState.levelStatus != 2 && EndUI.activeInHierarchy)
         {
-            MenuUI.SetActive(false);
+            EndUI.SetActive(false);
         }
 
     }
@@ -102,5 +112,16 @@ public class UIController : MonoBehaviour
         {
 
         }
+    }
+
+    public void UpdateEndStatePanel(string message)
+    {
+        WinLoseMessage.text = message;
+    }
+
+    public void ReturnToMenu()
+    {
+        LevelState.levelState.levelStatus = 0;
+        LevelState.levelState.ProcessState();
     }
 }
