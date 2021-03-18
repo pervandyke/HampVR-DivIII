@@ -26,7 +26,7 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerPhysics = playerController.RB;
+        playerPhysics = playerController.RB; //what is this used for?
     }
 
     // Update is called once per frame
