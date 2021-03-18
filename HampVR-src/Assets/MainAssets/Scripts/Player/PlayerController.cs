@@ -5,7 +5,7 @@ using UnityEngine.Animations;
 using Valve.VR;
 
 public class PlayerController : MonoBehaviour
-{
+{   //declare tunable variables
     public static PlayerController playerController;
 
     [Header("Debug")]
@@ -145,6 +145,7 @@ public class PlayerController : MonoBehaviour
     [Header("Misc")]
     public LayerMask cockpitMask;
     public UIParentScript uiParentScript; //include the ui parent script as a variable in this script so that we can call the height adjustment function
+    //end of tunable variables
 
 
     // Start is called before the first frame update
