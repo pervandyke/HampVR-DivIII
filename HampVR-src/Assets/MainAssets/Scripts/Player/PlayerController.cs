@@ -220,7 +220,7 @@ public class PlayerController : MonoBehaviour
             maxLean = mainCamera.transform.localPosition.z;
         }
 
-        //space break
+        //space break   //old pre-vr block
         if (Input.GetKey(KeyCode.B))
         {
             RB.velocity = Vector3.zero;
