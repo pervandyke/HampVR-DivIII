@@ -332,7 +332,7 @@ public class PlayerController : MonoBehaviour
                 print("leftLastPositions: " + leftLastPositions);
                 print("rightLastPositions: " + rightLastPositions);
             }
-            leftLastPositions.Insert(0, leftPosition);
+            leftLastPositions.Insert(0, leftPosition); //insert this latest position into the list of past positions
             rightLastPositions.Insert(0, rightPosition);
 
             if (leftLastPositions.Count > handMoveLogSize)
@@ -343,7 +343,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if (rightLastPositions.Count > handMoveLogSize)
+            if (rightLastPositions.Count > handMoveLogSize) //same as previous block but for the right side
             {
                 for (int i = rightLastPositions.Count-1; i < handMoveLogSize - 1; i--)
                 {
@@ -351,7 +351,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            handMoveLogTimer = handMoveLogTimerDefault; //reset the timer
+            handMoveLogTimer = handMoveLogTimerDefault; //reset the timer to the tuned value
         }
 
         PunchCheck(leftPosition, rightPosition);
@@ -621,7 +621,7 @@ public class PlayerController : MonoBehaviour
    
     private void PunchCheck(Vector3 leftPosition, Vector3 rightPosition) //called once per fixedUpdate, during ControllerBehaviorHandler
     {
-        //if player has punched forward, then shoot
+        //if player has punched, then shoot
         if (GetLeftFireDown() && leftLastPositions.Count > fireDetectionTime)
         {
             if ((leftPosition - leftLastPositions[fireDetectionTime]).magnitude > fireDistance && !leftWeaponCooldown)  //only if the weapon is not reloading, and the distance traveled since the location recorded fireDetectionTime ago is greater than the tuned firDistance
@@ -633,7 +633,7 @@ public class PlayerController : MonoBehaviour
                 }
 
                 WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner2, RB, laserSpawner2.transform.rotation, laserSpeed, missileTurningSpeed, laserDamage, Global.global.leftSelectedTarget, SteamVR_Input_Sources.LeftHand);
-                leftWeaponCooldown = true;
+                leftWeaponCooldown = true; //start the reload timer
             }
         }
 
