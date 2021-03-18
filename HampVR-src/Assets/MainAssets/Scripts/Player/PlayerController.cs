@@ -150,12 +150,16 @@ public class PlayerController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        //set rigidbody tunables to the values defined in the editor
         RB = playerPhysics.GetComponent<Rigidbody>();
         RB.drag = drag;
         RB.angularDrag = angularDrag;
         RB.mass = mass;
-        headsetZero = mainCamera.transform.localPosition;
+
+        headsetZero = mainCamera.transform.localPosition; //replace this with a new ResetControlSpace()
+        
+        //initialize controller-related variables
         handMoveLogTimer = handMoveLogTimerDefault;
         leftLastPositions = new List<Vector3>();
         rightLastPositions = new List<Vector3>();
