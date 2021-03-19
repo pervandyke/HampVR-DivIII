@@ -7,7 +7,7 @@ public class Global : MonoBehaviour
 {
     public static Global global;
 
-    public string rotationType = "relative";
+    public string rotationType;
     public List<List<HexPrefabReference>> hexSelectionLists;
     public GameObject leftSelectedTarget;
     public GameObject rightSelectedTarget;

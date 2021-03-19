@@ -48,7 +48,7 @@ public class LevelState : MonoBehaviour
         else if (levelStatus == 1)
         {
             //un-grey canopy, and unlock rotation
-            Global.global.rotationType = "relative";
+            Global.global.rotationType = "absolute";
         }
         else if (levelStatus == 2)
         {
@@ -58,7 +58,7 @@ public class LevelState : MonoBehaviour
             //grey out canopy
             UIC.UpdateEndStatePanel("You " + endGameStatus);
             Global.global.rotationType = "none";
-            GameObject.Find("PlayerModel").transform.rotation = GameObject.Find("[CameraRig]").transform.rotation;
+            GameObject.Find("PlayerModel").transform.rotation = GameObject.Find("Camera").transform.rotation;
         }
     }
 }
