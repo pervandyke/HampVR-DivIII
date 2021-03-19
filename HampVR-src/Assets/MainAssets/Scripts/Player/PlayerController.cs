@@ -55,11 +55,10 @@ public class PlayerController : MonoBehaviour
     public float angularDrag;
     [Tooltip("The distance in units the player has to lean from the zero to get max speed.")]
     public float maxLean;
-
-    [Header("Weapons/Health")]
     [Tooltip("The curve controlling how the ship achieves max speed throughout the players lean.")]
     public AnimationCurve targetSpeedCurve;
 
+    [Header("Weapons/Health")]
     public float laserSpeed;
     public int laserDamage;
     public float missileTurningSpeed;
