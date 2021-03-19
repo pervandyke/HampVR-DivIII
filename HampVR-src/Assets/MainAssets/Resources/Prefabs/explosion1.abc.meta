@@ -8,8 +8,8 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: f53f5fc499d31e44b9deee84d28a9ee8, type: 3}
-  rootGameObjectId: 
-  rootGameObjectName: 
+  rootGameObjectId: turretExplosion_Blendshape_1
+  rootGameObjectName: turretExplosion_Blendshape_1
   streamSettings:
     normals: 1
     tangents: 1
