@@ -19,6 +19,7 @@ public class UIController : MonoBehaviour
     public TextMeshProUGUI rightTargetText;
     public TextMeshProUGUI WinLoseMessage;
     public PlayerController playerController;
+    public VehicleMovement vehicleMovement;
 
     private float currentSpeed;
     private int currentHealth;
@@ -26,7 +27,7 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerPhysics = playerController.RB; //what is this used for?
+        playerPhysics = vehicleMovement.RB; //what is this used for?
     }
 
     // Update is called once per frame

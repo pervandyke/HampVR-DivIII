@@ -20,6 +20,7 @@ public class LevelState : MonoBehaviour
     }
     void Update()
     {
+        
         if (CheckEnemyEmpty() && levelStatus == 1)
         {
             levelStatus = 2;
@@ -58,7 +59,7 @@ public class LevelState : MonoBehaviour
             //grey out canopy
             UIC.UpdateEndStatePanel("You " + endGameStatus);
             Global.global.rotationType = "none";
-            GameObject.Find("PlayerModel").transform.rotation = GameObject.Find("Camera").transform.rotation;
+            GameObject.Find("PlayerModel").transform.rotation = VehicleMovement.vehicleMovement.HeadsetRotation2d(); //GameObject.Find("Camera").transform.rotation;
         }
     }
 }

@@ -5,26 +5,27 @@ using UnityEngine.Animations;
 using Valve.VR;
 
 public class PlayerController : MonoBehaviour
-{   //declare tunable variables
+{   
     public static PlayerController playerController;
 
+    //declare tunable variables
     [Header("Debug")]
     [Tooltip("Should controller debug messages be on?")]
     public bool controllerDebug;
     [Tooltip("Should Weapon debug messages be on?")]
     public bool weaponDebug;
-    [Tooltip("Should Movement debug messages be on?")]
-    public bool movementDebug;
+    //[Tooltip("Should Movement debug messages be on?")]
+    //public bool movementDebug;
     [Tooltip("Should Shield debug messages be on?")]
     public bool shieldDebug;
     [Tooltip("Should Selection Sphere be visible?")]
     public bool selectionDebug;
 
     [Header("GameObjects")]
-    [Tooltip("The GameObject with the players RigidBody")]
-    public GameObject playerPhysics;
-    [Tooltip("The GameObject representing the ship detached from the cockpit.")]
-    public GameObject playerModel;
+    //[Tooltip("The GameObject with the players RigidBody")]
+    //public GameObject playerPhysics;
+    //[Tooltip("The GameObject representing the ship detached from the cockpit.")]
+    //public GameObject playerModel;
     [Tooltip("The left controller.")]
     public GameObject leftHand;
     [Tooltip("The right controller.")]
@@ -33,30 +34,30 @@ public class PlayerController : MonoBehaviour
     public GameObject laserSpawner;
     [Tooltip("The right laser spawner.")]
     public GameObject laserSpawner2;
-    [Tooltip("The camera being used as the headset.")]
-    public Camera mainCamera;
-    
-    public Rigidbody RB;
+    //[Tooltip("The camera being used as the headset.")]
+    //public Camera mainCamera;
 
-    [Header("Flight Model")]
-    [Tooltip("The base acceleration value to be modified by the curve.")]
-    public float acceleration;
-    [Tooltip("How quickly the ship follows the players view.")]
-    public float rotateSpeed;
-    [Tooltip("The maximum speed achiveable by the player.")]
-    public float maxSpeed;
-    [Tooltip("THe area around the player where control inputs will not register in units.")]
-    public float deadZone;
-    [Tooltip("The mass of the ship. \n Overrides the rigidbody on the CameraRig.")]
-    public float mass;
-    [Tooltip("The drag of the ship (probably leave at 0). \n Overrides the rigidbody on the CameraRig.")]
-    public float drag;
-    [Tooltip("The angular drag of the ship (probably leave at 0). \n Overrides the rigidbody on the CameraRig.")]
-    public float angularDrag;
-    [Tooltip("The distance in units the player has to lean from the zero to get max speed.")]
-    public float maxLean;
-    [Tooltip("The curve controlling how the ship achieves max speed throughout the players lean.")]
-    public AnimationCurve targetSpeedCurve;
+    //public Rigidbody RB;
+
+    //[Header("Flight Model")]
+    //[Tooltip("The base acceleration value to be modified by the curve.")]
+    //public float acceleration;
+    //[Tooltip("How quickly the ship follows the players view.")]
+    //public float rotateSpeed;
+    //[Tooltip("The maximum speed achiveable by the player.")]
+    //public float maxSpeed;
+    //[Tooltip("The area around the player where control inputs will not register in units.")]
+    //public float deadZone;
+    //[Tooltip("The mass of the ship. \n Overrides the rigidbody on the CameraRig.")]
+    //public float mass;
+    //[Tooltip("The drag of the ship (probably leave at 0). \n Overrides the rigidbody on the CameraRig.")]
+    //public float drag;
+    //[Tooltip("The angular drag of the ship (probably leave at 0). \n Overrides the rigidbody on the CameraRig.")]
+    //public float angularDrag;
+    //[Tooltip("The distance in units the player has to lean from the zero to get max speed.")]
+    //public float maxLean;
+    //[Tooltip("The curve controlling how the ship achieves max speed throughout the players lean.")]
+    //public AnimationCurve targetSpeedCurve;
 
     [Header("Weapons/Health")]
     public float laserSpeed;
@@ -77,17 +78,17 @@ public class PlayerController : MonoBehaviour
     public SteamVR_Action_Boolean deccelerate;
     public SteamVR_Action_Boolean leftFire;
     public SteamVR_Action_Boolean rightFire;
-    public SteamVR_Action_Boolean resetHeadsetZero;
+    //public SteamVR_Action_Boolean resetHeadsetZero;
     public SteamVR_Action_Boolean leftSelect;
     public SteamVR_Action_Boolean rightSelect;
 
 
-    [SerializeField]
-    [Tooltip("The vector of representing the force being applied to the ships rigidbody.")]
-    private Vector3 horizontalMovementVector;
+    //[SerializeField]
+    //[Tooltip("The vector of representing the force being applied to the ships rigidbody.")]
+    //private Vector3 horizontalMovementVector;
 
-    private Vector3 headsetZero;
-    
+    //private Vector3 headsetZero;
+
 
     [Header("Punching")]
     [Tooltip("Interval between samples of controller positions in seconds.")]
@@ -151,12 +152,12 @@ public class PlayerController : MonoBehaviour
     void Start()
     {   
         //set rigidbody tunables to the values defined in the editor
-        RB = playerPhysics.GetComponent<Rigidbody>();
-        RB.drag = drag;
-        RB.angularDrag = angularDrag;
-        RB.mass = mass;
+        //RB = playerPhysics.GetComponent<Rigidbody>();
+        //RB.drag = drag;
+        //RB.angularDrag = angularDrag;
+        //RB.mass = mass;
 
-        headsetZero = mainCamera.transform.localPosition; //replace this with a new ResetControlSpace()
+        //headsetZero = mainCamera.transform.localPosition; //replace this with a new ResetControlSpace()
         
         //initialize controller-related variables
         handMoveLogTimer = handMoveLogTimerDefault;
@@ -182,9 +183,9 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        horizontalMovementVector = SetMovementVectors();
+        //horizontalMovementVector = SetMovementVectors();
 
-        ApplyForce();
+        //ApplyForce();
 
         ControllerBehaviorHandler();
 
@@ -211,110 +212,110 @@ public class PlayerController : MonoBehaviour
         }
 
         //Reset Control Zero
-        if (GetResetHeadsetDown())
-        {
-            headsetZero = mainCamera.transform.localPosition; //set the control space center to the current headset location
-            uiParentScript.ChangeUIHeight(headsetZero); //update ui height
+        //if (GetResetHeadsetDown())
+        //{
+        //    headsetZero = mainCamera.transform.localPosition; //set the control space center to the current headset location
+        //    uiParentScript.ChangeUIHeight(headsetZero); //update ui height
             
-        }
+        //}
 
         //set max forward lean
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            maxLean = mainCamera.transform.localPosition.z;
-        }
+        //if (Input.GetKeyDown(KeyCode.UpArrow))
+        //{
+        //    maxLean = mainCamera.transform.localPosition.z;
+        //}
 
         //space break   //old pre-vr block
-        if (Input.GetKey(KeyCode.B))
-        {
-            RB.velocity = Vector3.zero;
-        }
+        //if (Input.GetKey(KeyCode.B))
+        //{
+        //    RB.velocity = Vector3.zero;
+        //}
 
-        float lean;
-        float speedPercentage;
-        if (mainCamera.transform.localPosition.z != headsetZero.z)
-        {
-            lean = horizontalMovementVector.magnitude / maxLean;
-            if (lean > 1.0f)
-            {
-                lean = 1.0f;
-            }
-            speedPercentage = targetSpeedCurve.Evaluate(lean);
-            if (movementDebug)
-            {
-                print("Speed percentage: " + speedPercentage + "%");
-            }
-        }
-        else
-        {
-            speedPercentage = 0.0f;
-        }
+        //float lean;
+        //float speedPercentage;
+        //if (mainCamera.transform.localPosition.z != headsetZero.z)
+        //{
+        //    lean = horizontalMovementVector.magnitude / maxLean;
+        //    if (lean > 1.0f)
+        //    {
+        //        lean = 1.0f;
+        //    }
+        //    speedPercentage = targetSpeedCurve.Evaluate(lean);
+        //    if (movementDebug)
+        //    {
+        //        print("Speed percentage: " + speedPercentage + "%");
+        //    }
+        //}
+        //else
+        //{
+        //    speedPercentage = 0.0f;
+        //}
 
-        //clamp max speed
-        if (RB.velocity.magnitude > maxSpeed * speedPercentage)
-        {
-            RB.velocity = Vector3.ClampMagnitude(RB.velocity, maxSpeed * speedPercentage);
-            if (movementDebug)
-            {
-                print("Velocity clamped to: " + RB.velocity);
-            }
-        }
+        ////clamp max speed
+        //if (RB.velocity.magnitude > maxSpeed * speedPercentage)
+        //{
+        //    RB.velocity = Vector3.ClampMagnitude(RB.velocity, maxSpeed * speedPercentage);
+        //    if (movementDebug)
+        //    {
+        //        print("Velocity clamped to: " + RB.velocity);
+        //    }
+        //}
 
-        if (Global.global.rotationType == "relative")
-        {
-            RelativeRotateToCamera();
-        }
-        else if (Global.global.rotationType == "absolute")
-        {
-            AbsoluteRotateToCamera();
-        }
+        //if (Global.global.rotationType == "relative")
+        //{
+        //    RelativeRotateToCamera();
+        //}
+        //else if (Global.global.rotationType == "absolute")
+        //{
+        //    AbsoluteRotateToCamera();
+        //}
         
     }
 
-    private void RelativeRotateToCamera()
-    {
-        playerPhysics.transform.rotation = Quaternion.Slerp(playerPhysics.transform.rotation, mainCamera.transform.rotation, Time.deltaTime * rotateSpeed);
-    }
-    private void AbsoluteRotateToCamera()
-    {
-        //set rotation
-        playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, mainCamera.transform.rotation, Time.deltaTime * rotateSpeed);
-        //zero out x and z rotations
-        playerModel.transform.rotation = Quaternion.Euler(0,playerModel.transform.rotation.eulerAngles.y,0);
-    }
+    //private void RelativeRotateToCamera()
+    //{
+    //    playerPhysics.transform.rotation = Quaternion.Slerp(playerPhysics.transform.rotation, mainCamera.transform.rotation, Time.deltaTime * rotateSpeed);
+    //}
+    //private void AbsoluteRotateToCamera()
+    //{
+    //    //set rotation
+    //    playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, mainCamera.transform.rotation, Time.deltaTime * rotateSpeed);
+    //    //zero out x and z rotations
+    //    playerModel.transform.rotation = Quaternion.Euler(0,playerModel.transform.rotation.eulerAngles.y,0);
+    //}
 
     //Set the vector to control the players movement
-    private Vector3 SetMovementVectors()
-    {
-        Vector3 localHorizontalMovementVector = Vector3.zero;
-        if ((mainCamera.transform.localPosition - headsetZero).magnitude > deadZone)
-        {
-            localHorizontalMovementVector = mainCamera.transform.localPosition - headsetZero;
-            if (movementDebug)
-            {
-                print("Movement Vector: " + horizontalMovementVector);
-            }
-        }
+    //private Vector3 SetMovementVectors()
+    //{
+    //    Vector3 localHorizontalMovementVector = Vector3.zero;
+    //    if ((mainCamera.transform.localPosition - headsetZero).magnitude > deadZone)
+    //    {
+    //        localHorizontalMovementVector = mainCamera.transform.localPosition - headsetZero;
+    //        if (movementDebug)
+    //        {
+    //            print("Movement Vector: " + horizontalMovementVector);
+    //        }
+    //    }
 
-        localHorizontalMovementVector.y = 0;
-        return localHorizontalMovementVector;
-    }
+    //    localHorizontalMovementVector.y = 0;
+    //    return localHorizontalMovementVector;
+    //}
 
     //Apply the vector to the player as a force
-    private void ApplyForce()
-    {
-        if (mainCamera.transform.localPosition != headsetZero)
-        {
-            RB.AddForce(horizontalMovementVector.normalized * acceleration);
+    //private void ApplyForce()
+    //{
+    //    if (mainCamera.transform.localPosition != headsetZero)
+    //    {
+    //        RB.AddForce(horizontalMovementVector.normalized * acceleration);
 
-            if (movementDebug)
-            {
-                //Debug Raycast
-                Ray horizontalMovementRay = new Ray(mainCamera.transform.position, mainCamera.transform.localPosition - headsetZero);
-                Debug.DrawRay(horizontalMovementRay.origin, horizontalMovementRay.direction * 10, Color.red);
-            } 
-        }
-    }
+    //        if (movementDebug)
+    //        {
+    //            //Debug Raycast
+    //            Ray horizontalMovementRay = new Ray(mainCamera.transform.position, mainCamera.transform.localPosition - headsetZero);
+    //            Debug.DrawRay(horizontalMovementRay.origin, horizontalMovementRay.direction * 10, Color.red);
+    //        } 
+    //    }
+    //}
 
     private void ControllerBehaviorHandler() //this function is called once per fixed update, on line 185 as of March 13 2021
     {
@@ -512,7 +513,7 @@ public class PlayerController : MonoBehaviour
         }
         //create a sphere with a diameter == to twice the distance from the average point fo the furthest point
         GameObject selectionSphere = Instantiate(Resources.Load("Prefabs/SelectionSphere")) as GameObject;
-        selectionSphere.transform.parent = playerPhysics.transform;
+        selectionSphere.transform.parent = VehicleMovement.vehicleMovement.playerPhysics.transform;
         if (!selectionDebug)
         {
             selectionSphere.GetComponent<MeshRenderer>().enabled = false;
@@ -529,9 +530,9 @@ public class PlayerController : MonoBehaviour
             foreach (GameObject enemy in EnemyManager.enemyManager.enemies)
             {
                 //cast a ray from enemy to headset, if it hits the selection sphere add it to the list
-                Vector3 direction = (mainCamera.transform.position - enemy.transform.position).normalized;
+                Vector3 direction = (VehicleMovement.vehicleMovement.mainCamera.transform.position - enemy.transform.position).normalized;
                 RaycastHit hitData;
-                bool didHit = Physics.Raycast(enemy.transform.position, direction, out hitData, Vector3.Distance(enemy.transform.position, mainCamera.transform.position),
+                bool didHit = Physics.Raycast(enemy.transform.position, direction, out hitData, Vector3.Distance(enemy.transform.position, VehicleMovement.vehicleMovement.mainCamera.transform.position),
                     cockpitMask, QueryTriggerInteraction.Collide);
 
                 if (selectionDebug)
@@ -551,7 +552,7 @@ public class PlayerController : MonoBehaviour
                     {
                         rayColor = Color.green;
                     }
-                    Debug.DrawRay(selectionRay.origin, selectionRay.direction * Vector3.Distance(mainCamera.transform.position, enemy.transform.position), rayColor, 10.0f);
+                    Debug.DrawRay(selectionRay.origin, selectionRay.direction * Vector3.Distance(VehicleMovement.vehicleMovement.mainCamera.transform.position, enemy.transform.position), rayColor, 10.0f);
                 }
 
                 if (didHit)
@@ -585,14 +586,14 @@ public class PlayerController : MonoBehaviour
                 validSelectionValues.Add(new TargetSelectionValues() {potentialTarget = validSelections[i]});
 
                 //get the angle to player view
-                Vector3 enemyDirection = validSelections[i].transform.position - mainCamera.transform.position;
-                float viewAngle = Vector3.Angle(enemyDirection, mainCamera.transform.forward);
+                Vector3 enemyDirection = validSelections[i].transform.position - VehicleMovement.vehicleMovement.mainCamera.transform.position;
+                float viewAngle = Vector3.Angle(enemyDirection, VehicleMovement.vehicleMovement.mainCamera.transform.forward);
                 validSelectionValues[i].normalizedAngleToView = Mathf.InverseLerp(viewAngleMax, viewAngleMin, viewAngle);
 
                 //get the angle to the forward direction of the selection sphere
 
                 //get the distance to target
-                float distanceToSelectionCandidate = Vector3.Distance(mainCamera.transform.position, validSelectionValues[i].potentialTarget.transform.position);
+                float distanceToSelectionCandidate = Vector3.Distance(VehicleMovement.vehicleMovement.mainCamera.transform.position, validSelectionValues[i].potentialTarget.transform.position);
                 validSelectionValues[i].normalizedDistance = Mathf.InverseLerp(distanceMax, distanceMin, distanceToSelectionCandidate);
                 
                 //get the target threat value
@@ -631,7 +632,7 @@ public class PlayerController : MonoBehaviour
                     print("Left Position: " + leftPosition + "\nLeft Last Position: " + leftLastPositions[fireDetectionTime]);
                 }
 
-                WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner2, RB, laserSpawner2.transform.rotation, laserSpeed, missileTurningSpeed, laserDamage, Global.global.leftSelectedTarget, SteamVR_Input_Sources.LeftHand);
+                WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner2, VehicleMovement.vehicleMovement.RB, laserSpawner2.transform.rotation, laserSpeed, missileTurningSpeed, laserDamage, Global.global.leftSelectedTarget, SteamVR_Input_Sources.LeftHand);
                 leftWeaponCooldown = true; //start the reload timer
             }
         }
@@ -648,7 +649,7 @@ public class PlayerController : MonoBehaviour
                     print("Right Position: " + rightPosition + "\nRight Last Position: " + rightLastPositions[fireDetectionTime]);
                 }
 
-                WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner, RB, laserSpawner.transform.rotation, laserSpeed, missileTurningSpeed, laserDamage, Global.global.rightSelectedTarget, SteamVR_Input_Sources.RightHand);
+                WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner, VehicleMovement.vehicleMovement.RB, laserSpawner.transform.rotation, laserSpeed, missileTurningSpeed, laserDamage, Global.global.rightSelectedTarget, SteamVR_Input_Sources.RightHand);
                 rightWeaponCooldown = true;
             }
         }
@@ -728,10 +729,10 @@ public class PlayerController : MonoBehaviour
         return rightFire.GetState(handType);
     }
 
-    public bool GetResetHeadsetDown()
-    {
-        return resetHeadsetZero.GetStateDown(handType);
-    }
+    //public bool GetResetHeadsetDown()
+    //{
+    //    return resetHeadsetZero.GetStateDown(handType);
+    //}
 
     public bool GetLeftSelect()
     {
