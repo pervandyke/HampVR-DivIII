@@ -1123,6 +1123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4263430022867207205}
   - component: {fileID: 4263430022867207204}
+  - component: {fileID: 3725177797625511386}
   m_Layer: 10
   m_Name: Spot Light
   m_TagString: Untagged
@@ -1205,6 +1206,46 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &3725177797625511386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4263430022867207206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b7c2ef9bebce14d8ceb4aa628ea68e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementDebug: 0
+  playerPhysics: {fileID: 0}
+  playerModel: {fileID: 0}
+  mainCamera: {fileID: 0}
+  RB: {fileID: 0}
+  acceleration: 0
+  rotateSpeed: 0
+  maxSpeed: 0
+  deadZone: 0
+  mass: 0
+  drag: 0
+  angularDrag: 0
+  maxLean: 0
+  targetSpeedCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  handType: 0
+  resetHeadsetZero:
+    actionPath: 
+    needsReinit: 0
+  horizontalMovementVector: {x: 0, y: 0, z: 0}
+  cockpitMask:
+    serializedVersion: 2
+    m_Bits: 0
+  uiParentScript: {fileID: 0}
 --- !u!1 &4487286798532868455
 GameObject:
   m_ObjectHideFlags: 0
@@ -2050,6 +2091,7 @@ MonoBehaviour:
   rightTargetText: {fileID: 2794215516586485830}
   WinLoseMessage: {fileID: 4951532652222185771}
   playerController: {fileID: 3930032130077271513}
+  vehicleMovement: {fileID: 3635075392740884574}
 --- !u!1 &7270267465244786604
 GameObject:
   m_ObjectHideFlags: 0
@@ -2247,6 +2289,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2739497789454770634}
   - component: {fileID: 3930032130077271513}
+  - component: {fileID: 3635075392740884574}
   - component: {fileID: 2169872460634575079}
   m_Layer: 10
   m_Name: PlayerController
@@ -2283,20 +2326,76 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controllerDebug: 0
   weaponDebug: 0
-  movementDebug: 0
   shieldDebug: 0
   selectionDebug: 0
-  playerPhysics: {fileID: 0}
-  playerModel: {fileID: 4263430021785689421}
   leftHand: {fileID: 0}
   rightHand: {fileID: 0}
   laserSpawner: {fileID: 4263430022694038438}
   laserSpawner2: {fileID: 8194421143144734473}
+  laserSpeed: 30
+  laserDamage: 10
+  missileTurningSpeed: 5
+  health: 100
+  handType: 0
+  accelerate:
+    actionPath: /actions/Flight1/in/Accelerate
+    needsReinit: 0
+  deccelerate:
+    actionPath: /actions/Flight1/in/Decelerate
+    needsReinit: 0
+  leftFire:
+    actionPath: /actions/Flight1/in/LeftFire
+    needsReinit: 0
+  rightFire:
+    actionPath: /actions/Flight1/in/RightFire
+    needsReinit: 0
+  leftSelect:
+    actionPath: /actions/Flight1/in/LeftSelect
+    needsReinit: 0
+  rightSelect:
+    actionPath: /actions/Flight1/in/RightSelect
+    needsReinit: 0
+  handMoveLogTimerDefault: 0.02
+  handMoveLogSize: 100
+  fireDistance: 0.2
+  fireDetectionTime: 15
+  missileCooldownDefault: 3
+  leftShieldMax: 100
+  rightShieldMax: 100
+  slapDistance: 0.2
+  slapDetectionTime: 15
+  shieldBoostTime: 5
+  shieldCooldownTime: 5
+  viewAngleMin: 0
+  viewAngleMax: 110
+  viewAngleWeight: 0.75
+  distanceMin: 0
+  distanceMax: 1000
+  distanceWeight: 0.25
+  cockpitMask:
+    serializedVersion: 2
+    m_Bits: 20497
+  uiParentScript: {fileID: 0}
+--- !u!114 &3635075392740884574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8648127016444375712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b7c2ef9bebce14d8ceb4aa628ea68e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementDebug: 0
+  playerPhysics: {fileID: 4263430021785689421}
+  playerModel: {fileID: 4263430021785689421}
   mainCamera: {fileID: 0}
   RB: {fileID: 0}
   acceleration: 120
   rotateSpeed: 0.7
-  maxSpeed: 69
+  maxSpeed: 75
   deadZone: 0.1
   mass: 2
   drag: 3
@@ -2326,53 +2425,14 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  laserSpeed: 30
-  laserDamage: 10
-  missileTurningSpeed: 5
-  health: 100
   handType: 0
-  accelerate:
-    actionPath: /actions/Flight1/in/Accelerate
-    needsReinit: 0
-  deccelerate:
-    actionPath: /actions/Flight1/in/Decelerate
-    needsReinit: 0
-  leftFire:
-    actionPath: /actions/Flight1/in/LeftFire
-    needsReinit: 0
-  rightFire:
-    actionPath: /actions/Flight1/in/RightFire
-    needsReinit: 0
   resetHeadsetZero:
     actionPath: /actions/Flight1/in/Recenter_Headset_Zero
     needsReinit: 0
-  leftSelect:
-    actionPath: /actions/Flight1/in/LeftSelect
-    needsReinit: 0
-  rightSelect:
-    actionPath: /actions/Flight1/in/RightSelect
-    needsReinit: 0
   horizontalMovementVector: {x: 0, y: 0, z: 0}
-  handMoveLogTimerDefault: 0.02
-  handMoveLogSize: 100
-  fireDistance: 0.2
-  fireDetectionTime: 15
-  missileCooldownDefault: 3
-  leftShieldMax: 100
-  rightShieldMax: 100
-  slapDistance: 0.2
-  slapDetectionTime: 15
-  shieldBoostTime: 5
-  shieldCooldownTime: 5
-  viewAngleMin: 0
-  viewAngleMax: 110
-  viewAngleWeight: 0.75
-  distanceMin: 0
-  distanceMax: 1000
-  distanceWeight: 0.25
   cockpitMask:
     serializedVersion: 2
-    m_Bits: 20497
+    m_Bits: 0
   uiParentScript: {fileID: 0}
 --- !u!114 &2169872460634575079
 MonoBehaviour:
@@ -2387,7 +2447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   engineEmitter: {fileID: 7202613262376222587}
-  PC: {fileID: 3930032130077271513}
+  PC: {fileID: 3635075392740884574}
 --- !u!1 &8834241556656945749
 GameObject:
   m_ObjectHideFlags: 0

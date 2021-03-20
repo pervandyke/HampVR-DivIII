@@ -6,7 +6,7 @@ using FMODUnity;
 public class EngineModulator : MonoBehaviour
 {
     public StudioEventEmitter engineEmitter;
-    public PlayerController PC;
+    public VehicleMovement PC;
 
 
 
