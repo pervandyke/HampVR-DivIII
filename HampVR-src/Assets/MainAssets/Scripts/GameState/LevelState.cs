@@ -60,6 +60,7 @@ public class LevelState : MonoBehaviour
             UIC.UpdateEndStatePanel("You " + endGameStatus);
             Global.global.rotationType = "none";
             GameObject.Find("PlayerModel").transform.rotation = VehicleMovement.vehicleMovement.HeadsetRotation2d(); //GameObject.Find("Camera").transform.rotation;
+            GameMap.gameMap.ClearMap();
         }
     }
 }

@@ -85,18 +85,7 @@ public class UIController : MonoBehaviour
 
     private void TargetPanel()
     {
-        if (LevelState.levelState.levelStatus == 1)
-        {
-            if (!GameplayUI.activeInHierarchy)
-            {
-                GameplayUI.SetActive(true);
-            }
-            
-        }
-        else if (LevelState.levelState.levelStatus != 1 && GameplayUI.activeInHierarchy)
-        {
-            GameplayUI.SetActive(false);
-        }
+        
     }
 
     private void StartPanel()
@@ -123,6 +112,12 @@ public class UIController : MonoBehaviour
     public void ReturnToMenu()
     {
         LevelState.levelState.levelStatus = 0;
+        LevelState.levelState.ProcessState();
+    }
+
+    public void StartSimulation()
+    {
+        LevelState.levelState.levelStatus = 1;
         LevelState.levelState.ProcessState();
     }
 }

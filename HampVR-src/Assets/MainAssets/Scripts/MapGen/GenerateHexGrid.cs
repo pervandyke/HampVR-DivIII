@@ -4,6 +4,8 @@ using UnityEngine;
 using System.IO;
 public class GenerateHexGrid : MonoBehaviour
 {
+    public static GenerateHexGrid MapGen;
+
     [Tooltip("The side length of the hexes being used.")]
     public int sideLength;
 
@@ -12,13 +14,19 @@ public class GenerateHexGrid : MonoBehaviour
     private float hexHeight;
     private float hexWidth;
 
-    private MapObject mapData;
-    
+    private void Awake()
+    {
+        MapGen = this;
+    }
     private void Start()
     {
         hexHeight = Mathf.Sqrt(3.0f) * sideLength;
         hexWidth = sideLength * 2;
-        mapData = CreateFromJSON("JSONS/TestMapData");
+    }
+
+    public void ImportMap(string path = "JSONS/TestMapData")
+    {
+        MapObject mapData = CreateFromJSON(path);
         GenerateMap(mapData);
     }
 
@@ -29,8 +37,7 @@ public class GenerateHexGrid : MonoBehaviour
         //place hexes with defined positions
         foreach(HexPiece hex in mapData.tiles)
         {
-            PlaceHex(hex.z, hex.x, hex.tileType);
-            GameMap.gameMap.PlaceHex(hex);
+            PlaceHex(hex.z, hex.x, hex.tileType, hex);
         }
 
         List<Vector2> emptyHexes = GameMap.gameMap.GetEmptyHexes();
@@ -57,8 +64,7 @@ public class GenerateHexGrid : MonoBehaviour
             {
                 Vector2 coords = emptyHexes[0];
                 emptyHexes.RemoveAt(0);
-                PlaceHex((int)coords.x, (int)coords.y, hex);
-                GameMap.gameMap.PlaceHex(new HexPiece {z = (int)coords.x, x = (int)coords.y, tileType = hex});
+                PlaceHex((int)coords.x, (int)coords.y, hex, new HexPiece { z = (int)coords.x, x = (int)coords.y, tileType = hex });
             }
             else
             {
@@ -74,8 +80,7 @@ public class GenerateHexGrid : MonoBehaviour
         foreach (Vector2 hex in emptyHexes)
         {
             print("placing hex at: (" + hex.x + ", " + hex.y + ")");
-            PlaceHex((int)hex.x, (int)hex.y, "HexFiller");
-            GameMap.gameMap.PlaceHex(new HexPiece { z = (int)hex.x, x = (int)hex.y, tileType = "HexFiller" });
+            PlaceHex((int)hex.x, (int)hex.y, "HexFiller", new HexPiece { z = (int)hex.x, x = (int)hex.y, tileType = "HexFiller" });
         }
     }
 
@@ -86,7 +91,7 @@ public class GenerateHexGrid : MonoBehaviour
         return JsonUtility.FromJson<MapObject>(jsonTextFile.ToString());
     }
 
-    private void PlaceHex(int hexZ, int hexX, string tileType)
+    private void PlaceHex(int hexZ, int hexX, string tileType, HexPiece hex)
     {
         //Set Rotation
         Quaternion rotation = new Quaternion();
@@ -98,8 +103,9 @@ public class GenerateHexGrid : MonoBehaviour
         position.z = hexZ * hexWidth * .75f;
         position.y = 0;
         
-        //Instantiate using rotation and position
+        //Instantiate using rotation and position, and log in the map representation
         GameObject HexInstance = Instantiate(Resources.Load<GameObject>("Prefabs/"+tileType), position, rotation) as GameObject;
+        GameMap.gameMap.PlaceHex(hex, HexInstance);
 
         //scale up each placed hex appropriately
         HexInstance.transform.localScale = new Vector3(sideLength, 1.0f, sideLength);

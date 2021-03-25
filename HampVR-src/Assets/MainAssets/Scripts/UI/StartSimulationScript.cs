@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ReturnToMenuScript : MonoBehaviour
+public class StartSimulationScript : MonoBehaviour
 {
     public float timerDefault;
     public bool buttonHeld;
@@ -35,8 +35,9 @@ public class ReturnToMenuScript : MonoBehaviour
             {
                 buttonTimer = timerDefault;
                 buttonHeld = false;
-                print("Returning To Menu");
-                UIC.ReturnToMenu();
+                print("Starting Simulation");
+                GenerateHexGrid.MapGen.ImportMap(); //make this use a string based on user selection if we implement that
+                UIC.StartSimulation();
             }
         }
         else if (!buttonHeld && buttonTimer != timerDefault)
