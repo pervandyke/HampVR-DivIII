@@ -26,6 +26,7 @@ public class GameMap : MonoBehaviour
 
     public void ClearMap()
     {
+        print("clearing map");
         foreach(GameObject hexObject in referenceObjectList)
         {
             Destroy(hexObject);
