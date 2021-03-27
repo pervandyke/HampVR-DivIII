@@ -115,7 +115,7 @@ public class GenerateHexGrid : MonoBehaviour
         HexInstance.GetComponent<HexData>().z = hexZ;
 
         //spawn turrets if present
-        if (HexInstance.TryGetComponent<HexInit>(out HexInit init))
+        if (HexInstance.TryGetComponent(out HexInit init))
         {
             init.SpawnTurrets(2);
         }
