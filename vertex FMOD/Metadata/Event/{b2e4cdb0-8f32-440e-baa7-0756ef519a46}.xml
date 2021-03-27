@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{b2e4cdb0-8f32-440e-baa7-0756ef519a46}">
 		<property name="name">
-			<value>Level1</value>
+			<value>Menu</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -122,8 +122,11 @@
 	</object>
 	<object class="MixerBusPanner" id="{dd03400d-401e-49dc-88e4-2f1205b4ef4e}" />
 	<object class="SingleSound" id="{c3070631-eddf-4f84-b2bf-f67e70443171}">
+		<property name="looping">
+			<value>true</value>
+		</property>
 		<relationship name="audioFile">
-			<destination>{aeca6c46-38d0-44f5-ab1a-91be5971ef64}</destination>
+			<destination>{7de3c364-eeba-48d1-be6d-835cf4b42cd2}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{896ff81a-d050-4def-bb48-b14372e0e8be}" />
