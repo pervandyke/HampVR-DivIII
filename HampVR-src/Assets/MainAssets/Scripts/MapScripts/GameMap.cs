@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameMap : MonoBehaviour
 {
     private Dictionary<Vector2, HexPiece> dictMap;
-    private List<GameObject> referenceObjectList;
     private int width;
     private int height;
     public static GameMap gameMap;
@@ -19,23 +18,16 @@ public class GameMap : MonoBehaviour
     public void InitilizeMapData(int mapWidth, int mapHeight)
     {
         dictMap = new Dictionary<Vector2, HexPiece>();
-        referenceObjectList = new List<GameObject>();
         width = mapWidth;
         height = mapHeight;
     }
 
     public void ClearMap()
     {
-        print("clearing map");
-        foreach(GameObject hexObject in referenceObjectList)
-        {
-            Destroy(hexObject);
-        }
         dictMap.Clear();
-        referenceObjectList.Clear();
     }
 
-    public void PlaceHex(HexPiece hex, GameObject hexObjectReference)
+    public void PlaceHex(HexPiece hex)
     {
         if (dictMap.ContainsKey(new Vector2(hex.z, hex.x)))
         {

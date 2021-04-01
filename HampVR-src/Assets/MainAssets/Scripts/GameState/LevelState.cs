@@ -61,6 +61,7 @@ public class LevelState : MonoBehaviour
             Global.global.rotationType = "none";
             GameObject.Find("PlayerModel").transform.rotation = VehicleMovement.vehicleMovement.HeadsetRotation2d(); //GameObject.Find("Camera").transform.rotation;
             GameMap.gameMap.ClearMap();
+            GameObject.Find("MapHolder").GetComponent<MapCleanupScript>().ClearMap();
         }
     }
 }
