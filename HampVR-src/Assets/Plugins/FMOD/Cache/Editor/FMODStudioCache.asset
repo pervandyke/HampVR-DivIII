@@ -144,7 +144,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-5650935008021817107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,8 +276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Music/Level1
   guid: b0cde4b2328f0e44baa70756ef519a46
-  Banks:
-  - {fileID: 2150131222118325595}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -300,7 +299,7 @@ MonoBehaviour:
   Path: ../vertex FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637512420582450342
+  lastModified: 637524551150602832
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -367,6 +366,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 2000
   Length: 0
+--- !u!114 &-2210872015535531127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TankMovement/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 2000
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-1147808437495918586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,6 +468,29 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &-724445985499267900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Menu
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Menu
+  guid: b0cde4b2328f0e44baa70756ef519a46
+  Banks:
+  - {fileID: 2150131222118325595}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &-654376773281053339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,16 +591,17 @@ MonoBehaviour:
   - {fileID: 2150131222118325595}
   - {fileID: 3185167573424367571}
   EditorEvents:
-  - {fileID: -3423922107780314471}
   - {fileID: 5833851976804796713}
   - {fileID: -2229025068065963342}
   - {fileID: 7488192482273135873}
+  - {fileID: -724445985499267900}
+  - {fileID: 6360263732671904336}
   EditorParameters: []
   MasterBanks:
   - {fileID: -3374053040280374850}
   StringsBanks:
   - {fileID: 5023197787500889396}
-  stringsBankWriteTime: 637524546289770351
+  stringsBankWriteTime: 637524551150622762
   cacheVersion: 6
 --- !u!114 &625463347826010311
 MonoBehaviour:
@@ -598,7 +641,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &1466927214639973923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,7 +681,7 @@ MonoBehaviour:
   Path: ../vertex FMOD/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 637524546289830191
+  lastModified: 637524551151769367
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -697,7 +740,7 @@ MonoBehaviour:
   Path: ../vertex FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637525412978098024
+  lastModified: 637524551153729904
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -804,7 +847,7 @@ MonoBehaviour:
   Path: ../vertex FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637524546289770351
+  lastModified: 637524551150622762
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -850,10 +893,33 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 1201934989772705839}
-  - {fileID: -5699087541094275663}
+  - {fileID: -2210872015535531127}
+  - {fileID: 7005298372794364416}
   MinDistance: 1
   MaxDistance: 20
+  Length: 0
+--- !u!114 &6360263732671904336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Explosion
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Explosion
+  guid: 70795f1ead4d20408266972b96f1e30b
+  Banks:
+  - {fileID: 3185167573424367571}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 4000
   Length: 0
 --- !u!114 &6457446962978487742
 MonoBehaviour:
@@ -894,6 +960,26 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &7005298372794364416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TankMovement/Load
+  m_EditorClassIdentifier: 
+  Name: Load
+  Min: -1
+  Max: 1
+  Default: -1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &7488192482273135873
 MonoBehaviour:
   m_ObjectHideFlags: 0
