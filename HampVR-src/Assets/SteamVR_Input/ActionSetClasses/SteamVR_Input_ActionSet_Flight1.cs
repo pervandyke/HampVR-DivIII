@@ -17,14 +17,6 @@ namespace Valve.VR
     public class SteamVR_Input_ActionSet_Flight1 : Valve.VR.SteamVR_ActionSet
     {
         
-        public virtual SteamVR_Action_Boolean Accelerate
-        {
-            get
-            {
-                return SteamVR_Actions.flight1_Accelerate;
-            }
-        }
-        
         public virtual SteamVR_Action_Boolean LeftFire
         {
             get
@@ -38,14 +30,6 @@ namespace Valve.VR
             get
             {
                 return SteamVR_Actions.flight1_Recenter_Headset_Zero;
-            }
-        }
-        
-        public virtual SteamVR_Action_Boolean Decelerate
-        {
-            get
-            {
-                return SteamVR_Actions.flight1_Decelerate;
             }
         }
         

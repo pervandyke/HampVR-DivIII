@@ -1,11 +1,6 @@
 {
   "actions": [
     {
-      "name": "/actions/Flight1/in/Accelerate",
-      "type": "boolean",
-      "requirement": "optional"
-    },
-    {
       "name": "/actions/Flight1/in/LeftFire",
       "type": "boolean",
       "requirement": "mandatory"
@@ -14,11 +9,6 @@
       "name": "/actions/Flight1/in/Recenter_Headset_Zero",
       "type": "boolean",
       "requirement": "mandatory"
-    },
-    {
-      "name": "/actions/Flight1/in/Decelerate",
-      "type": "boolean",
-      "requirement": "optional"
     },
     {
       "name": "/actions/Flight1/in/poseTest",
@@ -54,6 +44,10 @@
     {
       "name": "/actions/Flight1",
       "usage": "leftright"
+    },
+    {
+      "name": "/actions/NewSet",
+      "usage": "single"
     }
   ],
   "default_bindings": [
