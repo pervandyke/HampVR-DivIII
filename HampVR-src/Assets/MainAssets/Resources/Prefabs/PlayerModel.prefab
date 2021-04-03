@@ -2657,12 +2657,6 @@ MonoBehaviour:
   maxHealth: 100
   health: 100
   handType: 0
-  accelerate:
-    actionPath: /actions/Flight1/in/Accelerate
-    needsReinit: 0
-  deccelerate:
-    actionPath: /actions/Flight1/in/Decelerate
-    needsReinit: 0
   leftFire:
     actionPath: /actions/Flight1/in/LeftFire
     needsReinit: 0
@@ -2715,7 +2709,7 @@ MonoBehaviour:
   RB: {fileID: 0}
   acceleration: 120
   rotateSpeed: 0.7
-  maxSpeed: 75
+  maxSpeed: 140
   deadZone: 0.1
   mass: 2
   drag: 3
