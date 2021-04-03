@@ -8,6 +8,7 @@ public class LevelState : MonoBehaviour
     public int levelStatus; //0 = menu, 1 = in progress, 2 = level complete (win/lose)
     public PlayerController PC;
     public UIController UIC;
+    public GameObject canopy;
 
     private void Awake()
     {
@@ -43,6 +44,7 @@ public class LevelState : MonoBehaviour
         else if (levelStatus == 1)
         {
             //un-grey canopy, and unlock rotation
+            canopy.SetActive(false);
             Global.global.rotationType = "absolute";
         }
         else if (levelStatus == 2)
@@ -50,7 +52,7 @@ public class LevelState : MonoBehaviour
             //grey out canopy and display you win/you lose message on consoles
             //after timer switch to state 0
 
-            //grey out canopy
+            canopy.SetActive(true);
             UIC.UpdateEndStatePanel("You " + endGameStatus);
             Global.global.rotationType = "none";
             GameObject.Find("PlayerModel").transform.rotation = VehicleMovement.vehicleMovement.HeadsetRotation2d(); //GameObject.Find("Camera").transform.rotation;
