@@ -16,7 +16,7 @@ public class TurretAI : MonoBehaviour, IEnemy
     public float laserSpeed;
     [Tooltip("time in seconds between shots")]
     public float fireRate;
-    public float damage;
+    public int damage;
     public float trackingSpeed;
     public float trackingDistance;
     public float allowedShotAngle;
@@ -122,6 +122,7 @@ public class TurretAI : MonoBehaviour, IEnemy
         {
             GameObject shotInstance = Instantiate(Resources.Load("Prefabs/Laser"), laserEmitter.transform.position, laserEmitter.transform.rotation) as GameObject;
             shotInstance.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, laserSpeed);
+            shotInstance.GetComponent<LaserScript>().damage = damage;
             shotTimer = fireRate;
             print("pew");
         }

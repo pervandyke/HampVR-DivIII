@@ -26,12 +26,6 @@ public class LevelState : MonoBehaviour
             levelStatus = 2;
             ProcessState("Win");
         }
-        if (PC.health <= 0 && levelStatus == 1)
-        {
-            levelStatus = 2;
-            ProcessState("Lose");
-        }
-        
     }
 
     private bool CheckEnemyEmpty()
@@ -62,6 +56,7 @@ public class LevelState : MonoBehaviour
             GameObject.Find("PlayerModel").transform.rotation = VehicleMovement.vehicleMovement.HeadsetRotation2d(); //GameObject.Find("Camera").transform.rotation;
             GameMap.gameMap.ClearMap();
             GameObject.Find("MapHolder").GetComponent<MapCleanupScript>().ClearMap();
+            PC.health = PC.maxHealth;
         }
     }
 }

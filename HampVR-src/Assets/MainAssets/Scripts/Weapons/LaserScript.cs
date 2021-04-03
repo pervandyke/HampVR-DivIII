@@ -53,18 +53,9 @@ public class LaserScript : MonoBehaviour, IProjectile
         playParticle();
         if (other.gameObject.layer == 10)
         {
-            if (other.gameObject.tag == "Player")
-            {
-                print("Hit player");
-                other.gameObject.GetComponentInChildren<PlayerController>().TakeHit(damage, gameObject);
-                Destroy(gameObject);
-            }
-            if (other.gameObject.tag == "Enemy")
-            {
-                print("Hit enemy");
-                other.gameObject.GetComponent<IEnemy>().TakeDamage(damage);
-                Destroy(gameObject);
-            }
+            print("Hit player");
+            other.gameObject.GetComponentInChildren<PlayerController>().TakeHit(damage, gameObject);
+            Destroy(gameObject);
         }
         
         //collisionflag = true;

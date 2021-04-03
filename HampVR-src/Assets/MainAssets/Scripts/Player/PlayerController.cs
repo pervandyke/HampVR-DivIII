@@ -63,7 +63,8 @@ public class PlayerController : MonoBehaviour
     public float laserSpeed;
     public int laserDamage;
     public float missileTurningSpeed;
-    
+    [Tooltip("The maximum amount of health the player can have.")]
+    public int maxHealth;
     [Tooltip("The amount of health the player has.")]
     public int health;
 
@@ -74,8 +75,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("SteamVR")]
     public SteamVR_Input_Sources handType;
-    public SteamVR_Action_Boolean accelerate;
-    public SteamVR_Action_Boolean deccelerate;
     public SteamVR_Action_Boolean leftFire;
     public SteamVR_Action_Boolean rightFire;
     //public SteamVR_Action_Boolean resetHeadsetZero;
@@ -671,7 +670,8 @@ public class PlayerController : MonoBehaviour
 
     public void TakeHit(int damage, GameObject projectile)
     {
-        Vector3 hitDirection = projectile.transform.position - transform.position;
+        // Shields not really functional, still need a lot of work and tuning
+        /*Vector3 hitDirection = projectile.transform.position - transform.position;
         float collisionAngle = Vector3.SignedAngle(hitDirection, transform.forward, Vector3.up);
         if (collisionAngle > 0)
         {
@@ -680,6 +680,15 @@ public class PlayerController : MonoBehaviour
         else if (collisionAngle < 0)
         {
             leftShieldValue = TakeDamage(leftShieldBoosted, damage, leftShieldValue);
+        }*/
+        print("player hit");
+        print("Old health: " + health);
+        health -= damage;
+        print("New health: " + health);
+        if (health <= 0)
+        {
+            LevelState.levelState.levelStatus = 2;
+            LevelState.levelState.ProcessState("Lose");
         }
     }
 
@@ -707,16 +716,6 @@ public class PlayerController : MonoBehaviour
         }
 
         return shieldValue;
-    }
-
-    public bool GetAccelerateDown()
-    {
-        return accelerate.GetState(handType);
-    }
-
-    public bool GetDeccelerateDown()
-    {
-        return deccelerate.GetState(handType);
     }
 
     public bool GetLeftFireDown()
