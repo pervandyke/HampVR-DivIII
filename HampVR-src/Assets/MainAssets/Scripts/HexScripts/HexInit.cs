@@ -16,6 +16,10 @@ public class HexInit : MonoBehaviour
         
         for (int i = 0; i < turretCount; i++)
         {
+            if (spawnerList.Count <= 0)
+            {
+                break;
+            }
             print("spawner list count = " + spawnerList.Count);
             int turretIndex = Random.Range(0, spawnerList.Count);
             print("turret index = " + turretIndex);

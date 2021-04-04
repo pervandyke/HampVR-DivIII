@@ -9,11 +9,13 @@
   "otherTileKeys": [
     "HexPresence",
     "HexPresence2",
-    "SpawnHex"
+    "SpawnHex",
+    "ColumnHex"
   ],
   "otherTileValues": [
     0,
     0,
+    1,
     1
   ],
   "mapWidth": 4,
