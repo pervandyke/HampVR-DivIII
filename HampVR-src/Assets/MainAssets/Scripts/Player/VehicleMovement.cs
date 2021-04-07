@@ -91,50 +91,50 @@ public class VehicleMovement : MonoBehaviour
 
         }
 
-        horizontalMovementVector = SetMovementVectors();
-
-        ApplyForce();
-
-        //
-        float lean;
-        float speedPercentage;
-        if (mainCamera.transform.localPosition.z != headsetZero.z)
+        if(LevelState.levelState.levelStatus == 1)
         {
-            lean = horizontalMovementVector.magnitude / maxLean;
-            if (lean > 1.0f)
+            horizontalMovementVector = SetMovementVectors();
+
+            ApplyForce();
+
+            //
+            float lean;
+            float speedPercentage;
+            if (mainCamera.transform.localPosition.z != headsetZero.z)
             {
-                lean = 1.0f;
+                lean = horizontalMovementVector.magnitude / maxLean;
+                if (lean > 1.0f)
+                {
+                    lean = 1.0f;
+                }
+                speedPercentage = targetSpeedCurve.Evaluate(lean);
+                if (movementDebug)
+                {
+                    print("Lean: " + lean);
+                    print("Speed percentage: " + speedPercentage + "%");
+                    print("Target Speed: " + maxSpeed * speedPercentage);
+                }
             }
-            speedPercentage = targetSpeedCurve.Evaluate(lean);
-            if (movementDebug)
+            else
             {
-                print("Lean: " + lean);
-                print("Speed percentage: " + speedPercentage + "%");
-                print("Target Speed: " + maxSpeed * speedPercentage);
+                speedPercentage = 0.0f;
+            }
+
+            //clamp max speed
+            if (RB.velocity.magnitude > maxSpeed * speedPercentage)
+            {
+                RB.velocity = Vector3.ClampMagnitude(RB.velocity, maxSpeed * speedPercentage);
+                if (movementDebug)
+                {
+                    print("Velocity clamped to: " + RB.velocity);
+                }
             }
         }
-        else
-        {
-            speedPercentage = 0.0f;
-        }
-
-        //clamp max speed
-        if (RB.velocity.magnitude > maxSpeed * speedPercentage)
-        {
-            RB.velocity = Vector3.ClampMagnitude(RB.velocity, maxSpeed * speedPercentage);
-            if (movementDebug)
-            {
-                print("Velocity clamped to: " + RB.velocity);
-            }
-        }
-
 
         if (Global.global.rotationType == "absolute")
         {
             AbsoluteRotateToCamera();
         }
-
-
     }
 
     private void AbsoluteRotateToCamera()
