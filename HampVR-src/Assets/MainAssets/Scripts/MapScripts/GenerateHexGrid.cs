@@ -109,7 +109,7 @@ public class GenerateHexGrid : MonoBehaviour
 
         //scale up each placed hex appropriately
         //HexInstance.transform.localScale = new Vector3(sideLength, 1.0f, sideLength);
-        HexInstance.transform.localScale = new Vector3(sideLength, sideLength, sideLength);
+        HexInstance.transform.localScale = new Vector3(sideLength, 0, sideLength);
 
         //setup coordinates to display in editor
         HexInstance.GetComponent<HexData>().x = hexX;
