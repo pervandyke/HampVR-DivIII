@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class HexInit : MonoBehaviour
 {
+    public int turretMax;
+    public int turretMin;
+
+    private void Start()
+    {
+        SpawnTurrets(Random.Range(turretMin, turretMax+1));
+    }
+
     public void SpawnTurrets(int turretCount)
     {
         TurretSpawnerScript[] turretSpawners = gameObject.GetComponentsInChildren<TurretSpawnerScript>();

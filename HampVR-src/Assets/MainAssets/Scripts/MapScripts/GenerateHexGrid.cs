@@ -108,18 +108,11 @@ public class GenerateHexGrid : MonoBehaviour
         GameMap.gameMap.PlaceHex(hex);
 
         //scale up each placed hex appropriately
-        //HexInstance.transform.localScale = new Vector3(sideLength, 1.0f, sideLength);
-        HexInstance.transform.localScale = new Vector3(sideLength, 0, sideLength);
+        HexInstance.transform.localScale = new Vector3(sideLength, 1.0f, sideLength);
 
         //setup coordinates to display in editor
         HexInstance.GetComponent<HexData>().x = hexX;
         HexInstance.GetComponent<HexData>().z = hexZ;
-
-        //spawn turrets if present
-        if (HexInstance.TryGetComponent(out HexInit init))
-        {
-            init.SpawnTurrets(2);
-        }
 
         //set parent of hex to MapHolder
         HexInstance.transform.parent = GameObject.Find("MapHolder").transform;
