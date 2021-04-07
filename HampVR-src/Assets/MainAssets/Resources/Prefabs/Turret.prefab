@@ -373,9 +373,9 @@ MonoBehaviour:
   cap: {fileID: 2340375542848690771}
   body: {fileID: 8608294380658711902}
   laserEmitter: {fileID: 4812390416266281832}
-  laserSpeed: 40
+  laserSpeed: 100
   fireRate: 1.5
-  damage: 1
+  damage: 5
   trackingSpeed: 10
   trackingDistance: 500
   allowedShotAngle: 45

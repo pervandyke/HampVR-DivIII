@@ -2651,8 +2651,8 @@ MonoBehaviour:
   rightHand: {fileID: 0}
   laserSpawner: {fileID: 4263430022694038438}
   laserSpawner2: {fileID: 8194421143144734473}
-  laserSpeed: 30
-  laserDamage: 10
+  missileSpeed: 80
+  missileDamage: 10
   missileTurningSpeed: 5
   maxHealth: 100
   health: 100

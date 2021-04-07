@@ -60,8 +60,8 @@ public class PlayerController : MonoBehaviour
     //public AnimationCurve targetSpeedCurve;
 
     [Header("Weapons/Health")]
-    public float laserSpeed;
-    public int laserDamage;
+    public float missileSpeed;
+    public int missileDamage;
     public float missileTurningSpeed;
     [Tooltip("The maximum amount of health the player can have.")]
     public int maxHealth;
@@ -631,7 +631,7 @@ public class PlayerController : MonoBehaviour
                     print("Left Position: " + leftPosition + "\nLeft Last Position: " + leftLastPositions[fireDetectionTime]);
                 }
 
-                WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner2, VehicleMovement.vehicleMovement.RB, laserSpawner2.transform.rotation, laserSpeed, missileTurningSpeed, laserDamage, Global.global.leftSelectedTarget, SteamVR_Input_Sources.LeftHand);
+                WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner2, VehicleMovement.vehicleMovement.RB, laserSpawner2.transform.rotation, missileSpeed, missileTurningSpeed, missileDamage, Global.global.leftSelectedTarget, SteamVR_Input_Sources.LeftHand);
                 leftWeaponCooldown = true; //start the reload timer
             }
         }
@@ -648,7 +648,7 @@ public class PlayerController : MonoBehaviour
                     print("Right Position: " + rightPosition + "\nRight Last Position: " + rightLastPositions[fireDetectionTime]);
                 }
 
-                WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner, VehicleMovement.vehicleMovement.RB, laserSpawner.transform.rotation, laserSpeed, missileTurningSpeed, laserDamage, Global.global.rightSelectedTarget, SteamVR_Input_Sources.RightHand);
+                WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner, VehicleMovement.vehicleMovement.RB, laserSpawner.transform.rotation, missileSpeed, missileTurningSpeed, missileDamage, Global.global.rightSelectedTarget, SteamVR_Input_Sources.RightHand);
                 rightWeaponCooldown = true;
             }
         }
