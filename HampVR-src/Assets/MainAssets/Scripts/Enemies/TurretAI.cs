@@ -124,7 +124,7 @@ public class TurretAI : MonoBehaviour, IEnemy
             shotInstance.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, laserSpeed);
             shotInstance.GetComponent<LaserScript>().damage = damage;
             shotTimer = fireRate;
-            print("pew");
+            //print("pew");
         }
     }
 

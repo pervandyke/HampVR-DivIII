@@ -83,10 +83,6 @@ public class VehicleMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        horizontalMovementVector = SetMovementVectors();
-
-        ApplyForce();
-
         //Reset Control Zero
         if (GetResetHeadsetDown())
         {
@@ -95,6 +91,11 @@ public class VehicleMovement : MonoBehaviour
 
         }
 
+        horizontalMovementVector = SetMovementVectors();
+
+        ApplyForce();
+
+        //
         float lean;
         float speedPercentage;
         if (mainCamera.transform.localPosition.z != headsetZero.z)
@@ -107,7 +108,9 @@ public class VehicleMovement : MonoBehaviour
             speedPercentage = targetSpeedCurve.Evaluate(lean);
             if (movementDebug)
             {
+                print("Lean: " + lean);
                 print("Speed percentage: " + speedPercentage + "%");
+                print("Target Speed: " + maxSpeed * speedPercentage);
             }
         }
         else
@@ -132,7 +135,7 @@ public class VehicleMovement : MonoBehaviour
         }
 
 
-        }
+    }
 
     private void AbsoluteRotateToCamera()
     {

@@ -2709,12 +2709,12 @@ MonoBehaviour:
   RB: {fileID: 0}
   acceleration: 120
   rotateSpeed: 0.7
-  maxSpeed: 140
+  maxSpeed: 40
   deadZone: 0.1
   mass: 2
-  drag: 3
+  drag: 0
   angularDrag: 0
-  maxLean: 1
+  maxLean: 0.8
   targetSpeedCurve:
     serializedVersion: 2
     m_Curve:
