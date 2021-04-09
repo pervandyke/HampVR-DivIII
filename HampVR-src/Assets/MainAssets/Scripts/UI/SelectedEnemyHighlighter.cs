@@ -8,7 +8,8 @@ public class SelectedEnemyHighlighter : MonoBehaviour
     private GameObject currentRightTarget = null;
     public GameObject leftHighlight;
     public GameObject rightHighlight;
-    public LayerMask highlightMask; 
+    public LayerMask highlightMask;
+    public AnimationCurve highlightScalingCurve;
 
 
     private void Update()
@@ -42,6 +43,7 @@ public class SelectedEnemyHighlighter : MonoBehaviour
             {
                 highlight.SetActive(true);
             }
+
             //move highlight to correct position
             Vector3 direction = (gameObject.transform.position - target.transform.position).normalized;
             RaycastHit hitData;
@@ -49,7 +51,12 @@ public class SelectedEnemyHighlighter : MonoBehaviour
                 gameObject.transform.position), highlightMask, QueryTriggerInteraction.Collide);
             highlight.transform.position = hitData.point;
 
+            //rotate highlight to face player
             highlight.transform.rotation = Quaternion.LookRotation((highlight.transform.position - target.transform.position).normalized);
+
+            //scale highlight
+            //float scaledSize = hitData.distance * 0.0001f;
+            //highlight.transform.localScale = new Vector3();
         }
         else
         {
