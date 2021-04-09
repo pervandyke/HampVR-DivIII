@@ -10,12 +10,14 @@
     "Hex",
     "HexPresence",
     "HexPresence2",
+    "TerrainHex",
     "SpawnHex"
   ],
   "otherTileValues": [
     6,
     2,
     2,
+    4,
     1
   ],
   "mapWidth": 8,

@@ -104,7 +104,7 @@ public class GenerateHexGrid : MonoBehaviour
         position.y = 0;
         
         //Instantiate using rotation and position, and log in the map representation
-        GameObject HexInstance = Instantiate(Resources.Load<GameObject>("Prefabs/"+tileType), position, rotation) as GameObject;
+        GameObject HexInstance = Instantiate(Resources.Load<GameObject>("Prefabs/Hexes/"+tileType), position, rotation);
         GameMap.gameMap.PlaceHex(hex);
 
         //scale up each placed hex appropriately
