@@ -74,7 +74,7 @@ public class VehicleMovement : MonoBehaviour
         RB.angularDrag = angularDrag;
         RB.mass = mass;
 
-        headsetZero = mainCamera.transform.localPosition; //replace this with a new ResetControlSpace()
+        ResetControlSpace();
     }
 
     void FixedUpdate()
@@ -82,8 +82,7 @@ public class VehicleMovement : MonoBehaviour
         //Reset Control Zero
         if (GetResetHeadsetDown())
         {
-            headsetZero = mainCamera.transform.localPosition; //set the control space center to the current headset location
-            uiParentScript.ChangeUIHeight(headsetZero); //update ui height
+            ResetControlSpace();
 
         }
 
@@ -172,6 +171,12 @@ public class VehicleMovement : MonoBehaviour
                 Debug.DrawRay(horizontalMovementRay.origin, horizontalMovementRay.direction * 10, Color.red);
             }
         }
+    }
+
+    public void ResetControlSpace()
+    {
+        headsetZero = mainCamera.transform.localPosition; //set the control space center to the current headset location
+        uiParentScript.ChangeUIHeight(headsetZero); //update ui height
     }
 
     public bool GetResetHeadsetDown()
