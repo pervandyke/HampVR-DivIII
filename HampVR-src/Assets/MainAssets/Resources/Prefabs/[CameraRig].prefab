@@ -363,6 +363,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  maxScalingDistance: 7000
+  baseScale: 0.03
 --- !u!1 &2978118321519623394
 GameObject:
   m_ObjectHideFlags: 0
