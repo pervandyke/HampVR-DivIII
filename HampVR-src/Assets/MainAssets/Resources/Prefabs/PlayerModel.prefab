@@ -667,6 +667,7 @@ GameObject:
   - component: {fileID: 9201675519023189428}
   - component: {fileID: 9084143937810047295}
   - component: {fileID: 6359594939886634183}
+  - component: {fileID: 1791669607610697782}
   - component: {fileID: 7202613262376222587}
   m_Layer: 10
   m_Name: PlayerModel
@@ -771,7 +772,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!1818360608 &6359594939886634183
 PositionConstraint:
   m_ObjectHideFlags: 0
@@ -782,7 +783,7 @@ PositionConstraint:
   m_Enabled: 1
   m_Weight: 1
   m_TranslationAtRest: {x: 0, y: 6.5, z: 0}
-  m_TranslationOffset: {x: 0, y: 0.9, z: 0}
+  m_TranslationOffset: {x: 0, y: 0, z: 0}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -791,6 +792,23 @@ PositionConstraint:
   m_Sources:
   - sourceTransform: {fileID: 0}
     weight: 1
+--- !u!1818360609 &1791669607610697782
+RotationConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4263430021785689421}
+  m_Enabled: 1
+  m_Weight: 1
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_RotationOffset: {x: 0, y: 0, z: 0}
+  m_AffectRotationX: 1
+  m_AffectRotationY: 0
+  m_AffectRotationZ: 1
+  m_IsContraintActive: 1
+  m_IsLocked: 1
+  m_Sources: []
 --- !u!114 &7202613262376222587
 MonoBehaviour:
   m_ObjectHideFlags: 0

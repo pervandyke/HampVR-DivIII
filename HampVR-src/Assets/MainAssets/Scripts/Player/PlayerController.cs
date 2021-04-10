@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour
         if (leftWeaponCooldown)
         {
             leftCooldownTimer -= Time.fixedDeltaTime; //subtract elapsed time from the reload timer
-            print("left cooldown: " + leftCooldownTimer);
+            //print("left cooldown: " + leftCooldownTimer);
             if (leftCooldownTimer <= 0)
             {
                 leftCooldownTimer = missileCooldownDefault;
@@ -160,119 +160,14 @@ public class PlayerController : MonoBehaviour
         if (rightWeaponCooldown)
         {
             rightCooldownTimer -= Time.fixedDeltaTime;
-            print("right cooldown: " + rightCooldownTimer);
+            //print("right cooldown: " + rightCooldownTimer);
             if (rightCooldownTimer <= 0)
             {
                 rightCooldownTimer = missileCooldownDefault;
                 rightWeaponCooldown = false;
             }
         }
-
-        //Reset Control Zero
-        //if (GetResetHeadsetDown())
-        //{
-        //    headsetZero = mainCamera.transform.localPosition; //set the control space center to the current headset location
-        //    uiParentScript.ChangeUIHeight(headsetZero); //update ui height
-            
-        //}
-
-        //set max forward lean
-        //if (Input.GetKeyDown(KeyCode.UpArrow))
-        //{
-        //    maxLean = mainCamera.transform.localPosition.z;
-        //}
-
-        //space break   //old pre-vr block
-        //if (Input.GetKey(KeyCode.B))
-        //{
-        //    RB.velocity = Vector3.zero;
-        //}
-
-        //float lean;
-        //float speedPercentage;
-        //if (mainCamera.transform.localPosition.z != headsetZero.z)
-        //{
-        //    lean = horizontalMovementVector.magnitude / maxLean;
-        //    if (lean > 1.0f)
-        //    {
-        //        lean = 1.0f;
-        //    }
-        //    speedPercentage = targetSpeedCurve.Evaluate(lean);
-        //    if (movementDebug)
-        //    {
-        //        print("Speed percentage: " + speedPercentage + "%");
-        //    }
-        //}
-        //else
-        //{
-        //    speedPercentage = 0.0f;
-        //}
-
-        ////clamp max speed
-        //if (RB.velocity.magnitude > maxSpeed * speedPercentage)
-        //{
-        //    RB.velocity = Vector3.ClampMagnitude(RB.velocity, maxSpeed * speedPercentage);
-        //    if (movementDebug)
-        //    {
-        //        print("Velocity clamped to: " + RB.velocity);
-        //    }
-        //}
-
-        //if (Global.global.rotationType == "relative")
-        //{
-        //    RelativeRotateToCamera();
-        //}
-        //else if (Global.global.rotationType == "absolute")
-        //{
-        //    AbsoluteRotateToCamera();
-        //}
-        
     }
-
-    //private void RelativeRotateToCamera()
-    //{
-    //    playerPhysics.transform.rotation = Quaternion.Slerp(playerPhysics.transform.rotation, mainCamera.transform.rotation, Time.deltaTime * rotateSpeed);
-    //}
-    //private void AbsoluteRotateToCamera()
-    //{
-    //    //set rotation
-    //    playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, mainCamera.transform.rotation, Time.deltaTime * rotateSpeed);
-    //    //zero out x and z rotations
-    //    playerModel.transform.rotation = Quaternion.Euler(0,playerModel.transform.rotation.eulerAngles.y,0);
-    //}
-
-    //Set the vector to control the players movement
-    //private Vector3 SetMovementVectors()
-    //{
-    //    Vector3 localHorizontalMovementVector = Vector3.zero;
-    //    if ((mainCamera.transform.localPosition - headsetZero).magnitude > deadZone)
-    //    {
-    //        localHorizontalMovementVector = mainCamera.transform.localPosition - headsetZero;
-    //        if (movementDebug)
-    //        {
-    //            print("Movement Vector: " + horizontalMovementVector);
-    //        }
-    //    }
-
-    //    localHorizontalMovementVector.y = 0;
-    //    return localHorizontalMovementVector;
-    //}
-
-    //Apply the vector to the player as a force
-    //private void ApplyForce()
-    //{
-    //    if (mainCamera.transform.localPosition != headsetZero)
-    //    {
-    //        RB.AddForce(horizontalMovementVector.normalized * acceleration);
-
-    //        if (movementDebug)
-    //        {
-    //            //Debug Raycast
-    //            Ray horizontalMovementRay = new Ray(mainCamera.transform.position, mainCamera.transform.localPosition - headsetZero);
-    //            Debug.DrawRay(horizontalMovementRay.origin, horizontalMovementRay.direction * 10, Color.red);
-    //        } 
-    //    }
-    //}
 
     private void ControllerBehaviorHandler() //this function is called once per fixed update, on line 185 as of March 13 2021
     {
@@ -411,6 +306,10 @@ public class PlayerController : MonoBehaviour
         else if (!GetLeftSelect() && leftSelecting)
         {
             leftSelecting = false;
+            if (weaponDebug)
+            {
+                print("Running selection algorithm");
+            }
             List<GameObject> validSelections = RunSelectionAlgorithm(leftSelectionPoints);
             if(validSelections.Count > 0)
             {
@@ -434,6 +333,10 @@ public class PlayerController : MonoBehaviour
         else if (!GetRightSelect() && rightSelecting)
         {
             rightSelecting = false;
+            if (weaponDebug)
+            {
+                print("Running selection algorithm");
+            }
             List<GameObject> validSelections = RunSelectionAlgorithm(rightSelectionPoints);
             if (validSelections.Count > 0)
             {
@@ -451,6 +354,10 @@ public class PlayerController : MonoBehaviour
 
     private List<GameObject> RunSelectionAlgorithm(List<Vector3> selectionPoints)
     {
+        if (weaponDebug)
+        {
+            print("In selection algorithm");
+        }
         //find the average point of the circle
         Vector3 averagePoint = Vector3.zero;
         foreach (Vector3 point in selectionPoints)
@@ -458,6 +365,7 @@ public class PlayerController : MonoBehaviour
             averagePoint = averagePoint + point;
         }
         averagePoint = averagePoint / selectionPoints.Count;
+
         //find the point farthest from the average
         float farthestPointDistance = 0;
         foreach (Vector3 point in selectionPoints)
@@ -468,6 +376,7 @@ public class PlayerController : MonoBehaviour
                 farthestPointDistance = distance;
             }
         }
+
         //create a sphere with a diameter == to twice the distance from the average point fo the furthest point
         GameObject selectionSphere = Instantiate(Resources.Load("Prefabs/SelectionSphere")) as GameObject;
         selectionSphere.transform.parent = VehicleMovement.vehicleMovement.playerPhysics.transform;
