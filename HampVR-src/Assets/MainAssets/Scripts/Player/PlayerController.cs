@@ -144,7 +144,7 @@ public class PlayerController : MonoBehaviour
 
         //ApplyForce();
 
-        ControllerBehaviorHandler();
+        //ControllerBehaviorHandler();
 
         if (leftWeaponCooldown)
         {
@@ -167,6 +167,11 @@ public class PlayerController : MonoBehaviour
                 rightWeaponCooldown = false;
             }
         }
+    }
+
+    private void LateUpdate()
+    {
+        ControllerBehaviorHandler();
     }
 
     private void ControllerBehaviorHandler() //this function is called once per fixed update, on line 185 as of March 13 2021

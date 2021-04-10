@@ -782,8 +782,8 @@ PositionConstraint:
   m_GameObject: {fileID: 4263430021785689421}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 6.5, z: 0}
-  m_TranslationOffset: {x: 0, y: 0, z: 0}
+  m_TranslationAtRest: {x: 0, y: 5.8, z: 0}
+  m_TranslationOffset: {x: 0, y: 0.8000002, z: 0}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -1387,7 +1387,6 @@ GameObject:
   - component: {fileID: 5332842739613364934}
   - component: {fileID: 8852739614545779383}
   - component: {fileID: 6079473468017103463}
-  - component: {fileID: 77806926170463307}
   m_Layer: 10
   m_Name: GameplayUIConsole
   m_TagString: Untagged
@@ -1457,19 +1456,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &77806926170463307
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6055075912594866856}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6280169154943989361
 GameObject:
   m_ObjectHideFlags: 0
