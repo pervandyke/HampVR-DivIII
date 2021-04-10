@@ -19,10 +19,6 @@ public class VehicleMovement : MonoBehaviour
     [Tooltip("The GameObject representing the ship detached from the cockpit.")]
     public GameObject playerModel;
 
-    //[Tooltip("The left laser spawner.")]
-    //public GameObject laserSpawner;
-    //[Tooltip("The right laser spawner.")]
-    //public GameObject laserSpawner2;
     [Tooltip("The camera being used as the headset.")]
     public Camera mainCamera;
 

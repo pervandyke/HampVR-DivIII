@@ -14,18 +14,12 @@ public class PlayerController : MonoBehaviour
     public bool controllerDebug;
     [Tooltip("Should Weapon debug messages be on?")]
     public bool weaponDebug;
-    //[Tooltip("Should Movement debug messages be on?")]
-    //public bool movementDebug;
     [Tooltip("Should Shield debug messages be on?")]
     public bool shieldDebug;
     [Tooltip("Should Selection Sphere be visible?")]
     public bool selectionDebug;
 
     [Header("GameObjects")]
-    //[Tooltip("The GameObject with the players RigidBody")]
-    //public GameObject playerPhysics;
-    //[Tooltip("The GameObject representing the ship detached from the cockpit.")]
-    //public GameObject playerModel;
     [Tooltip("The left controller.")]
     public GameObject leftHand;
     [Tooltip("The right controller.")]
@@ -34,30 +28,7 @@ public class PlayerController : MonoBehaviour
     public GameObject laserSpawner;
     [Tooltip("The right laser spawner.")]
     public GameObject laserSpawner2;
-    //[Tooltip("The camera being used as the headset.")]
-    //public Camera mainCamera;
 
-    //public Rigidbody RB;
-
-    //[Header("Flight Model")]
-    //[Tooltip("The base acceleration value to be modified by the curve.")]
-    //public float acceleration;
-    //[Tooltip("How quickly the ship follows the players view.")]
-    //public float rotateSpeed;
-    //[Tooltip("The maximum speed achiveable by the player.")]
-    //public float maxSpeed;
-    //[Tooltip("The area around the player where control inputs will not register in units.")]
-    //public float deadZone;
-    //[Tooltip("The mass of the ship. \n Overrides the rigidbody on the CameraRig.")]
-    //public float mass;
-    //[Tooltip("The drag of the ship (probably leave at 0). \n Overrides the rigidbody on the CameraRig.")]
-    //public float drag;
-    //[Tooltip("The angular drag of the ship (probably leave at 0). \n Overrides the rigidbody on the CameraRig.")]
-    //public float angularDrag;
-    //[Tooltip("The distance in units the player has to lean from the zero to get max speed.")]
-    //public float maxLean;
-    //[Tooltip("The curve controlling how the ship achieves max speed throughout the players lean.")]
-    //public AnimationCurve targetSpeedCurve;
 
     [Header("Weapons/Health")]
     public float missileSpeed;
@@ -81,12 +52,6 @@ public class PlayerController : MonoBehaviour
     public SteamVR_Action_Boolean leftSelect;
     public SteamVR_Action_Boolean rightSelect;
 
-
-    //[SerializeField]
-    //[Tooltip("The vector of representing the force being applied to the ships rigidbody.")]
-    //private Vector3 horizontalMovementVector;
-
-    //private Vector3 headsetZero;
 
 
     [Header("Punching")]
@@ -150,13 +115,6 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {   
-        //set rigidbody tunables to the values defined in the editor
-        //RB = playerPhysics.GetComponent<Rigidbody>();
-        //RB.drag = drag;
-        //RB.angularDrag = angularDrag;
-        //RB.mass = mass;
-
-        //headsetZero = mainCamera.transform.localPosition; //replace this with a new ResetControlSpace()
         
         //initialize controller-related variables
         handMoveLogTimer = handMoveLogTimerDefault;
