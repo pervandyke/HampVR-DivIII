@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 17773951239282763}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.61, y: 6.87, z: 8.476}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 5873180746604026041}
@@ -50,7 +50,7 @@ MonoBehaviour:
   streamDescriptor: {fileID: 6864457380984977442, guid: ab79ffe6631eaff4583e7f97e24696e9,
     type: 3}
   startTime: 0.008333333767950535
-  endTime: 1.0125000476837158
+  endTime: 1.0124999284744263
   currentTime: 0
   vertexMotionScale: 1
   asyncLoad: 1
