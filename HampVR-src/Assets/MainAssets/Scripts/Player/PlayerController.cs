@@ -306,7 +306,7 @@ public class PlayerController : MonoBehaviour
         else if (!GetLeftSelect() && leftSelecting)
         {
             leftSelecting = false;
-            if (weaponDebug)
+            if (selectionDebug)
             {
                 print("Running selection algorithm");
             }
@@ -333,7 +333,7 @@ public class PlayerController : MonoBehaviour
         else if (!GetRightSelect() && rightSelecting)
         {
             rightSelecting = false;
-            if (weaponDebug)
+            if (selectionDebug)
             {
                 print("Running selection algorithm");
             }
@@ -385,6 +385,7 @@ public class PlayerController : MonoBehaviour
             selectionSphere.GetComponent<MeshRenderer>().enabled = false;
         }
         selectionSphere.transform.localPosition = averagePoint;
+        //selectionSphere.transform.localPosition += new Vector3(0, -0.7f, 0);
         selectionSphere.transform.localScale = new Vector3(farthestPointDistance * 2, farthestPointDistance * 2, farthestPointDistance * 2);
         selectionSphere.transform.parent = null;
         selectionPoints.Clear();

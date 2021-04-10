@@ -143,7 +143,7 @@ public class TurretAI : MonoBehaviour, IEnemy
                 Global.global.rightSelectedTarget = null;
             }
             EnemyManager.enemyManager.RemoveEnemy(gameObject);
-            Instantiate(Resources.Load("Prefabs/explosion1"), gameObject.transform.position, gameObject.transform.rotation);
+            Instantiate(Resources.Load("Prefabs/explosion0"), gameObject.transform.position, gameObject.transform.rotation);
             Destroy(gameObject);
         }
     }
