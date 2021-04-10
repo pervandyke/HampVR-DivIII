@@ -9,7 +9,10 @@ public class SelectedEnemyHighlighter : MonoBehaviour
     public GameObject leftHighlight;
     public GameObject rightHighlight;
     public LayerMask highlightMask;
+    
     public AnimationCurve highlightScalingCurve;
+    public float maxScalingDistance;
+    public float baseScale;
 
 
     private void Update()
@@ -55,8 +58,10 @@ public class SelectedEnemyHighlighter : MonoBehaviour
             highlight.transform.rotation = Quaternion.LookRotation((highlight.transform.position - target.transform.position).normalized);
 
             //scale highlight
-            //float scaledSize = hitData.distance * 0.0001f;
-            //highlight.transform.localScale = new Vector3();
+            float distancePercentage = Vector3.Distance(gameObject.transform.position, target.transform.position) / maxScalingDistance;
+            float scaleFactor = highlightScalingCurve.Evaluate(distancePercentage);
+            float scaleValue = baseScale * scaleFactor;
+            highlight.transform.localScale = new Vector3(scaleValue,scaleValue,scaleValue);
         }
         else
         {
