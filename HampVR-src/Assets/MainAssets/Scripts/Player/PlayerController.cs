@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     public bool selectionDebug;
 
     [Header("GameObjects")]
+    [Tooltip("The Camera Rig.")]
+    public GameObject cockpit;
     [Tooltip("The left controller.")]
     public GameObject leftHand;
     [Tooltip("The right controller.")]
@@ -306,7 +308,18 @@ public class PlayerController : MonoBehaviour
             {
                 leftSelecting = true;
             }
+            
             leftSelectionPoints.Add(leftHand.transform.localPosition);
+            
+            if (selectionDebug)
+            {
+                GameObject positionSphere = Instantiate(Resources.Load("Prefabs/PositionSphere")) as GameObject;
+                positionSphere.transform.parent = cockpit.transform;
+                positionSphere.transform.localPosition = leftHand.transform.localPosition;
+                positionSphere.transform.localScale = new Vector3(.05f, .05f, .05f);
+                positionSphere.transform.parent = null;
+            }
+            
         }
         else if (!GetLeftSelect() && leftSelecting)
         {
@@ -333,7 +346,17 @@ public class PlayerController : MonoBehaviour
             {
                 rightSelecting = true;
             }
+            
             rightSelectionPoints.Add(rightHand.transform.localPosition);
+            
+            if (selectionDebug)
+            {
+                GameObject positionSphere = Instantiate(Resources.Load("Prefabs/PositionSphere")) as GameObject;
+                positionSphere.transform.parent = cockpit.transform;
+                positionSphere.transform.localPosition = rightHand.transform.localPosition;
+                positionSphere.transform.localScale = new Vector3(.05f, .05f, .05f);
+                positionSphere.transform.parent = null;
+            }
         }
         else if (!GetRightSelect() && rightSelecting)
         {
@@ -384,7 +407,7 @@ public class PlayerController : MonoBehaviour
 
         //create a sphere with a diameter == to twice the distance from the average point fo the furthest point
         GameObject selectionSphere = Instantiate(Resources.Load("Prefabs/SelectionSphere")) as GameObject;
-        selectionSphere.transform.parent = VehicleMovement.vehicleMovement.playerPhysics.transform;
+        selectionSphere.transform.parent = cockpit.transform;
         if (!selectionDebug)
         {
             selectionSphere.GetComponent<MeshRenderer>().enabled = false;

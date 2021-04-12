@@ -782,11 +782,11 @@ PositionConstraint:
   m_GameObject: {fileID: 4263430021785689421}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 5.8, z: 0}
-  m_TranslationOffset: {x: 0, y: 0.8000002, z: 0}
-  m_AffectTranslationX: 1
+  m_TranslationAtRest: {x: 0, y: 6, z: 0}
+  m_TranslationOffset: {x: 0, y: 0, z: 0}
+  m_AffectTranslationX: 0
   m_AffectTranslationY: 1
-  m_AffectTranslationZ: 1
+  m_AffectTranslationZ: 0
   m_IsContraintActive: 1
   m_IsLocked: 1
   m_Sources:
@@ -2614,6 +2614,7 @@ GameObject:
   - component: {fileID: 3930032130077271513}
   - component: {fileID: 3635075392740884574}
   - component: {fileID: 2169872460634575079}
+  - component: {fileID: 1057948469644315417}
   m_Layer: 10
   m_Name: PlayerController
   m_TagString: Untagged
@@ -2651,6 +2652,7 @@ MonoBehaviour:
   weaponDebug: 0
   shieldDebug: 0
   selectionDebug: 0
+  cockpit: {fileID: 0}
   leftHand: {fileID: 0}
   rightHand: {fileID: 0}
   laserSpawner: {fileID: 4263430022694038438}
@@ -2710,7 +2712,7 @@ MonoBehaviour:
   playerPhysics: {fileID: 4263430021785689421}
   playerModel: {fileID: 4263430021785689421}
   mainCamera: {fileID: 0}
-  RB: {fileID: 0}
+  RB: {fileID: 9084143937810047295}
   acceleration: 120
   rotateSpeed: 0.7
   maxSpeed: 40
@@ -2766,6 +2768,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   engineEmitter: {fileID: 7202613262376222587}
   vehicleMovementScript: {fileID: 3635075392740884574}
+--- !u!114 &1057948469644315417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8648127016444375712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 889d3fab5011ce94cb4febdf0e585557, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 4263430021785689417}
+  cockpit: {fileID: 0}
+  height: 5.2
 --- !u!1 &8834241556656945749
 GameObject:
   m_ObjectHideFlags: 0
