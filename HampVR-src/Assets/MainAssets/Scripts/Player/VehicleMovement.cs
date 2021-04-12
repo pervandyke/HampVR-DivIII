@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
@@ -160,7 +160,7 @@ public class VehicleMovement : MonoBehaviour
     //Apply the vector to the player as a force
     private void ApplyForce()
     {
-        if (mainCamera.transform.localPosition != headsetZero)
+        if (mainCamera.transform.localPosition != headsetZero && LevelState.levelState.levelStatus == 1)
         {
             RB.AddForce(horizontalMovementVector.normalized * acceleration);
 

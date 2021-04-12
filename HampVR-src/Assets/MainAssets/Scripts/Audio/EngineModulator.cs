@@ -12,7 +12,14 @@ public class EngineModulator : MonoBehaviour
 
     private void Update()
     {
-        float speedPercentage = Mathf.InverseLerp(0, vehicleMovementScript.maxSpeed, vehicleMovementScript.RB.velocity.magnitude);
-        engineEmitter.SetParameter("RPM", 2000 * speedPercentage);
+        if (LevelState.levelState.levelStatus != 1)
+        {
+             engineEmitter.SetParameter("RPM", 0);
+        }
+        else
+        {
+            float speedPercentage = Mathf.InverseLerp(0, vehicleMovementScript.maxSpeed, vehicleMovementScript.RB.velocity.magnitude);
+            engineEmitter.SetParameter("RPM", 2000 * speedPercentage);
+        }
     }
 }
