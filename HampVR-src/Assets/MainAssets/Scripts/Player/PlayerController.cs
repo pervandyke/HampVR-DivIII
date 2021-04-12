@@ -317,7 +317,6 @@ public class PlayerController : MonoBehaviour
                 positionSphere.transform.parent = cockpit.transform;
                 positionSphere.transform.localPosition = leftHand.transform.localPosition;
                 positionSphere.transform.localScale = new Vector3(.05f, .05f, .05f);
-                positionSphere.transform.parent = null;
             }
             
         }
@@ -355,7 +354,6 @@ public class PlayerController : MonoBehaviour
                 positionSphere.transform.parent = cockpit.transform;
                 positionSphere.transform.localPosition = rightHand.transform.localPosition;
                 positionSphere.transform.localScale = new Vector3(.05f, .05f, .05f);
-                positionSphere.transform.parent = null;
             }
         }
         else if (!GetRightSelect() && rightSelecting)
