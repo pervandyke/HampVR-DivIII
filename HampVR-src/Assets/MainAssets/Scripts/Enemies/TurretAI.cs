@@ -23,12 +23,12 @@ public class TurretAI : MonoBehaviour, IEnemy
     public bool playerInRange;
     private float shotTimer;
 
-    private GameObject player;
+    private GameObject player; //this variable stores the turret's target
     private Quaternion lookRotation;
     public bool allowedToShoot = true;
 
     [Header("General Stats")]
-    public int health;
+    public int health; //the health of this turret
     
 
 
