@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 using Valve.VR;
+using FMODUnity;
 
 public class PlayerController : MonoBehaviour
 {   
@@ -107,6 +108,10 @@ public class PlayerController : MonoBehaviour
     private bool rightSelecting = false;
     private List<Vector3> leftSelectionPoints;
     private List<Vector3> rightSelectionPoints;
+
+    [Header("Audio")]
+    public StudioEventEmitter leftLauncherAudio;
+    public StudioEventEmitter rightLauncherAudio;
 
     [Header("Misc")]
     public LayerMask cockpitMask;
@@ -527,7 +532,7 @@ public class PlayerController : MonoBehaviour
 
                 WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner2, VehicleMovement.vehicleMovement.RB, laserSpawner2.transform.rotation, missileSpeed, missileTurningSpeed, missileDamage, Global.global.leftSelectedTarget, SteamVR_Input_Sources.LeftHand);
                 leftWeaponCooldown = true; //start the reload timer
-                //trigger firing sound effect here --GLP, April 13 2021
+                leftLauncherAudio.Play(); //play launch effect
             }
         }
 
@@ -545,6 +550,7 @@ public class PlayerController : MonoBehaviour
 
                 WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner, VehicleMovement.vehicleMovement.RB, laserSpawner.transform.rotation, missileSpeed, missileTurningSpeed, missileDamage, Global.global.rightSelectedTarget, SteamVR_Input_Sources.RightHand);
                 rightWeaponCooldown = true;
+                rightLauncherAudio.Play();
             }
         }
 
