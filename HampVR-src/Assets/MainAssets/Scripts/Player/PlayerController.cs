@@ -527,6 +527,7 @@ public class PlayerController : MonoBehaviour
 
                 WeaponsLibrary.wepLib.FireLongRangeMissile(laserSpawner2, VehicleMovement.vehicleMovement.RB, laserSpawner2.transform.rotation, missileSpeed, missileTurningSpeed, missileDamage, Global.global.leftSelectedTarget, SteamVR_Input_Sources.LeftHand);
                 leftWeaponCooldown = true; //start the reload timer
+                //trigger firing sound effect here --GLP, April 13 2021
             }
         }
 
