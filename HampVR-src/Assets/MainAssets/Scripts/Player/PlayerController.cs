@@ -416,7 +416,6 @@ public class PlayerController : MonoBehaviour
             selectionSphere.GetComponent<MeshRenderer>().enabled = false;
         }
         selectionSphere.transform.localPosition = averagePoint;
-        //selectionSphere.transform.localPosition += new Vector3(0, -0.7f, 0);
         selectionSphere.transform.localScale = new Vector3(farthestPointDistance * 2, farthestPointDistance * 2, farthestPointDistance * 2);
         selectionSphere.transform.parent = null;
         selectionPoints.Clear();
@@ -430,8 +429,8 @@ public class PlayerController : MonoBehaviour
                 //cast a ray from enemy to headset, if it hits the selection sphere add it to the list
                 Vector3 direction = (VehicleMovement.vehicleMovement.mainCamera.transform.position - enemy.transform.position).normalized;
                 RaycastHit hitData;
-                bool didHit = Physics.Raycast(enemy.transform.position, direction, out hitData, Vector3.Distance(enemy.transform.position, VehicleMovement.vehicleMovement.mainCamera.transform.position),
-                    cockpitMask, QueryTriggerInteraction.Collide);
+                bool didHit = Physics.Raycast(enemy.transform.position, direction, out hitData, Vector3.Distance(enemy.transform.position, 
+                    VehicleMovement.vehicleMovement.mainCamera.transform.position), cockpitMask, QueryTriggerInteraction.Collide);
 
                 if (selectionDebug)
                 {
@@ -450,7 +449,8 @@ public class PlayerController : MonoBehaviour
                     {
                         rayColor = Color.green;
                     }
-                    Debug.DrawRay(selectionRay.origin, selectionRay.direction * Vector3.Distance(VehicleMovement.vehicleMovement.mainCamera.transform.position, enemy.transform.position), rayColor, 10.0f);
+                    Debug.DrawRay(selectionRay.origin, selectionRay.direction * Vector3.Distance(VehicleMovement.vehicleMovement.mainCamera.transform.position, 
+                        enemy.transform.position), rayColor, 10.0f);
                 }
 
                 if (didHit)
@@ -473,6 +473,7 @@ public class PlayerController : MonoBehaviour
     private GameObject RunSelectionPriorityAlgorithm(List<GameObject> validSelections)
     {
         GameObject objectToSelect;
+        Vector3 cameraPosition = VehicleMovement.vehicleMovement.mainCamera.transform.position;
         objectToSelect = validSelections[0];
         List<TargetSelectionValues> validSelectionValues = new List<TargetSelectionValues>();
         if (validSelections.Count > 1)
@@ -484,20 +485,17 @@ public class PlayerController : MonoBehaviour
                 validSelectionValues.Add(new TargetSelectionValues() {potentialTarget = validSelections[i]});
 
                 //get the angle to player view
-                Vector3 enemyDirection = validSelections[i].transform.position - VehicleMovement.vehicleMovement.mainCamera.transform.position;
-                float viewAngle = Vector3.Angle(enemyDirection, VehicleMovement.vehicleMovement.mainCamera.transform.forward);
+                Vector3 enemyDirection = validSelections[i].transform.position - cameraPosition;
+                float viewAngle = Vector3.Angle(enemyDirection, cameraPosition);
                 validSelectionValues[i].normalizedAngleToView = Mathf.InverseLerp(viewAngleMax, viewAngleMin, viewAngle);
 
-                //get the angle to the forward direction of the selection sphere
-
                 //get the distance to target
-                float distanceToSelectionCandidate = Vector3.Distance(VehicleMovement.vehicleMovement.mainCamera.transform.position, validSelectionValues[i].potentialTarget.transform.position);
+                float distanceToSelectionCandidate = Vector3.Distance(cameraPosition, validSelectionValues[i].potentialTarget.transform.position);
                 validSelectionValues[i].normalizedDistance = Mathf.InverseLerp(distanceMax, distanceMin, distanceToSelectionCandidate);
-                
-                //get the target threat value
 
-                //Multiply all the normalized values by multipliers and combine (currently addition)
-                validSelectionValues[i].selectionValue = (validSelectionValues[i].normalizedAngleToView * viewAngleWeight) + (validSelectionValues[i].normalizedDistance * distanceWeight);
+                //Multiply all the normalized values by weights and combine (currently addition)
+                validSelectionValues[i].selectionValue = (validSelectionValues[i].normalizedAngleToView * viewAngleWeight) + 
+                    (validSelectionValues[i].normalizedDistance * distanceWeight);
             }
 
             //select the target with the highest SelectionValue
@@ -512,7 +510,6 @@ public class PlayerController : MonoBehaviour
             objectToSelect = currentTargetSelectionValues.potentialTarget;
             
         }
-        //objectToSelect.GetComponent<MeshRenderer>().material.color = Color.red;
         return objectToSelect;
     }
 
