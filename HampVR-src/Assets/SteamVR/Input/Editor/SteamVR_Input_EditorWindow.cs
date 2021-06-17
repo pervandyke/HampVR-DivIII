@@ -293,7 +293,6 @@ namespace Valve.VR
                 SteamVR_CopyExampleInputFiles.CopyFiles(true);
                 System.Threading.Thread.Sleep(1000);
                 bool initializeSuccess = SteamVR_Input.InitializeFile();
-                EditorApplication.delayCall += SaveFile; 
                 return initializeSuccess;
             }
             else
@@ -684,12 +683,9 @@ namespace Valve.VR
             EditorGUILayout.EndFadeGroup();
         }
 
-        private Vector2 setScrollPosition;
         private void DrawSets()
         {
             EditorGUILayout.LabelField("Action Sets", headerLabelStyle);
-
-            setScrollPosition = EditorGUILayout.BeginScrollView(setScrollPosition);
             EditorGUILayout.BeginHorizontal();
 
             GUILayout.FlexibleSpace();
@@ -800,8 +796,6 @@ namespace Valve.VR
             GUILayout.FlexibleSpace();
 
             EditorGUILayout.EndHorizontal();
-
-            EditorGUILayout.EndScrollView();
         }
 
         private static MemberInfo GetMemberInfo<TModel, TItem>(TModel model, Expression<Func<TModel, TItem>> expr)

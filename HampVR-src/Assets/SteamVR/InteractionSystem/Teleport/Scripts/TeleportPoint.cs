@@ -70,11 +70,7 @@ namespace Valve.VR.InteractionSystem
 
 			animation = GetComponent<Animation>();
 
-#if UNITY_URP
-			tintColorID = Shader.PropertyToID( "_BaseColor" );
-#else
-			tintColorID = Shader.PropertyToID("_TintColor");
-#endif
+			tintColorID = Shader.PropertyToID( "_TintColor" );
 
 			moveLocationIcon.gameObject.SetActive( false );
 			switchSceneIcon.gameObject.SetActive( false );
