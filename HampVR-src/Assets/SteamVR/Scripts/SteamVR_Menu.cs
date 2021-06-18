@@ -167,12 +167,11 @@ namespace Valve.VR
                 {
                     if (GUILayout.Button("Switch to Standing"))
                         SteamVR.settings.trackingSpace = ETrackingUniverseOrigin.TrackingUniverseStanding;
-
                     if (GUILayout.Button("Center View"))
                     {
-                        var chaperone = OpenVR.Chaperone;
-                        if (chaperone != null)
-                            chaperone.ResetZeroPose(SteamVR.settings.trackingSpace);
+                        var system = OpenVR.System;
+                        if (system != null)
+                            system.ResetSeatedZeroPose();
                     }
                 }
                 else
