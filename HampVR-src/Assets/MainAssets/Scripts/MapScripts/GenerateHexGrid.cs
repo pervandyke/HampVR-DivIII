@@ -40,10 +40,11 @@ public class GenerateHexGrid : MonoBehaviour
             PlaceHex(hex.z, hex.x, hex.tileType, hex);
         }
 
+        //get locations with no defined position hexes placed in them
         List<Vector2> emptyHexes = GameMap.gameMap.GetEmptyHexes();
-        List<string> presenceHexes = new List<string>();
 
         //ready hexes with defined presence but not location
+        List<string> presenceHexes = new List<string>();
         for (int i = 0; i < mapData.otherTileKeys.Count; i++)
         {
             for (int y = 0; y < mapData.otherTileValues[i]; y++)

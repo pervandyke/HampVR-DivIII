@@ -460,8 +460,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c30955c805522f4086dae0afd47da91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretMax: 6
-  turretMin: 2
+  turretMax: 4
+  turretMin: 0
 --- !u!1 &7450799100555339489
 GameObject:
   m_ObjectHideFlags: 0
